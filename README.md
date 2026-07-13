@@ -1,3 +1,16 @@
+# Chronos Engine
+
+llama.cpp fork: fresh upstream + KV-cache quantization stack (TurboQuant/TCQ/KVarN)
+ported from beellama.cpp + MoE-offload optimizations (host-pin, expert prefetch).
+Speculative decoding is upstream-native (DFlash, EAGLE3, MTP).
+
+Architecture and decision history: [ARCHITECTURE.md](ARCHITECTURE.md), [DECISIONS.log](DECISIONS.log).
+Port map: [docs/chronos-port-map.md](docs/chronos-port-map.md).
+
+Upstream base documentation follows below.
+
+---
+
 # llama.cpp
 
 ![llama](https://raw.githubusercontent.com/ggml-org/llama.brand/refs/heads/master/cover/llama-cpp/cover-llama-cpp-dark.svg)
