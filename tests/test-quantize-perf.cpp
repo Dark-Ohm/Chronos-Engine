@@ -322,18 +322,20 @@ int main(int argc, char * argv[]) {
                 printf("  quantize_row_q_dot\n");
                 for (size_t size : params.test_sizes) {
                     printf("    %zu values (%.2f MB)\n", size, 4*size/(float)(1024*1024));
-                    auto quantize_fn = [&](void) -> float {
-                        const auto * vdot = ggml_get_type_traits_cpu(qfns_cpu->vec_dot_type);
-                        vdot->from_float(test_data1, test_q1, size);
-                        return test_q1[0];
-                    };
-                    size_t quantized_size = ggml_row_size(type, size);
-                    benchmark_function(size, quantized_size, iterations, quantize_fn);
+                    const auto * vdot = ggml_get_type_traits_cpu(qfns_cpu->vec_dot_type);
+                    if (vdot->from_float) {
+                        auto quantize_fn = [&](void) -> float {
+                            vdot->from_float(test_data1, test_q1, size);
+                            return test_q1[0];
+                        };
+                        size_t quantized_size = ggml_row_size(type, size);
+                        benchmark_function(size, quantized_size, iterations, quantize_fn);
+                    }
                 }
                 printf("\n");
             }
 
-            if (params.op_vec_dot_q) {
+            if (params.op_vec_dot_q && qfns_cpu->vec_dot) {
                 printf("  vec_dot_q\n");
                 qfns_cpu->from_float(test_data1, test_q1, largest);
                 qfns_cpu->from_float(test_data2, test_q2, largest);

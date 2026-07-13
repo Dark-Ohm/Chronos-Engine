@@ -942,6 +942,113 @@ static const struct ggml_type_traits type_traits[GGML_TYPE_COUNT] = {
         .type_size                = 0,
         .is_quantized             = false,
     },
+
+    // Chronos: TurboQuant / TCQ / bee-cache type_traits (200-212)
+    // NOTE: to_float/from_float_ref are NULL until Phase 1 kernels are ported
+    [GGML_TYPE_TURBO2_0] = {
+        .type_name                = "turbo2",
+        .blck_size                = QK_TURBO2,
+        .type_size                = sizeof(block_turbo2_0),
+        .is_quantized             = true,
+        .to_float                 = (ggml_to_float_t) dequantize_row_turbo2_0,
+        .from_float_ref           = (ggml_from_float_t) quantize_row_turbo2_0_ref,
+    },
+    [GGML_TYPE_TURBO3_0] = {
+        .type_name                = "turbo3",
+        .blck_size                = QK_TURBO3,
+        .type_size                = sizeof(block_turbo3_0),
+        .is_quantized             = true,
+        .to_float                 = (ggml_to_float_t) dequantize_row_turbo3_0,
+        .from_float_ref           = (ggml_from_float_t) quantize_row_turbo3_0_ref,
+    },
+    [GGML_TYPE_TURBO4_0] = {
+        .type_name                = "turbo4",
+        .blck_size                = QK_TURBO4,
+        .type_size                = sizeof(block_turbo4_0),
+        .is_quantized             = true,
+        .to_float                 = (ggml_to_float_t) dequantize_row_turbo4_0,
+        .from_float_ref           = (ggml_from_float_t) quantize_row_turbo4_0_ref,
+    },
+    [GGML_TYPE_TURBO2_TCQ] = {
+        .type_name                = "turbo2_tcq",
+        .blck_size                = QK_TURBO2_TCQ,
+        .type_size                = sizeof(block_turbo2_tcq),
+        .is_quantized             = true,
+        .to_float                 = (ggml_to_float_t) dequantize_row_turbo2_tcq,
+        .from_float_ref           = (ggml_from_float_t) quantize_row_turbo2_tcq_ref,
+    },
+    [GGML_TYPE_TURBO3_TCQ] = {
+        .type_name                = "turbo3_tcq",
+        .blck_size                = QK_TURBO3_TCQ,
+        .type_size                = sizeof(block_turbo3_tcq),
+        .is_quantized             = true,
+        .to_float                 = (ggml_to_float_t) dequantize_row_turbo3_tcq,
+        .from_float_ref           = (ggml_from_float_t) quantize_row_turbo3_tcq_ref,
+    },
+    [GGML_TYPE_TURBO4_TCQ] = {
+        .type_name                = "turbo4_tcq",
+        .blck_size                = QK_TURBO4_TCQ,
+        .type_size                = sizeof(block_turbo4_tcq),
+        .is_quantized             = true,
+        .to_float                 = (ggml_to_float_t) dequantize_row_turbo4_tcq,
+        .from_float_ref           = (ggml_from_float_t) quantize_row_turbo4_tcq_ref,
+    },
+    [GGML_TYPE_TQ3_1S] = {
+        .type_name                = "tq3_1s",
+        .blck_size                = QK_TQ3_0,
+        .type_size                = sizeof(block_tq3_1s),
+        .is_quantized             = true,
+        .to_float                 = (ggml_to_float_t) dequantize_row_tq3_1s,
+        .from_float_ref           = (ggml_from_float_t) quantize_row_tq3_1s_ref,
+    },
+    [GGML_TYPE_TQ4_1S] = {
+        .type_name                = "tq4_1s",
+        .blck_size                = QK_TQ4_1S,
+        .type_size                = sizeof(block_tq4_1s),
+        .is_quantized             = true,
+        .to_float                 = (ggml_to_float_t) dequantize_row_tq4_1s,
+        .from_float_ref           = (ggml_from_float_t) quantize_row_tq4_1s_ref,
+    },
+    [GGML_TYPE_Q2_1] = {
+        .type_name                = "q2_1",
+        .blck_size                = QK2_1,
+        .type_size                = sizeof(block_q2_1),
+        .is_quantized             = true,
+        .to_float                 = (ggml_to_float_t) dequantize_row_q2_1,
+        .from_float_ref           = (ggml_from_float_t) quantize_row_q2_1_ref,
+    },
+    [GGML_TYPE_Q3_0] = {
+        .type_name                = "q3_0",
+        .blck_size                = QK3_0,
+        .type_size                = sizeof(block_q3_0),
+        .is_quantized             = true,
+        .to_float                 = (ggml_to_float_t) dequantize_row_q3_0,
+        .from_float_ref           = (ggml_from_float_t) quantize_row_q3_0_ref,
+    },
+    [GGML_TYPE_Q3_1] = {
+        .type_name                = "q3_1",
+        .blck_size                = QK3_1,
+        .type_size                = sizeof(block_q3_1),
+        .is_quantized             = true,
+        .to_float                 = (ggml_to_float_t) dequantize_row_q3_1,
+        .from_float_ref           = (ggml_from_float_t) quantize_row_q3_1_ref,
+    },
+    [GGML_TYPE_Q6_0] = {
+        .type_name                = "q6_0",
+        .blck_size                = QK6_0,
+        .type_size                = sizeof(block_q6_0),
+        .is_quantized             = true,
+        .to_float                 = (ggml_to_float_t) dequantize_row_q6_0,
+        .from_float_ref           = (ggml_from_float_t) quantize_row_q6_0_ref,
+    },
+    [GGML_TYPE_Q6_1] = {
+        .type_name                = "q6_1",
+        .blck_size                = QK6_1,
+        .type_size                = sizeof(block_q6_1),
+        .is_quantized             = true,
+        .to_float                 = (ggml_to_float_t) dequantize_row_q6_1,
+        .from_float_ref           = (ggml_from_float_t) quantize_row_q6_1_ref,
+    },
 };
 
 const struct ggml_type_traits * ggml_get_type_traits(enum ggml_type type) {
@@ -1095,9 +1202,11 @@ static const char * GGML_OP_NAME[GGML_OP_COUNT] = {
     "OPT_STEP_SGD",
 
     "GLU",
+
+    "KVARN_VIEW",
 };
 
-static_assert(GGML_OP_COUNT == 98, "GGML_OP_COUNT != 98");
+static_assert(GGML_OP_COUNT == 99, "GGML_OP_COUNT != 99");
 
 static const char * GGML_OP_SYMBOL[GGML_OP_COUNT] = {
     "none",
@@ -1207,9 +1316,11 @@ static const char * GGML_OP_SYMBOL[GGML_OP_COUNT] = {
     "sgd(x)",
 
     "glu(x)",
+
+    "kvarn_view(records, stage, idx)",
 };
 
-static_assert(GGML_OP_COUNT == 98, "GGML_OP_COUNT != 98");
+static_assert(GGML_OP_COUNT == 99, "GGML_OP_COUNT != 99");
 
 static_assert(GGML_OP_POOL_COUNT == 2, "GGML_OP_POOL_COUNT != 2");
 
@@ -1447,6 +1558,20 @@ enum ggml_type ggml_ftype_to_ggml_type(enum ggml_ftype ftype) {
         case GGML_FTYPE_MOSTLY_IQ4_XS:        wtype = GGML_TYPE_IQ4_XS;   break;
         case GGML_FTYPE_MOSTLY_IQ3_S:         wtype = GGML_TYPE_IQ3_S;    break;
         case GGML_FTYPE_MOSTLY_IQ2_S:         wtype = GGML_TYPE_IQ2_S;    break;
+        // Chronos: TurboQuant / TCQ / bee-cache ftype mappings
+        case GGML_FTYPE_MOSTLY_TURBO2_0:   wtype = GGML_TYPE_TURBO2_0;   break;
+        case GGML_FTYPE_MOSTLY_TURBO3_0:   wtype = GGML_TYPE_TURBO3_0;   break;
+        case GGML_FTYPE_MOSTLY_TURBO4_0:   wtype = GGML_TYPE_TURBO4_0;   break;
+        case GGML_FTYPE_MOSTLY_TURBO2_TCQ: wtype = GGML_TYPE_TURBO2_TCQ; break;
+        case GGML_FTYPE_MOSTLY_TURBO3_TCQ: wtype = GGML_TYPE_TURBO3_TCQ; break;
+        case GGML_FTYPE_MOSTLY_TURBO4_TCQ: wtype = GGML_TYPE_TURBO4_TCQ; break;
+        case GGML_FTYPE_MOSTLY_TQ3_1S:     wtype = GGML_TYPE_TQ3_1S;     break;
+        case GGML_FTYPE_MOSTLY_TQ4_1S:     wtype = GGML_TYPE_TQ4_1S;     break;
+        case GGML_FTYPE_MOSTLY_Q2_1:       wtype = GGML_TYPE_Q2_1;       break;
+        case GGML_FTYPE_MOSTLY_Q3_0:       wtype = GGML_TYPE_Q3_0;       break;
+        case GGML_FTYPE_MOSTLY_Q3_1:       wtype = GGML_TYPE_Q3_1;       break;
+        case GGML_FTYPE_MOSTLY_Q6_0:       wtype = GGML_TYPE_Q6_0;       break;
+        case GGML_FTYPE_MOSTLY_Q6_1:       wtype = GGML_TYPE_Q6_1;       break;
         case GGML_FTYPE_UNKNOWN:              wtype = GGML_TYPE_COUNT; break;
         case GGML_FTYPE_MOSTLY_Q4_1_SOME_F16: wtype = GGML_TYPE_COUNT; break;
     }
@@ -6325,6 +6450,67 @@ struct ggml_tensor * ggml_lightning_indexer(
     return result;
 }
 
+// ggml_kvarn_view
+
+static bool ggml_kvarn_valid_bits(int bits) {
+    return bits == 2 || bits == 3 || bits == 4 || bits == 5 || bits == 6 || bits == 8;
+}
+
+enum {
+    GGML_KVARN_OP_PARAM_BITS              = 0,
+    GGML_KVARN_OP_PARAM_ITERS             = 1,
+    GGML_KVARN_OP_PARAM_VIEW_VALUE        = 1,
+    GGML_KVARN_OP_PARAM_STORE_VALUE       = 2,
+    GGML_KVARN_OP_PARAM_STORE_SWA         = 4,
+    GGML_KVARN_OP_PARAM_HEAD_SLICES       = 5,
+    GGML_KVARN_OP_PARAM_STAGE_GROUPS      = 7,
+    GGML_KVARN_OP_PARAM_TAIL_GROUPS       = 8,
+};
+
+struct ggml_tensor * ggml_kvarn_view(
+        struct ggml_context * ctx,
+        struct ggml_tensor  * records,
+        struct ggml_tensor  * stage_after_store,
+        struct ggml_tensor  * indices,
+        int                   n_kv,
+        int                   stream_start,
+        int                   n_stream,
+        int                   bits,
+        bool                  value,
+        int                   stage_groups) {
+    GGML_ASSERT(records->type == GGML_TYPE_I8);
+    GGML_ASSERT(stage_after_store->type == GGML_TYPE_F16);
+    GGML_ASSERT(indices->type == GGML_TYPE_I64);
+    GGML_ASSERT(stage_groups >= 2);
+    GGML_ASSERT(stage_after_store->ne[0] == 128 && stage_after_store->ne[2] % (128 * stage_groups) == 0);
+    GGML_ASSERT(stage_after_store->ne[1] == records->ne[1]);
+    GGML_ASSERT(n_kv > 0 && ggml_kvarn_valid_bits(bits));
+    const int64_t n_total_stream = stage_after_store->ne[2] / (128 * stage_groups);
+    GGML_ASSERT(n_total_stream > 0 && records->ne[2] > 0 && records->ne[2] % n_total_stream == 0);
+    GGML_ASSERT(stream_start >= 0 && n_stream > 0);
+    GGML_ASSERT((int64_t) stream_start + n_stream <= n_total_stream);
+
+    struct ggml_tensor * result = ggml_new_tensor_4d(ctx, GGML_TYPE_F16, 128, stage_after_store->ne[1], n_kv, n_stream);
+    result->op = GGML_OP_KVARN_VIEW;
+    result->src[0] = records;
+    result->src[1] = stage_after_store;
+    result->src[2] = indices;
+    ggml_set_op_params_i32(result, GGML_KVARN_OP_PARAM_BITS, bits);
+    ggml_set_op_params_i32(result, GGML_KVARN_OP_PARAM_VIEW_VALUE, value ? 1 : 0);
+    ggml_set_op_params_i32(result, 2, stream_start);
+    ggml_set_op_params_i32(result, 3, n_stream);
+    ggml_set_op_params_i32(result, GGML_KVARN_OP_PARAM_HEAD_SLICES,
+            ggml_get_op_params_i32(stage_after_store, GGML_KVARN_OP_PARAM_HEAD_SLICES) > 0 ?
+            ggml_get_op_params_i32(stage_after_store, GGML_KVARN_OP_PARAM_HEAD_SLICES) : 1);
+    ggml_set_op_params_i32(result, GGML_KVARN_OP_PARAM_STAGE_GROUPS, stage_groups);
+    int tail_groups = ggml_get_op_params_i32(stage_after_store, GGML_KVARN_OP_PARAM_TAIL_GROUPS);
+    if (tail_groups <= 0) {
+        tail_groups = stage_groups - 1;
+    }
+    ggml_set_op_params_i32(result, GGML_KVARN_OP_PARAM_TAIL_GROUPS, tail_groups);
+    return result;
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 
 struct ggml_hash_set ggml_hash_set_new(size_t size) {
@@ -7129,7 +7315,8 @@ void ggml_build_backward_expand(
 
         // inplace operations are currently not supported
         GGML_ASSERT(!node->view_src || node->op == GGML_OP_CPY || node->op == GGML_OP_VIEW ||
-            node->op == GGML_OP_RESHAPE || node->op == GGML_OP_PERMUTE || node->op == GGML_OP_TRANSPOSE);
+            node->op == GGML_OP_RESHAPE || node->op == GGML_OP_PERMUTE || node->op == GGML_OP_TRANSPOSE ||
+            node->op == GGML_OP_KVARN_VIEW);
 
         const size_t ihash = ggml_hash_find(&cgraph->visited_hash_set, node);
         GGML_ASSERT(ihash != GGML_HASHSET_FULL);

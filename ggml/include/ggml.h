@@ -430,7 +430,23 @@ extern "C" {
         GGML_TYPE_NVFP4   = 40, // NVFP4 (4 blocks, E4M3 scale)
         GGML_TYPE_Q1_0    = 41,
         GGML_TYPE_Q2_0    = 42,
-        GGML_TYPE_COUNT   = 43,
+
+        // Chronos: TurboQuant / TCQ / bee-cache types (high-range, 200+)
+        GGML_TYPE_TURBO2_0   = 200, // TurboQuant 2-bit KV cache
+        GGML_TYPE_TURBO3_0   = 201, // TurboQuant 3-bit KV cache
+        GGML_TYPE_TURBO4_0   = 202, // TurboQuant 4-bit KV cache
+        GGML_TYPE_TURBO2_TCQ = 203, // TCQ 2-bit KV cache
+        GGML_TYPE_TURBO3_TCQ = 204, // TCQ 3-bit KV cache
+        GGML_TYPE_TURBO4_TCQ = 205, // TCQ 4-bit KV cache
+        GGML_TYPE_TQ3_1S     = 206, // WHT-rotated 3-bit weight
+        GGML_TYPE_TQ4_1S     = 207, // WHT-rotated 4-bit weight
+        GGML_TYPE_Q2_1       = 208, // bee Q2_1 (KV cache quant)
+        GGML_TYPE_Q3_0       = 209, // bee Q3_0
+        GGML_TYPE_Q3_1       = 210, // bee Q3_1
+        GGML_TYPE_Q6_0       = 211, // bee Q6_0
+        GGML_TYPE_Q6_1       = 212, // bee Q6_1
+
+        GGML_TYPE_COUNT   = 213,
     };
 
     // precision
@@ -475,6 +491,20 @@ extern "C" {
         GGML_FTYPE_MOSTLY_NVFP4   = 26, // except 1d tensors
         GGML_FTYPE_MOSTLY_Q1_0    = 27, // except 1d tensors
         GGML_FTYPE_MOSTLY_Q2_0    = 28, // except 1d tensors
+        // Chronos: TurboQuant / TCQ / bee-cache ftype entries
+        GGML_FTYPE_MOSTLY_TURBO2_0   = 29,
+        GGML_FTYPE_MOSTLY_TURBO3_0   = 30,
+        GGML_FTYPE_MOSTLY_TURBO4_0   = 31,
+        GGML_FTYPE_MOSTLY_TURBO2_TCQ = 32,
+        GGML_FTYPE_MOSTLY_TURBO3_TCQ = 33,
+        GGML_FTYPE_MOSTLY_TURBO4_TCQ = 34,
+        GGML_FTYPE_MOSTLY_TQ3_1S     = 35,
+        GGML_FTYPE_MOSTLY_TQ4_1S     = 36,
+        GGML_FTYPE_MOSTLY_Q2_1       = 37,
+        GGML_FTYPE_MOSTLY_Q3_0       = 38,
+        GGML_FTYPE_MOSTLY_Q3_1       = 39,
+        GGML_FTYPE_MOSTLY_Q6_0       = 40,
+        GGML_FTYPE_MOSTLY_Q6_1       = 41,
     };
 
     // available tensor operations:
@@ -586,6 +616,8 @@ extern "C" {
         GGML_OP_OPT_STEP_SGD,
 
         GGML_OP_GLU,
+
+        GGML_OP_KVARN_VIEW,
 
         GGML_OP_COUNT,
     };
@@ -2593,6 +2625,19 @@ extern "C" {
         struct ggml_tensor  * k,
         struct ggml_tensor  * weights,
         struct ggml_tensor  * mask);
+
+    // KVarN structured KV-cache operations (fork-specific)
+    GGML_API struct ggml_tensor * ggml_kvarn_view(
+            struct ggml_context * ctx,
+            struct ggml_tensor  * records,
+            struct ggml_tensor  * stage_after_store,
+            struct ggml_tensor  * indices,
+            int                   n_kv,
+            int                   stream_start,
+            int                   n_stream,
+            int                   bits,
+            bool                  value,
+            int                   stage_groups);
 
     // custom operators
 

@@ -205,6 +205,60 @@ typedef pthread_t ggml_thread_t;
 #define GGML_THREADPOOL_N_THREADS_MASK (0xffffU)
 #define GGML_THREADPOOL_N_THREADS_BITS (16)
 
+static void ggml_vec_dot_tq3_1s_q8_0(int n, float * GGML_RESTRICT s, size_t bs,
+        const void * GGML_RESTRICT vx, size_t bx,
+        const void * GGML_RESTRICT vy, size_t by, int nrc) {
+    GGML_ASSERT(nrc == 1);
+    GGML_UNUSED(bs);
+    GGML_UNUSED(bx);
+    GGML_UNUSED(by);
+    GGML_UNUSED(nrc);
+
+    float * tmp_x = (float *) malloc((size_t) n * sizeof(float));
+    float * tmp_y = (float *) malloc((size_t) n * sizeof(float));
+    GGML_ASSERT(tmp_x != NULL);
+    GGML_ASSERT(tmp_y != NULL);
+
+    ggml_get_type_traits(GGML_TYPE_TQ3_1S)->to_float(vx, tmp_x, n);
+    ggml_get_type_traits(GGML_TYPE_Q8_0)->to_float(vy, tmp_y, n);
+
+    float sum = 0.0f;
+    for (int i = 0; i < n; i++) {
+        sum += tmp_x[i] * tmp_y[i];
+    }
+
+    free(tmp_x);
+    free(tmp_y);
+    *s = sum;
+}
+
+static void ggml_vec_dot_tq4_1s_q8_0(int n, float * GGML_RESTRICT s, size_t bs,
+        const void * GGML_RESTRICT vx, size_t bx,
+        const void * GGML_RESTRICT vy, size_t by, int nrc) {
+    GGML_ASSERT(nrc == 1);
+    GGML_UNUSED(bs);
+    GGML_UNUSED(bx);
+    GGML_UNUSED(by);
+    GGML_UNUSED(nrc);
+
+    float * tmp_x = (float *) malloc((size_t) n * sizeof(float));
+    float * tmp_y = (float *) malloc((size_t) n * sizeof(float));
+    GGML_ASSERT(tmp_x != NULL);
+    GGML_ASSERT(tmp_y != NULL);
+
+    ggml_get_type_traits(GGML_TYPE_TQ4_1S)->to_float(vx, tmp_x, n);
+    ggml_get_type_traits(GGML_TYPE_Q8_0)->to_float(vy, tmp_y, n);
+
+    float sum = 0.0f;
+    for (int i = 0; i < n; i++) {
+        sum += tmp_x[i] * tmp_y[i];
+    }
+
+    free(tmp_x);
+    free(tmp_y);
+    *s = sum;
+}
+
 #if defined(__APPLE__)
 #include <unistd.h>
 #include <mach/mach.h>
@@ -407,6 +461,84 @@ static const struct ggml_type_traits_cpu type_traits_cpu[GGML_TYPE_COUNT] = {
         .from_float               = quantize_row_tq2_0,
         .vec_dot                  = ggml_vec_dot_tq2_0_q8_K,
         .vec_dot_type             = GGML_TYPE_Q8_K,
+        .nrows                    = 1,
+    },
+    [GGML_TYPE_TURBO2_0] = {
+        .from_float               = (ggml_from_float_t) quantize_row_turbo2_0_ref,
+        .vec_dot                  = NULL,
+        .vec_dot_type             = GGML_TYPE_F32,
+        .nrows                    = 1,
+    },
+    [GGML_TYPE_TURBO3_0] = {
+        .from_float               = (ggml_from_float_t) quantize_row_turbo3_0_ref,
+        .vec_dot                  = NULL,
+        .vec_dot_type             = GGML_TYPE_F32,
+        .nrows                    = 1,
+    },
+    [GGML_TYPE_TURBO4_0] = {
+        .from_float               = (ggml_from_float_t) quantize_row_turbo4_0_ref,
+        .vec_dot                  = NULL,
+        .vec_dot_type             = GGML_TYPE_F32,
+        .nrows                    = 1,
+    },
+    [GGML_TYPE_TURBO2_TCQ] = {
+        .from_float               = NULL,
+        .vec_dot                  = NULL,
+        .vec_dot_type             = GGML_TYPE_F32,
+        .nrows                    = 1,
+    },
+    [GGML_TYPE_TURBO3_TCQ] = {
+        .from_float               = NULL,
+        .vec_dot                  = NULL,
+        .vec_dot_type             = GGML_TYPE_F32,
+        .nrows                    = 1,
+    },
+    [GGML_TYPE_TURBO4_TCQ] = {
+        .from_float               = NULL,
+        .vec_dot                  = NULL,
+        .vec_dot_type             = GGML_TYPE_F32,
+        .nrows                    = 1,
+    },
+    [GGML_TYPE_TQ3_1S] = {
+        .from_float               = (ggml_from_float_t) quantize_row_tq3_1s_ref,
+        .vec_dot                  = (ggml_vec_dot_t) ggml_vec_dot_tq3_1s_q8_0,
+        .vec_dot_type             = GGML_TYPE_Q8_0,
+        .nrows                    = 1,
+    },
+    [GGML_TYPE_TQ4_1S] = {
+        .from_float               = (ggml_from_float_t) quantize_row_tq4_1s_ref,
+        .vec_dot                  = (ggml_vec_dot_t) ggml_vec_dot_tq4_1s_q8_0,
+        .vec_dot_type             = GGML_TYPE_Q8_0,
+        .nrows                    = 1,
+    },
+    [GGML_TYPE_Q2_1] = {
+        .from_float               = quantize_row_q2_1,
+        .vec_dot                  = ggml_vec_dot_q2_1_q8_1,
+        .vec_dot_type             = GGML_TYPE_Q8_1,
+        .nrows                    = 1,
+    },
+    [GGML_TYPE_Q3_0] = {
+        .from_float               = quantize_row_q3_0,
+        .vec_dot                  = ggml_vec_dot_q3_0_q8_0,
+        .vec_dot_type             = GGML_TYPE_Q8_0,
+        .nrows                    = 1,
+    },
+    [GGML_TYPE_Q3_1] = {
+        .from_float               = quantize_row_q3_1,
+        .vec_dot                  = ggml_vec_dot_q3_1_q8_1,
+        .vec_dot_type             = GGML_TYPE_Q8_1,
+        .nrows                    = 1,
+    },
+    [GGML_TYPE_Q6_0] = {
+        .from_float               = quantize_row_q6_0,
+        .vec_dot                  = ggml_vec_dot_q6_0_q8_0,
+        .vec_dot_type             = GGML_TYPE_Q8_0,
+        .nrows                    = 1,
+    },
+    [GGML_TYPE_Q6_1] = {
+        .from_float               = quantize_row_q6_1,
+        .vec_dot                  = ggml_vec_dot_q6_1_q8_1,
+        .vec_dot_type             = GGML_TYPE_Q8_1,
         .nrows                    = 1,
     },
     [GGML_TYPE_I32] = {
@@ -2124,6 +2256,10 @@ static void ggml_compute_forward(struct ggml_compute_params * params, struct ggm
             {
                 // nop
             } break;
+        case GGML_OP_KVARN_VIEW:
+            {
+                // no-op proxy consumed by native KVarN FlashAttention backends
+            } break;
         case GGML_OP_COUNT:
             {
                 GGML_ABORT("fatal error");
@@ -2448,6 +2584,7 @@ static int ggml_get_n_tasks(struct ggml_tensor * node, int n_threads) {
             {
                 n_tasks = n_threads;
             } break;
+        case GGML_OP_KVARN_VIEW:
         case GGML_OP_NONE:
             {
                 n_tasks = 1;
@@ -2975,6 +3112,10 @@ struct ggml_cplan ggml_graph_plan(
                         // temp buffer for dequantizing lightning indexer keys
                         const int64_t ne10 = node->src[1]->ne[0];
                         cur += sizeof(float)*ne10*n_tasks;
+                    } break;
+                case GGML_OP_KVARN_VIEW:
+                    {
+                        cur = 0;  // no extra workspace needed
                     } break;
                 default:
                     break;
