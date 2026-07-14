@@ -19,7 +19,7 @@
 | ggml/src/ggml-cuda/turbo-sink.cu/cuh | +39/+16 | 2 |
 | ggml/src/ggml-cuda/turbo4-tcq-codebook.cuh | +132 | 2 |
 | ggml/src/ggml-cuda/cross-ring-interleave.cu | +955 | 2 |
-| ggml/src/ggml-cuda/argmax.cu | +498 | 2 (TCQ nearest-codeword, проверить) |
+| ggml/src/ggml-cuda/argmax.cu | +498 | ДРОП — весь дифф DFlash-семплинг (philox/gumbel/topk); TCQ тут нет, ранняя разметка ошиблась (проверено 2.1) |
 | ggml/src/ggml-cuda/fwht.cu | +1/-1 | 2 |
 
 ### KVarN

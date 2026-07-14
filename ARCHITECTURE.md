@@ -111,6 +111,16 @@ KVarN ремапа не требует (псевдотипы CLI, нет enum-з
 - контекст до 1M (yarn x4 от 262k родных) — длинный контекст на 8GB VRAM и есть
   главный сценарий выгоды KV-сжатия; 5.5G весов + KV в 8GB впритык
 - рядом mmproj (BF16, 880M) — мультимодалка через апстримный mtmd
+- ограничение железа: 1M ctx = ~32GB KV в f16 (~8 attn-слоёв), с kvarn2 ~4GB;
+  целиком в 8GB VRAM с весами не влезает — валидация 1M через частичный offload,
+  чистый VRAM-тест на ~256-512k
+
+### Эталон MoE (Фаза 5, prefetch-experts): InternScience/Agents-A1-Q4_K_M-GGUF
+- arch `qwen35moe` — покрыта bee-wiring'ом Фазы 3, доп. проводки не требует
+- 35B MoE (A3B-класс), Q4_K_M 21.2GB, ctx 262k
+- сценарий: эксперты в RAM (64GB), активная часть на GPU; связка
+  GGML_CUDA_REGISTER_HOST + GGML_SCHED_PREFETCH_EXPERTS + kvarn
+- Qwythos (dense) prefetch-experts не задействует — MoE-трек только здесь
 
 ## Правила
 
