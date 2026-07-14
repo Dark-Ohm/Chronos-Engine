@@ -65,6 +65,9 @@
 #include "ggml-cuda/tri.cuh"
 #include "ggml-cuda/cumsum.cuh"
 #include "ggml-cuda/fill.cuh"
+#include "ggml-cuda/turbo-wht.cuh"
+#include "fattn-mma-kvarn.cuh"
+#include "ggml-cuda/kvarn.cuh"
 #include "ggml.h"
 
 #include <algorithm>
@@ -634,6 +637,8 @@ static std::atomic<int> ggml_cuda_lock_counter;
 ggml_backend_cuda_context::~ggml_backend_cuda_context() {
     std::unique_lock<std::mutex> lock(ggml_cuda_lock);
     ggml_cuda_lock_cv.wait(lock, []{ return ggml_cuda_lock_counter.load(std::memory_order_relaxed) == 0; });
+
+    ggml_cuda_kvarn_profile_dump();
 
     if (copy_event != nullptr) {
         CUDA_CHECK(cudaEventDestroy(copy_event));
@@ -1950,6 +1955,12 @@ static bool ggml_cuda_compute_forward(ggml_backend_cuda_context & ctx, struct gg
         case GGML_OP_SET_ROWS:
             ggml_cuda_op_set_rows(ctx, dst);
             break;
+        case GGML_OP_KVARN_WHT:
+            ggml_cuda_op_kvarn_wht(ctx, dst);
+            break;
+        case GGML_OP_KVARN_STORE:
+            ggml_cuda_op_kvarn_store(ctx, dst);
+            break;
         case GGML_OP_SET:
             ggml_cuda_op_set(ctx, dst);
             break;
@@ -2253,6 +2264,9 @@ static bool ggml_cuda_compute_forward(ggml_backend_cuda_context & ctx, struct gg
             break;
         case GGML_OP_SOLVE_TRI:
             ggml_cuda_op_solve_tri(ctx, dst);
+            break;
+        case GGML_OP_TURBO_WHT:
+            ggml_cuda_op_turbo_wht(ctx, dst);
             break;
         case GGML_OP_FILL:
             ggml_cuda_op_fill(ctx, dst);
@@ -4669,6 +4683,11 @@ static bool ggml_backend_cuda_device_supports_op(ggml_backend_dev_t dev, const g
                     case GGML_TYPE_Q4_1:
                     case GGML_TYPE_Q5_0:
                     case GGML_TYPE_Q5_1:
+                    case GGML_TYPE_Q6_0:
+                    case GGML_TYPE_Q6_1:
+                    case GGML_TYPE_Q3_0:
+                    case GGML_TYPE_Q3_1:
+                    case GGML_TYPE_Q2_1:
                     case GGML_TYPE_Q8_0:
                     case GGML_TYPE_MXFP4:
                     case GGML_TYPE_NVFP4:
@@ -4708,6 +4727,17 @@ static bool ggml_backend_cuda_device_supports_op(ggml_backend_dev_t dev, const g
                     case GGML_TYPE_Q5_0:
                     case GGML_TYPE_Q5_1:
                     case GGML_TYPE_Q8_0:
+                    case GGML_TYPE_TURBO2_0:
+                    case GGML_TYPE_TURBO3_0:
+                    case GGML_TYPE_TURBO4_0:
+                    case GGML_TYPE_TURBO3_TCQ:
+                    case GGML_TYPE_TURBO2_TCQ:
+                    case GGML_TYPE_TURBO4_TCQ:
+                    case GGML_TYPE_Q6_0:
+                    case GGML_TYPE_Q6_1:
+                    case GGML_TYPE_Q3_0:
+                    case GGML_TYPE_Q3_1:
+                    case GGML_TYPE_Q2_1:
                         return true;
                     default:
                         return false;
@@ -4719,16 +4749,15 @@ static bool ggml_backend_cuda_device_supports_op(ggml_backend_dev_t dev, const g
             } break;
         case GGML_OP_SET_ROWS:
             {
-                return (
-                           (
-                               (op->type == GGML_TYPE_F32 || op->type == GGML_TYPE_F16 || op->type == GGML_TYPE_BF16 ||
-                               op->type == GGML_TYPE_Q4_0 || op->type == GGML_TYPE_Q4_1 || op->type == GGML_TYPE_Q5_0 ||
-                               op->type == GGML_TYPE_Q5_1 || op->type == GGML_TYPE_Q8_0 || op->type == GGML_TYPE_IQ4_NL) &&
-                               op->src[0]->type == GGML_TYPE_F32
-                           ) || (
-                               op->type == GGML_TYPE_F16 && op->src[0]->type == GGML_TYPE_F16
-                           )
-                       ) &&
+                return (op->type == GGML_TYPE_F32 || op->type == GGML_TYPE_F16 || op->type == GGML_TYPE_BF16 ||
+                       op->type == GGML_TYPE_Q4_0 || op->type == GGML_TYPE_Q4_1 || op->type == GGML_TYPE_Q5_0 ||
+                       op->type == GGML_TYPE_Q5_1 || op->type == GGML_TYPE_Q8_0 || op->type == GGML_TYPE_IQ4_NL ||
+                       op->type == GGML_TYPE_TURBO2_0 || op->type == GGML_TYPE_TURBO3_0 || op->type == GGML_TYPE_TURBO4_0 ||
+                       op->type == GGML_TYPE_TURBO3_TCQ ||
+                       op->type == GGML_TYPE_TURBO2_TCQ || op->type == GGML_TYPE_TURBO4_TCQ ||
+                       op->type == GGML_TYPE_Q6_0 || op->type == GGML_TYPE_Q6_1 ||
+                       op->type == GGML_TYPE_Q3_0 || op->type == GGML_TYPE_Q3_1 || op->type == GGML_TYPE_Q2_1) &&
+                       op->src[0]->type == GGML_TYPE_F32 &&
                        (op->src[1]->type == GGML_TYPE_I64 || op->src[1]->type == GGML_TYPE_I32);
             } break;
         case GGML_OP_SET:
@@ -4801,6 +4830,11 @@ static bool ggml_backend_cuda_device_supports_op(ggml_backend_dev_t dev, const g
             } break;
         case GGML_OP_ARGMAX:
         case GGML_OP_COUNT_EQUAL:
+            {
+                return true;
+            } break;
+        case GGML_OP_KVARN_WHT:
+        case GGML_OP_KVARN_STORE:
             {
                 return true;
             } break;
@@ -4976,6 +5010,7 @@ static bool ggml_backend_cuda_device_supports_op(ggml_backend_dev_t dev, const g
         case GGML_OP_TRI:
         case GGML_OP_DIAG:
         case GGML_OP_SOLVE_TRI:
+        case GGML_OP_TURBO_WHT:
             return true;
 
         default:

@@ -2257,6 +2257,8 @@ static void ggml_compute_forward(struct ggml_compute_params * params, struct ggm
                 // nop
             } break;
         case GGML_OP_KVARN_VIEW:
+        case GGML_OP_KVARN_WHT:
+        case GGML_OP_KVARN_STORE:
             {
                 // no-op proxy consumed by native KVarN FlashAttention backends
             } break;
@@ -2585,6 +2587,8 @@ static int ggml_get_n_tasks(struct ggml_tensor * node, int n_threads) {
                 n_tasks = n_threads;
             } break;
         case GGML_OP_KVARN_VIEW:
+        case GGML_OP_KVARN_WHT:
+        case GGML_OP_KVARN_STORE:
         case GGML_OP_NONE:
             {
                 n_tasks = 1;
@@ -3114,6 +3118,8 @@ struct ggml_cplan ggml_graph_plan(
                         cur += sizeof(float)*ne10*n_tasks;
                     } break;
                 case GGML_OP_KVARN_VIEW:
+                case GGML_OP_KVARN_WHT:
+                case GGML_OP_KVARN_STORE:
                     {
                         cur = 0;  // no extra workspace needed
                     } break;

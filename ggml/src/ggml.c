@@ -1204,9 +1204,11 @@ static const char * GGML_OP_NAME[GGML_OP_COUNT] = {
     "GLU",
 
     "KVARN_VIEW",
+    "KVARN_WHT",
+    "KVARN_STORE",
 };
 
-static_assert(GGML_OP_COUNT == 99, "GGML_OP_COUNT != 99");
+static_assert(GGML_OP_COUNT == 101, "GGML_OP_COUNT != 101");
 
 static const char * GGML_OP_SYMBOL[GGML_OP_COUNT] = {
     "none",
@@ -1318,9 +1320,11 @@ static const char * GGML_OP_SYMBOL[GGML_OP_COUNT] = {
     "glu(x)",
 
     "kvarn_view(records, stage, idx)",
+    "kvarn_wht(a)",
+    "kvarn_store(cur, idx, stage, records)",
 };
 
-static_assert(GGML_OP_COUNT == 99, "GGML_OP_COUNT != 99");
+static_assert(GGML_OP_COUNT == 101, "GGML_OP_COUNT != 101");
 
 static_assert(GGML_OP_POOL_COUNT == 2, "GGML_OP_POOL_COUNT != 2");
 
@@ -6450,7 +6454,7 @@ struct ggml_tensor * ggml_lightning_indexer(
     return result;
 }
 
-// ggml_kvarn_view
+// ggml_kvarn shared helpers
 
 static bool ggml_kvarn_valid_bits(int bits) {
     return bits == 2 || bits == 3 || bits == 4 || bits == 5 || bits == 6 || bits == 8;
@@ -6466,6 +6470,69 @@ enum {
     GGML_KVARN_OP_PARAM_STAGE_GROUPS      = 7,
     GGML_KVARN_OP_PARAM_TAIL_GROUPS       = 8,
 };
+
+// ggml_kvarn_wht
+
+struct ggml_tensor * ggml_kvarn_wht(
+        struct ggml_context * ctx,
+        struct ggml_tensor  * a,
+        int                   head_width) {
+    GGML_ASSERT(ggml_is_contiguous(a));
+    GGML_ASSERT(a->type == GGML_TYPE_F32);
+    GGML_ASSERT(head_width == 128 || head_width == 256 || head_width == 512);
+    GGML_ASSERT(ggml_nelements(a) % head_width == 0);
+
+    struct ggml_tensor * result = ggml_new_tensor(ctx, GGML_TYPE_F32, 4, a->ne);
+
+    result->op = GGML_OP_KVARN_WHT;
+    result->src[0] = a;
+
+    memcpy(result->op_params, &head_width, sizeof(int));
+
+    return result;
+}
+
+// ggml_kvarn_store
+
+struct ggml_tensor * ggml_kvarn_store(
+        struct ggml_context * ctx,
+        struct ggml_tensor  * current,
+        struct ggml_tensor  * indices,
+        struct ggml_tensor  * stage,
+        struct ggml_tensor  * records,
+        int                   bits,
+        int                   sinkhorn_iters,
+        bool                  value,
+        int                   stage_groups) {
+    GGML_ASSERT(current->type == GGML_TYPE_F32);
+    GGML_ASSERT(indices->type == GGML_TYPE_I64);
+    GGML_ASSERT(stage->type == GGML_TYPE_F16);
+    GGML_ASSERT(records->type == GGML_TYPE_I8);
+    GGML_ASSERT(current->ne[0] == 128);
+    GGML_ASSERT(stage_groups >= 2);
+    GGML_ASSERT(stage->ne[0] == 128 && stage->ne[2] % (128 * stage_groups) == 0);
+    GGML_ASSERT(current->ne[1] == stage->ne[1] && stage->ne[1] == records->ne[1]);
+    GGML_ASSERT(current->ne[2] == indices->ne[0]);
+    GGML_ASSERT(ggml_kvarn_valid_bits(bits) && sinkhorn_iters > 0);
+    const int64_t n_stream = stage->ne[2] / (128 * stage_groups);
+    GGML_ASSERT(n_stream > 0 && records->ne[2] > 0 && records->ne[2] % n_stream == 0);
+
+    struct ggml_tensor * result = ggml_view_tensor(ctx, stage);
+    result->op = GGML_OP_KVARN_STORE;
+    result->src[0] = current;
+    result->src[1] = indices;
+    result->src[2] = stage;
+    result->src[3] = records;
+    ggml_set_op_params_i32(result, GGML_KVARN_OP_PARAM_BITS, bits);
+    ggml_set_op_params_i32(result, GGML_KVARN_OP_PARAM_ITERS, sinkhorn_iters);
+    ggml_set_op_params_i32(result, GGML_KVARN_OP_PARAM_STORE_VALUE, value ? 1 : 0);
+    ggml_set_op_params_i32(result, GGML_KVARN_OP_PARAM_HEAD_SLICES, 1);
+    ggml_set_op_params_i32(result, GGML_KVARN_OP_PARAM_STAGE_GROUPS, stage_groups);
+    ggml_set_op_params_i32(result, GGML_KVARN_OP_PARAM_TAIL_GROUPS, stage_groups - 1);
+    return result;
+}
+
+// ggml_kvarn_view
 
 struct ggml_tensor * ggml_kvarn_view(
         struct ggml_context * ctx,

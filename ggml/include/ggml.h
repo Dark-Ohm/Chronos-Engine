@@ -618,6 +618,8 @@ extern "C" {
         GGML_OP_GLU,
 
         GGML_OP_KVARN_VIEW,
+        GGML_OP_KVARN_WHT,
+        GGML_OP_KVARN_STORE,
 
         GGML_OP_COUNT,
     };
@@ -2627,6 +2629,22 @@ extern "C" {
         struct ggml_tensor  * mask);
 
     // KVarN structured KV-cache operations (fork-specific)
+    GGML_API struct ggml_tensor * ggml_kvarn_wht(
+            struct ggml_context * ctx,
+            struct ggml_tensor  * a,
+            int                   head_width);
+
+    GGML_API struct ggml_tensor * ggml_kvarn_store(
+            struct ggml_context * ctx,
+            struct ggml_tensor  * current,
+            struct ggml_tensor  * indices,
+            struct ggml_tensor  * stage,
+            struct ggml_tensor  * records,
+            int                   bits,
+            int                   sinkhorn_iters,
+            bool                  value,
+            int                   stage_groups);
+
     GGML_API struct ggml_tensor * ggml_kvarn_view(
             struct ggml_context * ctx,
             struct ggml_tensor  * records,

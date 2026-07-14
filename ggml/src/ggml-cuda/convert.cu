@@ -718,6 +718,16 @@ to_bf16_cuda_t ggml_get_to_bf16_cuda(ggml_type type) {
             return dequantize_block_cont_cuda<QK5_0, QR5_0, dequantize_q5_0>;
         case GGML_TYPE_Q5_1:
             return dequantize_block_cont_cuda<QK5_1, QR5_1, dequantize_q5_1>;
+        case GGML_TYPE_Q6_0:
+            return dequantize_block_cont_cuda<QK6_0, QR6_0, dequantize_q6_0>;
+        case GGML_TYPE_Q6_1:
+            return dequantize_block_cont_cuda<QK6_1, QR6_1, dequantize_q6_1>;
+        case GGML_TYPE_Q3_0: // 2-bit-plane layout: float2 dequant covers (iqs, iqs+16), so ratio 2
+            return dequantize_block_cont_cuda<QK3_0, 2, dequantize_q3_0>;
+        case GGML_TYPE_Q3_1:
+            return dequantize_block_cont_cuda<QK3_1, 2, dequantize_q3_1>;
+        case GGML_TYPE_Q2_1:
+            return dequantize_block_cont_cuda<QK2_1, 2, dequantize_q2_1>;
         case GGML_TYPE_Q8_0:
             return dequantize_block_cont_cuda<QK8_0, QR8_0, dequantize_q8_0>;
         case GGML_TYPE_Q2_K:
@@ -773,6 +783,16 @@ to_fp16_cuda_t ggml_get_to_fp16_cuda(ggml_type type) {
             return dequantize_block_cont_cuda<QK5_0, QR5_0, dequantize_q5_0>;
         case GGML_TYPE_Q5_1:
             return dequantize_block_cont_cuda<QK5_1, QR5_1, dequantize_q5_1>;
+        case GGML_TYPE_Q6_0:
+            return dequantize_block_cont_cuda<QK6_0, QR6_0, dequantize_q6_0>;
+        case GGML_TYPE_Q6_1:
+            return dequantize_block_cont_cuda<QK6_1, QR6_1, dequantize_q6_1>;
+        case GGML_TYPE_Q3_0: // 2-bit-plane layout: float2 dequant covers (iqs, iqs+16), so ratio 2
+            return dequantize_block_cont_cuda<QK3_0, 2, dequantize_q3_0>;
+        case GGML_TYPE_Q3_1:
+            return dequantize_block_cont_cuda<QK3_1, 2, dequantize_q3_1>;
+        case GGML_TYPE_Q2_1:
+            return dequantize_block_cont_cuda<QK2_1, 2, dequantize_q2_1>;
         case GGML_TYPE_Q8_0:
             if (fp16_available(ggml_cuda_info().devices[ggml_cuda_get_device()].cc)) {
                 return dequantize_block_q8_0_f16_cuda;
@@ -831,6 +851,16 @@ to_fp32_cuda_t ggml_get_to_fp32_cuda(ggml_type type) {
             return dequantize_block_cont_cuda<QK5_0, QR5_0, dequantize_q5_0>;
         case GGML_TYPE_Q5_1:
             return dequantize_block_cont_cuda<QK5_1, QR5_1, dequantize_q5_1>;
+        case GGML_TYPE_Q6_0:
+            return dequantize_block_cont_cuda<QK6_0, QR6_0, dequantize_q6_0>;
+        case GGML_TYPE_Q6_1:
+            return dequantize_block_cont_cuda<QK6_1, QR6_1, dequantize_q6_1>;
+        case GGML_TYPE_Q3_0: // 2-bit-plane layout: float2 dequant covers (iqs, iqs+16), so ratio 2
+            return dequantize_block_cont_cuda<QK3_0, 2, dequantize_q3_0>;
+        case GGML_TYPE_Q3_1:
+            return dequantize_block_cont_cuda<QK3_1, 2, dequantize_q3_1>;
+        case GGML_TYPE_Q2_1:
+            return dequantize_block_cont_cuda<QK2_1, 2, dequantize_q2_1>;
         case GGML_TYPE_Q8_0:
             return dequantize_block_cont_cuda<QK8_0, QR8_0, dequantize_q8_0>;
         case GGML_TYPE_Q2_K:
@@ -888,6 +918,16 @@ to_fp16_nc_cuda_t ggml_get_to_fp16_nc_cuda(ggml_type type) {
             return dequantize_block_cuda<QK5_0, QR5_0, dequantize_q5_0>;
         case GGML_TYPE_Q5_1:
             return dequantize_block_cuda<QK5_1, QR5_1, dequantize_q5_1>;
+        case GGML_TYPE_Q6_0:
+            return dequantize_block_cuda<QK6_0, QR6_0, dequantize_q6_0>;
+        case GGML_TYPE_Q6_1:
+            return dequantize_block_cuda<QK6_1, QR6_1, dequantize_q6_1>;
+        case GGML_TYPE_Q3_0: // 2-bit-plane layout: float2 dequant covers (iqs, iqs+16), so ratio 2
+            return dequantize_block_cuda<QK3_0, 2, dequantize_q3_0>;
+        case GGML_TYPE_Q3_1:
+            return dequantize_block_cuda<QK3_1, 2, dequantize_q3_1>;
+        case GGML_TYPE_Q2_1:
+            return dequantize_block_cuda<QK2_1, 2, dequantize_q2_1>;
         case GGML_TYPE_Q8_0:
             return dequantize_block_cuda<QK8_0, QR8_0, dequantize_q8_0>;
         case GGML_TYPE_BF16:
@@ -911,6 +951,16 @@ to_bf16_nc_cuda_t ggml_get_to_bf16_nc_cuda(ggml_type type) {
             return dequantize_block_cuda<QK5_0, QR5_0, dequantize_q5_0>;
         case GGML_TYPE_Q5_1:
             return dequantize_block_cuda<QK5_1, QR5_1, dequantize_q5_1>;
+        case GGML_TYPE_Q6_0:
+            return dequantize_block_cuda<QK6_0, QR6_0, dequantize_q6_0>;
+        case GGML_TYPE_Q6_1:
+            return dequantize_block_cuda<QK6_1, QR6_1, dequantize_q6_1>;
+        case GGML_TYPE_Q3_0: // 2-bit-plane layout: float2 dequant covers (iqs, iqs+16), so ratio 2
+            return dequantize_block_cuda<QK3_0, 2, dequantize_q3_0>;
+        case GGML_TYPE_Q3_1:
+            return dequantize_block_cuda<QK3_1, 2, dequantize_q3_1>;
+        case GGML_TYPE_Q2_1:
+            return dequantize_block_cuda<QK2_1, 2, dequantize_q2_1>;
         case GGML_TYPE_Q8_0:
             return dequantize_block_cuda<QK8_0, QR8_0, dequantize_q8_0>;
         case GGML_TYPE_F16:
@@ -934,6 +984,16 @@ to_fp32_nc_cuda_t ggml_get_to_fp32_nc_cuda(ggml_type type) {
             return dequantize_block_cuda<QK5_0, QR5_0, dequantize_q5_0>;
         case GGML_TYPE_Q5_1:
             return dequantize_block_cuda<QK5_1, QR5_1, dequantize_q5_1>;
+        case GGML_TYPE_Q6_0:
+            return dequantize_block_cuda<QK6_0, QR6_0, dequantize_q6_0>;
+        case GGML_TYPE_Q6_1:
+            return dequantize_block_cuda<QK6_1, QR6_1, dequantize_q6_1>;
+        case GGML_TYPE_Q3_0: // 2-bit-plane layout: float2 dequant covers (iqs, iqs+16), so ratio 2
+            return dequantize_block_cuda<QK3_0, 2, dequantize_q3_0>;
+        case GGML_TYPE_Q3_1:
+            return dequantize_block_cuda<QK3_1, 2, dequantize_q3_1>;
+        case GGML_TYPE_Q2_1:
+            return dequantize_block_cuda<QK2_1, 2, dequantize_q2_1>;
         case GGML_TYPE_Q8_0:
             return dequantize_block_cuda<QK8_0, QR8_0, dequantize_q8_0>;
         case GGML_TYPE_BF16:
