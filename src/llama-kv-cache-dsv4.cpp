@@ -1061,19 +1061,23 @@ llama_memory_context_ptr llama_kv_cache_dsv4::init_batch(
             bool embd_all) {
     GGML_UNUSED(embd_all);
 
-    const bool raw_per_seq  = static_cast<llama_kv_cache *>(kv_raw->get_base())->get_n_stream() != 1;
+    auto * base = dynamic_cast<llama_kv_cache *>(kv_raw->get_base());
+    GGML_ASSERT(base != nullptr && "DSv4 raw kv_raw is expected to never be kvarn-backed");
+    const bool raw_per_seq  = base->get_n_stream() != 1;
     const bool comp_per_seq = csa_state->get_n_stream() > 1;
     const bool has_coupled = dsv4_batch_has_coupled(balloc.get_batch());
 
     const auto make_context = [&](std::vector<llama_ubatch> ubatches) -> llama_memory_context_ptr {
         auto ubatches_raw = dsv4_build_raw_write_ubatches(ubatches);
 
-        auto sinfos_raw_base_write = static_cast<llama_kv_cache *>(kv_raw->get_base())->prepare(ubatches_raw);
+        auto sinfos_raw_base_write = base->prepare(ubatches_raw);
         if (sinfos_raw_base_write.empty()) {
             return nullptr;
         }
 
-        auto sinfos_raw_swa_write = static_cast<llama_kv_cache *>(kv_raw->get_swa())->prepare(ubatches_raw);
+        auto * swa = dynamic_cast<llama_kv_cache *>(kv_raw->get_swa());
+        GGML_ASSERT(swa != nullptr && "DSv4 raw kv_raw is expected to never be kvarn-backed");
+        auto sinfos_raw_swa_write = swa->prepare(ubatches_raw);
         if (sinfos_raw_swa_write.empty()) {
             return nullptr;
         }
@@ -1401,7 +1405,11 @@ static llama_kv_cache::slot_info dsv4_build_full_sinfo(const llama_kv_cache * kv
 }
 
 llama_kv_cache_dsv4_raw_context::llama_kv_cache_dsv4_raw_context(llama_kv_cache_iswa * kv) :
-    kv_swa(static_cast<llama_kv_cache *>(kv->get_swa())),
+    kv_swa([&]() {
+        llama_kv_cache * s = dynamic_cast<llama_kv_cache *>(kv->get_swa());
+        GGML_ASSERT(s != nullptr && "DSv4 iswa SWA is expected to never be kvarn-backed");
+        return s;
+    }()),
     ctx_base_mem(nullptr),
     ctx_swa_mem(nullptr),
     n_kv(kv_swa->get_size()),
@@ -1414,7 +1422,11 @@ llama_kv_cache_dsv4_raw_context::llama_kv_cache_dsv4_raw_context(
         llama_kv_cache_iswa * kv,
         llama_context * lctx,
         bool optimize) :
-    kv_swa(static_cast<llama_kv_cache *>(kv->get_swa())),
+    kv_swa([&]() {
+        llama_kv_cache * s = dynamic_cast<llama_kv_cache *>(kv->get_swa());
+        GGML_ASSERT(s != nullptr && "DSv4 iswa SWA is expected to never be kvarn-backed");
+        return s;
+    }()),
     ctx_base_mem(kv->get_base()->init_update(lctx, optimize)),
     ctx_swa_mem(kv->get_swa()->init_update(lctx, optimize)),
     n_kv(kv_swa->get_size()),
@@ -1428,13 +1440,21 @@ llama_kv_cache_dsv4_raw_context::llama_kv_cache_dsv4_raw_context(
         slot_info_vec_t sinfos_swa_read,
         std::vector<llama_ubatch> ubatches,
         std::vector<llama_ubatch> ubatches_write) :
-    kv_swa(static_cast<llama_kv_cache *>(kv->get_swa())),
+    kv_swa([&]() {
+        llama_kv_cache * s = dynamic_cast<llama_kv_cache *>(kv->get_swa());
+        GGML_ASSERT(s != nullptr && "DSv4 iswa SWA is expected to never be kvarn-backed");
+        return s;
+    }()),
     sinfos_write(std::move(sinfos_swa_write)),
     sinfos_read(std::move(sinfos_swa_read)),
     ubatches(std::move(ubatches)),
     ubatches_write(std::move(ubatches_write)),
     ctx_base_mem(std::make_unique<llama_kv_cache_context>(
-                static_cast<llama_kv_cache *>(kv->get_base()), std::move(sinfos_base_write), this->ubatches_write)),
+                [&]() {
+                    llama_kv_cache * b = dynamic_cast<llama_kv_cache *>(kv->get_base());
+                    GGML_ASSERT(b != nullptr && "DSv4 iswa base is expected to never be kvarn-backed");
+                    return b;
+                }(), std::move(sinfos_base_write), this->ubatches_write)),
     ctx_swa_mem(nullptr),
     n_kv(kv_swa->get_size()),
     status(LLAMA_MEMORY_STATUS_SUCCESS) {
