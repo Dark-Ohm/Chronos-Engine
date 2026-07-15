@@ -6,6 +6,7 @@
 #include <map>
 #include <memory>
 #include <functional>
+#include <vector>
 
 struct llama_ubatch;
 
@@ -124,6 +125,12 @@ struct llama_memory_i {
 
     virtual void state_write(llama_io_write_i & io, llama_seq_id seq_id = -1, llama_state_seq_flags flags = 0) const = 0;
     virtual void state_read (llama_io_read_i  & io, llama_seq_id seq_id = -1, llama_state_seq_flags flags = 0) = 0;
+
+    // KVarN: batch initialization for structured KV cache (fork-specific)
+    virtual llama_memory_context_ptr init_kv_batch(const std::vector<llama_ubatch> & /* ubatches */) { return nullptr; }
+
+    virtual uint32_t get_kv_size() const { return 0; }
+    virtual uint32_t get_kv_n_stream() const { return 0; }
 };
 
 using llama_memory_ptr = std::unique_ptr<llama_memory_i>;

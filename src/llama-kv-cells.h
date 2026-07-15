@@ -257,6 +257,18 @@ public:
         return false;
     }
 
+    // remove seq_id from cell if present, return true if cell had seq_id
+    bool seq_rm_cell(uint32_t i, llama_seq_id seq_id) {
+        assert(i < pos.size());
+        assert(seq_id >= 0);
+
+        if (pos[i] == -1 || !seq[i].test(seq_id)) {
+            return false;
+        }
+
+        return seq_rm(i, seq_id);
+    }
+
     // return true if the cell becomes empty (i.e. it did not contain seq_id before the call)
     bool seq_keep(uint32_t i, llama_seq_id seq_id) {
         assert(i < pos.size());
@@ -405,6 +417,18 @@ public:
     void ext_set(uint32_t i, llama_kv_cell_ext p) {
         assert(i < ext.size());
         ext[i] = p;
+    }
+
+    // return cell indices at a given position for a seq_id
+    std::vector<uint32_t> cells_at(llama_seq_id seq_id, llama_pos p) const {
+        assert(seq_id >= 0);
+        std::vector<uint32_t> result;
+        for (const auto & i : used) {
+            if (pos[i] == p && seq[i].test(seq_id)) {
+                result.push_back(i);
+            }
+        }
+        return result;
     }
 
     // pos[i] = pos[i] + d

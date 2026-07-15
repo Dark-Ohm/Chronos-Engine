@@ -129,6 +129,8 @@ public:
 
     llama_memory_context_ptr init_update(llama_context * lctx, bool optimize) override;
 
+    llama_memory_context_ptr init_kv_batch(const std::vector<llama_ubatch> & ubatches) override;
+
     bool get_can_shift() const override;
 
     void clear(bool data) override;
@@ -154,7 +156,16 @@ public:
     //
 
     uint32_t get_size()     const;
+    uint32_t get_kv_size()  const override;
+    uint32_t get_kv_n_stream() const override;
     uint32_t get_n_stream() const;
+    uint32_t get_stream_for_seq(llama_seq_id seq_id) const;
+
+    ggml_tensor * get_turbo_rotation() const { return turbo_rotation; }
+    ggml_tensor * get_turbo_rotation_inv() const { return turbo_rotation_inv; }
+
+    bool seq_rm_cell(llama_seq_id seq_id, uint32_t cell_idx);
+    int cells_at_pos(llama_seq_id seq_id, llama_pos pos, uint32_t * cell_indices, int n_max);
 
     bool get_has_shift() const;
 
@@ -169,6 +180,9 @@ public:
     //
 
     uint32_t get_n_kv(const slot_info & sinfo) const;
+
+    // access cells for a given stream
+    const llama_kv_cells & get_cells(uint32_t stream) const { return v_cells[stream]; }
 
     // get views of the current state of the cache
     ggml_tensor * get_k(ggml_context * ctx, int32_t il, uint32_t n_kv, const slot_info & sinfo) const;
@@ -216,6 +230,12 @@ public:
 
     void set_input_k_rot(ggml_tensor * dst) const;
     void set_input_v_rot(ggml_tensor * dst) const;
+
+    // backend variants (for kvarn/turbo - use ggml_backend_tensor_set instead of host pointer)
+    void set_input_k_idxs_backend(ggml_tensor * dst, const llama_ubatch * ubatch, const slot_info & sinfo) const;
+    void set_input_v_idxs_backend(ggml_tensor * dst, const llama_ubatch * ubatch, const slot_info & sinfo) const;
+    void set_input_k_rot_backend(ggml_tensor * dst) const;
+    void set_input_v_rot_backend(ggml_tensor * dst) const;
 
 private:
     const llama_model & model;
@@ -283,6 +303,10 @@ private:
     stream_copy_info sc_info;
 
     std::vector<kv_layer> layers;
+
+    // TurboQuant rotation matrices (128x128, row-major stored)
+    ggml_tensor * turbo_rotation = nullptr;      // R (forward rotation)
+    ggml_tensor * turbo_rotation_inv = nullptr;   // R^T = R^{-1} (inverse rotation)
 
     // model layer id -> KV cache layer id
     std::unordered_map<int32_t, int32_t> map_layer_ids;
@@ -398,6 +422,15 @@ public:
 
     void set_input_k_rot(ggml_tensor * dst) const;
     void set_input_v_rot(ggml_tensor * dst) const;
+
+    // backend variants (for kvarn/turbo)
+    void set_input_k_idxs_backend(ggml_tensor * dst, const llama_ubatch * ubatch) const;
+    void set_input_v_idxs_backend(ggml_tensor * dst, const llama_ubatch * ubatch) const;
+    void set_input_k_rot_backend(ggml_tensor * dst) const;
+    void set_input_v_rot_backend(ggml_tensor * dst) const;
+
+    // current slot info (for kvarn context delegation)
+    const llama_kv_cache::slot_info & current_sinfo() const;
 
 private:
     llama_memory_status status;

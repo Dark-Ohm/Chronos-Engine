@@ -112,16 +112,177 @@ if (CUDAToolkit_FOUND)
     file(GLOB   SRCS "template-instances/mmf*.cu")
     list(APPEND GGML_SOURCES_CUDA ${SRCS})
 
+    macro(ggml_add_fattn_vec_pair OUT_VAR PREFIX K_TYPE V_TYPE)
+        set(_FILE "${PREFIX}/fattn-vec-instance-${K_TYPE}-${V_TYPE}.cu")
+        if (NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/${_FILE}")
+            message(FATAL_ERROR "Missing FA vec template instance: ${_FILE}")
+        endif()
+        list(APPEND ${OUT_VAR} "${_FILE}")
+    endmacro()
+
+    if (GGML_CUDA_FA_ALL_QUANTS AND GGML_CUDA_FA_HALF_QUANTS)
+        message(FATAL_ERROR
+            "GGML_CUDA_FA_ALL_QUANTS and GGML_CUDA_FA_HALF_QUANTS are mutually exclusive. "
+            "Use GGML_CUDA_FA_ALL_QUANTS for the full K/V pair matrix, or GGML_CUDA_FA_HALF_QUANTS for only K>=V pairs.")
+    endif()
+
+    set(FA_VEC_PREFIX "template-instances")
+
     if (GGML_CUDA_FA_ALL_QUANTS)
-        file(GLOB   SRCS "template-instances/fattn-vec*.cu")
+        file(GLOB   SRCS "${FA_VEC_PREFIX}/fattn-vec-instance-*.cu")
         list(APPEND GGML_SOURCES_CUDA ${SRCS})
         add_compile_definitions(GGML_CUDA_FA_ALL_QUANTS)
+    elseif (GGML_CUDA_FA_HALF_QUANTS)
+        # D-009: no q2_0 in this fork (bee layout incompatible with upstream ID 42).
+        set(GGML_CUDA_FA_KV_TYPES_ORDERED
+            f16
+            bf16
+            q8_0
+            q6_1
+            q6_0
+            q5_1
+            q5_0
+            q4_1
+            turbo4_tcq
+            turbo4_0
+            q4_0
+            q3_1
+            turbo3_tcq
+            turbo3_0
+            q3_0
+            q2_1
+            turbo2_tcq
+            turbo2_0
+        )
+
+        function(ggml_cuda_fa_kv_rank OUT TYPE)
+            if (TYPE STREQUAL "f16")
+                set(${OUT} 0 PARENT_SCOPE)
+            elseif (TYPE STREQUAL "bf16")
+                set(${OUT} 1 PARENT_SCOPE)
+            elseif (TYPE STREQUAL "q8_0")
+                set(${OUT} 2 PARENT_SCOPE)
+            elseif (TYPE STREQUAL "q6_1")
+                set(${OUT} 3 PARENT_SCOPE)
+            elseif (TYPE STREQUAL "q6_0")
+                set(${OUT} 4 PARENT_SCOPE)
+            elseif (TYPE STREQUAL "q5_1")
+                set(${OUT} 5 PARENT_SCOPE)
+            elseif (TYPE STREQUAL "q5_0")
+                set(${OUT} 6 PARENT_SCOPE)
+            elseif (TYPE STREQUAL "q4_1" OR TYPE STREQUAL "turbo4_tcq" OR TYPE STREQUAL "turbo4_0")
+                set(${OUT} 7 PARENT_SCOPE)
+            elseif (TYPE STREQUAL "q4_0")
+                set(${OUT} 8 PARENT_SCOPE)
+            elseif (TYPE STREQUAL "q3_1" OR TYPE STREQUAL "turbo3_tcq" OR TYPE STREQUAL "turbo3_0")
+                set(${OUT} 9 PARENT_SCOPE)
+            elseif (TYPE STREQUAL "q3_0")
+                set(${OUT} 10 PARENT_SCOPE)
+            elseif (TYPE STREQUAL "q2_1" OR TYPE STREQUAL "turbo2_tcq" OR TYPE STREQUAL "turbo2_0")
+                set(${OUT} 11 PARENT_SCOPE)
+            else()
+                message(FATAL_ERROR "Unknown CUDA FA K/V rank type: ${TYPE}")
+            endif()
+        endfunction()
+
+        list(LENGTH GGML_CUDA_FA_KV_TYPES_ORDERED GGML_CUDA_FA_KV_TYPES_LEN)
+        math(EXPR GGML_CUDA_FA_KV_TYPES_LAST "${GGML_CUDA_FA_KV_TYPES_LEN} - 1")
+
+        set(GGML_CUDA_FA_HALF_PAIR_COUNT 0)
+
+        foreach(KI RANGE 0 ${GGML_CUDA_FA_KV_TYPES_LAST})
+            list(GET GGML_CUDA_FA_KV_TYPES_ORDERED ${KI} K_TYPE)
+
+            foreach(VI RANGE 0 ${GGML_CUDA_FA_KV_TYPES_LAST})
+                list(GET GGML_CUDA_FA_KV_TYPES_ORDERED ${VI} V_TYPE)
+
+                ggml_cuda_fa_kv_rank(K_RANK "${K_TYPE}")
+                ggml_cuda_fa_kv_rank(V_RANK "${V_TYPE}")
+
+                if (K_RANK LESS_EQUAL V_RANK OR K_TYPE STREQUAL "f16" OR V_TYPE STREQUAL "f16")
+                    ggml_add_fattn_vec_pair(GGML_SOURCES_CUDA "${FA_VEC_PREFIX}" "${K_TYPE}" "${V_TYPE}")
+                    math(EXPR GGML_CUDA_FA_HALF_PAIR_COUNT "${GGML_CUDA_FA_HALF_PAIR_COUNT} + 1")
+                endif()
+            endforeach()
+        endforeach()
+
+        if (NOT GGML_CUDA_FA_HALF_PAIR_COUNT EQUAL 197)
+            message(FATAL_ERROR "GGML_CUDA_FA_HALF_QUANTS expected 197 FA vec pairs, got ${GGML_CUDA_FA_HALF_PAIR_COUNT}")
+        endif()
+
+        add_compile_definitions(GGML_CUDA_FA_HALF_QUANTS)
     else()
-        list(APPEND GGML_SOURCES_CUDA
-            template-instances/fattn-vec-instance-f16-f16.cu
-            template-instances/fattn-vec-instance-q4_0-q4_0.cu
-            template-instances/fattn-vec-instance-q8_0-q8_0.cu
-            template-instances/fattn-vec-instance-bf16-bf16.cu)
+        # Must match scripts/gen-fattn-vec-dispatch.py DEFAULT_PAIRS exactly (D-009: no q2_0).
+        set(GGML_CUDA_FA_DEFAULT_KV_PAIRS
+            f16:f16
+            f16:q8_0
+            f16:q6_1
+            f16:q6_0
+            f16:q5_1
+            f16:q5_0
+            bf16:bf16
+            bf16:q8_0
+            bf16:q6_1
+            bf16:q6_0
+            bf16:q5_1
+            bf16:q5_0
+            q8_0:q8_0
+            q8_0:q6_1
+            q8_0:q6_0
+            q8_0:q5_1
+            q8_0:q5_0
+            q8_0:q4_1
+            q8_0:q4_0
+            q6_1:q6_1
+            q6_1:q6_0
+            q6_1:q5_1
+            q6_1:q5_0
+            q6_1:q4_1
+            q6_1:q4_0
+            q6_0:q6_0
+            q6_0:q5_1
+            q6_0:q5_0
+            q6_0:q4_1
+            q6_0:q4_0
+            q5_1:q5_1
+            q5_1:q5_0
+            q5_1:q4_1
+            q5_1:q4_0
+            q5_1:q3_1
+            q5_1:q3_0
+            q5_0:q5_0
+            q5_0:q4_1
+            q5_0:q4_0
+            q5_0:q3_1
+            q5_0:q3_0
+            q4_1:q4_1
+            q4_1:q4_0
+            q4_1:q3_1
+            q4_1:q3_0
+            q4_1:q2_1
+            q4_0:q4_0
+            q4_0:q3_1
+            q4_0:q3_0
+            q4_0:q2_1
+            q3_1:q3_1
+            q3_1:q3_0
+            q3_1:q2_1
+            q3_0:q3_0
+            q3_0:q2_1
+            q2_1:q2_1
+        )
+
+        list(LENGTH GGML_CUDA_FA_DEFAULT_KV_PAIRS GGML_CUDA_FA_DEFAULT_PAIR_COUNT)
+        if (NOT GGML_CUDA_FA_DEFAULT_PAIR_COUNT EQUAL 56)
+            message(FATAL_ERROR "Default CUDA FA vec policy expected 56 pairs, got ${GGML_CUDA_FA_DEFAULT_PAIR_COUNT}")
+        endif()
+
+        foreach(PAIR ${GGML_CUDA_FA_DEFAULT_KV_PAIRS})
+            string(REPLACE ":" ";" PARTS "${PAIR}")
+            list(GET PARTS 0 K_TYPE)
+            list(GET PARTS 1 V_TYPE)
+            ggml_add_fattn_vec_pair(GGML_SOURCES_CUDA "${FA_VEC_PREFIX}" "${K_TYPE}" "${V_TYPE}")
+        endforeach()
     endif()
 
     ggml_add_backend_library(ggml-cuda

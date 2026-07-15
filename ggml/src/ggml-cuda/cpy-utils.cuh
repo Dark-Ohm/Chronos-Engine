@@ -386,6 +386,8 @@ static __device__ void cpy_blck_f32_q5_0(const char * cxi, char * cdsti) {
 
 static __device__ void cpy_blck_f32_q5_1(const char * cxi, char * cdsti) {
     quantize_f32_q5_1_block((const float *)cxi, (block_q5_1 *)cdsti);
+}
+
 static __device__ void cpy_blck_f32_q6_0(const char * cxi, char * cdsti) {
     quantize_f32_q6_0_block((const float *)cxi, (block_q6_0 *)cdsti);
 }
@@ -405,8 +407,6 @@ static __device__ void cpy_blck_f32_q3_1(const char * cxi, char * cdsti) {
 
 static __device__ void cpy_blck_f32_q2_1(const char * cxi, char * cdsti) {
     quantize_f32_q2_1_block((const float *)cxi, (block_q2_1 *)cdsti);
-}
-
 }
 
 static __device__ void cpy_blck_f32_q8_0(const char * cxi, char * cdsti) {

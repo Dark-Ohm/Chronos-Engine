@@ -109,8 +109,7 @@ public:
     // init success
     llama_memory_hybrid_iswa_context(
            llama_memory_hybrid_iswa * mem,
-                    slot_info_vec_t   sinfos_base,
-                    slot_info_vec_t   sinfos_swa,
+        llama_memory_context_ptr   ctx_attn_in,
           std::vector<llama_ubatch>   ubatches);
 
     ~llama_memory_hybrid_iswa_context() = default;

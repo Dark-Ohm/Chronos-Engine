@@ -54,6 +54,18 @@ struct llama_cparams {
     enum llama_context_type ctx_type;
     enum llama_pooling_type pooling_type;
 
+    llama_kvarn_params kvarn = {
+        /*.type                =*/ LLAMA_KVARN_TYPE_DISABLED,
+        /*.key_bits            =*/ 0,
+        /*.value_bits          =*/ 0,
+        /*.swa_key_bits        =*/ 0,
+        /*.swa_value_bits      =*/ 0,
+        /*.group               =*/ 128,
+        /*.sinkhorn_iters      =*/ 16,
+        /*.sink_tokens         =*/ 128,
+        /*.fail_if_unsupported =*/ true,
+    };
+
     ggml_backend_sched_eval_callback cb_eval;
     void * cb_eval_user_data;
 

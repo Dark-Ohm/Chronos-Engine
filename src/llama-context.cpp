@@ -3468,6 +3468,7 @@ llama_context_params llama_context_default_params() {
         /*.sampler                     =*/ nullptr,
         /*.n_sampler                   =*/ 0,
         /*.ctx_other                   =*/ nullptr,
+        /*.kvarn                       =*/ llama_kvarn_default_params(),
     };
 
     return result;

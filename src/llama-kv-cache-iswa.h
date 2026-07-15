@@ -1,6 +1,7 @@
 #pragma once
 
 #include "llama-kv-cache.h"
+#include "llama-kv-cache-kvarn.h"
 
 #include <vector>
 
@@ -28,7 +29,8 @@ public:
                llama_memory_t   mem_other,
         const layer_filter_cb & filter,
         const  layer_reuse_cb & reuse,
-        const  layer_share_cb & share);
+        const  layer_share_cb & share,
+          llama_kvarn_params   kvarn = llama_kvarn_default_params());
 
     llama_kv_cache_iswa(
             const llama_model & model,
@@ -46,7 +48,8 @@ public:
                llama_memory_t   mem_other,
         const layer_filter_cb & filter,
         const  layer_reuse_cb & reuse,
-        const  layer_share_cb & share);
+        const  layer_share_cb & share,
+          llama_kvarn_params   kvarn = llama_kvarn_default_params());
 
     ~llama_kv_cache_iswa() = default;
 
@@ -87,14 +90,19 @@ public:
     // llama_kv_cache_iswa specific API
     //
 
-    llama_kv_cache * get_base() const;
-    llama_kv_cache * get_swa () const;
+    llama_memory_i * get_base() const;
+    llama_memory_i * get_swa () const;
+
+    uint32_t get_kv_n_stream() const override;
+    llama_memory_context_ptr init_kv_batch(const std::vector<llama_ubatch> & ubatches) override;
 
 private:
     const bool unified;
 
-    std::unique_ptr<llama_kv_cache> kv_base;
-    std::unique_ptr<llama_kv_cache> kv_swa;
+    // When kvarn is enabled, these hold llama_kv_cache_kvarn; otherwise llama_kv_cache.
+    // We use llama_memory_ptr for polymorphic storage.
+    llama_memory_ptr kv_base;
+    llama_memory_ptr kv_swa;
 };
 
 class llama_kv_cache_iswa_context : public llama_memory_context_i {
@@ -114,11 +122,10 @@ public:
             llama_context * lctx,
             bool optimize);
 
-    // used to create a batch processing context from a batch
+    // used to create a batch processing context from memory contexts
     llama_kv_cache_iswa_context(
-            llama_kv_cache_iswa * kv,
-            slot_info_vec_t sinfos_base,
-            slot_info_vec_t sinfos_swa,
+            llama_memory_context_ptr ctx_base_in,
+            llama_memory_context_ptr ctx_swa_in,
             std::vector<llama_ubatch> ubatches);
 
     virtual ~llama_kv_cache_iswa_context();

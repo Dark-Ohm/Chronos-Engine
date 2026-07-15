@@ -78,7 +78,7 @@ llama_memory_context_ptr llama_memory_hybrid_iswa::init_batch(llama_batch_allocr
                 ubatch = balloc.split_seq(n_ubatch);
             } else {
                 // Use non-sequential split when KV cache is unified (needed for hellaswag/winogrande/multiple-choice)
-                const bool unified = (mem_attn->get_base()->get_n_stream() == 1);
+                const bool unified = (mem_attn->get_kv_n_stream() == 1);
 
                 // [TAG_RECURRENT_ROLLBACK_SPLITS]
                 // the trailing (1 + n_rs_seq) tokens of each seq must stay in the same ubatch
@@ -107,21 +107,15 @@ llama_memory_context_ptr llama_memory_hybrid_iswa::init_batch(llama_batch_allocr
             return std::make_unique<llama_memory_hybrid_iswa_context>(LLAMA_MEMORY_STATUS_FAILED_PREPARE);
         }
 
-        // prepare the attention cache (iswa version returns both base and swa slot infos)
-        auto sinfos_base = mem_attn->get_base()->prepare(ubatches);
-        if (sinfos_base.empty()) {
-            LLAMA_LOG_ERROR("%s: failed to prepare attention base ubatches\n", __func__);
-            return std::make_unique<llama_memory_hybrid_iswa_context>(LLAMA_MEMORY_STATUS_FAILED_PREPARE);
-        }
-
-        auto sinfos_swa = mem_attn->get_swa()->prepare(ubatches);
-        if (sinfos_swa.empty()) {
-            LLAMA_LOG_ERROR("%s: failed to prepare attention swa ubatches\n", __func__);
+        // prepare the attention cache via init_kv_batch (works for both kvarn and non-kvarn)
+        auto ctx_attn = mem_attn->init_kv_batch(ubatches);
+        if (!ctx_attn || llama_memory_status_is_fail(ctx_attn->get_status())) {
+            LLAMA_LOG_ERROR("%s: failed to prepare attention ubatches\n", __func__);
             return std::make_unique<llama_memory_hybrid_iswa_context>(LLAMA_MEMORY_STATUS_FAILED_PREPARE);
         }
 
         return std::make_unique<llama_memory_hybrid_iswa_context>(
-                this, std::move(sinfos_base), std::move(sinfos_swa), std::move(ubatches));
+                this, std::move(ctx_attn), std::move(ubatches));
     } while(false);
 
     return std::make_unique<llama_memory_hybrid_iswa_context>(LLAMA_MEMORY_STATUS_FAILED_PREPARE);
@@ -233,12 +227,10 @@ llama_memory_hybrid_iswa_context::llama_memory_hybrid_iswa_context(
 
 llama_memory_hybrid_iswa_context::llama_memory_hybrid_iswa_context(
            llama_memory_hybrid_iswa * mem,
-                    slot_info_vec_t   sinfos_base,
-                    slot_info_vec_t   sinfos_swa,
+        llama_memory_context_ptr   ctx_attn_in,
           std::vector<llama_ubatch>   ubatches) :
     ubatches(std::move(ubatches)),
-    // note: here we copy the ubatches. not sure if this is ideal
-    ctx_attn(new llama_kv_cache_iswa_context(mem->get_mem_attn(), std::move(sinfos_base), std::move(sinfos_swa), this->ubatches)),
+    ctx_attn(std::move(ctx_attn_in)),
     ctx_recr(new llama_memory_recurrent_context(mem->get_mem_recr(), this->ubatches)),
     status(llama_memory_status_combine(ctx_attn->get_status(), ctx_recr->get_status())) {
 }

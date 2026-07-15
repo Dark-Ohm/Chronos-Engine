@@ -2256,6 +2256,7 @@ static void ggml_compute_forward(struct ggml_compute_params * params, struct ggm
             {
                 // nop
             } break;
+        case GGML_OP_TURBO_WHT:
         case GGML_OP_KVARN_VIEW:
         case GGML_OP_KVARN_WHT:
         case GGML_OP_KVARN_STORE:
@@ -2586,6 +2587,7 @@ static int ggml_get_n_tasks(struct ggml_tensor * node, int n_threads) {
             {
                 n_tasks = n_threads;
             } break;
+        case GGML_OP_TURBO_WHT:
         case GGML_OP_KVARN_VIEW:
         case GGML_OP_KVARN_WHT:
         case GGML_OP_KVARN_STORE:
@@ -3117,6 +3119,7 @@ struct ggml_cplan ggml_graph_plan(
                         const int64_t ne10 = node->src[1]->ne[0];
                         cur += sizeof(float)*ne10*n_tasks;
                     } break;
+                case GGML_OP_TURBO_WHT:
                 case GGML_OP_KVARN_VIEW:
                 case GGML_OP_KVARN_WHT:
                 case GGML_OP_KVARN_STORE:

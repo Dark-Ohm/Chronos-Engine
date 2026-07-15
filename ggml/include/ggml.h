@@ -455,6 +455,18 @@ extern "C" {
         GGML_PREC_F32     = 10,
     };
 
+    enum ggml_flash_attn_ext_op_param {
+        GGML_FLASH_ATTN_EXT_OP_PARAM_PREC         = 3,
+        GGML_FLASH_ATTN_EXT_OP_PARAM_KVARN_DOMAIN = 4,
+    };
+
+    enum ggml_flash_attn_ext_kvarn_domain {
+        GGML_FLASH_ATTN_EXT_KVARN_DOMAIN_AUTO                 = 0,
+        GGML_FLASH_ATTN_EXT_KVARN_DOMAIN_ROTATED              = 1,
+        GGML_FLASH_ATTN_EXT_KVARN_DOMAIN_ORIGINAL             = 2,
+        GGML_FLASH_ATTN_EXT_KVARN_DOMAIN_ROTATED_K_ORIGINAL_V = 3,
+    };
+
     // op hint
     enum ggml_op_hint {
         GGML_HINT_NONE             = 0,
@@ -617,6 +629,7 @@ extern "C" {
 
         GGML_OP_GLU,
 
+        GGML_OP_TURBO_WHT,
         GGML_OP_KVARN_VIEW,
         GGML_OP_KVARN_WHT,
         GGML_OP_KVARN_STORE,
@@ -2627,6 +2640,13 @@ extern "C" {
         struct ggml_tensor  * k,
         struct ggml_tensor  * weights,
         struct ggml_tensor  * mask);
+
+    // TurboQuant Walsh-Hadamard rotation (fork-specific)
+    // direction: 0 = forward, 1 = inverse
+    GGML_API struct ggml_tensor * ggml_turbo_wht(
+            struct ggml_context * ctx,
+            struct ggml_tensor  * a,
+            int                   direction);
 
     // KVarN structured KV-cache operations (fork-specific)
     GGML_API struct ggml_tensor * ggml_kvarn_wht(

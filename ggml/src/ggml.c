@@ -1203,12 +1203,13 @@ static const char * GGML_OP_NAME[GGML_OP_COUNT] = {
 
     "GLU",
 
+    "TURBO_WHT",
     "KVARN_VIEW",
     "KVARN_WHT",
     "KVARN_STORE",
 };
 
-static_assert(GGML_OP_COUNT == 101, "GGML_OP_COUNT != 101");
+static_assert(GGML_OP_COUNT == 102, "GGML_OP_COUNT != 102");
 
 static const char * GGML_OP_SYMBOL[GGML_OP_COUNT] = {
     "none",
@@ -1319,12 +1320,13 @@ static const char * GGML_OP_SYMBOL[GGML_OP_COUNT] = {
 
     "glu(x)",
 
+    "turbo_wht(a)",
     "kvarn_view(records, stage, idx)",
     "kvarn_wht(a)",
     "kvarn_store(cur, idx, stage, records)",
 };
 
-static_assert(GGML_OP_COUNT == 101, "GGML_OP_COUNT != 101");
+static_assert(GGML_OP_COUNT == 102, "GGML_OP_COUNT != 102");
 
 static_assert(GGML_OP_POOL_COUNT == 2, "GGML_OP_POOL_COUNT != 2");
 
@@ -6470,6 +6472,28 @@ enum {
     GGML_KVARN_OP_PARAM_STAGE_GROUPS      = 7,
     GGML_KVARN_OP_PARAM_TAIL_GROUPS       = 8,
 };
+
+// ggml_turbo_wht
+
+struct ggml_tensor * ggml_turbo_wht(
+        struct ggml_context * ctx,
+        struct ggml_tensor  * a,
+        int                   direction) {
+    GGML_ASSERT(ggml_is_contiguous(a));
+    GGML_ASSERT(a->type == GGML_TYPE_F32);
+    GGML_ASSERT(a->ne[0] % 128 == 0);  // ne[0] must be divisible by rotation group size
+    GGML_ASSERT(direction == 0 || direction == 1);
+
+    struct ggml_tensor * result = ggml_new_tensor(ctx, GGML_TYPE_F32, 4, a->ne);
+
+    result->op = GGML_OP_TURBO_WHT;
+    result->src[0] = a;
+
+    // Store direction in op_params: 0 = forward, 1 = inverse
+    memcpy(result->op_params, &direction, sizeof(int));
+
+    return result;
+}
 
 // ggml_kvarn_wht
 

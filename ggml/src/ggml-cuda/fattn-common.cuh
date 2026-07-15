@@ -1837,8 +1837,6 @@ constexpr __device__ vec_dot_KQ_t get_vec_dot_KQ() {
         return vec_dot_fattn_vec_KQ_q3_0<D, nthreads>;
     } else if constexpr (type_K == GGML_TYPE_Q3_1) {
         return vec_dot_fattn_vec_KQ_q3_1<D, nthreads>;
-    } else if constexpr (type_K == GGML_TYPE_Q2_0) {
-        return vec_dot_fattn_vec_KQ_q2_0<D, nthreads>;
     } else if constexpr (type_K == GGML_TYPE_Q2_1) {
         return vec_dot_fattn_vec_KQ_q2_1<D, nthreads>;
     } else if constexpr (type_K == GGML_TYPE_Q8_0) {
@@ -1883,8 +1881,6 @@ constexpr __device__ dequantize_V_t get_dequantize_V() {
         return dequantize_V_q3_0<T, ne>;
     } else if constexpr (type_V == GGML_TYPE_Q3_1) {
         return dequantize_V_q3_1<T, ne>;
-    } else if constexpr (type_V == GGML_TYPE_Q2_0) {
-        return dequantize_V_q2_0<T, ne>;
     } else if constexpr (type_V == GGML_TYPE_Q2_1) {
         return dequantize_V_q2_1<T, ne>;
     } else if constexpr (type_V == GGML_TYPE_Q8_0) {

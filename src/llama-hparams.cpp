@@ -273,6 +273,13 @@ uint32_t llama_hparams::n_layer() const {
     return n_layer_all - n_layer_nextn;
 }
 
+uint32_t llama_hparams::n_layer_kv() const {
+    if (n_layer_kv_from_start >= 0) {
+        return (uint32_t) n_layer_kv_from_start;
+    }
+    return n_layer();
+}
+
 bool llama_hparams::use_mrope() const {
     return rope_sections[0] > 0 && rope_sections[1] > 0;
 }
