@@ -319,13 +319,63 @@ static ggml_type kv_cache_type_from_str(const std::string & s) {
     throw std::runtime_error("Unsupported cache type: " + s);
 }
 
-static std::string get_all_kv_cache_types() {
+static std::string get_all_kv_cache_types(bool include_kvarn_pseudo_types = false) {
     std::ostringstream msg;
     for (const auto & type : kv_cache_types) {
         msg << ggml_type_name(type) << (&type == &kv_cache_types.back() ? "" : ", ");
     }
+    if (include_kvarn_pseudo_types) {
+        msg << ", kvarn2, kvarn3, kvarn4, kvarn5, kvarn6, kvarn8";
+    }
     return msg.str();
 }
+
+// parse a "kvarnN" pseudo cache-type string into its bitness (kvarn4 -> 4, kvarn2 -> 2).
+// returns 0 for any non-kvarn string (caller keeps the existing ggml_type parsing).
+static int32_t kvarn_bits_from_cache_type(const std::string & value) {
+    if (value.rfind("kvarn", 0) != 0) {
+        return 0;
+    }
+    const std::string bits_str = value.substr(5); // length of "kvarn"
+    if (bits_str.empty()) {
+        return 0;
+    }
+    for (char c : bits_str) {
+        if (c < '0' || c > '9') {
+            return 0;
+        }
+    }
+    try {
+        return std::stoi(bits_str);
+    } catch (...) {
+        return 0;
+    }
+}
+
+// resolve a KVarN (key_bits, value_bits) pair to its llama_kvarn_type via the
+// "kvarn_k{K}v{V}_g128" canonical name. returns DISABLED when 0/0 (no kvarn requested).
+static llama_kvarn_type kvarn_type_from_bits(int32_t key_bits, int32_t value_bits) {
+    if (key_bits == 0 && value_bits == 0) {
+        return LLAMA_KVARN_TYPE_DISABLED;
+    }
+    const std::string name = string_format("kvarn_k%dv%d_g128", key_bits, value_bits);
+    return llama_kvarn_type_from_name(name.c_str());
+}
+
+// the plain ggml_type used as the fallback KV cache type for a given kvarn bitness.
+static ggml_type kvarn_fallback_cache_type(int32_t bits) {
+    switch (bits) {
+        case 2:  return GGML_TYPE_Q2_K;
+        case 3:  return GGML_TYPE_Q3_K;
+        case 4:  return GGML_TYPE_Q4_K;
+        case 5:  return GGML_TYPE_Q5_K;
+        case 6:  return GGML_TYPE_Q6_K;
+        case 8:  return GGML_TYPE_Q8_0;
+        default: return GGML_TYPE_F16;
+    }
+}
+// forward declaration: resolves --cache-type-k/-v kvarn pseudo-types into params.kvarn
+static void common_params_kvarn_normalize(common_params & params);
 
 static bool parse_bool_value(const std::string & value) {
     if (is_truthy(value)) {
@@ -962,6 +1012,41 @@ static void add_rpc_devices(const std::string & servers) {
     }
 }
 
+// Resolves the --cache-type-k/-v kvarn pseudo-types into a concrete
+// llama_kvarn_params. Non-kvarn cache types leave params.kvarn disabled.
+static void common_params_kvarn_normalize(common_params & params) {
+    int32_t bits_k = params.cache_kvarn_bits_k;
+    int32_t bits_v = params.cache_kvarn_bits_v;
+
+    // if only one of K/V is a kvarn pseudo-type, force the other to match
+    if (bits_k != 0 && bits_v == 0) {
+        LOG_WRN("KVarN requested for K (%d-bit) but V is a plain type; forcing V to %d-bit KVarN\n", bits_k, bits_k);
+        bits_v = bits_k;
+        params.cache_kvarn_bits_v = bits_k;
+        params.cache_type_v = kvarn_fallback_cache_type(bits_k);
+    } else if (bits_v != 0 && bits_k == 0) {
+        LOG_WRN("KVarN requested for V (%d-bit) but K is a plain type; forcing K to %d-bit KVarN\n", bits_v, bits_v);
+        bits_k = bits_v;
+        params.cache_kvarn_bits_k = bits_v;
+        params.cache_type_k = kvarn_fallback_cache_type(bits_v);
+    }
+
+    if (bits_k == 0 && bits_v == 0) {
+        // no kvarn requested: leave params.kvarn disabled (already defaulted)
+        return;
+    }
+
+    const llama_kvarn_type type = kvarn_type_from_bits(bits_k, bits_v);
+    if (type == LLAMA_KVARN_TYPE_DISABLED || type == LLAMA_KVARN_TYPE_INVALID) {
+        throw std::runtime_error(string_format(
+            "error: unsupported KVarN bitness combination: k=%d v=%d (valid: kvarn2..kvarn8, matching K/V pairs)\n",
+            bits_k, bits_v));
+    }
+
+    params.kvarn = llama_kvarn_params_for_type(type);
+    params.kvarn.fail_if_unsupported = true;
+}
+
 bool common_params_to_map(int argc, char ** argv, llama_example ex, std::map<common_arg, std::string> & out_map) {
     common_params dummy_params;
     common_params_context ctx_arg = common_params_parser_init(dummy_params, ex, nullptr);
@@ -1083,6 +1168,7 @@ bool common_params_parse(int argc, char ** argv, common_params & params, llama_e
             common_params_print_completion(ctx_arg);
             exit(0);
         }
+        common_params_kvarn_normalize(params);
         params.lr.init();
     } catch (const std::invalid_argument & ex) {
         fprintf(stderr, "%s\n", ex.what());
@@ -2147,6 +2233,26 @@ common_params_context common_params_parser_init(common_params & params, llama_ex
         }
     ).set_env("LLAMA_ARG_YARN_BETA_FAST"));
     add_opt(common_arg(
+        {"-ctk", "--cache-type-k"}, "TYPE",
+        string_format(
+            "KV cache data type for K\n"
+            "allowed values: %s\n"
+            "(default: %s)",
+            get_all_kv_cache_types(true).c_str(),
+            ggml_type_name(params.cache_type_k)
+        ),
+        [](common_params & params, const std::string & value) {
+            const int32_t bits = kvarn_bits_from_cache_type(value);
+            if (bits != 0) {
+                params.cache_kvarn_bits_k = bits;
+                params.cache_type_k = kvarn_fallback_cache_type(bits);
+            } else {
+                params.cache_kvarn_bits_k = 0;
+                params.cache_type_k = kv_cache_type_from_str(value);
+            }
+        }
+    ).set_env("LLAMA_ARG_CACHE_TYPE_K"));
+    add_opt(common_arg(
         {"-gan", "--grp-attn-n"}, "N",
         string_format("group-attention factor (default: %d)", params.grp_attn_n),
         [](common_params & params, int value) {
@@ -2184,29 +2290,23 @@ common_params_context common_params_parser_init(common_params & params, llama_ex
         }
     ).set_env("LLAMA_ARG_NO_HOST"));
     add_opt(common_arg(
-        {"-ctk", "--cache-type-k"}, "TYPE",
-        string_format(
-            "KV cache data type for K\n"
-            "allowed values: %s\n"
-            "(default: %s)",
-            get_all_kv_cache_types().c_str(),
-            ggml_type_name(params.cache_type_k)
-        ),
-        [](common_params & params, const std::string & value) {
-            params.cache_type_k = kv_cache_type_from_str(value);
-        }
-    ).set_env("LLAMA_ARG_CACHE_TYPE_K"));
-    add_opt(common_arg(
         {"-ctv", "--cache-type-v"}, "TYPE",
         string_format(
             "KV cache data type for V\n"
             "allowed values: %s\n"
             "(default: %s)",
-            get_all_kv_cache_types().c_str(),
+            get_all_kv_cache_types(true).c_str(),
             ggml_type_name(params.cache_type_v)
         ),
         [](common_params & params, const std::string & value) {
-            params.cache_type_v = kv_cache_type_from_str(value);
+            const int32_t bits = kvarn_bits_from_cache_type(value);
+            if (bits != 0) {
+                params.cache_kvarn_bits_v = bits;
+                params.cache_type_v = kvarn_fallback_cache_type(bits);
+            } else {
+                params.cache_kvarn_bits_v = 0;
+                params.cache_type_v = kv_cache_type_from_str(value);
+            }
         }
     ).set_env("LLAMA_ARG_CACHE_TYPE_V"));
     add_opt(common_arg(
