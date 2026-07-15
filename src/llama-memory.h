@@ -25,6 +25,9 @@ struct llama_memory_params {
 
     llama_context_type ctx_type;
 
+    // fork-specific structured KVarN cache; disabled leaves upstream memory selection unchanged
+    llama_kvarn_params kvarn;
+
     llama_memory_t mem_other;
 };
 

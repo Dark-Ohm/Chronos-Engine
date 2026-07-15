@@ -2225,7 +2225,8 @@ llama_memory_i * llama_model::create_memory(const llama_memory_params & params, 
                                     mem_other,
                                     filter,
                                     reuse,
-                                    share);
+                                    share,
+                                    params.kvarn);
                         } else {
                             res = new llama_kv_cache_iswa(
                                     *this,
@@ -2242,28 +2243,47 @@ llama_memory_i * llama_model::create_memory(const llama_memory_params & params, 
                                     nullptr,
                                     filter,
                                     reuse,
-                                    share);
+                                    share,
+                                    params.kvarn);
                         }
                     } else {
                         GGML_ASSERT(!hparams.is_swa_any());
 
-                        res = new llama_kv_cache(
-                                *this,
-                                hparams,
-                                params.type_k,
-                                params.type_v,
-                                !cparams.flash_attn,
-                                cparams.offload_kqv,
-                                cparams.kv_unified,
-                                cparams.n_ctx_seq,
-                                cparams.n_seq_max,
-                                1,
-                                hparams.n_swa,
-                                hparams.swa_type,
-                                nullptr,
-                                filter,
-                                nullptr,
-                                nullptr);
+                        if (params.kvarn.type != LLAMA_KVARN_TYPE_DISABLED) {
+                            res = new llama_kv_cache_kvarn(
+                                    *this,
+                                    hparams,
+                                    params.kvarn,
+                                    cparams.offload_kqv,
+                                    cparams.kv_unified,
+                                    cparams.n_ctx_seq,
+                                    cparams.n_seq_max,
+                                    cparams.n_batch,
+                                    cparams.n_ubatch,
+                                    1,
+                                    hparams.n_swa,
+                                    hparams.swa_type,
+                                    filter,
+                                    reuse);
+                        } else {
+                            res = new llama_kv_cache(
+                                    *this,
+                                    hparams,
+                                    params.type_k,
+                                    params.type_v,
+                                    !cparams.flash_attn,
+                                    cparams.offload_kqv,
+                                    cparams.kv_unified,
+                                    cparams.n_ctx_seq,
+                                    cparams.n_seq_max,
+                                    1,
+                                    hparams.n_swa,
+                                    hparams.swa_type,
+                                    nullptr,
+                                    filter,
+                                    nullptr,
+                                    nullptr);
+                        }
                     }
                 }
             }
