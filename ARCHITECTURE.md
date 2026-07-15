@@ -101,7 +101,10 @@ KVarN ремапа не требует (псевдотипы CLI, нет enum-з
 - Фаза 5: бенч связки pin+prefetch+kvarn на MoE (эта комбинация нигде не тестировалась)
 - Железо: RTX 3070 8GB (sm_86), i5 12400F, 64GB DDR4
 
-### Эталонная модель: models/main/Qwythos-9B-v2-MTP-Q4_K_M.gguf (5.5G)
+### Эталонная модель: models/main/Qwythos-9B-v3-1M-MTP-Q4_K_M.gguf (5.5G)
+
+v3 той же линии (v2 — предыдущий чекпоинт, датасеты fable+mythos5),
+архитектура и характеристики ниже не меняются между v2/v3.
 - arch `qwen35` — ровно та, куда bee проводил KVarN wiring (Фаза 3: qwen35.cpp)
 - гибрид SSM+attention: `full_attention_interval=4`, 33 слоя -> ~8 attention-слоёв
   с KV-кэшем, остальное SSM-state. Задействует llama-memory-hybrid* из порта.
