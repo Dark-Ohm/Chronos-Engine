@@ -23,10 +23,11 @@ Speculative decoding is upstream-native only (donor DFlash was rejected, D-001).
 ## Orchestration model
 Lead Architect (Claude) assigns tasks via minion files, kept in
 `.chronos-ops/` to keep repo root clean for outside readers: `GROK.md`,
-`OPENCODE.md`, `CLINE.md`, `HERMES.md`, `MIMO.md` (`OMP.md` closed —
-executor fired). `ZED.md` is the one exception — stays in repo root while a
-task is in flight (a live external process reads it there); moves into
-`.chronos-ops/` once idle. Convention: each file holds ONLY the current task
+`ZED.md`, `OPENCODE.md`, `CLINE.md`, `HERMES.md`, `MIMO.md` (`OMP.md`
+closed — executor fired). Exception: whichever minion file has a task in
+flight moves temporarily to repo root (a live external process reads it
+there), then back into `.chronos-ops/` right after acceptance. Convention:
+each file holds ONLY the current task
 (full rewrite per task, history in `git log -- <FILE>.md`). Reports go to
 `<name>-report.md` next to the task file; accepted reports are moved to
 `.chronos-ops/dump/`. Architect verifies every report claim against the
