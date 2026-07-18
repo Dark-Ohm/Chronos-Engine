@@ -171,5 +171,10 @@ AGENTS.local.md
 /run-build.sh
 /pocs/vdot/verify_q2_0_dedup
 
+# Personal Claude Code local state (global skill library mirror, local
+# permission allowlist with machine-specific paths) - not project content;
+# curated project skills live in the tracked /skills/ directory instead.
+/.claude/
+
 # Stakpak session files
 .stakpak/session*
