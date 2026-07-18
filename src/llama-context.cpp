@@ -3638,6 +3638,10 @@ uint32_t llama_n_ctx(const llama_context * ctx) {
     return ctx->n_ctx();
 }
 
+bool llama_kvarn_enabled(const llama_context * ctx) {
+    return ctx->get_cparams().kvarn.type != LLAMA_KVARN_TYPE_DISABLED;
+}
+
 uint32_t llama_n_ctx_seq(const llama_context * ctx) {
     return ctx->n_ctx_seq();
 }

@@ -266,6 +266,7 @@ extern "C" {
     LLAMA_API enum llama_kvarn_type    llama_kvarn_type_from_name  (const char * name);
     LLAMA_API struct llama_kvarn_params llama_kvarn_default_params (void);
     LLAMA_API struct llama_kvarn_params llama_kvarn_params_for_type(enum llama_kvarn_type type);
+    LLAMA_API bool                      llama_kvarn_enabled       (const struct llama_context * ctx);
 
     enum llama_split_mode {
         LLAMA_SPLIT_MODE_NONE   = 0, // single GPU

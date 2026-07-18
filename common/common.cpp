@@ -1222,12 +1222,20 @@ common_init_result::common_init_result(common_params & params, bool model_only) 
     if (params.fit_params) {
         COM_TRC("%s", "fitting params to device memory ...\n");
         COM_TRC("%s", "(for bugs during this step try to reproduce them with -fit off, or provide --verbose logs if the bug only occurs with -fit on)\n");
-        common_fit_params(params.model.path.c_str(), &mparams, &cparams,
+        common_params_fit_status fit_status = common_fit_params(params.model.path.c_str(), &mparams, &cparams,
             params.tensor_split,
             params.tensor_buft_overrides.data(),
             params.fit_params_target.data(),
             params.fit_params_min_ctx,
             params.verbosity >= LOG_LEVEL_DEBUG ? GGML_LOG_LEVEL_DEBUG : GGML_LOG_LEVEL_ERROR);
+        if (fit_status != COMMON_PARAMS_FIT_STATUS_SUCCESS) {
+            if (fit_status == COMMON_PARAMS_FIT_STATUS_FAILURE) {
+                COM_ERR("%s", "failed to fit model parameters to device memory: insufficient memory\n");
+            } else {
+                COM_ERR("%s", "error while fitting model parameters to device memory\n");
+            }
+            return;
+        }
     }
 
     llama_model * model = llama_model_load_from_file(params.model.path.c_str(), mparams);
@@ -1505,6 +1513,12 @@ common_context_seq_rm_type common_context_can_seq_rm(llama_context * ctx) {
         goto done;
     }
 
+    if (llama_kvarn_enabled(ctx)) {
+        COM_TRC("%s", "KVarN context supports only full sequence removal\n");
+        res = COMMON_CONTEXT_SEQ_RM_TYPE_FULL;
+        goto done;
+    }
+
     // try to remove the last tokens
     if (!llama_memory_seq_rm(mem, 0, 1, -1)) {
         COM_TRC("%s", "the context does not support partial sequence removal\n");
@@ -1621,6 +1635,7 @@ struct llama_context_params common_context_params_to_llama(const common_params &
 
     cparams.type_k = params.cache_type_k;
     cparams.type_v = params.cache_type_v;
+    cparams.kvarn  = params.kvarn;
 
     return cparams;
 }
