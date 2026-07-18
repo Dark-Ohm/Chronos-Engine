@@ -472,6 +472,14 @@ extern "C" {
 
         // fork-specific structured KVarN cache; disabled leaves upstream memory selection unchanged
         struct llama_kvarn_params kvarn;
+
+        // Phase 1 tiered hot/cold KV offload (docs/design/tiered-kv-offload.md).
+        // Hot window size in tokens for a KVarN cache whose architecture is not
+        // already sliding-window; must be a multiple of 128. 0 (default) leaves
+        // KVarN behavior unchanged -- this is strictly opt-in. Ignored when
+        // kvarn.type == LLAMA_KVARN_TYPE_DISABLED or the architecture already
+        // has its own SWA window.
+        uint32_t kv_hot_size;
     };
 
     struct llama_model_tensor_override {

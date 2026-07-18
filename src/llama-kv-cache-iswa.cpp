@@ -122,7 +122,7 @@ llama_kv_cache_iswa::llama_kv_cache_iswa(
             return std::make_unique<llama_kv_cache_kvarn>(
                     model, hparams, cache_kvarn, offload, unified, size, n_seq_max,
                     n_ubatch, n_ubatch, n_pad,
-                    n_swa_p, swa_type_p, layer_filter, nullptr);
+                    n_swa_p, swa_type_p, /*kv_hot_size=*/0, layer_filter, nullptr);
         }
         return std::make_unique<llama_kv_cache>(
                 model, hparams, type_k, type_v, v_trans, offload, unified, size, n_seq_max, n_pad,

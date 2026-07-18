@@ -661,6 +661,14 @@ void llm_graph_input_attn_kv::set_input(const llama_ubatch * ubatch) {
         GGML_ASSERT(kvarn != nullptr);
         llm_kvarn_set_rot_inputs(kvarn, self_kvarn_rot_128, self_kvarn_rot_256, self_kvarn_rot_512);
     }
+
+    // SWA KVarN ring (hot-window reuse path, --kv-hot-size): fill the per-cell
+    // absolute positions from the metadata cache cells. Mirrors the iswa path.
+    if (self_kvarn_mat_idxs && self_kvarn_mat_idxs->buffer) {
+        const auto * kvarn = dynamic_cast<const llama_kv_cache_kvarn_context *>(mctx);
+        GGML_ASSERT(kvarn != nullptr);
+        kvarn->set_input_kvarn_mat_idxs(self_kvarn_mat_idxs, ubatch);
+    }
 }
 
 bool llm_graph_input_attn_kv::can_reuse(const llm_graph_params & params) {
@@ -674,6 +682,13 @@ bool llm_graph_input_attn_kv::can_reuse(const llm_graph_params & params) {
   //res &= self_v_idxs->ne[0] == params.ubatch.n_tokens; // TODO: need to move this to the unified cache and check there
 
     res &= can_reuse_kq_mask(self_kq_mask, mctx, params.ubatch, params.cparams);
+
+    // re-bind the SWA KVarN view indices to the (possibly new) kvarn context
+    if (self_kvarn_mat_idxs && self_kvarn_mat_idxs->buffer) {
+        if (const auto * kvarn = dynamic_cast<const llama_kv_cache_kvarn_context *>(mctx)) {
+            const_cast<llama_kv_cache_kvarn_context *>(kvarn)->set_mat_idxs(self_kvarn_mat_idxs);
+        }
+    }
 
     return res;
 }
@@ -2852,6 +2867,15 @@ static std::unique_ptr<llm_graph_input_attn_kv> build_attn_inp_kv_impl(
         inp->self_kvarn_rot_128 = kvarn->build_input_kvarn_rot(ctx0, 128);
         inp->self_kvarn_rot_256 = kvarn->build_input_kvarn_rot(ctx0, 256);
         inp->self_kvarn_rot_512 = kvarn->build_input_kvarn_rot(ctx0, 512);
+        // SWA KVarN ring (hot-window reuse path, --kv-hot-size): make the
+        // per-cell absolute positions available to the context at graph build
+        // time, because get_k_native/get_v_native run during build (e.g.
+        // sched_reserve) before set_input populates them. The iswa path does
+        // the equivalent via self_kvarn_mat_idxs_swa.
+        if (kvarn->is_swa()) {
+            inp->self_kvarn_mat_idxs = kvarn->build_input_kvarn_mat_idxs(ctx0);
+            const_cast<llama_kv_cache_kvarn_context *>(kvarn)->set_mat_idxs(inp->self_kvarn_mat_idxs);
+        }
     }
 
     return inp;

@@ -345,6 +345,12 @@ public:
     ggml_tensor * self_kvarn_rot_256 = nullptr;
     ggml_tensor * self_kvarn_rot_512 = nullptr;
 
+    // SWA KVarN ring (hot-window reuse path, --kv-hot-size): per-cell absolute
+    // positions for native KVarN views. Built only when the main kvarn cache is
+    // in SWA mode; null otherwise. Mirrors self_kvarn_mat_idxs_swa on the iswa
+    // path, which is the only other place a kvarn view needs mat_idxs at build.
+    ggml_tensor * self_kvarn_mat_idxs = nullptr; // I64 [n_kv]
+
     // note: these have to be copies because in order to be able to reuse a graph, its inputs
     //       need to carry these parameters with them. otherwise, they can point to freed
     //       llm_graph_params from a previous batch, causing stack-use-after-return

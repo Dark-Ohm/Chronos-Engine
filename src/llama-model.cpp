@@ -2024,6 +2024,29 @@ ggml_tensor * llama_model::get_rope_factors(const llama_cparams & cparams, int i
     return layers[il].rope_short;
 }
 
+// Phase 1 tiered hot/cold KV offload (docs/design/tiered-kv-offload.md,
+// --kv-hot-size). Reuses the existing SWA windowing/eviction machinery to
+// bound a non-SWA KVarN cache's hot GPU footprint to the configured window:
+// the mask/eviction logic lives entirely inside llama_kv_cache's own
+// n_swa/swa_type members (set from these arguments, not from the model's
+// global hparams), so this override is self-contained and does not disturb
+// any other graph-building code that reads hparams.n_swa/swa_type directly.
+// Only applies when the architecture is not already genuinely SWA (a real
+// SWA window is already bounded; stacking this on top is unsupported in
+// Phase 1, see docs/design/tiered-kv-offload.md open question 2).
+static void llama_kvarn_apply_hot_window(
+        const llama_hparams & hparams,
+        uint32_t kv_hot_size,
+        uint32_t & n_swa,
+        llama_swa_type & swa_type) {
+    n_swa    = hparams.n_swa;
+    swa_type = hparams.swa_type;
+    if (kv_hot_size > 0 && swa_type == LLAMA_SWA_TYPE_NONE) {
+        n_swa    = GGML_PAD(std::max<uint32_t>(kv_hot_size, 128u), 128u);
+        swa_type = LLAMA_SWA_TYPE_STANDARD;
+    }
+}
+
 llama_memory_i * llama_model::create_memory(const llama_memory_params & params, const llama_cparams & cparams) const {
     llama_memory_i * res;
 
@@ -2130,6 +2153,11 @@ llama_memory_i * llama_model::create_memory(const llama_memory_params & params, 
                             /* filter_recr       */ std::move(filter_recr),
                             /* kvarn             */ params.kvarn);
                     } else {
+                        uint32_t attn_n_swa = hparams.n_swa;
+                        llama_swa_type attn_swa_type = hparams.swa_type;
+                        if (params.kvarn.type != LLAMA_KVARN_TYPE_DISABLED) {
+                            llama_kvarn_apply_hot_window(hparams, cparams.kv_hot_size, attn_n_swa, attn_swa_type);
+                        }
                         res = new llama_memory_hybrid(
                             /* model             */ *this,
                             /* attn_type_k       */ params.type_k,
@@ -2138,8 +2166,8 @@ llama_memory_i * llama_model::create_memory(const llama_memory_params & params, 
                             /* attn_kv_size      */ cparams.n_ctx_seq,
                             /* attn_n_ubatch     */ cparams.n_ubatch,
                             /* attn_n_pad        */ 1,
-                            /* attn_n_swa        */ hparams.n_swa,
-                            /* attn_swa_type     */ hparams.swa_type,
+                            /* attn_n_swa        */ attn_n_swa,
+                            /* attn_swa_type     */ attn_swa_type,
                             /* recurrent_type_k  */ GGML_TYPE_F32,
                             /* recurrent_type_v  */ GGML_TYPE_F32,
                             /* recurrent_kv_size */ std::max((uint32_t) 1, cparams.n_seq_max),
@@ -2149,7 +2177,8 @@ llama_memory_i * llama_model::create_memory(const llama_memory_params & params, 
                             /* unified           */ cparams.kv_unified,
                             /* filter_attn       */ std::move(filter_attn),
                             /* filter_recr       */ std::move(filter_recr),
-                            /* kvarn             */ params.kvarn);
+                            /* kvarn             */ params.kvarn,
+                            /* kv_hot_size       */ params.kvarn.type != LLAMA_KVARN_TYPE_DISABLED ? cparams.kv_hot_size : 0);
                     }
                 } else {
                     llama_kv_cache::layer_filter_cb filter = nullptr;
@@ -2253,6 +2282,9 @@ llama_memory_i * llama_model::create_memory(const llama_memory_params & params, 
                         GGML_ASSERT(!hparams.is_swa_any());
 
                         if (params.kvarn.type != LLAMA_KVARN_TYPE_DISABLED) {
+                            uint32_t attn_n_swa = hparams.n_swa;
+                            llama_swa_type attn_swa_type = hparams.swa_type;
+                            llama_kvarn_apply_hot_window(hparams, cparams.kv_hot_size, attn_n_swa, attn_swa_type);
                             res = new llama_kv_cache_kvarn(
                                     *this,
                                     hparams,
@@ -2264,8 +2296,9 @@ llama_memory_i * llama_model::create_memory(const llama_memory_params & params, 
                                     cparams.n_batch,
                                     cparams.n_ubatch,
                                     1,
-                                    hparams.n_swa,
-                                    hparams.swa_type,
+                                    attn_n_swa,
+                                    attn_swa_type,
+                                    cparams.kv_hot_size,
                                     filter,
                                     reuse);
                         } else {

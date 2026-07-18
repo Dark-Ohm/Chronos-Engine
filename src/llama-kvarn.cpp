@@ -578,3 +578,29 @@ void llama_kvarn_dequantize_v_tile(
         }
     }
 }
+
+void llama_kvarn_offload_copy_to_host(
+        ggml_backend_t backend,
+        ggml_backend_event_t event,
+        const ggml_tensor * src,
+        size_t src_offset,
+        void * dst_host,
+        size_t size) {
+    if (size == 0) {
+        return;
+    }
+    assert(src != nullptr);
+    assert(dst_host != nullptr);
+
+    if (backend == nullptr) {
+        // Safe fallback used by Phase 1: fully blocking copy, resolved from
+        // the tensor's own buffer, no owned backend instance required.
+        ggml_backend_tensor_get(src, dst_host, src_offset, size);
+        return;
+    }
+
+    ggml_backend_tensor_get_async(backend, src, dst_host, src_offset, size);
+    if (event != nullptr) {
+        ggml_backend_event_record(event, backend);
+    }
+}

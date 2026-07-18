@@ -2285,6 +2285,25 @@ common_params_context common_params_parser_init(common_params & params, llama_ex
         }
     ).set_env("LLAMA_ARG_KV_OFFLOAD"));
     add_opt(common_arg(
+        {"--kv-hot-size"}, "N",
+        "Phase 1 tiered hot/cold KV offload (docs/design/tiered-kv-offload.md): size of the KVarN "
+        "hot window in tokens, must be a multiple of 128 (default: 0 = disabled, current behavior). "
+        "Only takes effect for a KVarN cache (--cache-type-k/-v kvarn*) whose architecture is not "
+        "already sliding-window; ignored otherwise. Recommended starting point when enabling: 512.",
+        [](common_params & params, int value) {
+            if (value <= 0) {
+                params.kv_hot_size = 0;
+                return;
+            }
+            uint32_t rounded = ((uint32_t) value + 127u) / 128u * 128u;
+            if (rounded != (uint32_t) value) {
+                fprintf(stderr, "warning: --kv-hot-size %d is not a multiple of 128, rounding up to %u\n",
+                        value, rounded);
+            }
+            params.kv_hot_size = rounded;
+        }
+    ).set_env("LLAMA_ARG_KV_HOT_SIZE"));
+    add_opt(common_arg(
         {"--repack"},
         {"-nr", "--no-repack"},
         string_format("whether to enable weight repacking (default: %s)", params.no_extra_bufts ? "disabled" : "enabled"),

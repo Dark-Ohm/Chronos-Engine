@@ -604,6 +604,11 @@ struct common_params {
         /*.fail_if_unsupported =*/ true,
     };
 
+    // Phase 1 tiered hot/cold KV offload (docs/design/tiered-kv-offload.md).
+    // 0 = disabled (default; identical behavior to before Phase 1). When set,
+    // must be a multiple of 128; see the --kv-hot-size CLI flag in arg.cpp.
+    uint32_t kv_hot_size = 0;
+
     common_conversation_mode conversation_mode = COMMON_CONVERSATION_MODE_AUTO;
 
     // multimodal models (see tools/mtmd)

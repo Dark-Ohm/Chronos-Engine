@@ -2,6 +2,8 @@
 
 #include "llama.h"
 
+#include "ggml-backend.h"
+
 #include <cstddef>
 #include <cstdint>
 
@@ -84,3 +86,27 @@ void llama_kvarn_dequantize_v_tile(
         int bits,
         const llama_kvarn_tile_layout & layout,
         float * tile);
+
+// Phase 1 tiered hot/cold KV offload (docs/design/tiered-kv-offload.md).
+// Copies one KVarN-compressed record group from a GPU-resident tensor `src`
+// (at byte offset `src_offset`) into a host destination pointer `dst_host`.
+//
+// When `backend` is non-null, the copy is issued asynchronously on that
+// backend's stream via ggml_backend_tensor_get_async, and `event` (if
+// non-null) is recorded immediately after so a caller can defer waiting on
+// it (this is the shape Phase 2/3 prefetch pipelines need, modeled on the
+// codacus expert-prefetch pattern in ggml-backend.cpp). The caller is then
+// responsible for waiting on `event` (or synchronizing `backend`) before
+// touching `dst_host`.
+//
+// When `backend` is null, the copy runs fully blocking via
+// ggml_backend_tensor_get and `event` is ignored. This is the path Phase 1
+// actually uses: callers that only have tensor handles (no owned backend
+// instance) get a correct, safe copy without needing to stand up a backend.
+void llama_kvarn_offload_copy_to_host(
+        ggml_backend_t backend,
+        ggml_backend_event_t event,
+        const ggml_tensor * src,
+        size_t src_offset,
+        void * dst_host,
+        size_t size);

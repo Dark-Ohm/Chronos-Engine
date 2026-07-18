@@ -42,7 +42,10 @@ public:
                             /* layer filters */
     const layer_filter_cb & filter_attn = nullptr,
     const layer_filter_cb & filter_recr = nullptr,
-          llama_kvarn_params kvarn = llama_kvarn_default_params());
+          llama_kvarn_params kvarn = llama_kvarn_default_params(),
+          // Phase 1 tiered hot/cold KV offload (docs/design/tiered-kv-offload.md,
+          // --kv-hot-size). 0 = disabled, behavior identical to before Phase 1.
+                 uint32_t   kv_hot_size = 0);
 
     ~llama_memory_hybrid() = default;
 

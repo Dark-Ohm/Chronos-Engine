@@ -47,6 +47,10 @@ public:
     void set_input_kvarn_mat_idxs(ggml_tensor * dst, const llama_ubatch * ubatch) const;
     void set_mat_idxs(ggml_tensor * idxs) const { mat_idxs = idxs; }
 
+    // True when the underlying KVarN cache is in SWA (sliding-window) mode,
+    // i.e. native views need per-cell absolute positions (mat_idxs).
+    bool is_swa() const;
+
     ggml_tensor * get_turbo_rotation() const;
     ggml_tensor * get_turbo_rotation_inv() const;
     ggml_tensor * get_turbo_rot_forward() const;
@@ -99,6 +103,9 @@ public:
             uint32_t n_pad = 1,
             uint32_t n_swa = 0,
             llama_swa_type swa_type = LLAMA_SWA_TYPE_NONE,
+            // Phase 1 tiered hot/cold KV offload (docs/design/tiered-kv-offload.md,
+            // --kv-hot-size). 0 = disabled, behavior identical to before Phase 1.
+            uint32_t kv_hot_size = 0,
             const layer_filter_cb & filter = nullptr,
             const layer_reuse_cb & reuse = nullptr);
 
@@ -137,6 +144,13 @@ public:
     bool has_pending_stream_copies() const;
     bool apply_pending_stream_copies(llama_context * lctx);
     bool is_swa() const { return swa; }
+
+    // Phase 1 tiered hot/cold KV offload (docs/design/tiered-kv-offload.md).
+    // has_cold_offload() is true only when --kv-hot-size was set for this
+    // cache; every other new code path below is inert when it is false.
+    bool has_cold_offload() const { return cold_offload; }
+    bool has_pending_cold_offloads() const;
+    bool apply_pending_cold_offloads(llama_context * lctx);
 
     // Dynamic staging: the lossless F16 ring is position-oriented, not sized to
     // the full scheduler batch/window.
@@ -186,6 +200,13 @@ private:
         std::vector<ggml_tensor *> v_records_stream;
         std::vector<ggml_tensor *> k_stage_stream;
         std::vector<ggml_tensor *> v_stage_stream;
+        // Phase 1 cold tier: host-pinned mirror of k_records/v_records, sized
+        // for every group the hot ring will ever evict. Null when cold
+        // offload is disabled (has_cold_offload() == false).
+        ggml_tensor * host_cold_k_records = nullptr;
+        ggml_tensor * host_cold_v_records = nullptr;
+        std::vector<ggml_tensor *> host_cold_k_records_stream;
+        std::vector<ggml_tensor *> host_cold_v_records_stream;
     };
 
     const layer & layer_for(int32_t il) const;
@@ -202,9 +223,36 @@ private:
     const bool swa;
     const uint32_t n_groups_per_stream;
 
+    // Phase 1 tiered hot/cold KV offload (docs/design/tiered-kv-offload.md).
+    // kv_hot_size is the raw --kv-hot-size value in tokens (0 = disabled);
+    // cold_offload is the derived gate every new code path checks first.
+    // cold_groups_per_stream is the host cold ring's per-stream capacity in
+    // groups, sized once at construction for the worst case (every group the
+    // hot ring will ever evict up to kv_size), so it never needs to grow.
+    const uint32_t kv_hot_size;
+    const bool cold_offload;
+    const uint32_t cold_groups_per_stream;
+
     std::unique_ptr<llama_kv_cache> metadata;
     std::vector<layer> layers;
     std::unordered_map<int32_t, int32_t> map_layer_ids;
     std::vector<std::pair<ggml_context_ptr, ggml_backend_buffer_ptr>> ctxs_bufs;
     llama_kv_cache::stream_copy_info pending_stream_copies;
+
+    // Phase 1 cold-offload bookkeeping (all mutable: store() is logically
+    // const -- it only builds graph nodes -- but still has to track how many
+    // tokens/groups it has seen so far to know when a group has aged out of
+    // the hot ring and needs to be write-through-copied to the host cold
+    // buffer). See enqueue_cold_offloads()/offload_group_to_host() in the
+    // .cpp for the exact trigger and safety argument.
+    struct cold_offload_job {
+        uint32_t stream;
+        uint64_t abs_group;
+    };
+    mutable std::vector<uint64_t> cold_tokens_seen;       // per stream, raw token count fed to store()
+    mutable std::vector<uint64_t> cold_groups_committed;  // per stream, groups already queued for offload
+    mutable std::vector<cold_offload_job> pending_cold_offloads;
+
+    void enqueue_cold_offloads(const llama_kv_cache::slot_info & sinfo) const;
+    void offload_group_to_host(uint32_t stream, uint64_t abs_group);
 };

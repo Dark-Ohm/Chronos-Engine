@@ -216,12 +216,18 @@ bool llama_kv_cache_kvarn_context::apply() {
         return false;
     }
 
-    return !update_lctx || cache->apply_pending_stream_copies(update_lctx);
+    if (!update_lctx) {
+        return true;
+    }
+
+    return cache->apply_pending_stream_copies(update_lctx) &&
+        cache->apply_pending_cold_offloads(update_lctx);
 }
 
 llama_memory_status llama_kv_cache_kvarn_context::get_status() const {
     const auto status = base_ctx ? base_ctx->get_status() : LLAMA_MEMORY_STATUS_FAILED_PREPARE;
-    if (status == LLAMA_MEMORY_STATUS_NO_UPDATE && cache->has_pending_stream_copies()) {
+    if (status == LLAMA_MEMORY_STATUS_NO_UPDATE &&
+        (cache->has_pending_stream_copies() || cache->has_pending_cold_offloads())) {
         return LLAMA_MEMORY_STATUS_SUCCESS;
     }
     return status;
@@ -329,6 +335,10 @@ ggml_tensor * llama_kv_cache_kvarn_context::build_input_k_rot(ggml_context * ctx
 
 ggml_tensor * llama_kv_cache_kvarn_context::build_input_v_rot(ggml_context * ctx) const {
     return base()->build_input_v_rot(ctx);
+}
+
+bool llama_kv_cache_kvarn_context::is_swa() const {
+    return cache->is_swa();
 }
 
 ggml_tensor * llama_kv_cache_kvarn_context::build_input_kvarn_mat_idxs(ggml_context * ctx) const {
@@ -486,6 +496,7 @@ llama_kv_cache_kvarn::llama_kv_cache_kvarn(
         uint32_t n_pad,
         uint32_t n_swa,
         llama_swa_type swa_type,
+        uint32_t kv_hot_size,
         const layer_filter_cb & filter,
         const layer_reuse_cb & reuse) :
     hparams(hparams),
@@ -503,6 +514,16 @@ llama_kv_cache_kvarn::llama_kv_cache_kvarn(
     // The record ring stores only tiles older than the F16 tail; loaders account
     // for the tail offset when deciding whether a ring slot is live.
     n_groups_per_stream(kvarn_record_groups_per_stream(kv_size, n_ubatch, n_swa, swa, tail_groups)),
+    // Phase 1 tiered hot/cold KV offload: cold_groups_per_stream is the host
+    // ring's fixed capacity, sized for every group up to kv_size that could
+    // ever fall out of the (small, hot-window-bounded) GPU record ring. 0
+    // when disabled, or when the hot ring already covers the whole context
+    // (nothing ever ages out, so there is nothing to mirror).
+    kv_hot_size(kv_hot_size),
+    cold_offload(kv_hot_size > 0),
+    cold_groups_per_stream(!cold_offload ? 0u :
+        (((uint64_t(kv_size) + KVAR_N_GROUP - 1u) / KVAR_N_GROUP) > n_groups_per_stream ?
+            uint32_t(((uint64_t(kv_size) + KVAR_N_GROUP - 1u) / KVAR_N_GROUP) - n_groups_per_stream) : 0u)),
     metadata(std::make_unique<llama_kv_cache>(
         model,
         hparams,
@@ -540,6 +561,18 @@ llama_kv_cache_kvarn::llama_kv_cache_kvarn(
     // creation so regressions in the propagation are visible at startup.
     LLAMA_LOG_INFO("KVarN cache: stage_groups=%u tail_groups=%u n_batch=%u n_ubatch=%u%s\n",
             stage_groups, tail_groups, n_batch, n_ubatch, swa ? " (SWA ring)" : "");
+
+    if (cold_offload) {
+        // swa is guaranteed true here (the call sites only set kv_hot_size > 0
+        // together with n_swa/swa_type = STANDARD), and swa requires n_stream
+        // == 1 (asserted above), so a single-slot bookkeeping vector suffices.
+        GGML_ASSERT(swa && n_stream == 1 &&
+            "KVarN cold offload (--kv-hot-size) requires the hot-window SWA reuse path");
+        cold_tokens_seen.assign(n_stream, 0);
+        cold_groups_committed.assign(n_stream, 0);
+        LLAMA_LOG_INFO("KVarN cold offload: hot_size=%u tokens, cold ring capacity=%u groups/stream\n",
+                kv_hot_size, cold_groups_per_stream);
+    }
 
     struct buft_comparator {
         bool operator()(ggml_backend_buffer_type_t lhs, ggml_backend_buffer_type_t rhs) const {
@@ -626,14 +659,45 @@ llama_kv_cache_kvarn::llama_kv_cache_kvarn(
         ggml_format_name(k_stage, "cache_kvarn_k_stage_l%d", il);
         ggml_format_name(v_stage, "cache_kvarn_v_stage_l%d", il);
 
+        // Phase 1 cold tier (docs/design/tiered-kv-offload.md): a host-pinned
+        // mirror of k_records/v_records, sized for every group the hot ring
+        // will ever evict. Falls back to plain CPU buffer type if the device
+        // has no host-pinned buffer type; still correct, just without the
+        // pinned-DMA speedup. Allocated through the same ctx_for_buft/ctxs_bufs
+        // machinery as every other KVarN tensor, so fit's dry-run estimate
+        // (common/fit.cpp) sees it as its own buffer-type line item rather
+        // than counting it against the GPU device's VRAM budget.
+        ggml_tensor * host_cold_k_records = nullptr;
+        ggml_tensor * host_cold_v_records = nullptr;
+        ggml_context * host_ctx = nullptr;
+        if (cold_offload && cold_groups_per_stream > 0 && offload) {
+            auto * host_buft = ggml_backend_dev_host_buffer_type(dev);
+            if (!host_buft) {
+                host_buft = ggml_backend_cpu_buffer_type();
+            }
+            host_ctx = ctx_for_buft(host_buft);
+            if (!host_ctx) {
+                throw std::runtime_error("failed to create KVarN cold-offload host tensor context");
+            }
+            const int64_t n_cold_groups = int64_t(cold_groups_per_stream) * n_stream;
+            host_cold_k_records = ggml_new_tensor_3d(host_ctx, GGML_TYPE_I8, k_record_size, n_head_k_sliced, n_cold_groups);
+            host_cold_v_records = ggml_new_tensor_3d(host_ctx, GGML_TYPE_I8, v_record_size, n_head_v_sliced, n_cold_groups);
+            ggml_format_name(host_cold_k_records, "cache_kvarn_cold_k_records_l%d", il);
+            ggml_format_name(host_cold_v_records, "cache_kvarn_cold_v_records_l%d", il);
+        }
+
         std::vector<ggml_tensor *> k_records_stream;
         std::vector<ggml_tensor *> v_records_stream;
         std::vector<ggml_tensor *> k_stage_stream;
         std::vector<ggml_tensor *> v_stage_stream;
+        std::vector<ggml_tensor *> host_cold_k_records_stream;
+        std::vector<ggml_tensor *> host_cold_v_records_stream;
         k_records_stream.reserve(n_stream);
         v_records_stream.reserve(n_stream);
         k_stage_stream.reserve(n_stream);
         v_stage_stream.reserve(n_stream);
+        host_cold_k_records_stream.reserve(n_stream);
+        host_cold_v_records_stream.reserve(n_stream);
 
         for (uint32_t s = 0; s < n_stream; ++s) {
             auto * k_records_view = ggml_view_3d(
@@ -666,6 +730,23 @@ llama_kv_cache_kvarn::llama_kv_cache_kvarn(
             v_records_stream.push_back(v_records_view);
             k_stage_stream.push_back(k_stage_view);
             v_stage_stream.push_back(v_stage_view);
+
+            if (host_cold_k_records) {
+                auto * host_cold_k_records_view = ggml_view_3d(
+                        host_ctx, host_cold_k_records,
+                        k_record_size, n_head_k_sliced, cold_groups_per_stream,
+                        host_cold_k_records->nb[1], host_cold_k_records->nb[2],
+                        size_t(s) * cold_groups_per_stream * host_cold_k_records->nb[2]);
+                auto * host_cold_v_records_view = ggml_view_3d(
+                        host_ctx, host_cold_v_records,
+                        v_record_size, n_head_v_sliced, cold_groups_per_stream,
+                        host_cold_v_records->nb[1], host_cold_v_records->nb[2],
+                        size_t(s) * cold_groups_per_stream * host_cold_v_records->nb[2]);
+                ggml_format_name(host_cold_k_records_view, "cache_kvarn_cold_k_records_l%d_s%d", il, s);
+                ggml_format_name(host_cold_v_records_view, "cache_kvarn_cold_v_records_l%d_s%d", il, s);
+                host_cold_k_records_stream.push_back(host_cold_k_records_view);
+                host_cold_v_records_stream.push_back(host_cold_v_records_view);
+            }
         }
 
         map_layer_ids[il] = layers.size();
@@ -684,6 +765,10 @@ llama_kv_cache_kvarn::llama_kv_cache_kvarn(
             std::move(v_records_stream),
             std::move(k_stage_stream),
             std::move(v_stage_stream),
+            host_cold_k_records,
+            host_cold_v_records,
+            std::move(host_cold_k_records_stream),
+            std::move(host_cold_v_records_stream),
         });
 
         raw_bytes += size_t(kv_size) * n_stream * n_head_kv * (head_dim_k + head_dim_v) * sizeof(ggml_fp16_t);
@@ -789,6 +874,16 @@ void llama_kv_cache_kvarn::clear(bool data) {
             ggml_backend_buffer_clear(buf.get(), 0);
         }
     }
+    if (cold_offload) {
+        // Phase 1: the metadata cache is the sole source of truth for which
+        // positions are live, so stale bytes left behind in the cold host
+        // buffer by a previous sequence are simply unreachable; only the
+        // bookkeeping needs to reset (matches the `data=false` fast path
+        // above, which also skips physically zeroing the GPU ring).
+        std::fill(cold_tokens_seen.begin(), cold_tokens_seen.end(), 0);
+        std::fill(cold_groups_committed.begin(), cold_groups_committed.end(), 0);
+        pending_cold_offloads.clear();
+    }
 }
 
 bool llama_kv_cache_kvarn::can_remove(llama_seq_id seq_id, llama_pos p0, llama_pos p1) const {
@@ -815,7 +910,23 @@ bool llama_kv_cache_kvarn::seq_rm(llama_seq_id seq_id, llama_pos p0, llama_pos p
         LLAMA_LOG_WARN("%s: KVarN can only remove a complete sequence or the current/previous fp16 tail groups\n", __func__);
         return false;
     }
-    return metadata->seq_rm(seq_id, p0, p1);
+    const bool ok = metadata->seq_rm(seq_id, p0, p1);
+    // Phase 1 (docs/design/tiered-kv-offload.md ss5, D-011 kvarn=FULL): a full
+    // sequence removal invalidates its cold groups. There is no per-group
+    // liveness map on the host side yet (Phase 2/3), so Phase 1 just resets
+    // the bookkeeping counters -- the next store() call re-populates the
+    // cold ring from position 0, and old cold bytes are unreachable because
+    // the metadata cache (the sole source of truth for what is live) has
+    // already forgotten them. seq_id < 0 means "every sequence"; seq_id >= 0
+    // full removal only resets bookkeeping when swa is in play, which the
+    // constructor asserts implies n_stream == 1, i.e. no other sequence can
+    // share the stream being reset.
+    if (ok && cold_offload && p0 <= 0 && p1 < 0) {
+        std::fill(cold_tokens_seen.begin(), cold_tokens_seen.end(), 0);
+        std::fill(cold_groups_committed.begin(), cold_groups_committed.end(), 0);
+        pending_cold_offloads.clear();
+    }
+    return ok;
 }
 
 bool llama_kv_cache_kvarn::seq_rm_cell(llama_seq_id seq_id, uint32_t cell_idx) {
@@ -894,6 +1005,111 @@ std::map<ggml_backend_buffer_type_t, size_t> llama_kv_cache_kvarn::memory_breakd
 
 bool llama_kv_cache_kvarn::has_pending_stream_copies() const {
     return !pending_stream_copies.empty();
+}
+
+bool llama_kv_cache_kvarn::has_pending_cold_offloads() const {
+    return !pending_cold_offloads.empty();
+}
+
+// Phase 1 tiered hot/cold KV offload (docs/design/tiered-kv-offload.md).
+//
+// Trigger: called once per ubatch from store() (gated to the first attention
+// layer's K store so per-layer fan-out does not multiply-count tokens). Uses
+// a purely additive per-stream token counter -- NOT the metadata cache's
+// cell/position bookkeeping -- so it stays correct across the physical-cell
+// reuse that the SWA ring already performs for eviction.
+//
+// Timing: a group is only queued once `tail_groups` MORE groups have been
+// seen after it, mirroring the F16 stage depth (kvarn_stage_tail_groups) --
+// i.e. only once the KVarN store kernel has actually had the opportunity to
+// flush that group's F16 stage rows into a compressed record. This lag is a
+// conservative assumption about the kernel's flush timing, not verified
+// bit-for-bit against the CUDA/CPU kvarn_store implementation; see the
+// report's caveats before relying on this for Phase 2/3 prefetch.
+//
+// Known limitation: a single llama_decode() call whose ubatches flush more
+// groups than n_groups_per_stream (i.e. a prefill chunk larger than the hot
+// ring) can wrap the GPU ring before the next llama_decode() call drains
+// pending_cold_offloads (see apply_pending_cold_offloads()), losing the
+// overwritten groups' cold copies. Typical server usage chunks prefill by
+// n_ubatch, which drains between chunks and avoids this in practice.
+void llama_kv_cache_kvarn::enqueue_cold_offloads(const llama_kv_cache::slot_info & sinfo) const {
+    if (cold_groups_per_stream == 0 || sinfo.empty()) {
+        return;
+    }
+
+    const int32_t n_tokens = kvarn_contiguous_tokens_per_stream_hint(sinfo);
+    if (n_tokens <= 0) {
+        // Non-contiguous slot assignment: skip this ubatch rather than risk
+        // mis-detecting a group boundary. Bookkeeping resumes correctly on
+        // the next contiguous store() call (cold_tokens_seen is cumulative).
+        return;
+    }
+
+    for (uint32_t s = sinfo.s0; s <= sinfo.s1 && s < cold_tokens_seen.size(); ++s) {
+        cold_tokens_seen[s] += (uint64_t) n_tokens;
+
+        const uint64_t lag_tokens = (uint64_t) tail_groups * KVAR_N_GROUP;
+        const uint64_t groups_flushed = cold_tokens_seen[s] >= lag_tokens ?
+            (cold_tokens_seen[s] - lag_tokens) / KVAR_N_GROUP : 0;
+
+        while (cold_groups_committed[s] < groups_flushed && cold_groups_committed[s] < cold_groups_per_stream) {
+            pending_cold_offloads.push_back({s, cold_groups_committed[s]});
+            cold_groups_committed[s]++;
+        }
+    }
+}
+
+void llama_kv_cache_kvarn::offload_group_to_host(uint32_t stream, uint64_t abs_group) {
+    if (abs_group >= cold_groups_per_stream) {
+        return;
+    }
+    if (n_groups_per_stream == 0) {
+        return;
+    }
+
+    const uint32_t ring_slot = (uint32_t) (abs_group % n_groups_per_stream);
+
+    for (auto & layer : layers) {
+        if (!layer.host_cold_k_records || stream >= layer.k_records_stream.size() ||
+            stream >= layer.host_cold_k_records_stream.size()) {
+            continue;
+        }
+
+        auto * k_src = layer.k_records_stream[stream];
+        auto * v_src = layer.v_records_stream[stream];
+        auto * k_dst = layer.host_cold_k_records_stream[stream];
+        auto * v_dst = layer.host_cold_v_records_stream[stream];
+
+        // One full group (all heads) is a contiguous block: nb[2] is exactly
+        // the per-group stride for both the GPU ring tensor and its host
+        // cold mirror, since both were allocated with the same [record_size,
+        // n_head_sliced, n_groups] layout.
+        llama_kvarn_offload_copy_to_host(
+                nullptr, nullptr,
+                k_src, (size_t) ring_slot * k_src->nb[2],
+                (uint8_t *) k_dst->data + (size_t) abs_group * k_dst->nb[2],
+                (size_t) k_src->nb[2]);
+        llama_kvarn_offload_copy_to_host(
+                nullptr, nullptr,
+                v_src, (size_t) ring_slot * v_src->nb[2],
+                (uint8_t *) v_dst->data + (size_t) abs_group * v_dst->nb[2],
+                (size_t) v_src->nb[2]);
+    }
+}
+
+bool llama_kv_cache_kvarn::apply_pending_cold_offloads(llama_context * lctx) {
+    if (pending_cold_offloads.empty()) {
+        return true;
+    }
+
+    llama_synchronize(lctx);
+
+    for (auto & job : pending_cold_offloads) {
+        offload_group_to_host(job.stream, job.abs_group);
+    }
+    pending_cold_offloads.clear();
+    return true;
 }
 
 void llama_kv_cache_kvarn::copy_kvarn_stream(uint32_t stream_src, uint32_t stream_dst) {
@@ -1166,6 +1382,15 @@ ggml_tensor * llama_kv_cache_kvarn::store(
     result->op_params[4] = swa ? 1 : 0; // SWA sliding-window ring store
     result->op_params[5] = (int32_t) slices; // KVarN head-wide Hadamard slice count
     result->op_params[8] = int32_t(tail_groups);
+
+    // Phase 1 tiered hot/cold KV offload: bookkeeping must run exactly once
+    // per ubatch, not once per (layer, K-or-V) call. store() is invoked once
+    // per attention layer for K and once for V, so gate on the first
+    // attention layer's K call (a stable, arbitrary choice of "once").
+    if (cold_offload && !value && !layers.empty() && il == (int32_t) layers.front().il) {
+        enqueue_cold_offloads(sinfo);
+    }
+
     return result;
 }
 

@@ -66,6 +66,10 @@ struct llama_cparams {
         /*.fail_if_unsupported =*/ true,
     };
 
+    // Phase 1 tiered hot/cold KV offload (docs/design/tiered-kv-offload.md).
+    // 0 = disabled (default, no behavior change).
+    uint32_t kv_hot_size = 0;
+
     ggml_backend_sched_eval_callback cb_eval;
     void * cb_eval_user_data;
 
