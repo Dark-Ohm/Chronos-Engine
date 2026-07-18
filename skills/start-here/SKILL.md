@@ -16,23 +16,29 @@ Speculative decoding is upstream-native only (donor DFlash was rejected, D-001).
 1. `AGENTS.md` — Chronos header: which upstream rules apply here (style only)
    and which do not. AI trailers are FORBIDDEN in commits, always.
 2. `ARCHITECTURE.md` — canon; section «Принятые решения раунда 4» is current.
-3. `HANDOFF.md` — live session context: engine state, next steps, minion roster.
-4. `DECISIONS.log` — rejected alternatives and why (D-001 … D-014).
+3. `.chronos-ops/HANDOFF.md` — live session context: engine state, next
+   steps, minion roster.
+4. `DECISIONS.log` — rejected alternatives and why (D-001 … D-015).
 
 ## Orchestration model
-Lead Architect (Claude) assigns tasks via minion files: `GROK.md`, `ZED.md`,
-`OPENCODE.md`, `CLINE.md`, `HERMES.md` (`OMP.md` closed — executor fired).
-Convention: each file holds ONLY the current task (full rewrite per task,
-history in `git log -- <FILE>.md`). Reports go to `<name>-report.md` in repo
-root; accepted reports are moved to `dump/`. Architect verifies every report
-claim against the tree, then commits (minions never commit; commit style
+Lead Architect (Claude) assigns tasks via minion files, kept in
+`.chronos-ops/` to keep repo root clean for outside readers: `GROK.md`,
+`OPENCODE.md`, `CLINE.md`, `HERMES.md`, `MIMO.md` (`OMP.md` closed —
+executor fired). `ZED.md` is the one exception — stays in repo root while a
+task is in flight (a live external process reads it there); moves into
+`.chronos-ops/` once idle. Convention: each file holds ONLY the current task
+(full rewrite per task, history in `git log -- <FILE>.md`). Reports go to
+`<name>-report.md` next to the task file; accepted reports are moved to
+`.chronos-ops/dump/`. Architect verifies every report claim against the
+tree, then commits (minions never commit; commit style
 `область : что сделано`, no AI trailers ever).
 
 ## Build / test surface
 Minions must NOT build or test unless their task file explicitly allows it
 (currently only Grok may rebuild the release `build/`). Debug builds go to
-`build-debug/`, never into `build/`. Live smokes: see HANDOFF.md «Смоки»
-(port 8099 for Zed editor, `-fit off` for kvarn runs, watch VRAM background).
+`build-debug/`, never into `build/`. Live smokes: see `.chronos-ops/HANDOFF.md`
+«Смоки» (port 8099 for Zed editor, `-fit off` for kvarn runs, watch VRAM
+background).
 
 ## Which skill for the task
 - Any bug/failure investigation → `systematic-debugging`

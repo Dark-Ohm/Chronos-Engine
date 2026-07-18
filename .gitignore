@@ -158,5 +158,18 @@ AGENTS.local.md
 /donors/
 !/DECISIONS.log
 
+# Chronos: local-machine scratch, personal dev scripts with hardcoded paths,
+# and third-party tool config that doesn't belong in a llama.cpp fork -
+# never meant to be tracked, kept out of the product tree on purpose.
+/.rules
+/.hermes/
+/.mimocode/
+/.devops/nginx*.conf
+/.devops/searxng-install.sh
+/build.sh
+/debug-build.sh
+/run-build.sh
+/pocs/vdot/verify_q2_0_dedup
+
 # Stakpak session files
 .stakpak/session*
