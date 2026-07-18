@@ -1,0 +1,17 @@
+{
+  "target_path": "/Users/ben/code/philip",
+  "discovered_at": "2026-05-11T02:24:43Z",
+  "languages": [
+    "typescript_or_javascript"
+  ],
+  "binaries": [
+    "philip"
+  ],
+  "env_var_prefix": "",
+  "existing_surfaces": {
+    "robot_mode": false,
+    "capabilities": false,
+    "robot_docs": false
+  },
+  "recommended_mode": "full"
+}

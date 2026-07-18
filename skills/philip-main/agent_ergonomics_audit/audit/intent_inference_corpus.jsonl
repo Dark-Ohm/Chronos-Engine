@@ -1,0 +1,5 @@
+{"corpus_id":"I-001","command":"philip dif","before":"exit 1, generic unknown command","after":"exit 2, stderr suggests `philip diff`","test":"scripts/test-philip-cli.mjs"}
+{"corpus_id":"I-002","command":"philip lint-audit fixtures/audit-lint/pass.md --jsno","before":"exit 1, unexpected argument with no correction","after":"exit 2, stderr suggests `--json`","test":"scripts/test-philip-cli.mjs"}
+{"corpus_id":"I-003","command":"philip diff --bad","before":"exit 0, wrote artifact despite unknown flag","after":"exit 2, stderr names `philip diff --help`, no artifact write","test":"scripts/test-philip-cli.mjs"}
+{"corpus_id":"I-004","command":"philip diff --help","before":"exit 0, wrote artifact","after":"exit 0, prints help only","test":"scripts/test-philip-cli.mjs"}
+{"corpus_id":"I-005","command":"philip capabilities --json","before":"unknown option/command","after":"exit 0, JSON contract on stdout","test":"scripts/test-philip-cli.mjs"}

@@ -76,3 +76,55 @@ llama-kvarn.cpp) от bee-q2_0 не зависит; он лишь опция к�
 плодит вечную двусмысленность, ниша 2-битного KV закрыта kvarn2/turbo2.
 Отклонено: порт на ID 213 под другим именем. Таблица D-005 (200-212) не тронута.
 Прочие bee-типы q2_1/q3_0/q3_1/q6_0/q6_1 дедупа не требовали (в апстриме их нет).
+
+D-010 | 2026-07-18 | kvarn fallback bits=2 -> Q2_1 (ОТКЛОНЕНИЕ от донора: у bee Q2_0).
+Причина: bee-Q2_0 дропнут (D-009), его CUDA-кернелы (set-rows/cpy/supports_op)
+не портированы. Q2_1 покрыт CUDA SET_ROWS. Прежние fallback Q4_K/Q2_K были
+источником обоих SET_ROWS-крашей — приведены к донорским Q3_0/Q4_0/Q5_0/Q6_0
+(O-4b), кроме bits=2.
+
+D-011 | 2026-07-18 | kvarn seq_rm классифицируется как FULL (O-6+O-8).
+Частичное удаление диапазона невозможно по формату (группы 128, compressed
+records); проба can_seq_rm давала ложный PART (fp16-хвост). Решение: ранний
+FULL при llama_kvarn_enabled(ctx) + гейт call-site'ов частичного seq_rm в
+server-context. Сервер живёт на checkpoint/reprocess-механике (путь SWA).
+Отклонено: частичный seq_rm по группам (переусложнение, отложено как
+group-boundary-оптимизация). Известный негейченный сайт :2863
+(context-shift rearrange) — структурно не гейтится, на практике не
+триггерился; принят как задокументированный риск.
+
+D-012 | 2026-07-18 | fit x kvarn: запуск с -fit off, тихой подмены явного -c НЕ делаем (Z-1).
+Факты: fit-оценка kvarn-буфера точна до долей MiB; kvarn требует полный
+GPU-offload (ngl-редукция запрещена гардом fit.cpp); fit не редуцирует явно
+заданный -c; дефолтный margin 1024MiB на 8GB-карте с 6GB весов отклоняет
+любой kvarn-конфиг (даже -fitt 64 режет из-за ~150-200MiB шума dry-run vs
+реальная загрузка). ПРИНЯТО: kvarn-запуски с -fit off, -c подбирается
+вручную от фактического фона VRAM. ОТКЛОНЕНО: учить fit редуцировать явный
+-c при kvarn (тихая подмена пользовательского значения — плохой паттерн).
+Замеренные потолки (Qwythos, фон ~1.9GB): kvarn4@65536, kvarn2@63488.
+
+D-013 | 2026-07-18 | Эталон turbo — TheTom/llama-cpp-turboquant, цепочка через WHT-op (G-1/G-2).
+Найден research'ем H-10: первоисточник turbo-типов (beellama — производная),
+~300 коммитов, CUDA/Metal/ROCm. Склонирован в donors/thetom-turboquant.
+Архитектура цепочки: FWHT фьюзится в CUDA quantize (set_rows), обратный WHT —
+явный ggml_turbo_wht(...,1) в графе после flash-attn; тензоры turbo_rotation*
+— legacy для CUDA-пути. G-1: краш ctor (use-after-move rotation-тензоров).
+G-2: inv-WHT в граф + реальный CPU TURBO_WHT + порт CPU quantize turbo2/3.
+Residual (не порчено): auto-asymmetric K (GQA>=6 -> K=q8_0), тюнинг turbo4,
+Q pre-rotate для non-CUDA бэкендов.
+
+D-014 | 2026-07-18 | Путь к 262K на 8GB: tiered hot/cold KV-offload (H-10+O-10+Z-1).
+Квантизацией не решается: веса 5.9GB + фон 1.3-1.9GB оставляют KV 0.2-0.8GB,
+kvarn2@262K ~1.3GB. ПРИНЯТО: hot-tier VRAM (kvarn F16 stage) + cold-tier RAM
+(host-pinned kvarn-рекорды, 64GB DDR4) + префетч по codacus-инфраструктуре
+(prefetch_backend/slots/events). Дизайн: docs/design/tiered-kv-offload.md.
+Phase 1 (hot-only attend) — только инфраструктура; качество закрывают
+Phase 2 (H2O heavy-hitters) / Phase 3 (periodic full attend).
+ОТКЛОНЕНО: MLA/TransMLA и cross-layer sharing (требуют переобучения/конверсии
+модели); NVMe-tier без RAM (латентность убивает декод); чистый eviction
+(риск качества на агентных нагрузках не квантифицирован).
+
+D-015 | 2026-07-18 | grammar MAX_REPETITION_THRESHOLD 2000 -> 200000.
+Guard срабатывал на размере tool-схемы Zed editor (десятки инструментов,
+тысячи генерируемых правил), а не на патологической рекурсии. Порог поднят
+с запасом; отклонена альтернатива резать toolset клиента (лоботомия).

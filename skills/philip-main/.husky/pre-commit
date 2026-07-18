@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+set -eu
+
+if [ -d ".beads" ]; then
+  if ! command -v br >/dev/null 2>&1; then
+    echo "pre-commit: .beads exists but br is not installed; install br or run sync manually." >&2
+    exit 1
+  fi
+
+  echo "pre-commit: syncing Beads state"
+  br sync --flush-only
+  git add .beads/
+fi

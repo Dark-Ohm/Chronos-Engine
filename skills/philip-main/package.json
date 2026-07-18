@@ -1,0 +1,57 @@
+{
+  "name": "@benvenker/philip",
+  "version": "0.1.5",
+  "description": "Portable Agent Skill for writing, auditing, rewriting, and maintaining software documentation from code evidence.",
+  "type": "commonjs",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benvenker/philip.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "bin": {
+    "philip": "bin/philip.js"
+  },
+  "files": [
+    "SKILL.md",
+    "Audit.md",
+    "Writing.md",
+    "DocTypes.md",
+    "Exploration.md",
+    "OrbitIntegration.md",
+    "Validation.md",
+    "Workflows/",
+    "bin/",
+    "fixtures/",
+    "scripts/",
+    "README.md"
+  ],
+  "scripts": {
+    "check": "npm run test:lint-audit && npm run test:diff && npm run test:cli && node bin/philip.js install --dry-run && npm pack --dry-run",
+    "test:lint-audit": "node scripts/test-audit-report-lint.mjs",
+    "test:diff": "node scripts/test-collect-philip-diff.mjs",
+    "test:cli": "node --test scripts/test-philip-cli.mjs",
+    "pack:check": "npm pack --dry-run",
+    "install:skill": "node bin/philip.js install",
+    "postinstall": "node scripts/postinstall.js",
+    "prepare": "husky"
+  },
+  "keywords": [
+    "agent-skill",
+    "ai-documentation",
+    "documentation",
+    "cursor",
+    "claude",
+    "codex"
+  ],
+  "author": "",
+  "license": "UNLICENSED",
+  "private": false,
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7"
+  }
+}
