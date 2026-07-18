@@ -1,24 +1,33 @@
-# Tiered Hot/Cold KV Offload Design — **DEPRECATED**
+# Tiered Hot/Cold KV Offload — Phase 1 SPECIFICATION
 
-> **⚠️ This file is deprecated.**  
-> **Current specification:** [`tiered-kv-offload-PHASE1-SPEC.md`](tiered-kv-offload-PHASE1-SPEC.md)  
-> **User guide (implemented features):** [`../user-guide/tiered-kv-offload.md`](../user-guide/tiered-kv-offload.md)  
-> **Architecture index:** [`../../ARCHITECTURE.md`](../../ARCHITECTURE.md)
+**Status:** Design specification — **NOT fully implemented**  
+**Depends on:** KVarN cache infrastructure (accepted, D-014)  
+**Model reference:** Qwythos-9B (8 attention layers, GQA=4 kv-heads, head_dim=256, KVarN group=128 tokens)  
+**Implemented subset:** See [`../user-guide/tiered-kv-offload.md`](../user-guide/tiered-kv-offload.md)
 
 ---
 
-# Tiered Hot/Cold KV Offload Design
+## 🇷🇺 Краткое содержание на русском
 
-**Target:** 262144 context on RTX 3070 8GB  
-**Model reference:** Qwythos (8 attn layers, ~33 total, hybrid SSM+attn)  
-**Constraint:** Weights ~5.9GB + desktop 1.3-1.9GB leaves 0.2-0.8GB VRAM; kvarn4@262K ~1.3GB  
-**Opportunity:** 64GB DDR4 idle; PCIe 3.0 x16 ~16GB/s  
+Этот документ — **спецификация Phase 1** (целевая архитектура), а не описание текущей реализации.
+
+| Что в спеке | Что в коде |
+|-------------|------------|
+| Полная схема hot/cold tiering | Только `--kv-hot-size` + cold buffers |
+| Host-pinned buffers + async DMA | ✅ Реализовано |
+| Prefetch cold→GPU | ❌ Нет |
+| Attend modes (hot/h2o/periodic) | ❌ Только hot-window |
+| CLI: `--kv-hot-groups`, `--kv-prefetch-groups`, `--kv-attend-mode` | ❌ Нет |
+
+**Реально работающее:** см. [`../user-guide/tiered-kv-offload.md`](../user-guide/tiered-kv-offload.md) — только `--kv-hot-size` (tokens) + kvarn types + SWA requirement.
+
+---
 
 ## 1. Data Structures
 
-### Hot/Cold Buffer Split
+### 1.1 Hot/Cold Buffer Split
 
-Extend `llama_kv_cache_kvarn` (which already has a conceptual hot/cold split -- F16 stage + compressed records) into a *cross-device* hot/cold:
+Extend `llama_kv_cache_kvarn` (which already has a conceptual hot/cold split — F16 stage + compressed records) into a *cross-device* hot/cold:
 
 ```
 VRAM (hot tier, GPU):
@@ -33,11 +42,11 @@ RAM (cold tier, host):
   - Metadata cache (cell positions, seq IDs) stays in VRAM for fast lookup
 ```
 
-### Metadata Boundary
+### 1.2 Metadata Boundary
 
 The hot/cold boundary is a `uint32_t hot_boundary` stored in the existing `llama_kv_cache_kvarn` object. This is the token position dividing hot (>= boundary) from cold (< boundary). On window shift, the boundary advances.
 
-### Window Shift Mechanics
+### 1.3 Window Shift Mechanics
 
 When the hot window is full and a new token group arrives:
 1. The oldest hot group(s) are flushed: their F16 stage data is quantized into compressed records (already done by KVarN) AND the compressed record data is written to the host-pinned cold buffer
@@ -46,25 +55,27 @@ When the hot window is full and a new token group arrives:
 
 This is a natural extension of KVarN's existing stage-to-records flush; the difference is that the records are now in host RAM rather than GPU VRAM.
 
-## 2. Migration (Hot -> Cold)
+---
 
-### Trigger
+## 2. Migration (Hot → Cold)
+
+### 2.1 Trigger
 
 When the hot F16 stage exceeds `--kv-hot-groups` groups AND the next token group arrives.
 
-### Batch Size
+### 2.2 Batch Size
 
-- Minimum: 1 group (128 tokens) -- aligns with KVarN's KVAR_N_GROUP granularity
-- Preferred: 2-4 groups (256-512 tokens) -- amortizes PCIe transaction overhead
-- The existing KVarN store path already collapses F16->records; we add a host-side write after the compression
+- Minimum: 1 group (128 tokens) — aligns with KVarN's KVAR_N_GROUP granularity
+- Preferred: 2-4 groups (256-512 tokens) — amortizes PCIe transaction overhead
+- The existing KVarN store path already collapses F16→records; we add a host-side write after the compression
 
-### Format
+### 2.3 Format
 
 - **Always kvarn-compressed** (not raw F16). The compressed format is already optimized for the kvarn kernel and is 4-8x smaller than F16, minimizing PCIe bandwidth for migration.
 - The existing `kvarn_record_bytes()` + tile layout (`llama_kvarn_tile_layout`) is reused as-is.
 - The record data is written as a flat byte array into a pre-allocated host-pinned buffer, using the same layout as the GPU-side `k_records`/`v_records` tensors.
 
-### Migration Path
+### 2.4 Migration Path
 
 ```
 [F16 stage on GPU]
@@ -81,15 +92,17 @@ When the hot F16 stage exceeds `--kv-hot-groups` groups AND the next token group
 
 The GPU record slot can be reused after the DMA completes (tracked via CUDA event / `ggml_backend_event`).
 
-## 3. Prefetch (Cold -> Hot)
+---
 
-### What Gets Prefetched
+## 3. Prefetch (Cold → Hot)
+
+### 3.1 What Gets Prefetched
 
 When a new token is decoded and the attention window needs cold tokens:
 - The hot window is attended directly (already in VRAM F16 stage)
 - Cold tokens are prefetched into a *prefetch pool* on the GPU before attention computation
 
-### Prefetch Strategy
+### 3.2 Prefetch Strategy
 
 The prefetch is driven by the existing metadata cache (which tracks positions). For each decode step:
 
@@ -101,7 +114,7 @@ The prefetch is driven by the existing metadata cache (which tracks positions). 
 
 4. **Overlap:** The async DMA runs on the prefetch stream while the main compute stream processes the current decode step. Events synchronize the streams: `prefetch_ready` signals the main stream, `prefetch_free` signals the prefetch stream that the slot is available.
 
-### Reusing Codacus Expert Prefetch Infrastructure
+### 3.3 Reusing Codacus Expert Prefetch Infrastructure
 
 The MoE expert prefetch in `ggml-backend.cpp` (commit 81729eb43) provides:
 
@@ -115,7 +128,7 @@ The MoE expert prefetch in `ggml-backend.cpp` (commit 81729eb43) provides:
 
 The KV variant differs in *what* is copied: instead of MoE weight slices, we copy full KVarN record tensors (one per group, fixed-size). The slot management logic is identical.
 
-### Prefetch vs Compute Overlap
+### 3.4 Prefetch vs Compute Overlap
 
 For decode (single token):
 - Total cold KV size at 262K: ~1.3GB (kvarn4)
@@ -123,17 +136,19 @@ For decode (single token):
 - With PCIe 3.0 x16 (16GB/s), reading a full group (128 tokens worth of K/V for all heads) takes ~0.1ms for kvarn4
 - This fits comfortably within a decode step (~10-50ms), and the overlap means the cost is hidden
 
+---
+
 ## 4. Attend Over Cold Part
 
-### Problem
+### 4.1 Problem
 
-Full attention over 262K tokens every decode step would require reading 1.3GB per token from host RAM over PCIe 3.0 -- ~80ms per step, unacceptable.
+Full attention over 262K tokens every decode step would require reading 1.3GB per token from host RAM over PCIe 3.0 — ~80ms per step, unacceptable.
 
-### Strategy: Hot-Only Attend + Periodic Cold Flush
+### 4.2 Strategy: Hot-Only Attend + Periodic Cold Flush
 
 **Phase 1 (recommended): Attend only hot window**
 - Attention attends only the hot window (default 256-512 tokens)
-- The cold tier serves as a "context buffer" -- it's preserved but NOT attended every step
+- The cold tier serves as a "context buffer" — it's preserved but NOT attended every step
 - Quality impact: on long contexts, the model loses access to early tokens
 - Trade-off: for many workloads (chat, summarization of recent context), this is acceptable
 - CLI flag: `--kv-attend-mode hot` (default)
@@ -149,7 +164,7 @@ Full attention over 262K tokens every decode step would require reading 1.3GB pe
 - This is expensive (~1.3GB read over PCIe = ~80ms) but amortized over 128 steps adds only ~0.6ms/step
 - The full attend uses the same kvarn flash-attention kernel; cold records are streamed group-by-group through the prefetch mechanism
 
-### Quality Trade-offs
+### 4.3 Quality Trade-offs
 
 | Strategy | Quality | VRAM | Bandwidth | Complexity |
 |----------|---------|------|-----------|------------|
@@ -158,27 +173,31 @@ Full attention over 262K tokens every decode step would require reading 1.3GB pe
 | Hot + periodic full (Phase 3) | Full retention | Same as Phase 2 | ~0.6ms/step avg | High |
 | Full-attend every step | Best | Max | ~80ms/step | N/A (infeasible) |
 
+---
+
 ## 5. Compatibility with KVarN Kernels
 
-### Flash Attention Groups of 128
+### 5.1 Flash Attention Groups of 128
 
 KVarN operates on groups of 128 tokens (`KVAR_N_GROUP = 128`). The hot/cold boundary must be aligned to 128-token boundaries. The prefetch also fetches full groups, which maps naturally to the existing `ggml_kvarn_view` kernel that reads from `k_records` + `k_stage`.
 
-The tile layout (`llama_kvarn_tile_layout`) is unchanged -- the only difference is which device's memory the record pointer points to.
+The tile layout (`llama_kvarn_tile_layout`) is unchanged — the only difference is which device's memory the record pointer points to.
 
-### seq_rm=FULL Classification
+### 5.2 seq_rm=FULL Classification
 
 KVarN currently requires `seq_rm=FULL` (only full sequence removal, not ranges). This is because compressed records do not support fine-grained eviction. With cold offload:
 
-- **Hot tier:** Same constraints as current KVarN -- range removal only within the F16 stage groups
+- **Hot tier:** Same constraints as current KVarN — range removal only within the F16 stage groups
 - **Cold tier:** Host records are organized by group (128 tokens). Range removal on cold records requires marking groups as invalid at the boundary; the metadata cache (always in VRAM) tracks which cold groups are live
 - The metadata cache (`llama_kv_cache` in VRAM) continues to handle seq_rm; the cold host buffers are shadow copies and the metadata tells the prefetch which groups to skip
 
-For Phase 1, cold range removal is simply not supported -- only full sequence eviction (via seq_rm on the metadata cache, which invalidates the cold groups without modifying host buffers).
+For Phase 1, cold range removal is simply not supported — only full sequence eviction (via seq_rm on the metadata cache, which invalidates the cold groups without modifying host buffers).
+
+---
 
 ## 6. CLI
 
-```
+```bash
 --kv-hot-size N        Size of hot window in tokens (default: 512). Must be multiple of 128.
 --kv-cold-offload      Enable cold-tier RAM offload (default: true when hot window < context)
 --kv-prefetch-groups N Number of prefetch groups (default: 2). Must be >= 1.
@@ -188,6 +207,8 @@ For Phase 1, cold range removal is simply not supported -- only full sequence ev
 ```
 
 These slot into the existing `llama_context_params` struct alongside `offload_kqv`.
+
+---
 
 ## 7. Phased Implementation Plan
 
@@ -235,6 +256,8 @@ These slot into the existing `llama_context_params` struct alongside `offload_kq
 - Quality: perplexity matches full-attention baseline (no offload) at 262K
 - Performance: periodic full-attend adds <5% to total decode time
 
+---
+
 ## 8. Risks and Open Questions
 
 ### Risks
@@ -253,8 +276,25 @@ These slot into the existing `llama_context_params` struct alongside `offload_kq
 
 2. **How does the hot boundary interact with SWA (sliding window attention)?** For SWA models, the entire window fits in VRAM (e.g., 32K tokens), so cold offload is rarely triggered. The hot window size should be at least the SWA window size.
 
-3. **Can we use the CUDA unified memory (`cudaMallocManaged`) instead of explicit host/GPU buffers?** Unified memory would simplify programming but adds page fault overhead on GPU access. For streaming KV data, explicit async DMA is more predictable.
+3. **Can we use CUDA unified memory (`cudaMallocManaged`) instead of explicit host/GPU buffers?** Unified memory would simplify programming but adds page fault overhead on GPU access. For streaming KV data, explicit async DMA is more predictable.
 
 4. **Should cold data be compressed further (e.g., kvarn2 instead of kvarn4)?** For cold data that is rarely accessed, a higher compression ratio could save host RAM and PCIe bandwidth at the cost of dequant quality. Investigate: use `--kv-cold-type` separate from `--kvarn-type`.
 
 5. **Does the attend-over-cold strategy need to handle the full 262K tokens in the Qwythos architecture where only 8/33 layers have KV?** Yes, but the memory savings from 8 layers (vs 33) means the cold buffer is proportionally smaller. The hot window can also be proportionally larger.
+
+---
+
+## Appendix: Memory Layout Summary (Qwythos, 262K ctx, kvarn4)
+
+| Buffer | Location | Size |
+|--------|----------|------|
+| Weights (Q4_K_M) | VRAM | 5.9 GB |
+| Desktop / compositor | VRAM | 1.3–1.9 GB |
+| **F16 hot stage (4 groups)** | VRAM | 16 MB |
+| Metadata cache (positions, flags) | VRAM | ~2 MB |
+| KVarN compressed records (cold) | **RAM (host-pinned)** | ~1.3 GB |
+| Prefetch ring buffer (2 groups) | VRAM | 8 MB |
+| **Total KV VRAM** | | **~26 MB** |
+| **Headroom** | | **0.17–0.77 GB** |
+
+Fits comfortably in 0.2–0.8 GB budget.
