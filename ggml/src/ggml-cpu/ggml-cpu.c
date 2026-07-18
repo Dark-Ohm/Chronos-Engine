@@ -2257,6 +2257,59 @@ static void ggml_compute_forward(struct ggml_compute_params * params, struct ggm
                 // nop
             } break;
         case GGML_OP_TURBO_WHT:
+            {
+                // Must actually compute: CUDA has a real kernel; if the scheduler
+                // places this op on CPU, a no-op leaves dst uninitialized (G-2).
+                // WHT: signs_a -> butterfly -> signs_b * 1/sqrt(128), groups of 128 on ne[0].
+                // direction 0: s1 then s2; direction 1 (inverse): s2 then s1.
+                static const float s1[128] = {
+                    -1,1,1,-1,-1,1,-1,1,-1,-1,1,1,1,1,1,1,1,-1,1,-1,1,-1,-1,1,1,1,-1,1,1,-1,-1,-1,
+                    -1,1,1,-1,1,1,-1,1,-1,1,1,-1,-1,1,-1,1,1,1,1,-1,-1,-1,-1,-1,1,-1,1,1,1,1,-1,1,
+                    -1,-1,1,-1,-1,-1,1,-1,-1,-1,1,-1,-1,-1,1,1,1,-1,-1,1,1,1,-1,-1,1,1,-1,1,1,-1,1,-1,
+                    -1,1,1,-1,1,-1,1,-1,1,1,1,1,-1,1,-1,1,1,-1,1,1,-1,-1,-1,-1,-1,1,1,-1,1,1,-1,1
+                };
+                static const float s2[128] = {
+                    1,1,1,1,-1,1,1,-1,1,-1,-1,-1,1,-1,-1,-1,1,1,-1,-1,1,-1,1,-1,1,-1,-1,1,-1,1,1,1,
+                    1,1,-1,-1,-1,1,-1,-1,-1,-1,-1,-1,1,1,1,-1,1,-1,1,1,1,-1,-1,1,-1,-1,-1,-1,-1,-1,1,1,
+                    1,-1,1,-1,-1,-1,-1,1,-1,1,-1,1,-1,-1,1,1,-1,1,-1,1,1,-1,1,-1,-1,-1,-1,1,-1,-1,1,-1,
+                    1,-1,1,1,1,-1,-1,1,-1,1,-1,1,1,-1,-1,1,-1,1,-1,1,1,-1,1,-1,1,-1,-1,-1,-1,-1,1,-1
+                };
+                const int ith = params->ith;
+                const int nth = params->nth;
+                const struct ggml_tensor * src0 = tensor->src[0];
+                GGML_ASSERT(src0->type == GGML_TYPE_F32 && tensor->type == GGML_TYPE_F32);
+                GGML_ASSERT(ggml_is_contiguous(src0) && ggml_is_contiguous(tensor));
+                int direction = 0;
+                memcpy(&direction, tensor->op_params, sizeof(int));
+                const float * sa = (direction == 0) ? s1 : s2;
+                const float * sb = (direction == 0) ? s2 : s1;
+                const int64_t n_el = ggml_nelements(src0);
+                GGML_ASSERT(n_el % 128 == 0);
+                const int64_t n_groups = n_el / 128;
+                const float inv_sqrt = 0.08838834764831845f;
+                const float * src = (const float *) src0->data;
+                float * dst = (float *) tensor->data;
+                for (int64_t g = ith; g < n_groups; g += nth) {
+                    float buf[128];
+                    const float * in = src + g * 128;
+                    for (int i = 0; i < 128; i++) {
+                        buf[i] = in[i] * sa[i];
+                    }
+                    for (int h = 1; h < 128; h *= 2) {
+                        for (int i = 0; i < 128; i += h * 2) {
+                            for (int j = i; j < i + h; j++) {
+                                float a = buf[j], b = buf[j + h];
+                                buf[j]     = a + b;
+                                buf[j + h] = a - b;
+                            }
+                        }
+                    }
+                    float * out = dst + g * 128;
+                    for (int i = 0; i < 128; i++) {
+                        out[i] = buf[i] * inv_sqrt * sb[i];
+                    }
+                }
+            } break;
         case GGML_OP_KVARN_VIEW:
         case GGML_OP_KVARN_WHT:
         case GGML_OP_KVARN_STORE:

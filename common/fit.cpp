@@ -375,6 +375,9 @@ static void common_params_fit_impl(
     if (mparams->n_gpu_layers != default_mparams.n_gpu_layers) {
         throw common_params_fit_exception("n_gpu_layers already set by user to " + std::to_string(mparams->n_gpu_layers) + ", abort");
     }
+    if (cparams->kvarn.type != LLAMA_KVARN_TYPE_DISABLED) {
+        throw common_params_fit_exception("KVarN requires full GPU offload; cannot fit by reducing n_gpu_layers -- reduce n_ctx or free device memory");
+    }
     if (nd > 1) {
         if (!tensor_split) {
             throw common_params_fit_exception("did not provide a buffer to write the tensor_split to, abort");

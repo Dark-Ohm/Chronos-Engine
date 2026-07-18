@@ -3,6 +3,7 @@
 #include "llama-batch.h"
 #include "llama-graph.h"
 #include "llama-kv-cache.h"
+#include "llama-kv-cache-kvarn.h"
 #include "llama-memory.h"
 #include "llama-memory-recurrent.h"
 
@@ -25,6 +26,7 @@ public:
                 ggml_type   type_v,
                      bool   v_trans,
                  uint32_t   kv_size,
+                 uint32_t   n_ubatch,
                  uint32_t   n_pad,
                  uint32_t   n_swa,
            llama_swa_type   swa_type,
@@ -39,7 +41,8 @@ public:
                      bool   unified,
                             /* layer filters */
     const layer_filter_cb & filter_attn = nullptr,
-    const layer_filter_cb & filter_recr = nullptr);
+    const layer_filter_cb & filter_recr = nullptr,
+          llama_kvarn_params kvarn = llama_kvarn_default_params());
 
     ~llama_memory_hybrid() = default;
 
@@ -80,13 +83,13 @@ public:
     // llama_memory_hybrid specific API
     //
 
-    llama_kv_cache * get_mem_attn() const;
+    llama_memory_i * get_mem_attn() const;
     llama_memory_recurrent * get_mem_recr() const;
 
 private:
     const llama_hparams & hparams;
 
-    const std::unique_ptr<llama_kv_cache> mem_attn;
+    std::unique_ptr<llama_memory_i> mem_attn;
     const std::unique_ptr<llama_memory_recurrent> mem_recr;
 };
 
@@ -109,7 +112,7 @@ public:
     // init success
     llama_memory_hybrid_context(
               llama_memory_hybrid * mem,
-                  slot_info_vec_t   sinfos_attn,
+          llama_memory_context_ptr   ctx_attn_in,
         std::vector<llama_ubatch>   ubatches);
 
     ~llama_memory_hybrid_context() = default;
