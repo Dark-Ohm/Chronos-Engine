@@ -10,7 +10,12 @@
 #include <set>
 #include <stdexcept>
 
-#define MAX_REPETITION_THRESHOLD 2000
+// Raised from stock 2000 (2026-07-18): modern agent clients (Zed's AI panel)
+// generate GBNF for dozens of tools at once via JSON-schema-to-grammar
+// conversion, tripping this guard on schema SIZE alone (rule-count product),
+// not on any pathological/exponential repetition. 200000 still blocks truly
+// degenerate grammars while covering large-but-linear real-world tool schemas.
+#define MAX_REPETITION_THRESHOLD 200000
 //
 // helpers
 //
