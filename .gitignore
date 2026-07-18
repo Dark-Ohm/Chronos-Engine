@@ -157,3 +157,6 @@ AGENTS.local.md
 # Chronos
 /donors/
 !/DECISIONS.log
+
+# Stakpak session files
+.stakpak/session*
