@@ -33,7 +33,8 @@ Flash-attention (and KVarN's `ggml_kvarn_view` kernel) never materializes the fu
 
 | Approach | Source | How it works | Memory / Speed cost on Qwythos | Feasibility |
 |----------|--------|--------------|--------------------------------|-------------|
-| **A. Lightweight scoring pass (prefill only)** | H2O §3.1, SnapKV §3.1 | Run a separate attention pass with `causal=false` that outputs per-token scores. Use a small head-dim projection or just mean over heads. | Extra prefill FLOPs: 8 layers × 4 heads × 256² × n_tokens ≈ **1.1 TFLOPs total** (full prefill prefix). One extra kernel launch per layer. Negligible vs full prefill. | **Recommended.** Fits llama.cpp graph: add a `build_attn_inp_h2o_score` node that runs once after prefill. |
+| **A1. Full-prefix scoring pass (prefill only)** | H2O §3.1, SnapKV §3.1 | Run a separate attention pass with `causal=false`, scoring every query against every key, output per-token scores. | `2·n_q·n_k·d` per head-layer, `n_q=n_k=262144`, `d=256`, × 16 q-heads × 8 layers ≈ **4.5 PFLOPs total** ≈ several minutes at 20 TFLOPs fp16 peak (RTX 3070). **NOT negligible — impractical for Phase 2.** | Rejected as default: cost scales O(n²) with context, defeats the purpose at 262K. |
+| **A2. SnapKV-style observation window (prefill only)** | SnapKV §3.1 | Score only the last `W` prefill queries against all keys (not the full prefix) — SnapKV shows the observation window is sufficient to identify heavy hitters. | `2·W·n_k·d` per head-layer × 16 heads × 8 layers, `n_k=262144`: W=128 → ≈2.2 TFLOPs (~110ms); W=512 → ≈8.8 TFLOPs (~440ms); W=1024 → ≈17.6 TFLOPs (~0.9s). | **Recommended.** Same graph hook as A1, bounded query range instead of full prefix — cost independent of how long the tail of scoring needs to look, still O(n_k) in keys. |
 | **B. Scoring during prefill, piggyback on existing FA kernel** | H2O §4.1 (greedy H2) | Modify KVarN flash-attn kernel to accumulate per-token attention mass into a side buffer. | Zero extra kernel launches; adds atomicAdd or warp-reduce per token in the kernel. ~5-10% kernel overhead. | Possible but invasive to KVarN CUDA kernel (dkm kernel). Prefer A for Phase 2. |
 | **C. Approximation by K-norms** | SnapKV §3.2 (Fig 3), TokenSkipping §3 | `score_i ≈ ‖K_i‖²` or `‖K_i‖` (no Q needed). Pre-compute at token write time (`cpy_k`). | Zero runtime overhead. K-norm buffer: 8 layers × 4 heads × 262K × 2 bytes = 1.6 MB (fp16). | **Fallback** if A proves too slow. Quality loss: SnapKV §3.2 shows norm correlates with attention mass but not perfectly (correlation reported, exact R not stated in paper). |
 | **D. Sliding-window update on decode** | H2O §4.2 (dynamic H2) | Update scores incrementally: `score_i ← α·score_i + (1-α)·attn_i` each decode step. | Requires materializing per-step attention scores → back to Problem 1. Not viable without kernel support. | **Deferred** to Phase 3. |
@@ -65,12 +66,13 @@ void ggml_kvarn_h2o_score(const ggml_tensor *q, const ggml_tensor *k, const ggml
 - Each thread block handles one head × one tile; warp-reduce rowsum of softmax.
 - Writes per-token mass for that head.
 
-**Cost estimate (Qwythos, 8 attn layers, 262K prefill):**
-- FLOPs: 8 layers × 4 heads × (2 × 256² × 262144) ≈ **1.1 TFLOPs** (one matmul + softmax per layer)
-- On RTX 3070 (20 TFLOPs fp16): **~55 ms extra prefill latency**
-- Acceptable for Phase 2 (prefill is one-time; decode unaffected).
+**Cost estimate (Qwythos, 16 q-heads, 8 attn layers, 262K prefill):**
+- Full-prefix (A1): `2 × n_q × n_k × d × heads × layers` = `2 × 262144² × 256 × 16 × 8` ≈ **4.5 PFLOPs**. At 20 TFLOPs fp16 peak (RTX 3070): ≈ **4 minutes**, more in practice (full attention rarely hits peak). **Not acceptable for Phase 2** — this is why A2 is recommended instead.
+- Observation window (A2, recommended), `W=512`: `2 × 512 × 262144 × 256 × 16 × 8` ≈ **8.8 TFLOPs** ≈ **~440 ms** extra prefill latency. Acceptable one-time cost.
 
-**Correction from H-11 review:** The earlier claim "0.5-2 GFLOPs per 1K tokens" was wrong. The correct formula for full attention over the prefill prefix is `2 × n_q × n_k × d` with `n_q = n_k = 262144`, giving ~1.1 TFLOPs total. The SnapKV observation window (small W) reduces this but is not used here — we explicitly score the full prefix once.
+**Correction history (two prior wrong numbers, both from the fired Hermes H-11/H-11b review):**
+1. First claim: "0.5-2 GFLOPs per 1K tokens" — wrong, missing the `n_k` (all-keys) factor entirely.
+2. Second claim (presented as a fix): "1.1 TFLOPs / ~55ms" for full-prefix scoring — wrong by ~3 orders of magnitude; the formula `2·n_q·n_k·d` was quoted correctly but never evaluated with real numbers (16 heads, 262144² term). Verified by the Architect 2026-07-19 by direct substitution; see numbers above. This is also why Phase 2 defaults to the SnapKV observation window (A2), not full-prefix scoring (A1).
 
 ---
 
