@@ -11,6 +11,7 @@
 #include <algorithm>
 #include <cfloat>
 #include <cmath>
+#include <vector>
 
 // ggml_compute_forward_dup
 
@@ -8493,10 +8494,20 @@ static void ggml_compute_forward_flash_attn_ext_f16_one_chunk(
     ggml_type         const k_vec_dot_type = ggml_get_type_traits_cpu(k->type)->vec_dot_type;
     ggml_from_float_t const q_to_vec_dot   = ggml_get_type_traits_cpu(k_vec_dot_type)->from_float;
     ggml_vec_dot_t    const kq_vec_dot     = ggml_get_type_traits_cpu(k->type)->vec_dot;
+    ggml_to_float_t   const k_to_float     = ggml_get_type_traits(k->type)->to_float;
     ggml_to_float_t   const v_to_float     = ggml_get_type_traits(v->type)->to_float;
 
     GGML_ASSERT((                            q_to_vec_dot) && "fattn: unsupported K-type");
+    // Chronos turbo KV: no CPU vec_dot yet; fall back to dequant + f32 dot via to_float.
+    GGML_ASSERT((kq_vec_dot || k_to_float) && "fattn: unsupported K-type (no vec_dot/to_float)");
     GGML_ASSERT((v->type == GGML_TYPE_F32 || v_to_float  ) && "fattn: unsupported V-type");
+
+    // Scratch for K dequant when kq_vec_dot is null (turbo). Q is already in vec_dot_type
+    // (F32 for turbo), so the fallback dots F32xF32.
+    std::vector<float> k_f32_buf;
+    if (!kq_vec_dot) {
+        k_f32_buf.resize((size_t) DK);
+    }
 
     int ith = params->ith;
 
@@ -8549,7 +8560,12 @@ static void ggml_compute_forward_flash_attn_ext_f16_one_chunk(
             float s; // KQ value
 
             const char * k_data = (const char *) k->data + ( ic*nbk1 + ik2*nbk2 + ik3*nbk3);
-            kq_vec_dot(DK, &s, 0, k_data, 0, Q_q, 0, 1);
+            if (kq_vec_dot) {
+                kq_vec_dot(DK, &s, 0, k_data, 0, Q_q, 0, 1);
+            } else {
+                k_to_float(k_data, k_f32_buf.data(), DK);
+                ggml_vec_dot_f32(DK, &s, 0, k_f32_buf.data(), 0, (const float *) Q_q, 0, 1);
+            }
 
             s = s*scale; // scale KQ value
 

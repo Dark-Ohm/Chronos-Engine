@@ -309,6 +309,20 @@ llama_kv_cache::llama_kv_cache(
         }
     }
 
+    // TurboQuant: create rotation tensors before buffer alloc.
+    // Must happen before ctx_map entries are moved into ctxs_bufs (std::move
+    // leaves the map's unique_ptr empty). Also must be before
+    // ggml_backend_alloc_ctx_tensors_from_buft so the tensors get a buffer.
+    if (is_turbo) {
+        for (auto & [buft, ctx] : ctx_map) {
+            turbo_rotation = ggml_new_tensor_2d(ctx.get(), GGML_TYPE_F32, 128, 128);
+            ggml_format_name(turbo_rotation, "turbo_rotation");
+            turbo_rotation_inv = ggml_new_tensor_2d(ctx.get(), GGML_TYPE_F32, 128, 128);
+            ggml_format_name(turbo_rotation_inv, "turbo_rotation_inv");
+            break; // create in first context only
+        }
+    }
+
     // allocate tensors and initialize the buffers to avoid NaNs in the padding
     for (auto & [buft, ctx] : ctx_map) {
         ggml_backend_buffer_t buf;
@@ -394,17 +408,6 @@ llama_kv_cache::llama_kv_cache(
             tmp->data = attn_rot_hadamard[n].data();
 
             ggml_gen_hadamard(tmp);
-        }
-    }
-
-    // TurboQuant: create rotation tensors if turbo types are used
-    if (is_turbo) {
-        for (auto & [buft, ctx] : ctx_map) {
-            turbo_rotation = ggml_new_tensor_2d(ctx.get(), GGML_TYPE_F32, 128, 128);
-            ggml_format_name(turbo_rotation, "turbo_rotation");
-            turbo_rotation_inv = ggml_new_tensor_2d(ctx.get(), GGML_TYPE_F32, 128, 128);
-            ggml_format_name(turbo_rotation_inv, "turbo_rotation_inv");
-            break; // create in first context only
         }
     }
 

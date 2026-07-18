@@ -482,19 +482,19 @@ static const struct ggml_type_traits_cpu type_traits_cpu[GGML_TYPE_COUNT] = {
         .nrows                    = 1,
     },
     [GGML_TYPE_TURBO2_TCQ] = {
-        .from_float               = NULL,
+        .from_float               = (ggml_from_float_t) quantize_row_turbo2_tcq_ref,
         .vec_dot                  = NULL,
         .vec_dot_type             = GGML_TYPE_F32,
         .nrows                    = 1,
     },
     [GGML_TYPE_TURBO3_TCQ] = {
-        .from_float               = NULL,
+        .from_float               = (ggml_from_float_t) quantize_row_turbo3_tcq_ref,
         .vec_dot                  = NULL,
         .vec_dot_type             = GGML_TYPE_F32,
         .nrows                    = 1,
     },
     [GGML_TYPE_TURBO4_TCQ] = {
-        .from_float               = NULL,
+        .from_float               = (ggml_from_float_t) quantize_row_turbo4_tcq_ref,
         .vec_dot                  = NULL,
         .vec_dot_type             = GGML_TYPE_F32,
         .nrows                    = 1,
