@@ -1,13 +1,37 @@
 # Chronos Engine
 
-llama.cpp fork: fresh upstream + KV-cache quantization stack (TurboQuant/TCQ/KVarN)
-ported from beellama.cpp + MoE-offload optimizations (host-pin, expert prefetch).
-Speculative decoding is upstream-native (DFlash, EAGLE3, MTP).
+A private, server-focused fork of [llama.cpp](https://github.com/ggml-org/llama.cpp)
+built around one goal: push long-context KV-cache compression as far as it
+will go on consumer GPUs. Fresh upstream base, no browser chat UI (API/server
+only by default), no upstream speculative-decoding forks ported in — DFlash,
+EAGLE3 and MTP are used as-is from upstream.
 
-Architecture and decision history: [ARCHITECTURE.md](ARCHITECTURE.md), [DECISIONS.log](DECISIONS.log).
-Port map: [docs/chronos-port-map.md](docs/chronos-port-map.md).
+**What Chronos adds over stock llama.cpp:**
+- **KVarN** — pseudo-type KV-cache compression (`kvarn2`..`kvarn8`) via a
+  dedicated flash-attention path, ported from beellama.cpp.
+- **TurboQuant / TCQ** — real `ggml_type` KV quantization (`turbo2/3/4`,
+  `*_TCQ`) with Walsh-Hadamard rotation, etalon: `donors/thetom-turboquant`.
+- **Tiered hot/cold KV offload** — host-pinned RAM as a cold tier behind a
+  small VRAM hot window (`--kv-hot-size`), reusing the MoE expert-prefetch
+  infrastructure. Phase 1 (hot-only attend) is implemented; Phase 2 (H2O
+  heavy-hitter retention) is designed, not yet built.
+- **MoE expert prefetch / host-pin** — async expert weight upload overlapped
+  with compute, ported from thecodacus/llama.cpp.
 
-Upstream base documentation follows below.
+**Status:** work in progress, unreleased, no license granted yet. Nothing
+here is pushed to a public remote. Treat it as a research fork, not a
+consumable release.
+
+**Where to look:**
+- [`ARCHITECTURE.md`](ARCHITECTURE.md) — canonical design doc, current state.
+- [`DECISIONS.log`](DECISIONS.log) — rejected alternatives and why (D-001…).
+- [`docs/design/`](docs/design) — Phase 1/2 KV-offload specs.
+- [`docs/chronos-port-map.md`](docs/chronos-port-map.md) — port map from donors.
+
+Everything below this line is upstream llama.cpp's own README, kept as a
+build/backend/model-support reference. Some of it does not apply to this
+fork (e.g. the web UI is compiled out by default here — see
+`LLAMA_BUILD_UI` in `CMakeLists.txt`).
 
 ---
 
@@ -402,8 +426,9 @@ To learn more about model quantization, [read this documentation](tools/quantize
     ```bash
     llama-server -m model.gguf --port 8080
 
-    # Basic web UI can be accessed via browser: http://localhost:8080
     # Chat completion endpoint: http://localhost:8080/v1/chat/completions
+    # (Chronos builds server-only by default, no browser web UI - pass
+    # -DLLAMA_BUILD_UI=ON at configure time to restore it)
     ```
 
     </details>
