@@ -17,6 +17,11 @@
 | Донор KV-стека | Anbeeld/beellama.cpp `v0.3.2` | `fe67745d` | 2026-07-10 |
 | — его merge base с апстримом | | `d73cd076` | 2026-06-09 |
 | Донор MoE-оптимизаций | thecodacus/llama.cpp `fable5/prefetch-experts` | `5e7f6271` | 2026-07-08 |
+| Эталон turbo-цепочки | TheTom/llama-cpp-turboquant `feature/turboquant-kv-cache` | `471fb4ec8` | 2026-07-18 |
+
+TheTom — первоисточник turbo-типов (beellama — его производная), ~300 коммитов
+впереди апстрима, полный CUDA/Metal/ROCm-путь. Найден в ходе research H-10.
+При расхождении turbo-поведения beellama vs TheTom эталоном считается TheTom.
 
 Рабочая ветка: `chronos-main`. `master` — чистый трекер апстрима, не трогать.
 Доноры лежат в `donors/` (отдельные клоны, не сабмодули).
@@ -79,18 +84,61 @@ type_traits — массив [GGML_TYPE_COUNT]; при high-range массив �
 KVarN ремапа не требует (псевдотипы CLI, нет enum-записей). Оператор
 `GGML_OP_KVARN_VIEW` добавлять строго в КОНЕЦ enum ops.
 
+## Принятые решения раунда 4 (2026-07-18)
+
+### Turbo-цепочка: WHT-оператор, не rotation-matmul (G-1/G-2)
+FWHT-ротация фьюзится в CUDA quantize-ядро (set_rows), обратный WHT — явный
+`ggml_turbo_wht(..., 1)` в графе после flash-attn (как у TheTom). Тензоры
+`turbo_rotation`/`turbo_rotation_inv` в KV-кеше — legacy для CUDA-пути,
+оставлены для совместимости. CPU-путь: реальный `TURBO_WHT` (не no-op) +
+полноценные quantize turbo2/3 (порт TheTom). Residual: auto-asymmetric K
+(GQA≥6 → K=q8_0), тюнинг turbo4, Q pre-rotate для non-CUDA бэкендов.
+
+### KVarN: seq_rm = FULL (O-6/O-8)
+KVarN-контексты классифицируются `COMMON_CONTEXT_SEQ_RM_TYPE_FULL` — частичное
+удаление диапазона невозможно по формату (группы по 128, compressed records).
+Все call-site'ы частичного seq_rm в server-context гейтятся этой проверкой.
+
+### Fit и kvarn (Z-1)
+Fit-оценка KVarN-буфера точна (до долей MiB). Но: (1) kvarn требует полный
+GPU-offload — ngl-редукция запрещена гардом; (2) fit не редуцирует явно
+заданный `-c`; (3) дефолтный margin 1024 MiB на 8GB-карте с 6GB весов
+отклоняет любой kvarn-конфиг. Решение: kvarn-запуски идут с `-fit off`,
+`-c` подбирается вручную; тихую подмену пользовательского `-c` НЕ делаем.
+Замеренный потолок (Qwythos, фон ~1.9GB): kvarn4 `-c 65536`, kvarn2 `-c 63488`
+(65536 упирается в 64k-порог tail-групп).
+
+### Grammar-порог под агентные tool-схемы
+`MAX_REPETITION_THRESHOLD` 2000 → 200000: большие tool-схемы (Zed editor,
+десятки инструментов) срабатывали на guard размером схемы, не патологией.
+
+### Главный трек к 262K: tiered hot/cold KV-offload (H-10 + O-10)
+Замеры и research сошлись: квантизацией KV 262K на 8GB не достигается —
+бюджет съедают веса (5.9GB) + фон десктопа (1.3–1.9GB), на KV остаётся
+0.2–0.8GB при потребности ~1.3GB (kvarn2@262K). Решение: hot-tier в VRAM
+(kvarn F16 stage) + cold-tier в RAM (host-pinned kvarn-рекорды) с префетчем
+по codacus-инфраструктуре (`prefetch_backend`/`prefetch_slots`/events).
+Дизайн: `docs/design/tiered-kv-offload.md`. Phase 1 (hot-only attend) —
+инфраструктура; цель «без явной потери качества» закрывают Phase 2 (H2O
+heavy-hitters) / Phase 3 (periodic full attend). Alternatives (MLA,
+cross-layer sharing) отклонены — требуют переобучения модели.
+
 ## Фазы (статус)
 
 0. Развязка, карта дифа, type ID ремап — **готово** (2026-07-13)
-1. Типы + CPU-путь (quants, ops, KVARN_VIEW) + байт-сверка q2_0
-2. CUDA-кернели (fwht, cross-ring-interleave, kvarn, argmax/TCQ, FA-семейства,
-   перегенерация template-instances через generate_cu_files.py)
-3. llama-уровень (llama-kvarn.cpp, llama-kv-cache-kvarn.cpp/h, kv-cache/iswa,
-   graph, model wiring: qwen35/qwen35moe/gemma4)
-4. Scheduler + CLI (ggml-backend KVARN_VIEW split-логика, arg.cpp, loader)
-5. codacus-патчи (независимый трек; финальная сборка ggml-backend.cpp после Ф.4)
-6. CopySpec + loop-guard (условная)
-7. Интеграционная валидация (RTX 3070 8GB — модели подбирать соразмерно)
+1. Типы + CPU-путь (quants, ops, KVARN_VIEW) + байт-сверка q2_0 — **готово**
+2. CUDA-кернели — **готово** (fwht, kvarn, TCQ, FA-семейства)
+3. llama-уровень — **готово** (kvarn end-to-end живой: kvarn4@65536 смоки,
+   seq_rm-гейтинг; turbo end-to-end живой после G-1/G-2: turbo3 ≈ f16 по t/s)
+4. Scheduler + CLI — **готово** (turbo-типы в CLI-вайтлисте с 0f70a2d30)
+5. codacus-патчи — **готово** (host-pin + expert-prefetch смержены)
+6. CopySpec + loop-guard (условная) — не начата
+7. Интеграционная валидация — **частично**: живые смоки kvarn2/4 и turbo3/4/tcq,
+   стресс через chronos-host и Zed editor agent; НЕ сделано: test-backend-ops
+   parity (эталон 13994/13994), формальный бенч vs baseline (pp512=2298/tg64=61),
+   PPL/NIAH на длинном контексте
+8. **Tiered hot/cold KV-offload** (новая, главный трек к 262K) — дизайн принят,
+   реализация не начата. Фазы внутри трека — см. docs/design/tiered-kv-offload.md
 
 Полная пофайловая разметка дифа: `docs/chronos-port-map.md`.
 
