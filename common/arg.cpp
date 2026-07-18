@@ -308,6 +308,16 @@ const std::vector<ggml_type> kv_cache_types = {
     GGML_TYPE_IQ4_NL,
     GGML_TYPE_Q5_0,
     GGML_TYPE_Q5_1,
+    // TurboQuant KV-cache types (2026-07-18): CUDA/CPU quant math has existed
+    // since Phase 1-2 of the port, but was never added to this CLI whitelist —
+    // `--cache-type-k/v turbo4` etc. threw "Unsupported cache type" despite the
+    // ggml_type and kernels being real and working (see ggml.c type_traits).
+    GGML_TYPE_TURBO2_0,
+    GGML_TYPE_TURBO3_0,
+    GGML_TYPE_TURBO4_0,
+    GGML_TYPE_TURBO2_TCQ,
+    GGML_TYPE_TURBO3_TCQ,
+    GGML_TYPE_TURBO4_TCQ,
 };
 
 static ggml_type kv_cache_type_from_str(const std::string & s) {
@@ -365,11 +375,11 @@ static llama_kvarn_type kvarn_type_from_bits(int32_t key_bits, int32_t value_bit
 // the plain ggml_type used as the fallback KV cache type for a given kvarn bitness.
 static ggml_type kvarn_fallback_cache_type(int32_t bits) {
     switch (bits) {
-        case 2:  return GGML_TYPE_Q2_K;
-        case 3:  return GGML_TYPE_Q3_K;
-        case 4:  return GGML_TYPE_Q4_K;
-        case 5:  return GGML_TYPE_Q5_K;
-        case 6:  return GGML_TYPE_Q6_K;
+        case 2:  return GGML_TYPE_Q2_1; // donor uses Q2_0; no CUDA kernels for it in this tree, Q2_1 is the supported sibling
+        case 3:  return GGML_TYPE_Q3_0;
+        case 4:  return GGML_TYPE_Q4_0;
+        case 5:  return GGML_TYPE_Q5_0;
+        case 6:  return GGML_TYPE_Q6_0;
         case 8:  return GGML_TYPE_Q8_0;
         default: return GGML_TYPE_F16;
     }
