@@ -62,6 +62,11 @@ e4e8762f0 docs : T009 prompt-cache partial match drops cache
   НЕ turbo-специфично (проверено контролем на f16). Вероятная причина —
   тот же fallback-проб `common_context_can_seq_rm`, что описан ниже в
   расследовании `Invalid input batch`.
+- Хвост T010 (одна строка, не тикет): `llm_graph_input_mem_hybrid_k`
+  (`llama-graph.cpp:1246/1264`) НЕ получил зеркало фикса `mat_idxs`. Его
+  зовёт только `kimi-linear.cpp:246` под `is_mla()`; Qwythos идёт через
+  `build_inp_mem_hybrid()` (`qwen35.cpp:152`), так что на нашем пути это
+  не стреляет. Чинить — если/когда kimi-linear MLA поедет с kvarn+SWA.
 - Хвосты T001: `iq4_nl` × turbo -> `kernel=NONE` (тихий non-FA);
   llama-bench не знает turbo; q6_0/q6_1/q3_0/q3_1/q2_1 есть в
   `is_classic_non_q8_type()`, но не в CLI-whitelist.
