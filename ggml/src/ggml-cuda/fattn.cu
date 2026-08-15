@@ -3305,14 +3305,14 @@ void ggml_cuda_flash_attn_ext(ggml_backend_cuda_context & ctx, ggml_tensor * dst
         ggml_cuda_fattn_is_turbo_kv_type(V->type);
 
     // Fused MMA turbo: reads raw turbo bytes directly in the MMA kernel, no intermediate fp16 buffers.
-    // Fused straight TurboQuant matched K/V. Set GGML_TURBO_MMA_FUSED=0 to disable.
+    // Fused straight TurboQuant matched K/V. Opt-in (default off): set GGML_TURBO_MMA_FUSED=1 to enable.
     static const bool turbo_mma_fused = [] {
         const char * e = getenv("GGML_TURBO_MMA_FUSED");
-        if (e && atoi(e) == 0) {
-            fprintf(stderr, "GGML_TURBO_MMA_FUSED=0: fused turbo MMA kernel disabled\n");
-            return false;
+        if (e && atoi(e) != 0) {
+            fprintf(stderr, "GGML_TURBO_MMA_FUSED=1: fused turbo MMA kernel enabled (opt-in)\n");
+            return true;
         }
-        return true;
+        return false;
     }();
     static const bool turbo_fa_debug = [] {
         const char * e = getenv("GGML_TURBO_FA_DEBUG");

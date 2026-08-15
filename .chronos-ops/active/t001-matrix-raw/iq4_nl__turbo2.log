@@ -1,5 +1,5 @@
-0.00.015.514 I llama_completion: llama backend init
-0.00.015.521 I llama_completion: load the model and apply lora adapter, if any
+0.00.015.726 I llama_completion: llama backend init
+0.00.015.733 I llama_completion: load the model and apply lora adapter, if any
 CUDA_FA_ROUTE_PLAN device=0 Q=[256,1,16,1] Kraw=iq4_nl Vraw=turbo2 Kshape=[256,256,4,1] Vshape=[256,256,4,1] Keff=iq4_nl Veff=f16 turbo_kv=1 prefer_native_vec=0 decode=1 dk=0 dv=1 unsafe_vec_after_turbo_v_decode=0 allow_vec=1 kernel=NONE need_f16_K=0 need_f16_V=0 Knb=[18,576,144,147456] Vnb=[34,272,68,69632] Keff_nb=[18,576,144,147456] Veff_nb=[2,2048,512,524288]
 CUDA_FA_ROUTE_PLAN device=0 Q=[256,1,16,1] Kraw=iq4_nl Vraw=turbo2 Kshape=[256,256,4,1] Vshape=[256,256,4,1] Keff=iq4_nl Veff=f16 turbo_kv=1 prefer_native_vec=0 decode=1 dk=0 dv=1 unsafe_vec_after_turbo_v_decode=0 allow_vec=1 kernel=NONE need_f16_K=0 need_f16_V=0 Knb=[18,576,144,147456] Vnb=[34,272,68,69632] Keff_nb=[18,576,144,147456] Veff_nb=[2,2048,512,524288]
 CUDA_FA_ROUTE_PLAN device=0 Q=[256,1,16,1] Kraw=iq4_nl Vraw=turbo2 Kshape=[256,256,4,1] Vshape=[256,256,4,1] Keff=iq4_nl Veff=f16 turbo_kv=1 prefer_native_vec=0 decode=1 dk=0 dv=1 unsafe_vec_after_turbo_v_decode=0 allow_vec=1 kernel=NONE need_f16_K=0 need_f16_V=0 Knb=[18,576,144,147456] Vnb=[34,272,68,69632] Keff_nb=[18,576,144,147456] Veff_nb=[2,2048,512,524288]
@@ -1016,19 +1016,19 @@ CUDA_FA_ROUTE_PLAN device=0 Q=[256,2,16,1] Kraw=iq4_nl Vraw=turbo2 Kshape=[256,2
 CUDA_FA_ROUTE_PLAN device=0 Q=[256,2,16,1] Kraw=iq4_nl Vraw=turbo2 Kshape=[256,256,4,1] Vshape=[256,256,4,1] Keff=iq4_nl Veff=f16 turbo_kv=1 prefer_native_vec=0 decode=1 dk=0 dv=1 unsafe_vec_after_turbo_v_decode=0 allow_vec=1 kernel=NONE need_f16_K=0 need_f16_V=0 Knb=[18,576,144,147456] Vnb=[34,272,68,69632] Keff_nb=[18,576,144,147456] Veff_nb=[2,2048,512,524288]
 CUDA_FA_ROUTE_PLAN device=0 Q=[256,2,16,1] Kraw=iq4_nl Vraw=turbo2 Kshape=[256,256,4,1] Vshape=[256,256,4,1] Keff=iq4_nl Veff=f16 turbo_kv=1 prefer_native_vec=0 decode=1 dk=0 dv=1 unsafe_vec_after_turbo_v_decode=0 allow_vec=1 kernel=NONE need_f16_K=0 need_f16_V=0 Knb=[18,576,144,147456] Vnb=[34,272,68,69632] Keff_nb=[18,576,144,147456] Veff_nb=[2,2048,512,524288]
 CUDA_FA_ROUTE_PLAN device=0 Q=[256,2,16,1] Kraw=iq4_nl Vraw=turbo2 Kshape=[256,256,4,1] Vshape=[256,256,4,1] Keff=iq4_nl Veff=f16 turbo_kv=1 prefer_native_vec=0 decode=1 dk=0 dv=1 unsafe_vec_after_turbo_v_decode=0 allow_vec=1 kernel=NONE need_f16_K=0 need_f16_V=0 Knb=[18,576,144,147456] Vnb=[34,272,68,69632] Keff_nb=[18,576,144,147456] Veff_nb=[2,2048,512,524288]
-0.02.882.575 I llama_completion: llama threadpool init, n_threads = 6
-0.02.882.590 I 
-0.02.882.625 I system_info: n_threads = 6 (n_threads_batch = 6) / 12 | CUDA : ARCHS = 860 | USE_GRAPHS = 1 | CPU : SSE3 = 1 | SSSE3 = 1 | AVX = 1 | AVX_VNNI = 1 | AVX2 = 1 | F16C = 1 | FMA = 1 | BMI2 = 1 | LLAMAFILE = 1 | OPENMP = 1 | REPACK = 1 | 
-0.02.882.626 I 
-0.02.882.676 I sampler seed: 2319096388
-0.02.882.684 I sampler params: 
+0.02.786.454 I llama_completion: llama threadpool init, n_threads = 6
+0.02.786.470 I 
+0.02.786.507 I system_info: n_threads = 6 (n_threads_batch = 6) / 12 | CUDA : ARCHS = 860 | USE_GRAPHS = 1 | CPU : SSE3 = 1 | SSSE3 = 1 | AVX = 1 | AVX_VNNI = 1 | AVX2 = 1 | F16C = 1 | FMA = 1 | BMI2 = 1 | LLAMAFILE = 1 | OPENMP = 1 | REPACK = 1 | 
+0.02.786.509 I 
+0.02.786.558 I sampler seed: 1260280843
+0.02.786.566 I sampler params: 
 	repeat_last_n = 64, repeat_penalty = 1.000, frequency_penalty = 0.000, presence_penalty = 0.000
 	dry_multiplier = 0.000, dry_base = 1.750, dry_allowed_length = 2, dry_penalty_last_n = -1
 	top_k = 40, top_p = 0.950, min_p = 0.050, xtc_probability = 0.000, xtc_threshold = 0.100, typical_p = 1.000, top_n_sigma = -1.000, temp = 0.800
 	mirostat = 0, mirostat_lr = 0.100, mirostat_ent = 5.000, adaptive_target = -1.000, adaptive_decay = 0.900
-0.02.882.689 I sampler chain: logits -> ?penalties -> ?dry -> ?top-n-sigma -> top-k -> ?typical -> top-p -> min-p -> ?xtc -> temp-ext -> dist 
-0.02.882.690 I generate: n_ctx = 256, n_batch = 2048, n_predict = 2, n_keep = 0
-0.02.882.691 I 
+0.02.786.571 I sampler chain: logits -> ?penalties -> ?dry -> ?top-n-sigma -> top-k -> ?typical -> top-p -> min-p -> ?xtc -> temp-ext -> dist 
+0.02.786.571 I generate: n_ctx = 256, n_batch = 2048, n_predict = 2, n_keep = 0
+0.02.786.571 I 
 The capital of France isCUDA_FA_ROUTE_PLAN device=0 Q=[256,5,16,1] Kraw=iq4_nl Vraw=turbo2 Kshape=[256,256,4,1] Vshape=[256,256,4,1] Keff=iq4_nl Veff=f16 turbo_kv=1 prefer_native_vec=0 decode=1 dk=0 dv=1 unsafe_vec_after_turbo_v_decode=0 allow_vec=1 kernel=NONE need_f16_K=0 need_f16_V=0 Knb=[18,576,144,147456] Vnb=[34,272,68,69632] Keff_nb=[18,576,144,147456] Veff_nb=[2,2048,512,524288]
 CUDA_FA_ROUTE_PLAN device=0 Q=[256,5,16,1] Kraw=iq4_nl Vraw=turbo2 Kshape=[256,256,4,1] Vshape=[256,256,4,1] Keff=iq4_nl Veff=f16 turbo_kv=1 prefer_native_vec=0 decode=1 dk=0 dv=1 unsafe_vec_after_turbo_v_decode=0 allow_vec=1 kernel=NONE need_f16_K=0 need_f16_V=0 Knb=[18,576,144,147456] Vnb=[34,272,68,69632] Keff_nb=[18,576,144,147456] Veff_nb=[2,2048,512,524288]
 CUDA_FA_ROUTE_PLAN device=0 Q=[256,5,16,1] Kraw=iq4_nl Vraw=turbo2 Kshape=[256,256,4,1] Vshape=[256,256,4,1] Keff=iq4_nl Veff=f16 turbo_kv=1 prefer_native_vec=0 decode=1 dk=0 dv=1 unsafe_vec_after_turbo_v_decode=0 allow_vec=1 kernel=NONE need_f16_K=0 need_f16_V=0 Knb=[18,576,144,147456] Vnb=[34,272,68,69632] Keff_nb=[18,576,144,147456] Veff_nb=[2,2048,512,524288]
@@ -1111,11 +1111,11 @@ CUDA_FA_ROUTE_PLAN device=0 Q=[256,1,16,1] Kraw=iq4_nl Vraw=turbo2 Kshape=[256,2
 CUDA_FA_ROUTE_PLAN device=0 Q=[256,1,16,1] Kraw=iq4_nl Vraw=turbo2 Kshape=[256,256,4,1] Vshape=[256,256,4,1] Keff=iq4_nl Veff=f16 turbo_kv=1 prefer_native_vec=0 decode=1 dk=0 dv=1 unsafe_vec_after_turbo_v_decode=0 allow_vec=1 kernel=NONE need_f16_K=0 need_f16_V=0 Knb=[18,576,144,147456] Vnb=[34,272,68,69632] Keff_nb=[18,576,144,147456] Veff_nb=[2,2048,512,524288]
 .
 
-0.02.948.012 I common_perf_print:    sampling time =       1.51 ms
-0.02.948.014 I common_perf_print:    samplers time =       0.26 ms /     7 tokens
-0.02.948.017 I common_perf_print:        load time =    1044.36 ms
-0.02.948.018 I common_perf_print: prompt eval time =      38.51 ms /     5 tokens (    7.70 ms per token,   129.84 tokens per second)
-0.02.948.018 I common_perf_print:        eval time =      25.25 ms /     1 runs   (   25.25 ms per token,    39.60 tokens per second)
-0.02.948.019 I common_perf_print:       total time =      65.44 ms /     6 tokens
-0.02.948.019 I common_perf_print: unaccounted time =       0.17 ms /   0.3 %      (total - sampling - prompt eval - eval) / (total)
-0.02.948.026 I common_perf_print:    graphs reused =          0
+0.02.856.170 I common_perf_print:    sampling time =       1.53 ms
+0.02.856.173 I common_perf_print:    samplers time =       0.28 ms /     7 tokens
+0.02.856.176 I common_perf_print:        load time =    1022.09 ms
+0.02.856.177 I common_perf_print: prompt eval time =      41.62 ms /     5 tokens (    8.32 ms per token,   120.12 tokens per second)
+0.02.856.179 I common_perf_print:        eval time =      26.38 ms /     1 runs   (   26.38 ms per token,    37.91 tokens per second)
+0.02.856.179 I common_perf_print:       total time =      69.72 ms /     6 tokens
+0.02.856.180 I common_perf_print: unaccounted time =       0.19 ms /   0.3 %      (total - sampling - prompt eval - eval) / (total)
+0.02.856.181 I common_perf_print:    graphs reused =          0

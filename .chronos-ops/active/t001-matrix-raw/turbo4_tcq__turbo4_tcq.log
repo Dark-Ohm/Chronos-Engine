@@ -1,5 +1,5 @@
-0.00.014.428 I llama_completion: llama backend init
-0.00.014.434 I llama_completion: load the model and apply lora adapter, if any
+0.00.020.526 I llama_completion: llama backend init
+0.00.020.535 I llama_completion: load the model and apply lora adapter, if any
 CUDA_FA_ROUTE_PLAN device=0 Q=[256,1,16,1] Kraw=turbo4_tcq Vraw=turbo4_tcq Kshape=[256,256,4,1] Vshape=[256,256,4,1] Keff=f16 Veff=f16 turbo_kv=1 prefer_native_vec=0 decode=1 dk=1 dv=1 unsafe_vec_after_turbo_v_decode=0 allow_vec=1 kernel=MMA_F16 need_f16_K=0 need_f16_V=0 Knb=[68,544,136,139264] Vnb=[68,544,136,139264] Keff_nb=[2,2048,512,524288] Veff_nb=[2,2048,512,524288]
 CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
 CUDA_FA_ROUTE_PLAN device=0 Q=[256,1,16,1] Kraw=turbo4_tcq Vraw=turbo4_tcq Kshape=[256,256,4,1] Vshape=[256,256,4,1] Keff=f16 Veff=f16 turbo_kv=1 prefer_native_vec=0 decode=1 dk=1 dv=1 unsafe_vec_after_turbo_v_decode=0 allow_vec=1 kernel=MMA_F16 need_f16_K=0 need_f16_V=0 Knb=[68,544,136,139264] Vnb=[68,544,136,139264] Keff_nb=[2,2048,512,524288] Veff_nb=[2,2048,512,524288]
@@ -1011,19 +1011,19 @@ CUDA_FA_ROUTE_PLAN device=0 Q=[256,2,16,1] Kraw=turbo4_tcq Vraw=turbo4_tcq Kshap
 GGML_TURBO_FA_DEBUG: path=prefill-dequant K=turbo4_tcq V=turbo4_tcq Q=[256,2,16,1] K=[256,256,4,1] V=[256,256,4,1]
 CUDA_FA_ROUTE_PLAN device=0 Q=[256,2,16,1] Kraw=turbo4_tcq Vraw=turbo4_tcq Kshape=[256,256,4,1] Vshape=[256,256,4,1] Keff=f16 Veff=f16 turbo_kv=1 prefer_native_vec=0 decode=1 dk=1 dv=1 unsafe_vec_after_turbo_v_decode=0 allow_vec=1 kernel=MMA_F16 need_f16_K=0 need_f16_V=0 Knb=[68,544,136,139264] Vnb=[68,544,136,139264] Keff_nb=[2,2048,512,524288] Veff_nb=[2,2048,512,524288]
 GGML_TURBO_FA_DEBUG: path=prefill-dequant K=turbo4_tcq V=turbo4_tcq Q=[256,2,16,1] K=[256,256,4,1] V=[256,256,4,1]
-0.02.642.863 I llama_completion: llama threadpool init, n_threads = 6
-0.02.642.890 I 
-0.02.642.951 I system_info: n_threads = 6 (n_threads_batch = 6) / 12 | CUDA : ARCHS = 860 | USE_GRAPHS = 1 | CPU : SSE3 = 1 | SSSE3 = 1 | AVX = 1 | AVX_VNNI = 1 | AVX2 = 1 | F16C = 1 | FMA = 1 | BMI2 = 1 | LLAMAFILE = 1 | OPENMP = 1 | REPACK = 1 | 
-0.02.642.957 I 
-0.02.643.040 I sampler seed: 433186206
-0.02.643.055 I sampler params: 
+0.02.984.249 I llama_completion: llama threadpool init, n_threads = 6
+0.02.984.309 I 
+0.02.984.350 I system_info: n_threads = 6 (n_threads_batch = 6) / 12 | CUDA : ARCHS = 860 | USE_GRAPHS = 1 | CPU : SSE3 = 1 | SSSE3 = 1 | AVX = 1 | AVX_VNNI = 1 | AVX2 = 1 | F16C = 1 | FMA = 1 | BMI2 = 1 | LLAMAFILE = 1 | OPENMP = 1 | REPACK = 1 | 
+0.02.984.351 I 
+0.02.984.410 I sampler seed: 3319013694
+0.02.984.419 I sampler params: 
 	repeat_last_n = 64, repeat_penalty = 1.000, frequency_penalty = 0.000, presence_penalty = 0.000
 	dry_multiplier = 0.000, dry_base = 1.750, dry_allowed_length = 2, dry_penalty_last_n = -1
 	top_k = 40, top_p = 0.950, min_p = 0.050, xtc_probability = 0.000, xtc_threshold = 0.100, typical_p = 1.000, top_n_sigma = -1.000, temp = 0.800
 	mirostat = 0, mirostat_lr = 0.100, mirostat_ent = 5.000, adaptive_target = -1.000, adaptive_decay = 0.900
-0.02.643.063 I sampler chain: logits -> ?penalties -> ?dry -> ?top-n-sigma -> top-k -> ?typical -> top-p -> min-p -> ?xtc -> temp-ext -> dist 
-0.02.643.064 I generate: n_ctx = 256, n_batch = 2048, n_predict = 2, n_keep = 0
-0.02.643.065 I 
+0.02.984.424 I sampler chain: logits -> ?penalties -> ?dry -> ?top-n-sigma -> top-k -> ?typical -> top-p -> min-p -> ?xtc -> temp-ext -> dist 
+0.02.984.425 I generate: n_ctx = 256, n_batch = 2048, n_predict = 2, n_keep = 0
+0.02.984.425 I 
 The capital of France isCUDA_FA_ROUTE_PLAN device=0 Q=[256,5,16,1] Kraw=turbo4_tcq Vraw=turbo4_tcq Kshape=[256,256,4,1] Vshape=[256,256,4,1] Keff=f16 Veff=f16 turbo_kv=1 prefer_native_vec=0 decode=1 dk=1 dv=1 unsafe_vec_after_turbo_v_decode=0 allow_vec=1 kernel=MMA_F16 need_f16_K=0 need_f16_V=0 Knb=[68,544,136,139264] Vnb=[68,544,136,139264] Keff_nb=[2,2048,512,524288] Veff_nb=[2,2048,512,524288]
 CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
 CUDA_FA_ROUTE_PLAN device=0 Q=[256,5,16,1] Kraw=turbo4_tcq Vraw=turbo4_tcq Kshape=[256,256,4,1] Vshape=[256,256,4,1] Keff=f16 Veff=f16 turbo_kv=1 prefer_native_vec=0 decode=1 dk=1 dv=1 unsafe_vec_after_turbo_v_decode=0 allow_vec=1 kernel=MMA_F16 need_f16_K=0 need_f16_V=0 Knb=[68,544,136,139264] Vnb=[68,544,136,139264] Keff_nb=[2,2048,512,524288] Veff_nb=[2,2048,512,524288]
@@ -1234,43 +1234,43 @@ CUDA_FA_ROUTE_PLAN device=0 Q=[256,1,16,1] Kraw=turbo4_tcq Vraw=turbo4_tcq Kshap
 CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
 CUDA_FA_ROUTE_PLAN device=0 Q=[256,1,16,1] Kraw=turbo4_tcq Vraw=turbo4_tcq Kshape=[256,256,4,1] Vshape=[256,256,4,1] Keff=f16 Veff=f16 turbo_kv=1 prefer_native_vec=0 decode=1 dk=1 dv=1 unsafe_vec_after_turbo_v_decode=0 allow_vec=1 kernel=MMA_F16 need_f16_K=0 need_f16_V=0 Knb=[68,544,136,139264] Vnb=[68,544,136,139264] Keff_nb=[2,2048,512,524288] Veff_nb=[2,2048,512,524288]
 GGML_TURBO_FA_DEBUG: path=decode-dequant-or-vec K=turbo4_tcq V=turbo4_tcq Q=[256,1,16,1] K=[256,256,4,1] V=[256,256,4,1] prefill_safe=1 can_make_f16_K=1 can_make_f16_V=1 turbo_k_classic_v_prefill=0 vec_override=0 batch_ok=0 dim_ok=1 turing_mma=1
-CUDA_FA_ROUTE_EXEC_BEGIN Q=[256,1,16,1] Kraw=turbo4_tcq Vraw=turbo4_tcq decode=1 dk=1 dv=1 allow_vec=1 kernel=MMA_F16 need_f16_K=0 need_f16_V=0 Kdata=0x7fee0e200000 Vdata=0x7fee0e222000 dst=0x7fef40094c80
-CUDA_FA_ROUTE_EXEC_DISPATCH Qrun=f32 Q=[256,1,16,1] Qdata=0x7fef400a8c80 Krun=f16 K=[256,256,4,1] Kdata=0x7fef5b200000 Knb=[2,2048,512,524288] Vrun=f16 V=[256,256,4,1] Vdata=0x7fef5b280000 Vnb=[2,2048,512,524288] kernel=MMA_F16 compiled_pair=1
+CUDA_FA_ROUTE_EXEC_BEGIN Q=[256,1,16,1] Kraw=turbo4_tcq Vraw=turbo4_tcq decode=1 dk=1 dv=1 allow_vec=1 kernel=MMA_F16 need_f16_K=0 need_f16_V=0 Kdata=0x7f13ce200000 Vdata=0x7f13ce222000 dst=0x7f1520094c80
+CUDA_FA_ROUTE_EXEC_DISPATCH Qrun=f32 Q=[256,1,16,1] Qdata=0x7f15200a8c80 Krun=f16 K=[256,256,4,1] Kdata=0x7f153b200000 Knb=[2,2048,512,524288] Vrun=f16 V=[256,256,4,1] Vdata=0x7f153b280000 Vnb=[2,2048,512,524288] kernel=MMA_F16 compiled_pair=1
 CUDA_FA_ROUTE_PLAN device=0 Q=[256,1,16,1] Kraw=turbo4_tcq Vraw=turbo4_tcq Kshape=[256,256,4,1] Vshape=[256,256,4,1] Keff=f16 Veff=f16 turbo_kv=1 prefer_native_vec=0 decode=1 dk=1 dv=1 unsafe_vec_after_turbo_v_decode=0 allow_vec=1 kernel=MMA_F16 need_f16_K=0 need_f16_V=0 Knb=[68,544,136,139264] Vnb=[68,544,136,139264] Keff_nb=[2,2048,512,524288] Veff_nb=[2,2048,512,524288]
 GGML_TURBO_FA_DEBUG: path=decode-dequant-or-vec K=turbo4_tcq V=turbo4_tcq Q=[256,1,16,1] K=[256,256,4,1] V=[256,256,4,1] prefill_safe=1 can_make_f16_K=1 can_make_f16_V=1 turbo_k_classic_v_prefill=0 vec_override=0 batch_ok=0 dim_ok=1 turing_mma=1
-CUDA_FA_ROUTE_EXEC_BEGIN Q=[256,1,16,1] Kraw=turbo4_tcq Vraw=turbo4_tcq decode=1 dk=1 dv=1 allow_vec=1 kernel=MMA_F16 need_f16_K=0 need_f16_V=0 Kdata=0x7fee0e244000 Vdata=0x7fee0e266000 dst=0x7fef40094c80
-CUDA_FA_ROUTE_EXEC_DISPATCH Qrun=f32 Q=[256,1,16,1] Qdata=0x7fef400a8c80 Krun=f16 K=[256,256,4,1] Kdata=0x7fef5b200000 Knb=[2,2048,512,524288] Vrun=f16 V=[256,256,4,1] Vdata=0x7fef5b280000 Vnb=[2,2048,512,524288] kernel=MMA_F16 compiled_pair=1
+CUDA_FA_ROUTE_EXEC_BEGIN Q=[256,1,16,1] Kraw=turbo4_tcq Vraw=turbo4_tcq decode=1 dk=1 dv=1 allow_vec=1 kernel=MMA_F16 need_f16_K=0 need_f16_V=0 Kdata=0x7f13ce244000 Vdata=0x7f13ce266000 dst=0x7f1520094c80
+CUDA_FA_ROUTE_EXEC_DISPATCH Qrun=f32 Q=[256,1,16,1] Qdata=0x7f15200a8c80 Krun=f16 K=[256,256,4,1] Kdata=0x7f153b200000 Knb=[2,2048,512,524288] Vrun=f16 V=[256,256,4,1] Vdata=0x7f153b280000 Vnb=[2,2048,512,524288] kernel=MMA_F16 compiled_pair=1
 CUDA_FA_ROUTE_PLAN device=0 Q=[256,1,16,1] Kraw=turbo4_tcq Vraw=turbo4_tcq Kshape=[256,256,4,1] Vshape=[256,256,4,1] Keff=f16 Veff=f16 turbo_kv=1 prefer_native_vec=0 decode=1 dk=1 dv=1 unsafe_vec_after_turbo_v_decode=0 allow_vec=1 kernel=MMA_F16 need_f16_K=0 need_f16_V=0 Knb=[68,544,136,139264] Vnb=[68,544,136,139264] Keff_nb=[2,2048,512,524288] Veff_nb=[2,2048,512,524288]
 GGML_TURBO_FA_DEBUG: path=decode-dequant-or-vec K=turbo4_tcq V=turbo4_tcq Q=[256,1,16,1] K=[256,256,4,1] V=[256,256,4,1] prefill_safe=1 can_make_f16_K=1 can_make_f16_V=1 turbo_k_classic_v_prefill=0 vec_override=0 batch_ok=0 dim_ok=1 turing_mma=1
-CUDA_FA_ROUTE_EXEC_BEGIN Q=[256,1,16,1] Kraw=turbo4_tcq Vraw=turbo4_tcq decode=1 dk=1 dv=1 allow_vec=1 kernel=MMA_F16 need_f16_K=0 need_f16_V=0 Kdata=0x7fee0e288000 Vdata=0x7fee0e2aa000 dst=0x7fef40094c80
-CUDA_FA_ROUTE_EXEC_DISPATCH Qrun=f32 Q=[256,1,16,1] Qdata=0x7fef400a8c80 Krun=f16 K=[256,256,4,1] Kdata=0x7fef5b200000 Knb=[2,2048,512,524288] Vrun=f16 V=[256,256,4,1] Vdata=0x7fef5b280000 Vnb=[2,2048,512,524288] kernel=MMA_F16 compiled_pair=1
+CUDA_FA_ROUTE_EXEC_BEGIN Q=[256,1,16,1] Kraw=turbo4_tcq Vraw=turbo4_tcq decode=1 dk=1 dv=1 allow_vec=1 kernel=MMA_F16 need_f16_K=0 need_f16_V=0 Kdata=0x7f13ce288000 Vdata=0x7f13ce2aa000 dst=0x7f1520094c80
+CUDA_FA_ROUTE_EXEC_DISPATCH Qrun=f32 Q=[256,1,16,1] Qdata=0x7f15200a8c80 Krun=f16 K=[256,256,4,1] Kdata=0x7f153b200000 Knb=[2,2048,512,524288] Vrun=f16 V=[256,256,4,1] Vdata=0x7f153b280000 Vnb=[2,2048,512,524288] kernel=MMA_F16 compiled_pair=1
 CUDA_FA_ROUTE_PLAN device=0 Q=[256,1,16,1] Kraw=turbo4_tcq Vraw=turbo4_tcq Kshape=[256,256,4,1] Vshape=[256,256,4,1] Keff=f16 Veff=f16 turbo_kv=1 prefer_native_vec=0 decode=1 dk=1 dv=1 unsafe_vec_after_turbo_v_decode=0 allow_vec=1 kernel=MMA_F16 need_f16_K=0 need_f16_V=0 Knb=[68,544,136,139264] Vnb=[68,544,136,139264] Keff_nb=[2,2048,512,524288] Veff_nb=[2,2048,512,524288]
 GGML_TURBO_FA_DEBUG: path=decode-dequant-or-vec K=turbo4_tcq V=turbo4_tcq Q=[256,1,16,1] K=[256,256,4,1] V=[256,256,4,1] prefill_safe=1 can_make_f16_K=1 can_make_f16_V=1 turbo_k_classic_v_prefill=0 vec_override=0 batch_ok=0 dim_ok=1 turing_mma=1
-CUDA_FA_ROUTE_EXEC_BEGIN Q=[256,1,16,1] Kraw=turbo4_tcq Vraw=turbo4_tcq decode=1 dk=1 dv=1 allow_vec=1 kernel=MMA_F16 need_f16_K=0 need_f16_V=0 Kdata=0x7fee0e2cc000 Vdata=0x7fee0e2ee000 dst=0x7fef40094c80
-CUDA_FA_ROUTE_EXEC_DISPATCH Qrun=f32 Q=[256,1,16,1] Qdata=0x7fef400a8c80 Krun=f16 K=[256,256,4,1] Kdata=0x7fef5b200000 Knb=[2,2048,512,524288] Vrun=f16 V=[256,256,4,1] Vdata=0x7fef5b280000 Vnb=[2,2048,512,524288] kernel=MMA_F16 compiled_pair=1
+CUDA_FA_ROUTE_EXEC_BEGIN Q=[256,1,16,1] Kraw=turbo4_tcq Vraw=turbo4_tcq decode=1 dk=1 dv=1 allow_vec=1 kernel=MMA_F16 need_f16_K=0 need_f16_V=0 Kdata=0x7f13ce2cc000 Vdata=0x7f13ce2ee000 dst=0x7f1520094c80
+CUDA_FA_ROUTE_EXEC_DISPATCH Qrun=f32 Q=[256,1,16,1] Qdata=0x7f15200a8c80 Krun=f16 K=[256,256,4,1] Kdata=0x7f153b200000 Knb=[2,2048,512,524288] Vrun=f16 V=[256,256,4,1] Vdata=0x7f153b280000 Vnb=[2,2048,512,524288] kernel=MMA_F16 compiled_pair=1
 CUDA_FA_ROUTE_PLAN device=0 Q=[256,1,16,1] Kraw=turbo4_tcq Vraw=turbo4_tcq Kshape=[256,256,4,1] Vshape=[256,256,4,1] Keff=f16 Veff=f16 turbo_kv=1 prefer_native_vec=0 decode=1 dk=1 dv=1 unsafe_vec_after_turbo_v_decode=0 allow_vec=1 kernel=MMA_F16 need_f16_K=0 need_f16_V=0 Knb=[68,544,136,139264] Vnb=[68,544,136,139264] Keff_nb=[2,2048,512,524288] Veff_nb=[2,2048,512,524288]
 GGML_TURBO_FA_DEBUG: path=decode-dequant-or-vec K=turbo4_tcq V=turbo4_tcq Q=[256,1,16,1] K=[256,256,4,1] V=[256,256,4,1] prefill_safe=1 can_make_f16_K=1 can_make_f16_V=1 turbo_k_classic_v_prefill=0 vec_override=0 batch_ok=0 dim_ok=1 turing_mma=1
-CUDA_FA_ROUTE_EXEC_BEGIN Q=[256,1,16,1] Kraw=turbo4_tcq Vraw=turbo4_tcq decode=1 dk=1 dv=1 allow_vec=1 kernel=MMA_F16 need_f16_K=0 need_f16_V=0 Kdata=0x7fee0e310000 Vdata=0x7fee0e332000 dst=0x7fef40094c80
-CUDA_FA_ROUTE_EXEC_DISPATCH Qrun=f32 Q=[256,1,16,1] Qdata=0x7fef400a8c80 Krun=f16 K=[256,256,4,1] Kdata=0x7fef5b200000 Knb=[2,2048,512,524288] Vrun=f16 V=[256,256,4,1] Vdata=0x7fef5b280000 Vnb=[2,2048,512,524288] kernel=MMA_F16 compiled_pair=1
+CUDA_FA_ROUTE_EXEC_BEGIN Q=[256,1,16,1] Kraw=turbo4_tcq Vraw=turbo4_tcq decode=1 dk=1 dv=1 allow_vec=1 kernel=MMA_F16 need_f16_K=0 need_f16_V=0 Kdata=0x7f13ce310000 Vdata=0x7f13ce332000 dst=0x7f1520094c80
+CUDA_FA_ROUTE_EXEC_DISPATCH Qrun=f32 Q=[256,1,16,1] Qdata=0x7f15200a8c80 Krun=f16 K=[256,256,4,1] Kdata=0x7f153b200000 Knb=[2,2048,512,524288] Vrun=f16 V=[256,256,4,1] Vdata=0x7f153b280000 Vnb=[2,2048,512,524288] kernel=MMA_F16 compiled_pair=1
 CUDA_FA_ROUTE_PLAN device=0 Q=[256,1,16,1] Kraw=turbo4_tcq Vraw=turbo4_tcq Kshape=[256,256,4,1] Vshape=[256,256,4,1] Keff=f16 Veff=f16 turbo_kv=1 prefer_native_vec=0 decode=1 dk=1 dv=1 unsafe_vec_after_turbo_v_decode=0 allow_vec=1 kernel=MMA_F16 need_f16_K=0 need_f16_V=0 Knb=[68,544,136,139264] Vnb=[68,544,136,139264] Keff_nb=[2,2048,512,524288] Veff_nb=[2,2048,512,524288]
 GGML_TURBO_FA_DEBUG: path=decode-dequant-or-vec K=turbo4_tcq V=turbo4_tcq Q=[256,1,16,1] K=[256,256,4,1] V=[256,256,4,1] prefill_safe=1 can_make_f16_K=1 can_make_f16_V=1 turbo_k_classic_v_prefill=0 vec_override=0 batch_ok=0 dim_ok=1 turing_mma=1
-CUDA_FA_ROUTE_EXEC_BEGIN Q=[256,1,16,1] Kraw=turbo4_tcq Vraw=turbo4_tcq decode=1 dk=1 dv=1 allow_vec=1 kernel=MMA_F16 need_f16_K=0 need_f16_V=0 Kdata=0x7fee0e354000 Vdata=0x7fee0e376000 dst=0x7fef40094c80
-CUDA_FA_ROUTE_EXEC_DISPATCH Qrun=f32 Q=[256,1,16,1] Qdata=0x7fef400a8c80 Krun=f16 K=[256,256,4,1] Kdata=0x7fef5b200000 Knb=[2,2048,512,524288] Vrun=f16 V=[256,256,4,1] Vdata=0x7fef5b280000 Vnb=[2,2048,512,524288] kernel=MMA_F16 compiled_pair=1
+CUDA_FA_ROUTE_EXEC_BEGIN Q=[256,1,16,1] Kraw=turbo4_tcq Vraw=turbo4_tcq decode=1 dk=1 dv=1 allow_vec=1 kernel=MMA_F16 need_f16_K=0 need_f16_V=0 Kdata=0x7f13ce354000 Vdata=0x7f13ce376000 dst=0x7f1520094c80
+CUDA_FA_ROUTE_EXEC_DISPATCH Qrun=f32 Q=[256,1,16,1] Qdata=0x7f15200a8c80 Krun=f16 K=[256,256,4,1] Kdata=0x7f153b200000 Knb=[2,2048,512,524288] Vrun=f16 V=[256,256,4,1] Vdata=0x7f153b280000 Vnb=[2,2048,512,524288] kernel=MMA_F16 compiled_pair=1
 CUDA_FA_ROUTE_PLAN device=0 Q=[256,1,16,1] Kraw=turbo4_tcq Vraw=turbo4_tcq Kshape=[256,256,4,1] Vshape=[256,256,4,1] Keff=f16 Veff=f16 turbo_kv=1 prefer_native_vec=0 decode=1 dk=1 dv=1 unsafe_vec_after_turbo_v_decode=0 allow_vec=1 kernel=MMA_F16 need_f16_K=0 need_f16_V=0 Knb=[68,544,136,139264] Vnb=[68,544,136,139264] Keff_nb=[2,2048,512,524288] Veff_nb=[2,2048,512,524288]
 GGML_TURBO_FA_DEBUG: path=decode-dequant-or-vec K=turbo4_tcq V=turbo4_tcq Q=[256,1,16,1] K=[256,256,4,1] V=[256,256,4,1] prefill_safe=1 can_make_f16_K=1 can_make_f16_V=1 turbo_k_classic_v_prefill=0 vec_override=0 batch_ok=0 dim_ok=1 turing_mma=1
-CUDA_FA_ROUTE_EXEC_BEGIN Q=[256,1,16,1] Kraw=turbo4_tcq Vraw=turbo4_tcq decode=1 dk=1 dv=1 allow_vec=1 kernel=MMA_F16 need_f16_K=0 need_f16_V=0 Kdata=0x7fee0e398000 Vdata=0x7fee0e3ba000 dst=0x7fef40094c80
-CUDA_FA_ROUTE_EXEC_DISPATCH Qrun=f32 Q=[256,1,16,1] Qdata=0x7fef400a8c80 Krun=f16 K=[256,256,4,1] Kdata=0x7fef5b200000 Knb=[2,2048,512,524288] Vrun=f16 V=[256,256,4,1] Vdata=0x7fef5b280000 Vnb=[2,2048,512,524288] kernel=MMA_F16 compiled_pair=1
+CUDA_FA_ROUTE_EXEC_BEGIN Q=[256,1,16,1] Kraw=turbo4_tcq Vraw=turbo4_tcq decode=1 dk=1 dv=1 allow_vec=1 kernel=MMA_F16 need_f16_K=0 need_f16_V=0 Kdata=0x7f13ce398000 Vdata=0x7f13ce3ba000 dst=0x7f1520094c80
+CUDA_FA_ROUTE_EXEC_DISPATCH Qrun=f32 Q=[256,1,16,1] Qdata=0x7f15200a8c80 Krun=f16 K=[256,256,4,1] Kdata=0x7f153b200000 Knb=[2,2048,512,524288] Vrun=f16 V=[256,256,4,1] Vdata=0x7f153b280000 Vnb=[2,2048,512,524288] kernel=MMA_F16 compiled_pair=1
 CUDA_FA_ROUTE_PLAN device=0 Q=[256,1,16,1] Kraw=turbo4_tcq Vraw=turbo4_tcq Kshape=[256,256,4,1] Vshape=[256,256,4,1] Keff=f16 Veff=f16 turbo_kv=1 prefer_native_vec=0 decode=1 dk=1 dv=1 unsafe_vec_after_turbo_v_decode=0 allow_vec=1 kernel=MMA_F16 need_f16_K=0 need_f16_V=0 Knb=[68,544,136,139264] Vnb=[68,544,136,139264] Keff_nb=[2,2048,512,524288] Veff_nb=[2,2048,512,524288]
 GGML_TURBO_FA_DEBUG: path=decode-dequant-or-vec K=turbo4_tcq V=turbo4_tcq Q=[256,1,16,1] K=[256,256,4,1] V=[256,256,4,1] prefill_safe=1 can_make_f16_K=1 can_make_f16_V=1 turbo_k_classic_v_prefill=0 vec_override=0 batch_ok=0 dim_ok=1 turing_mma=1
-CUDA_FA_ROUTE_EXEC_BEGIN Q=[256,1,16,1] Kraw=turbo4_tcq Vraw=turbo4_tcq decode=1 dk=1 dv=1 allow_vec=1 kernel=MMA_F16 need_f16_K=0 need_f16_V=0 Kdata=0x7fee0e3dc000 Vdata=0x7fee0e3fe000 dst=0x7fef40094c80
-CUDA_FA_ROUTE_EXEC_DISPATCH Qrun=f32 Q=[256,1,16,1] Qdata=0x7fef400a8c80 Krun=f16 K=[256,256,4,1] Kdata=0x7fef5b200000 Knb=[2,2048,512,524288] Vrun=f16 V=[256,256,4,1] Vdata=0x7fef5b280000 Vnb=[2,2048,512,524288] kernel=MMA_F16 compiled_pair=1
-,
+CUDA_FA_ROUTE_EXEC_BEGIN Q=[256,1,16,1] Kraw=turbo4_tcq Vraw=turbo4_tcq decode=1 dk=1 dv=1 allow_vec=1 kernel=MMA_F16 need_f16_K=0 need_f16_V=0 Kdata=0x7f13ce3dc000 Vdata=0x7f13ce3fe000 dst=0x7f1520094c80
+CUDA_FA_ROUTE_EXEC_DISPATCH Qrun=f32 Q=[256,1,16,1] Qdata=0x7f15200a8c80 Krun=f16 K=[256,256,4,1] Kdata=0x7f153b200000 Knb=[2,2048,512,524288] Vrun=f16 V=[256,256,4,1] Vdata=0x7f153b280000 Vnb=[2,2048,512,524288] kernel=MMA_F16 compiled_pair=1
+.
 
-0.02.732.318 I common_perf_print:    sampling time =       1.50 ms
-0.02.732.319 I common_perf_print:    samplers time =       0.25 ms /     7 tokens
-0.02.732.321 I common_perf_print:        load time =    1009.60 ms
-0.02.732.322 I common_perf_print: prompt eval time =      61.74 ms /     5 tokens (   12.35 ms per token,    80.98 tokens per second)
-0.02.732.322 I common_perf_print:        eval time =      25.95 ms /     1 runs   (   25.95 ms per token,    38.54 tokens per second)
-0.02.732.323 I common_perf_print:       total time =      89.46 ms /     6 tokens
-0.02.732.323 I common_perf_print: unaccounted time =       0.27 ms /   0.3 %      (total - sampling - prompt eval - eval) / (total)
-0.02.732.323 I common_perf_print:    graphs reused =          0
+0.03.063.617 I common_perf_print:    sampling time =       1.56 ms
+0.03.063.618 I common_perf_print:    samplers time =       0.26 ms /     7 tokens
+0.03.063.621 I common_perf_print:        load time =    1115.19 ms
+0.03.063.622 I common_perf_print: prompt eval time =      47.65 ms /     5 tokens (    9.53 ms per token,   104.93 tokens per second)
+0.03.063.623 I common_perf_print:        eval time =      29.92 ms /     1 runs   (   29.92 ms per token,    33.42 tokens per second)
+0.03.063.624 I common_perf_print:       total time =      79.37 ms /     6 tokens
+0.03.063.624 I common_perf_print: unaccounted time =       0.24 ms /   0.3 %      (total - sampling - prompt eval - eval) / (total)
+0.03.063.625 I common_perf_print:    graphs reused =          0

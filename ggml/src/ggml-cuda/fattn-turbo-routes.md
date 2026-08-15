@@ -24,7 +24,7 @@ Gate (~fattn.cu:3320):
 - Straight turbo only (no TCQ, no mixed K/V).
 - Decode-shaped (`Q->ne[1] <= 4`).
 - Pre-rotates Q itself (`k_turbo_fwht_forward`, ~fattn.cu:3341-3357).
-- `GGML_TURBO_MMA_FUSED=0` is a kill-switch (default ON), not opt-in.
+- `GGML_TURBO_MMA_FUSED=1` is opt-in (default off since T001/D-017).
 
 ## 2. prefill-dequant MMA - `path=prefill-dequant`
 
@@ -66,7 +66,7 @@ Fall-through when neither gate above matches. `ggml_cuda_fattn_make_route_plan()
 Machine-readable rows: `.chronos-ops/active/t001-matrix-summary.tsv`;
 raw logs: `.chronos-ops/active/t001-matrix-raw/`. Result: 132 ok + 12 NO-FA.
 
-| K | V | prefill | decode (fused ON) |
+| K | V | prefill | decode (fused=1, opt-in) |
 |---|---|---------|-------------------|
 | straight turbo, K==V (t2/2, t3/3, t4/4) | same | prefill-dequant | fused-mma |
 | turbo* (any, incl TCQ, K!=V or mixed) | turbo* (any) | prefill-dequant | decode-dequant-or-vec, MMA_F16 |
@@ -110,7 +110,7 @@ The kernel availability matrix depends on `GGML_CUDA_FA_HALF_QUANTS` /
 Stable corpus (789 words, -c 256, n_seq=8). Numbers grepped verbatim from
 `.chronos-ops/active/t001-numerics/*.txt`:
 
-- PPL: f16 = 5.6305, dequant (FUSED=0) = 8.6542. fused (default ON) CRASHES
+- PPL: f16 = 5.6305, dequant (FUSED=0) = 8.6542. fused (GGML_TURBO_MMA_FUSED=1) CRASHES
   under `--save-all-logits` ("illegal memory access",
   fattn-mma-f16.cuh:2151 <- ggml_cuda_turbo_prefill_attend); without
   `--save-all-logits` it is intermittent (one PPL=10.3785, one "illegal
@@ -130,7 +130,7 @@ Stable corpus (789 words, -c 256, n_seq=8). Numbers grepped verbatim from
 
 - `GGML_TURBO_FA_DEBUG=1`   - prints `path=` for each FA call.
 - `GGML_CUDA_FA_ROUTE_DEBUG=1` - prints route plan + `kernel=` selection.
-- `GGML_TURBO_MMA_FUSED=0`  - kill-switch for family 1.
+- `GGML_TURBO_MMA_FUSED=1`  - opt-in for family 1 (default off).
 - `TURBO_PREFILL_VEC=1`     - force VEC prefill (bypass family 2).
 - `GGML_TURBO_DECODE_NATIVE=1` - force native VEC decode (no dequant).
 
@@ -142,8 +142,8 @@ Stable corpus (789 words, -c 256, n_seq=8). Numbers grepped verbatim from
   crash), so the fault is on the turbo V-side dequant in the VEC path.
   Same class as the documented turbo2 crash. The donor's "KLD == VEC
   baseline" is therefore not reproducible against this path.
-- **fused (default ON) crashes under multi-sequence prefill**: with the
-  default `GGML_TURBO_MMA_FUSED`, `llama-perplexity` (n_seq=8) aborts with
+- **fused (opt-in) crashes under multi-sequence prefill**: with
+  `GGML_TURBO_MMA_FUSED=1`, `llama-perplexity` (n_seq=8) aborts with
   "illegal memory access" / "illegal instruction" in
   `ggml_cuda_turbo_prefill_attend` -> `ggml_cuda_flash_attn_ext_mma_f16_case`
   (fattn-mma-f16.cuh:2151). FUSED=0 (dequant) does not crash. This makes
