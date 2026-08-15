@@ -1,0 +1,53 @@
+# Reconstruct of the T003b-pre cold-copy hash probe.
+# The original env-gated snippet was temporary and never landed in git.
+# Line format matches copies-*.txt in this directory (FNV-1a 64).
+# Apply on a throwaway tree, never commit:
+#   git apply .chronos-ops/done/t003b-pre-live/t003b-hash-probe.patch
+# Enable: CHRONOS_T003B_HASH=1
+# Collect: grep '^T003B copy' <server.log> > copies.txt
+# If the original minion patch still exists, replace this file with that one.
+
+diff --git a/src/llama-kv-cache-kvarn.cpp b/src/llama-kv-cache-kvarn.cpp
+index fdb672780..1f6b72b8a 100644
+--- a/src/llama-kv-cache-kvarn.cpp
++++ b/src/llama-kv-cache-kvarn.cpp
+@@ -9,6 +9,8 @@
+ 
+ #include <algorithm>
+ #include <cmath>
++#include <cstdio>
++#include <cstdlib>
+ #include <cstring>
+ #include <limits>
+ #include <map>
+@@ -1145,6 +1147,30 @@ void llama_kv_cache_kvarn::offload_group_to_host(uint32_t stream, uint64_t abs_g
+                 v_src, (size_t) ring_slot * v_src->nb[2],
+                 (uint8_t *) v_dst->data + (size_t) abs_group * v_dst->nb[2],
+                 (size_t) v_src->nb[2]);
++        // T003b-pre / T013 probe: hash what landed in host_cold after the copy.
++        // Gated; do not commit. Format must stay byte-compatible with
++        // .chronos-ops/done/t003b-pre-live/copies-*.txt
++        if (std::getenv("CHRONOS_T003B_HASH")) {
++            auto fnv1a64 = [](const uint8_t * p, size_t n) -> uint64_t {
++                uint64_t h = 14695981039346656037ull;
++                for (size_t i = 0; i < n; ++i) {
++                    h ^= p[i];
++                    h *= 1099511628211ull;
++                }
++                return h;
++            };
++            const uint8_t * k_host = (const uint8_t *) k_dst->data + (size_t) abs_group * k_dst->nb[2];
++            const uint8_t * v_host = (const uint8_t *) v_dst->data + (size_t) abs_group * v_dst->nb[2];
++            const uint64_t hk = fnv1a64(k_host, (size_t) k_src->nb[2]);
++            const uint64_t hv = fnv1a64(v_host, (size_t) v_src->nb[2]);
++            fprintf(stderr,
++                    "T003B copy stream=%u group=%llu slot=%u hash_k=%016llx hash_v=%016llx\n",
++                    stream,
++                    (unsigned long long) abs_group,
++                    ring_slot,
++                    (unsigned long long) hk,
++                    (unsigned long long) hv);
++        }
+     }
+ }
+
