@@ -1,0 +1,3 @@
+0.00.001.495 I llama_completion: llama backend init
+0.00.001.499 I llama_completion: load the model and apply lora adapter, if any
+timeout: the monitored command dumped core

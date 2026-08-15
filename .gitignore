@@ -18,6 +18,8 @@
 !.chronos-ops/checkpoint/DECISIONS.log
 !.chronos-ops/active/t001-matrix-raw/*.log
 !.chronos-ops/active/t001-ab/*.log
+!.chronos-ops/active/t002-cpu/*.log
+!.chronos-ops/active/t007-cpu/*.log
 *.metallib
 *.o
 *.so

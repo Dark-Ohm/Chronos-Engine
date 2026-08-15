@@ -1,0 +1,7 @@
+0.00.001.671 I llama_completion: llama backend init
+0.00.001.679 I llama_completion: load the model and apply lora adapter, if any
+0.00.420.300 E llama_init_from_model: V cache quantization requires flash_attn
+0.00.462.446 E common_fit_params: encountered an error while trying to fit params to free device memory: failed to create llama_context from model
+0.00.462.452 E cmn  common_init_: error while fitting model parameters to device memory
+0.00.462.457 E cmn  common_init_: failed to load model 'models/main/dence/Qwythos-9B-v3-1M-MTP-Q4_K_M-fixed.gguf'
+0.00.462.461 E llama_completion: error: unable to create context
