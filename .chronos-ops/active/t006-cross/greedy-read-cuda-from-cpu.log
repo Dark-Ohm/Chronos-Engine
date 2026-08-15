@@ -1,0 +1,30 @@
+0.00.143.549 I llama_completion: llama backend init
+0.00.143.557 I llama_completion: load the model and apply lora adapter, if any
+TCQ decode: context-adaptive V alpha enabled
+0.02.679.172 I llama_completion: llama threadpool init, n_threads = 6
+0.02.679.188 I 
+0.02.679.237 I system_info: n_threads = 6 (n_threads_batch = 6) / 12 | CUDA : ARCHS = 860 | USE_GRAPHS = 1 | CPU : SSE3 = 1 | SSSE3 = 1 | AVX = 1 | AVX_VNNI = 1 | AVX2 = 1 | F16C = 1 | FMA = 1 | BMI2 = 1 | LLAMAFILE = 1 | OPENMP = 1 | REPACK = 1 | 
+0.02.679.239 I 
+0.02.679.240 I llama_completion: attempting to load saved session from '.chronos-ops/active/t006-cross/g-cache-cpu.bin'
+0.02.690.310 I llama_completion: loaded a session with prompt size of 5 tokens
+0.02.690.365 I llama_completion: session file has exact match for prompt!
+0.02.702.268 I llama_completion: replayed last token from session
+0.02.702.279 I sampler seed: 1720670812
+0.02.702.290 I sampler params: 
+	repeat_last_n = 64, repeat_penalty = 1.000, frequency_penalty = 0.000, presence_penalty = 0.000
+	dry_multiplier = 0.000, dry_base = 1.750, dry_allowed_length = 2, dry_penalty_last_n = -1
+	top_k = 40, top_p = 0.950, min_p = 0.050, xtc_probability = 0.000, xtc_threshold = 0.100, typical_p = 1.000, top_n_sigma = -1.000, temp = 0.000
+	mirostat = 0, mirostat_lr = 0.100, mirostat_ent = 5.000, adaptive_target = -1.000, adaptive_decay = 0.900
+0.02.702.296 I sampler chain: logits -> logit-bias -> ?penalties -> ?dry -> ?top-n-sigma -> top-k -> ?typical -> top-p -> min-p -> ?xtc -> temp-ext -> dist 
+0.02.702.296 I generate: n_ctx = 256, n_batch = 2048, n_predict = 16, n_keep = 0
+0.02.702.296 I 
+The capital of France is Paris. This fact is universally recognized and serves as a foundational piece of geographical knowledge
+
+0.03.085.991 I common_perf_print:    sampling time =       7.12 ms
+0.03.085.991 I common_perf_print:    samplers time =       2.59 ms /    21 tokens
+0.03.085.997 I common_perf_print:        load time =     885.77 ms
+0.03.085.997 I common_perf_print: prompt eval time =       0.00 ms /     1 tokens (    0.00 ms per token,      inf tokens per second)
+0.03.085.998 I common_perf_print:        eval time =     388.17 ms /    16 runs   (   24.26 ms per token,    41.22 tokens per second)
+0.03.085.998 I common_perf_print:       total time =     406.83 ms /    17 tokens
+0.03.085.999 I common_perf_print: unaccounted time =      11.54 ms /   2.8 %      (total - sampling - prompt eval - eval) / (total)
+0.03.085.999 I common_perf_print:    graphs reused =         15

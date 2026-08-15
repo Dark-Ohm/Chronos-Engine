@@ -1,0 +1,13 @@
+0.03.263.560 W llama_context: n_ctx is not divisible by n_seq_max - rounding down to 4096
+0.03.301.254 W resolve_fused_ops: layer 0 is assigned to device CPU but fused Gated Delta Net (chunked) is assigned to device CUDA0 (usually due to missing support)
+0.03.301.257 W resolve_fused_ops: fused Gated Delta Net (chunked) not supported, set to disabled
+TCQ decode: context-adaptive V alpha enabled
+0.03.540.415 I 
+0.03.540.468 I system_info: n_threads = 6 (n_threads_batch = 6) / 12 | CUDA : ARCHS = 860 | USE_GRAPHS = 1 | CPU : SSE3 = 1 | SSSE3 = 1 | AVX = 1 | AVX_VNNI = 1 | AVX2 = 1 | F16C = 1 | FMA = 1 | BMI2 = 1 | LLAMAFILE = 1 | OPENMP = 1 | REPACK = 1 | 
+0.03.540.478 I perplexity: tokenizing the input ..
+0.03.541.692 I perplexity: tokenization took 1.211 ms
+0.03.541.872 I perplexity: calculating perplexity over 2 chunks, n_ctx=128, batch_size=2048, n_seq=16
+0.03.934.901 I perplexity: 0.39 seconds per pass - ETA 0.00 minutes
+[1]2.1094,[2]2.4325,
+0.03.954.269 I Final estimate: PPL = 2.4325 +/- 0.25871
+
