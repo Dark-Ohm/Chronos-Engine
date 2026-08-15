@@ -1,0 +1,55 @@
+0.00.016.719 I llama_completion: llama backend init
+0.00.016.725 I llama_completion: load the model and apply lora adapter, if any
+GGML_TURBO_MMA_FUSED=0: fused turbo MMA kernel disabled
+GGML_TURBO_FA_DEBUG: path=prefill-dequant K=turbo4 V=turbo4 Q=[256,2,16,1] K=[256,256,4,1] V=[256,256,4,1]
+TCQ decode: context-adaptive V alpha enabled
+GGML_TURBO_FA_DEBUG: path=prefill-dequant K=turbo4 V=turbo4 Q=[256,2,16,1] K=[256,256,4,1] V=[256,256,4,1]
+GGML_TURBO_FA_DEBUG: path=prefill-dequant K=turbo4 V=turbo4 Q=[256,2,16,1] K=[256,256,4,1] V=[256,256,4,1]
+GGML_TURBO_FA_DEBUG: path=prefill-dequant K=turbo4 V=turbo4 Q=[256,2,16,1] K=[256,256,4,1] V=[256,256,4,1]
+GGML_TURBO_FA_DEBUG: path=prefill-dequant K=turbo4 V=turbo4 Q=[256,2,16,1] K=[256,256,4,1] V=[256,256,4,1]
+GGML_TURBO_FA_DEBUG: path=prefill-dequant K=turbo4 V=turbo4 Q=[256,2,16,1] K=[256,256,4,1] V=[256,256,4,1]
+GGML_TURBO_FA_DEBUG: path=prefill-dequant K=turbo4 V=turbo4 Q=[256,2,16,1] K=[256,256,4,1] V=[256,256,4,1]
+0.03.329.712 I llama_completion: llama threadpool init, n_threads = 6
+0.03.329.745 I 
+0.03.329.809 I system_info: n_threads = 6 (n_threads_batch = 6) / 12 | CUDA : ARCHS = 860 | USE_GRAPHS = 1 | CPU : SSE3 = 1 | SSSE3 = 1 | AVX = 1 | AVX_VNNI = 1 | AVX2 = 1 | F16C = 1 | FMA = 1 | BMI2 = 1 | LLAMAFILE = 1 | OPENMP = 1 | REPACK = 1 | 
+0.03.329.812 I 
+0.03.329.889 I sampler seed: 42
+0.03.329.902 I sampler params: 
+	repeat_last_n = 64, repeat_penalty = 1.000, frequency_penalty = 0.000, presence_penalty = 0.000
+	dry_multiplier = 0.000, dry_base = 1.750, dry_allowed_length = 2, dry_penalty_last_n = -1
+	top_k = 40, top_p = 0.950, min_p = 0.050, xtc_probability = 0.000, xtc_threshold = 0.100, typical_p = 1.000, top_n_sigma = -1.000, temp = 0.800
+	mirostat = 0, mirostat_lr = 0.100, mirostat_ent = 5.000, adaptive_target = -1.000, adaptive_decay = 0.900
+0.03.329.911 I sampler chain: logits -> ?penalties -> ?dry -> ?top-n-sigma -> top-k -> ?typical -> top-p -> min-p -> ?xtc -> temp-ext -> dist 
+0.03.329.912 I generate: n_ctx = 512, n_batch = 2048, n_predict = 8, n_keep = 0
+0.03.329.913 I 
+The capital of France isGGML_TURBO_FA_DEBUG: path=prefill-dequant K=turbo4 V=turbo4 Q=[256,5,16,1] K=[256,256,4,1] V=[256,256,4,1]
+GGML_TURBO_FA_DEBUG: path=prefill-dequant K=turbo4 V=turbo4 Q=[256,5,16,1] K=[256,256,4,1] V=[256,256,4,1]
+GGML_TURBO_FA_DEBUG: path=prefill-dequant K=turbo4 V=turbo4 Q=[256,5,16,1] K=[256,256,4,1] V=[256,256,4,1]
+GGML_TURBO_FA_DEBUG: path=prefill-dequant K=turbo4 V=turbo4 Q=[256,5,16,1] K=[256,256,4,1] V=[256,256,4,1]
+GGML_TURBO_FA_DEBUG: path=prefill-dequant K=turbo4 V=turbo4 Q=[256,5,16,1] K=[256,256,4,1] V=[256,256,4,1]
+GGML_TURBO_FA_DEBUG: path=prefill-dequant K=turbo4 V=turbo4 Q=[256,5,16,1] K=[256,256,4,1] V=[256,256,4,1]
+GGML_TURBO_FA_DEBUG: path=prefill-dequant K=turbo4 V=turbo4 Q=[256,5,16,1] K=[256,256,4,1] V=[256,256,4,1]
+ ParisGGML_TURBO_FA_DEBUG: path=decode-dequant-or-vec K=turbo4 V=turbo4 Q=[256,1,16,1] K=[256,256,4,1] V=[256,256,4,1] prefill_safe=1 can_make_f16_K=1 can_make_f16_V=1 turbo_k_classic_v_prefill=0 vec_override=0 batch_ok=0 dim_ok=1 turing_mma=1
+GGML_TURBO_FA_DEBUG: path=decode-dequant-or-vec K=turbo4 V=turbo4 Q=[256,1,16,1] K=[256,256,4,1] V=[256,256,4,1] prefill_safe=1 can_make_f16_K=1 can_make_f16_V=1 turbo_k_classic_v_prefill=0 vec_override=0 batch_ok=0 dim_ok=1 turing_mma=1
+GGML_TURBO_FA_DEBUG: path=decode-dequant-or-vec K=turbo4 V=turbo4 Q=[256,1,16,1] K=[256,256,4,1] V=[256,256,4,1] prefill_safe=1 can_make_f16_K=1 can_make_f16_V=1 turbo_k_classic_v_prefill=0 vec_override=0 batch_ok=0 dim_ok=1 turing_mma=1
+GGML_TURBO_FA_DEBUG: path=decode-dequant-or-vec K=turbo4 V=turbo4 Q=[256,1,16,1] K=[256,256,4,1] V=[256,256,4,1] prefill_safe=1 can_make_f16_K=1 can_make_f16_V=1 turbo_k_classic_v_prefill=0 vec_override=0 batch_ok=0 dim_ok=1 turing_mma=1
+GGML_TURBO_FA_DEBUG: path=decode-dequant-or-vec K=turbo4 V=turbo4 Q=[256,1,16,1] K=[256,256,4,1] V=[256,256,4,1] prefill_safe=1 can_make_f16_K=1 can_make_f16_V=1 turbo_k_classic_v_prefill=0 vec_override=0 batch_ok=0 dim_ok=1 turing_mma=1
+GGML_TURBO_FA_DEBUG: path=decode-dequant-or-vec K=turbo4 V=turbo4 Q=[256,1,16,1] K=[256,256,4,1] V=[256,256,4,1] prefill_safe=1 can_make_f16_K=1 can_make_f16_V=1 turbo_k_classic_v_prefill=0 vec_override=0 batch_ok=0 dim_ok=1 turing_mma=1
+GGML_TURBO_FA_DEBUG: path=decode-dequant-or-vec K=turbo4 V=turbo4 Q=[256,1,16,1] K=[256,256,4,1] V=[256,256,4,1] prefill_safe=1 can_make_f16_K=1 can_make_f16_V=1 turbo_k_classic_v_prefill=0 vec_override=0 batch_ok=0 dim_ok=1 turing_mma=1
+.GGML_TURBO_FA_DEBUG: path=decode-dequant-or-vec K=turbo4 V=turbo4 Q=[256,1,16,1] K=[256,256,4,1] V=[256,256,4,1] prefill_safe=1 can_make_f16_K=1 can_make_f16_V=1 turbo_k_classic_v_prefill=0 vec_override=0 batch_ok=0 dim_ok=1 turing_mma=1
+GGML_TURBO_FA_DEBUG: path=decode-dequant-or-vec K=turbo4 V=turbo4 Q=[256,1,16,1] K=[256,256,4,1] V=[256,256,4,1] prefill_safe=1 can_make_f16_K=1 can_make_f16_V=1 turbo_k_classic_v_prefill=0 vec_override=0 batch_ok=0 dim_ok=1 turing_mma=1
+GGML_TURBO_FA_DEBUG: path=decode-dequant-or-vec K=turbo4 V=turbo4 Q=[256,1,16,1] K=[256,256,4,1] V=[256,256,4,1] prefill_safe=1 can_make_f16_K=1 can_make_f16_V=1 turbo_k_classic_v_prefill=0 vec_override=0 batch_ok=0 dim_ok=1 turing_mma=1
+GGML_TURBO_FA_DEBUG: path=decode-dequant-or-vec K=turbo4 V=turbo4 Q=[256,1,16,1] K=[256,256,4,1] V=[256,256,4,1] prefill_safe=1 can_make_f16_K=1 can_make_f16_V=1 turbo_k_classic_v_prefill=0 vec_override=0 batch_ok=0 dim_ok=1 turing_mma=1
+GGML_TURBO_FA_DEBUG: path=decode-dequant-or-vec K=turbo4 V=turbo4 Q=[256,1,16,1] K=[256,256,4,1] V=[256,256,4,1] prefill_safe=1 can_make_f16_K=1 can_make_f16_V=1 turbo_k_classic_v_prefill=0 vec_override=0 batch_ok=0 dim_ok=1 turing_mma=1
+GGML_TURBO_FA_DEBUG: path=decode-dequant-or-vec K=turbo4 V=turbo4 Q=[256,1,16,1] K=[256,256,4,1] V=[256,256,4,1] prefill_safe=1 can_make_f16_K=1 can_make_f16_V=1 turbo_k_classic_v_prefill=0 vec_override=0 batch_ok=0 dim_ok=1 turing_mma=1
+GGML_TURBO_FA_DEBUG: path=decode-dequant-or-vec K=turbo4 V=turbo4 Q=[256,1,16,1] K=[256,256,4,1] V=[256,256,4,1] prefill_safe=1 can_make_f16_K=1 can_make_f16_V=1 turbo_k_classic_v_prefill=0 vec_override=0 batch_ok=0 dim_ok=1 turing_mma=1
+ Paris is a city in France
+
+0.03.637.737 I common_perf_print:    sampling time =       3.83 ms
+0.03.637.738 I common_perf_print:    samplers time =       1.07 ms /    13 tokens
+0.03.637.740 I common_perf_print:        load time =     944.66 ms
+0.03.637.741 I common_perf_print: prompt eval time =      67.88 ms /     5 tokens (   13.58 ms per token,    73.66 tokens per second)
+0.03.637.742 I common_perf_print:        eval time =     235.89 ms /     7 runs   (   33.70 ms per token,    29.67 tokens per second)
+0.03.637.742 I common_perf_print:       total time =     308.03 ms /    12 tokens
+0.03.637.743 I common_perf_print: unaccounted time =       0.42 ms /   0.1 %      (total - sampling - prompt eval - eval) / (total)
+0.03.637.743 I common_perf_print:    graphs reused =          6

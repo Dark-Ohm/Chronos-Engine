@@ -1,0 +1,50 @@
+0.03.230.447 W resolve_fused_ops: layer 0 is assigned to device CPU but fused Gated Delta Net (chunked) is assigned to device CUDA0 (usually due to missing support)
+0.03.230.450 W resolve_fused_ops: fused Gated Delta Net (chunked) not supported, set to disabled
+0.03.454.689 I 
+0.03.454.748 I system_info: n_threads = 6 (n_threads_batch = 6) / 12 | CUDA : ARCHS = 860 | USE_GRAPHS = 1 | CPU : SSE3 = 1 | SSSE3 = 1 | AVX = 1 | AVX_VNNI = 1 | AVX2 = 1 | F16C = 1 | FMA = 1 | BMI2 = 1 | LLAMAFILE = 1 | OPENMP = 1 | REPACK = 1 | 
+0.03.477.257 I kl_divergence: computing over 3 chunks, n_ctx=256, batch_size=2048, n_seq=8
+TCQ decode: context-adaptive V alpha enabled
+/home/neo/projects/chronos-ecosystem/Chronos-Engine/ggml/src/ggml-cuda/ggml-cuda.cu:107: CUDA error
+0.03.734.796 E CUDA error: an illegal memory access was encountered
+0.03.734.801 E   current device: 0, in function ggml_cuda_flash_attn_ext_mma_f16_case at /home/neo/projects/chronos-ecosystem/Chronos-Engine/ggml/src/ggml-cuda/template-instances/../fattn-mma-f16.cuh:2151
+0.03.734.801 E   cudaFuncSetAttribute(reinterpret_cast<fattn_kernel_ptr_t>(fattn_kernel), cudaFuncAttributeMaxDynamicSharedMemorySize, nbytes_shared_total)
+[New LWP 2866520]
+[New LWP 2866519]
+[New LWP 2866518]
+[New LWP 2866517]
+[New LWP 2866516]
+[New LWP 2866369]
+[New LWP 2866367]
+[New LWP 2866366]
+[New LWP 2866358]
+[New LWP 2866357]
+
+This GDB supports auto-downloading debuginfo from the following URLs:
+  <https://debuginfod.cachyos.org>
+  <https://debuginfod.archlinux.org>
+Enable debuginfod for this session? (y or [n]) [answered N; input not from terminal]
+Debuginfod has been disabled.
+To make this setting permanent, add 'set debuginfod enabled off' to .gdbinit.
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/usr/lib/libthread_db.so.1".
+0x00007f719e0b5b82 in ?? () from /usr/lib/libc.so.6
+#0  0x00007f719e0b5b82 in ?? () from /usr/lib/libc.so.6
+#1  0x00007f719e130868 in wait4 () from /usr/lib/libc.so.6
+#2  0x00007f71a55158fb in ggml_print_backtrace () from /home/neo/projects/chronos-ecosystem/Chronos-Engine/build-debug/bin/libggml-base.so.0
+#3  0x00007f71a5515a8e in ggml_abort () from /home/neo/projects/chronos-ecosystem/Chronos-Engine/build-debug/bin/libggml-base.so.0
+#4  0x00007f71a5a15c31 in ggml_cuda_error(char const*, char const*, char const*, int, char const*) () from /home/neo/projects/chronos-ecosystem/Chronos-Engine/build-debug/bin/libggml-cuda.so.0
+#5  0x00007f71a5e7bc64 in void ggml_cuda_flash_attn_ext_mma_f16_case<256, 256, 16, 4>(ggml_backend_cuda_context&, ggml_tensor*) () from /home/neo/projects/chronos-ecosystem/Chronos-Engine/build-debug/bin/libggml-cuda.so.0
+#6  0x00007f71a59d0052 in ggml_cuda_turbo_prefill_attend(ggml_backend_cuda_context&, ggml_tensor*) () from /home/neo/projects/chronos-ecosystem/Chronos-Engine/build-debug/bin/libggml-cuda.so.0
+#7  0x00007f71a59d7f70 in ggml_cuda_flash_attn_ext(ggml_backend_cuda_context&, ggml_tensor*) () from /home/neo/projects/chronos-ecosystem/Chronos-Engine/build-debug/bin/libggml-cuda.so.0
+#8  0x00007f71a5a29130 in ggml_cuda_graph_evaluate_and_capture(ggml_backend_cuda_context*, ggml_cgraph*, bool, bool, void const*) () from /home/neo/projects/chronos-ecosystem/Chronos-Engine/build-debug/bin/libggml-cuda.so.0
+#9  0x00007f71a5a29fd2 in ggml_backend_cuda_graph_compute(ggml_backend*, ggml_cgraph*) () from /home/neo/projects/chronos-ecosystem/Chronos-Engine/build-debug/bin/libggml-cuda.so.0
+#10 0x00007f71a5533eba in ggml_backend_sched_compute_splits(ggml_backend_sched*) () from /home/neo/projects/chronos-ecosystem/Chronos-Engine/build-debug/bin/libggml-base.so.0
+#11 0x00007f71af8e7ae0 in llama_context::graph_compute(ggml_cgraph*, bool) () from /home/neo/projects/chronos-ecosystem/Chronos-Engine/build-debug/bin/libllama.so.0
+#12 0x00007f71af8ec354 in llama_context::process_ubatch(llama_ubatch const&, llm_graph_type, llama_memory_context_i*, ggml_status&) () from /home/neo/projects/chronos-ecosystem/Chronos-Engine/build-debug/bin/libllama.so.0
+#13 0x00007f71af8efd4b in llama_context::decode(llama_batch const&) () from /home/neo/projects/chronos-ecosystem/Chronos-Engine/build-debug/bin/libllama.so.0
+#14 0x00007f71af8f1fce in llama_decode () from /home/neo/projects/chronos-ecosystem/Chronos-Engine/build-debug/bin/libllama.so.0
+#15 0x00007f71b01970a9 in llama_perplexity(int, char**) () from /home/neo/projects/chronos-ecosystem/Chronos-Engine/build-debug/bin/libllama-perplexity-impl.so
+#16 0x00007f719e027d0e in ?? () from /usr/lib/libc.so.6
+#17 0x00007f719e027e4b in __libc_start_main () from /usr/lib/libc.so.6
+#18 0x0000564c5fe92075 in _start ()
+[Inferior 1 (process 2866349) detached]

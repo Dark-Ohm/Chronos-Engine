@@ -1,0 +1,7 @@
+0.08.733.539 I common_perf_print:        eval time =    5436.13 ms /   127 runs   (   42.80 ms per token,    23.36 tokens per second)
+0.09.083.450 I common_perf_print:        eval time =    5714.69 ms /   127 runs   (   45.00 ms per token,    22.22 tokens per second)
+0.05.937.129 I common_perf_print:        eval time =    2567.00 ms /    63 runs   (   40.75 ms per token,    24.54 tokens per second)
+--- dequant ---
+0.06.965.242 I common_perf_print:        eval time =    3748.07 ms /   123 runs   (   30.47 ms per token,    32.82 tokens per second)
+0.07.097.586 I common_perf_print:        eval time =    3891.06 ms /   127 runs   (   30.64 ms per token,    32.64 tokens per second)
+0.07.326.206 I common_perf_print:        eval time =    3950.87 ms /   127 runs   (   31.11 ms per token,    32.14 tokens per second)

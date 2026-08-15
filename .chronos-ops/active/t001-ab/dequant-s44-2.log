@@ -1,0 +1,27 @@
+0.00.017.025 I llama_completion: llama backend init
+0.00.017.032 I llama_completion: load the model and apply lora adapter, if any
+GGML_TURBO_MMA_FUSED=0: fused turbo MMA kernel disabled
+TCQ decode: context-adaptive V alpha enabled
+0.03.438.900 I llama_completion: llama threadpool init, n_threads = 6
+0.03.438.923 I 
+0.03.438.975 I system_info: n_threads = 6 (n_threads_batch = 6) / 12 | CUDA : ARCHS = 860 | USE_GRAPHS = 1 | CPU : SSE3 = 1 | SSSE3 = 1 | AVX = 1 | AVX_VNNI = 1 | AVX2 = 1 | F16C = 1 | FMA = 1 | BMI2 = 1 | LLAMAFILE = 1 | OPENMP = 1 | REPACK = 1 | 
+0.03.438.977 I 
+0.03.439.044 I sampler seed: 44
+0.03.439.054 I sampler params: 
+	repeat_last_n = 64, repeat_penalty = 1.000, frequency_penalty = 0.000, presence_penalty = 0.000
+	dry_multiplier = 0.000, dry_base = 1.750, dry_allowed_length = 2, dry_penalty_last_n = -1
+	top_k = 40, top_p = 0.950, min_p = 0.050, xtc_probability = 0.000, xtc_threshold = 0.100, typical_p = 1.000, top_n_sigma = -1.000, temp = 0.800
+	mirostat = 0, mirostat_lr = 0.100, mirostat_ent = 5.000, adaptive_target = -1.000, adaptive_decay = 0.900
+0.03.439.063 I sampler chain: logits -> logit-bias -> ?penalties -> ?dry -> ?top-n-sigma -> top-k -> ?typical -> top-p -> min-p -> ?xtc -> temp-ext -> dist 
+0.03.439.065 I generate: n_ctx = 512, n_batch = 2048, n_predict = 128, n_keep = 0
+0.03.439.065 I 
+The capital of France is Paris. This is a well-known fact that is universally accepted. Paris is a city in France, and France is a country in Europe. It is the most popular tourist destination in France. Paris has a rich history and culture, which is why it is the capital of France. Paris is home to many famous landmarks, including the Eiffel Tower. This is a well-known fact that is universally accepted. Paris is a city in France, and France is a country in Europe. It is the most popular tourist destination in France. Paris has a rich history and culture, which is why it is the capital of France. Paris is home to
+
+0.08.813.377 I common_perf_print:    sampling time =      65.09 ms
+0.08.813.378 I common_perf_print:    samplers time =      24.78 ms /   133 tokens
+0.08.813.381 I common_perf_print:        load time =    1099.03 ms
+0.08.813.384 I common_perf_print: prompt eval time =      67.53 ms /     5 tokens (   13.51 ms per token,    74.05 tokens per second)
+0.08.813.386 I common_perf_print:        eval time =    5238.35 ms /   127 runs   (   41.25 ms per token,    24.24 tokens per second)
+0.08.813.387 I common_perf_print:       total time =    5374.48 ms /   132 tokens
+0.08.813.388 I common_perf_print: unaccounted time =       3.52 ms /   0.1 %      (total - sampling - prompt eval - eval) / (total)
+0.08.813.389 I common_perf_print:    graphs reused =        126

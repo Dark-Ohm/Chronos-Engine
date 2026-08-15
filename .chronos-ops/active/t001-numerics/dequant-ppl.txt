@@ -1,0 +1,14 @@
+0.03.368.818 W resolve_fused_ops: layer 0 is assigned to device CPU but fused Gated Delta Net (chunked) is assigned to device CUDA0 (usually due to missing support)
+0.03.368.822 W resolve_fused_ops: fused Gated Delta Net (chunked) not supported, set to disabled
+GGML_TURBO_MMA_FUSED=0: fused turbo MMA kernel disabled
+TCQ decode: context-adaptive V alpha enabled
+0.03.599.170 I 
+0.03.599.235 I system_info: n_threads = 6 (n_threads_batch = 6) / 12 | CUDA : ARCHS = 860 | USE_GRAPHS = 1 | CPU : SSE3 = 1 | SSSE3 = 1 | AVX = 1 | AVX_VNNI = 1 | AVX2 = 1 | F16C = 1 | FMA = 1 | BMI2 = 1 | LLAMAFILE = 1 | OPENMP = 1 | REPACK = 1 | 
+0.03.603.842 I perplexity: saving all logits to /tmp/kld-dequant.logits
+0.03.603.848 I perplexity: tokenizing the input ..
+0.03.606.379 I perplexity: tokenization took 2.529 ms
+0.03.606.604 I perplexity: calculating perplexity over 3 chunks, n_ctx=256, batch_size=2048, n_seq=8
+0.04.654.154 I perplexity: 1.01 seconds per pass - ETA 0.00 minutes
+[1]8.8004,[2]8.3155,[3]8.6542,
+0.04.797.154 I Final estimate: PPL = 8.6542 +/- 0.88401
+

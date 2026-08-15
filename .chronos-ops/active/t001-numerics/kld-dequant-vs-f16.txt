@@ -1,0 +1,54 @@
+0.03.267.260 W resolve_fused_ops: layer 0 is assigned to device CPU but fused Gated Delta Net (chunked) is assigned to device CUDA0 (usually due to missing support)
+0.03.267.263 W resolve_fused_ops: fused Gated Delta Net (chunked) not supported, set to disabled
+GGML_TURBO_MMA_FUSED=0: fused turbo MMA kernel disabled
+TCQ decode: context-adaptive V alpha enabled
+0.03.490.089 I 
+0.03.490.151 I system_info: n_threads = 6 (n_threads_batch = 6) / 12 | CUDA : ARCHS = 860 | USE_GRAPHS = 1 | CPU : SSE3 = 1 | SSSE3 = 1 | AVX = 1 | AVX_VNNI = 1 | AVX2 = 1 | F16C = 1 | FMA = 1 | BMI2 = 1 | LLAMAFILE = 1 | OPENMP = 1 | REPACK = 1 | 
+0.03.511.912 I kl_divergence: computing over 3 chunks, n_ctx=256, batch_size=2048, n_seq=8
+0.04.519.038 I kl_divergence: 1.01 seconds per pass - ETA 0.00 minutes
+
+chunk             PPL               ln(PPL(Q)/PPL(base))          KL Divergence              Δp RMS            Same top p
+   1       8.3653 ±    1.3930       0.48782 ±    0.10017       0.48462 ±    0.04190    19.282 ±  1.892 %    71.654 ±  4.015 %
+   2       7.9883 ±    0.9357       0.40208 ±    0.07021       0.46137 ±    0.02711    18.453 ±  1.264 %    69.291 ±  2.900 %
+   3       8.7113 ±    0.8841       0.43644 ±    0.05793       0.47212 ±    0.02499    18.013 ±  1.070 %    69.029 ±  2.372 %
+
+====== Perplexity statistics ======
+Mean PPL(Q)                   :   8.711347 ±   0.884138
+Mean PPL(base)                :   5.630442 ±   0.548510
+Cor(ln(PPL(Q)), ln(PPL(base))):  83.12%
+Mean ln(PPL(Q)/PPL(base))     :   0.436438 ±   0.057927
+Mean PPL(Q)/PPL(base)         :   1.547187 ±   0.089623
+Mean PPL(Q)-PPL(base)         :   3.080905 ±   0.525752
+
+====== KL divergence statistics ======
+Mean    KLD:   0.472117 ±   0.024993
+Maximum KLD:   5.540393
+99.9%   KLD:   4.383344
+99.0%   KLD:   2.081530
+95.0%   KLD:   1.253769
+90.0%   KLD:   0.996412
+Median  KLD:   0.347552
+10.0%   KLD:   0.046672
+ 5.0%   KLD:   0.014542
+ 1.0%   KLD:   0.000625
+ 0.1%   KLD:   0.000140
+Minimum KLD:   0.000111
+
+====== Token probability statistics ======
+Mean    Δp: -9.278 ± 0.792 %
+Maximum Δp: 41.220%
+99.9%   Δp: 36.387%
+99.0%   Δp: 23.838%
+95.0%   Δp:  9.551%
+90.0%   Δp:  4.990%
+75.0%   Δp: -0.127%
+Median  Δp: -5.071%
+25.0%   Δp: -17.897%
+10.0%   Δp: -27.930%
+ 5.0%   Δp: -34.682%
+ 1.0%   Δp: -63.568%
+ 0.1%   Δp: -84.516%
+Minimum Δp: -88.468%
+RMS Δp    : 18.013 ± 1.070 %
+Same top p: 69.029 ± 2.372 %
+

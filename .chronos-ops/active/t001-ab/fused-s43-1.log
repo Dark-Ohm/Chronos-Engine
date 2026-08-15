@@ -1,0 +1,52 @@
+0.00.026.183 I llama_completion: llama backend init
+0.00.026.193 I llama_completion: load the model and apply lora adapter, if any
+0.03.425.882 I llama_completion: llama threadpool init, n_threads = 6
+0.03.425.913 I 
+0.03.425.986 I system_info: n_threads = 6 (n_threads_batch = 6) / 12 | CUDA : ARCHS = 860 | USE_GRAPHS = 1 | CPU : SSE3 = 1 | SSSE3 = 1 | AVX = 1 | AVX_VNNI = 1 | AVX2 = 1 | F16C = 1 | FMA = 1 | BMI2 = 1 | LLAMAFILE = 1 | OPENMP = 1 | REPACK = 1 | 
+0.03.425.989 I 
+0.03.426.088 I sampler seed: 43
+0.03.426.101 I sampler params: 
+	repeat_last_n = 64, repeat_penalty = 1.000, frequency_penalty = 0.000, presence_penalty = 0.000
+	dry_multiplier = 0.000, dry_base = 1.750, dry_allowed_length = 2, dry_penalty_last_n = -1
+	top_k = 40, top_p = 0.950, min_p = 0.050, xtc_probability = 0.000, xtc_threshold = 0.100, typical_p = 1.000, top_n_sigma = -1.000, temp = 0.800
+	mirostat = 0, mirostat_lr = 0.100, mirostat_ent = 5.000, adaptive_target = -1.000, adaptive_decay = 0.900
+0.03.426.110 I sampler chain: logits -> logit-bias -> ?penalties -> ?dry -> ?top-n-sigma -> top-k -> ?typical -> top-p -> min-p -> ?xtc -> temp-ext -> dist 
+0.03.426.111 I generate: n_ctx = 512, n_batch = 2048, n_predict = 128, n_keep = 0
+0.03.426.112 I 
+The capital of France isTCQ decode: context-adaptive V alpha enabled
+ Paris.
+The capital of the United States is Washington, D.C.
+The capital of India is New Delhi.
+
+Based on the above information, what is the capital of Canada?
+
+The capital of Canada is Ottawa.
+
+The capital of Australia is Canberra.
+
+The capital of Germany is Berlin.
+
+The capital of Russia is Moscow.
+
+The capital of Japan is Tokyo.
+
+The capital of Italy is Rome.
+
+The capital of Spain is Madrid.
+
+The capital of Brazil is Brasilia.
+
+The capital of Mexico is Mexico City.
+
+The capital of Turkey is Ankara.
+
+The capital of Egypt is Cairo.
+
+0.28.193.404 I common_perf_print:    sampling time =      77.90 ms
+0.28.193.405 I common_perf_print:    samplers time =      30.32 ms /   133 tokens
+0.28.193.408 I common_perf_print:        load time =     983.91 ms
+0.28.193.409 I common_perf_print: prompt eval time =      65.40 ms /     5 tokens (   13.08 ms per token,    76.45 tokens per second)
+0.28.193.410 I common_perf_print:        eval time =   24614.06 ms /   127 runs   (  193.81 ms per token,     5.16 tokens per second)
+0.28.193.410 I common_perf_print:       total time =   24767.53 ms /   132 tokens
+0.28.193.411 I common_perf_print: unaccounted time =      10.16 ms /   0.0 %      (total - sampling - prompt eval - eval) / (total)
+0.28.193.411 I common_perf_print:    graphs reused =        126

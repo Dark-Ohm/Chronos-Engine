@@ -16,6 +16,8 @@
 *.lastModified
 *.log
 !.chronos-ops/checkpoint/DECISIONS.log
+!.chronos-ops/active/t001-matrix-raw/*.log
+!.chronos-ops/active/t001-ab/*.log
 *.metallib
 *.o
 *.so

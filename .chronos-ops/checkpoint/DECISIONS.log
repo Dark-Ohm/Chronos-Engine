@@ -140,3 +140,48 @@ Chronos обслуживает API/сервер, не чат в браузере
 миньона с активным заданием временно живёт в корне (live-процесс читает его
 оттуда). ОТКЛОНЕНО: держать оркестрацию в корне (выглядит как черновик, не
 продукт); удалять апстримный UI-код (ломает merge с upstream).
+
+D-017 | 2026-08-15 | GGML_TURBO_MMA_FUSED default ON — ОТОЗВАНО, санкция снята (аудит T001).
+Первый вариант D-017 («default ON санкционирован») ОТМЕНЁН: приведённые там
+цифры (PPL 5.63/10.84/8.59, KLD 0.181/0.402/0.408, A/B 33-34 t/s) НЕ выводились
+из сохранённых артефактов — ручной прогон без фиксации. Ниже только числа,
+дословно изгрепленные из .chronos-ops/active/t001-numerics/*.txt (стабильный
+корпус 789 слов, -c 256, n_seq=8; Qwythos-9B turbo4/turbo4; HALF_QUANTS-билд;
+RTX 3070, чистая GPU).
+
+Факты (все из сохранённых артефактов):
+- PPL (llama-perplexity): f16 = 5.6305 +/- 0.54851; dequant (FUSED=0) =
+  8.6542 +/- 0.88401; fused (default ON) с --save-all-logits ПАДАЕТ:
+  "CUDA error: illegal memory access" в ggml_cuda_flash_attn_ext_mma_f16_case
+  <256,256,16,4> <- ggml_cuda_turbo_prefill_attend (fattn-mma-f16.cuh:2151).
+  Без --save-all-logits fused интермиттентен: 1 прогон PPL=10.3785, 1 прогон
+  "CUDA error: an illegal instruction was encountered".
+- KLD (llama-perplexity --kl-divergence): dequant||f16 median = 0.347552,
+  mean = 0.472117, Mean PPL(Q)/PPL(base) = 1.547187. fused||f16 и
+  fused||dequant ОБА падают (тот же illegal access) — KLD fused НЕВЫЧИСЛИМ.
+- A/B decode (llama-completion, -c 512 -n 128, --ignore-eos -s {42,43,44},
+  по 3 повтора, route-proven, БЕЗ debug — debug тормозит в ~5x, чистая GPU):
+  fused НЕдетерминирован: 2.94..24.09 t/s, mean 9.0 (бимодален: ~20-24 либо
+  ~3-5, тот же seed 42 подряд 20.17/4.09/3.83); dequant стабилен:
+  23.85..25.25, mean 24.4. Ранние «23 vs 32» (ab.txt) и «6.46 vs 5.97» —
+  невоспроизводимы (ловили только быстрые fused-прогоны, разнобой runs
+  63/123/127 из-за раннего EOS); ОТОЗВАНЫ.
+- turbo4/turbo4 сам по себе дорого стоит качеством: dequant PPL 8.65 vs f16
+  5.63 = в 1.55 раза хуже (median KLD 0.35) — отдельный хвост, не D-решение.
+- KLD-vs-VEC донора (0.008396) невоспроизводим: нативный turbo VEC кернел
+  (GGML_TURBO_DECODE_NATIVE=1) падает с illegal access (класс turbo2).
+
+Решение: санкция «default ON» ОТОЗВАНА. Рекомендация — инверсия дефолта в
+opt-in (GGML_TURBO_MMA_FUSED default OFF), отдельным коммитом (fattn.cu:3307-3315)
+с живым regression-прогоном ПОСЛЕ приёмки T001: (1) fused не проходит численную
+верификацию (KLD невычислим — путь падает), (2) fused недетерминирован по перфу
+(бимодален 2.9-24 t/s против стабильных 24 у dequant — признак той же
+нестабильности, что и краш), (3) путь спит в проде. До инверсии T001 остаётся
+REFUTED, T002 заблокирован.
+Открытые хвосты (отдельные тикеты): (1) native turbo VEC краш (illegal access);
+(2) llama-bench whitelist без turbo; (3) q8_0/turbo3 на D=256 в default-билде ->
+kernel=NONE -> non-FA фолбэк (прод-конфиг Qwythos); (4) iq4_nl x turbo* ->
+kernel=NONE (тихий non-FA, матрица 144); (5) q6_0/q6_1/q3_0/q3_1/q2_1 есть в
+is_classic_non_q8_type(), но НЕ в CLI-whitelist; (6) НОВОЕ: fused
+(prefill-dequant MMA) краш под multi-seq perplexity (n_seq=8) при default ON —
+root cause не изолирован, блокирует численную верификацию fused.
