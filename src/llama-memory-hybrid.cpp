@@ -32,7 +32,8 @@ llama_memory_hybrid::llama_memory_hybrid(
     const layer_filter_cb & filter_attn,
     const layer_filter_cb & filter_recr,
           llama_kvarn_params kvarn,
-                 uint32_t   kv_hot_size) :
+                 uint32_t   kv_hot_size,
+                 uint32_t   kv_h2o_groups) :
     hparams(model.hparams),
     mem_recr(new llama_memory_recurrent(
         model,
@@ -65,6 +66,7 @@ llama_memory_hybrid::llama_memory_hybrid(
             n_swa,
             swa_type,
             kv_hot_size,
+            kv_h2o_groups,
             filter,
             nullptr
         ));

@@ -1637,6 +1637,7 @@ struct llama_context_params common_context_params_to_llama(const common_params &
     cparams.type_v = params.cache_type_v;
     cparams.kvarn  = params.kvarn;
     cparams.kv_hot_size = params.kv_hot_size;
+    cparams.kv_h2o_groups = params.kv_h2o_groups;
 
     return cparams;
 }

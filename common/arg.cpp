@@ -2304,6 +2304,18 @@ common_params_context common_params_parser_init(common_params & params, llama_ex
         }
     ).set_env("LLAMA_ARG_KV_HOT_SIZE"));
     add_opt(common_arg(
+        {"--kv-h2o-groups"}, "N",
+        "Phase 2 H2O heavy-hitter pins (docs/design/h2o-heavy-hitters-PHASE2-SPEC.md): number of "
+        "128-token groups to pin per layer in the KVarN compressed record ring. "
+        "NOTE: units are GROUPS (group = 128 tokens), NOT tokens -- unlike --kv-hot-size -- and "
+        "there is no rounding to 128 (default: 0 = disabled, current behavior). The value is "
+        "clamped at cache construction to a fraction of the record ring's per-stream capacity. "
+        "Recommended starting point when enabling: 16.",
+        [](common_params & params, int value) {
+            params.kv_h2o_groups = value > 0 ? (uint32_t) value : 0u;
+        }
+    ).set_env("LLAMA_ARG_KV_H2O_GROUPS"));
+    add_opt(common_arg(
         {"--repack"},
         {"-nr", "--no-repack"},
         string_format("whether to enable weight repacking (default: %s)", params.no_extra_bufts ? "disabled" : "enabled"),

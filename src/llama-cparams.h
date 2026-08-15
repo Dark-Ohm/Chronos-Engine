@@ -70,6 +70,11 @@ struct llama_cparams {
     // 0 = disabled (default, no behavior change).
     uint32_t kv_hot_size = 0;
 
+    // Phase 2 H2O heavy-hitter pins (docs/design/h2o-heavy-hitters-PHASE2-SPEC.md).
+    // Units are groups (128 tokens), not tokens; clamped at cache construction.
+    // 0 = disabled (default, no behavior change).
+    uint32_t kv_h2o_groups = 0;
+
     ggml_backend_sched_eval_callback cb_eval;
     void * cb_eval_user_data;
 

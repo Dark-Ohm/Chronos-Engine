@@ -609,6 +609,13 @@ struct common_params {
     // must be a multiple of 128; see the --kv-hot-size CLI flag in arg.cpp.
     uint32_t kv_hot_size = 0;
 
+    // Phase 2 H2O heavy-hitter pins (docs/design/h2o-heavy-hitters-PHASE2-SPEC.md).
+    // Units are GROUPS (group = 128 tokens), NOT tokens, and there is no
+    // rounding -- unlike kv_hot_size above. 0 = disabled (default). Clamped to
+    // a fraction of the record ring's per-stream capacity at cache construction;
+    // see the --kv-h2o-groups CLI flag in arg.cpp.
+    uint32_t kv_h2o_groups = 0;
+
     common_conversation_mode conversation_mode = COMMON_CONVERSATION_MODE_AUTO;
 
     // multimodal models (see tools/mtmd)

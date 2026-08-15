@@ -122,6 +122,7 @@ llama_context::llama_context(
     cparams.cb_eval_user_data = params.cb_eval_user_data;
     cparams.kvarn             = params.kvarn;
     cparams.kv_hot_size       = params.kv_hot_size;
+    cparams.kv_h2o_groups     = params.kv_h2o_groups;
 
     cparams.ctx_other = nullptr;
 
@@ -290,6 +291,9 @@ llama_context::llama_context(
     LLAMA_LOG_INFO("%s: kv_unified    = %s\n",   __func__, cparams.kv_unified ? "true" : "false");
     if (cparams.kv_hot_size > 0) {
         LLAMA_LOG_INFO("%s: kv_hot_size   = %u (Phase 1 tiered hot/cold KV offload)\n", __func__, cparams.kv_hot_size);
+    }
+    if (cparams.kv_h2o_groups > 0) {
+        LLAMA_LOG_INFO("%s: kv_h2o_groups = %u (Phase 2 H2O heavy-hitter pins, units = groups of 128 tokens)\n", __func__, cparams.kv_h2o_groups);
     }
     LLAMA_LOG_INFO("%s: freq_base     = %.1f\n", __func__, cparams.rope_freq_base);
     LLAMA_LOG_INFO("%s: freq_scale    = %g\n",   __func__, cparams.rope_freq_scale);
@@ -3478,6 +3482,7 @@ llama_context_params llama_context_default_params() {
         /*.ctx_other                   =*/ nullptr,
         /*.kvarn                       =*/ llama_kvarn_default_params(),
         /*.kv_hot_size                 =*/ 0,
+        /*.kv_h2o_groups               =*/ 0,
     };
 
     return result;

@@ -2178,7 +2178,8 @@ llama_memory_i * llama_model::create_memory(const llama_memory_params & params, 
                             /* filter_attn       */ std::move(filter_attn),
                             /* filter_recr       */ std::move(filter_recr),
                             /* kvarn             */ params.kvarn,
-                            /* kv_hot_size       */ params.kvarn.type != LLAMA_KVARN_TYPE_DISABLED ? cparams.kv_hot_size : 0);
+                            /* kv_hot_size       */ params.kvarn.type != LLAMA_KVARN_TYPE_DISABLED ? cparams.kv_hot_size : 0,
+                            /* kv_h2o_groups     */ params.kvarn.type != LLAMA_KVARN_TYPE_DISABLED ? cparams.kv_h2o_groups : 0);
                     }
                 } else {
                     llama_kv_cache::layer_filter_cb filter = nullptr;
@@ -2299,6 +2300,7 @@ llama_memory_i * llama_model::create_memory(const llama_memory_params & params, 
                                     attn_n_swa,
                                     attn_swa_type,
                                     cparams.kv_hot_size,
+                                    cparams.kv_h2o_groups,
                                     filter,
                                     reuse);
                         } else {

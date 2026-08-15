@@ -22,6 +22,11 @@ constexpr uint32_t KVAR_N_MIN_TAIL_GROUPS = 4;
 // SWA keeps only local tail groups in F16; older window groups are served from
 // records. Keep this low enough that KVarN remains a KV-memory win over q5_0.
 constexpr uint32_t KVAR_N_SWA_TAIL_GROUPS = 2;
+// Phase 2 H2O pins are capped at 1/4 of the record ring's per-stream capacity:
+// every pinned slot is one fewer slot cycling through the sliding window, so
+// pinning more than a conservative fraction would collapse the effective
+// window (docs/design/h2o-heavy-hitters-PHASE2-SPEC.md, "Budget").
+constexpr uint32_t KVAR_H2O_RING_FRACTION_DIVISOR = 4;
 constexpr uint32_t KVAR_N_STATE_MAGIC = 0x4e52564b; // "KVRN"
 // Version 11: tail_groups is explicit and SWA stages no longer allocate a
 // non-existent sink slot. Version 9: D256/D512 records use the full logical-head Hadamard instead of
@@ -497,6 +502,7 @@ llama_kv_cache_kvarn::llama_kv_cache_kvarn(
         uint32_t n_swa,
         llama_swa_type swa_type,
         uint32_t kv_hot_size,
+        uint32_t kv_h2o_groups,
         const layer_filter_cb & filter,
         const layer_reuse_cb & reuse) :
     hparams(hparams),
@@ -524,6 +530,12 @@ llama_kv_cache_kvarn::llama_kv_cache_kvarn(
     cold_groups_per_stream(!cold_offload ? 0u :
         (((uint64_t(kv_size) + KVAR_N_GROUP - 1u) / KVAR_N_GROUP) > n_groups_per_stream ?
             uint32_t(((uint64_t(kv_size) + KVAR_N_GROUP - 1u) / KVAR_N_GROUP) - n_groups_per_stream) : 0u)),
+    // Phase 2 H2O: clamp the requested pin count to a conservative fraction of
+    // the record ring's per-stream capacity (a nonzero request never silently
+    // becomes zero; the mechanism itself is T003c, not this slice).
+    h2o_groups(kv_h2o_groups > 0 ?
+        std::min(kv_h2o_groups, std::max(1u, n_groups_per_stream / KVAR_H2O_RING_FRACTION_DIVISOR)) : 0u),
+    h2o_enabled(h2o_groups > 0),
     metadata(std::make_unique<llama_kv_cache>(
         model,
         hparams,
@@ -573,6 +585,10 @@ llama_kv_cache_kvarn::llama_kv_cache_kvarn(
         LLAMA_LOG_INFO("KVarN cold offload: hot_size=%u tokens, cold ring capacity=%u groups/stream\n",
                 kv_hot_size, cold_groups_per_stream);
     }
+    if (kv_h2o_groups > 0 && h2o_groups != kv_h2o_groups) {
+        LLAMA_LOG_WARN("KVarN H2O: --kv-h2o-groups %u exceeds the pin cap (%u groups = 1/%u of ring capacity %u groups/stream); clamped to %u\n",
+                kv_h2o_groups, h2o_groups, KVAR_H2O_RING_FRACTION_DIVISOR, n_groups_per_stream, h2o_groups);
+    }
 
     struct buft_comparator {
         bool operator()(ggml_backend_buffer_type_t lhs, ggml_backend_buffer_type_t rhs) const {
@@ -612,6 +628,10 @@ llama_kv_cache_kvarn::llama_kv_cache_kvarn(
     // Backends read stage_groups from op_params[7] instead of assuming 3.
     const int64_t n_stage_tokens = int64_t(KVAR_N_GROUP) * int64_t(stage_groups) * n_stream;
     size_t raw_bytes = 0;
+    // Phase 2 H2O: max_groups is the total number of 128-token groups the
+    // context can ever hold; flag/score buffers are indexed by absolute group
+    // id, so they span max_groups even though the record ring is smaller.
+    const uint32_t max_groups = (kv_size + KVAR_N_GROUP - 1u) / KVAR_N_GROUP;
 
     for (uint32_t il = 0; il < hparams.n_layer_all; ++il) {
         if (!hparams.has_kv(il)) {
@@ -772,6 +792,19 @@ llama_kv_cache_kvarn::llama_kv_cache_kvarn(
         });
 
         raw_bytes += size_t(kv_size) * n_stream * n_head_kv * (head_dim_k + head_dim_v) * sizeof(ggml_fp16_t);
+        if (h2o_enabled) {
+            layers.back().h2o_group_flags.assign((max_groups + 31u) / 32u, 0u);
+            layers.back().h2o_group_scores.assign(size_t(n_head_kv) * max_groups, 0.0f);
+        }
+    }
+
+    if (h2o_enabled) {
+        size_t h2o_bytes = 0;
+        for (const auto & l : layers) {
+            h2o_bytes += l.h2o_group_scores.size() * sizeof(float) + l.h2o_group_flags.size() * sizeof(uint32_t);
+        }
+        LLAMA_LOG_INFO("KVarN H2O: pinning up to %u groups per layer across %zu layers (%u groups/stream ring, cap 1/%u), %zu bytes of flag/score buffers\n",
+                h2o_groups, layers.size(), n_groups_per_stream, KVAR_H2O_RING_FRACTION_DIVISOR, h2o_bytes);
     }
 
     if (reuse) {

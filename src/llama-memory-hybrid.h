@@ -45,7 +45,10 @@ public:
           llama_kvarn_params kvarn = llama_kvarn_default_params(),
           // Phase 1 tiered hot/cold KV offload (docs/design/tiered-kv-offload.md,
           // --kv-hot-size). 0 = disabled, behavior identical to before Phase 1.
-                 uint32_t   kv_hot_size = 0);
+                 uint32_t   kv_hot_size = 0,
+          // Phase 2 H2O heavy-hitter pins (--kv-h2o-groups), groups of 128
+          // tokens, clamped inside the KVarN cache ctor. 0 = disabled.
+                 uint32_t   kv_h2o_groups = 0);
 
     ~llama_memory_hybrid() = default;
 

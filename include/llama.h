@@ -480,6 +480,15 @@ extern "C" {
         // kvarn.type == LLAMA_KVARN_TYPE_DISABLED or the architecture already
         // has its own SWA window.
         uint32_t kv_hot_size;
+
+        // Phase 2 H2O heavy-hitter pins (docs/design/h2o-heavy-hitters-PHASE2-SPEC.md).
+        // Number of groups (group = 128 tokens) to pin per layer in the KVarN
+        // compressed record ring. Units are GROUPS, unlike kv_hot_size which is
+        // tokens; there is no rounding. 0 (default) disables H2O entirely -- the
+        // per-layer flag/score buffers are not allocated. The value is clamped
+        // at cache construction to a fraction of the record ring's per-stream
+        // capacity. Ignored when kvarn.type == LLAMA_KVARN_TYPE_DISABLED.
+        uint32_t kv_h2o_groups;
     };
 
     struct llama_model_tensor_override {

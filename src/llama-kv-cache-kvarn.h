@@ -106,6 +106,13 @@ public:
             // Phase 1 tiered hot/cold KV offload (docs/design/tiered-kv-offload.md,
             // --kv-hot-size). 0 = disabled, behavior identical to before Phase 1.
             uint32_t kv_hot_size = 0,
+            // Phase 2 H2O heavy-hitter pins (docs/design/h2o-heavy-hitters-PHASE2-SPEC.md,
+            // --kv-h2o-groups). Units are GROUPS (group = 128 tokens), not tokens.
+            // 0 = disabled. The value is clamped to a fraction of the record ring's
+            // per-stream capacity at construction (see the .cpp ctor); the pin
+            // mechanism itself is Phase 2 (T003c) -- this cache only stores the
+            // count and allocates the per-layer flag/score buffers.
+            uint32_t kv_h2o_groups = 0,
             const layer_filter_cb & filter = nullptr,
             const layer_reuse_cb & reuse = nullptr);
 
@@ -151,6 +158,14 @@ public:
     bool has_cold_offload() const { return cold_offload; }
     bool has_pending_cold_offloads() const;
     bool apply_pending_cold_offloads(llama_context * lctx);
+
+    // Phase 2 H2O heavy-hitter pins (docs/design/h2o-heavy-hitters-PHASE2-SPEC.md).
+    // has_h2o() is true only when --kv-h2o-groups resolved to a nonzero count
+    // (after clamping against the record ring capacity). The per-layer flag and
+    // score buffers exist only while it is true; no other code path here is
+    // affected when it is false.
+    bool has_h2o() const { return h2o_enabled; }
+    uint32_t get_h2o_groups() const { return h2o_groups; }
 
     // Dynamic staging: the lossless F16 ring is position-oriented, not sized to
     // the full scheduler batch/window.
@@ -207,6 +222,19 @@ private:
         ggml_tensor * host_cold_v_records = nullptr;
         std::vector<ggml_tensor *> host_cold_k_records_stream;
         std::vector<ggml_tensor *> host_cold_v_records_stream;
+        // Phase 2 H2O heavy-hitter pins (docs/design/h2o-heavy-hitters-PHASE2-SPEC.md).
+        // Per-layer, matching the class convention of per-layer storage
+        // (k_records/v_records/... live here). Both are empty unless
+        // has_h2o() == true.
+        //   h2o_group_flags:  packed pin bits, word g bit = group g, size
+        //                     ceil(max_groups / 32); only groups the layer
+        //                     actually selected are set (written by T003c).
+        //   h2o_group_scores: accumulated attention mass, flat [n_head_kv]
+        //                     [max_groups] (the SPEC's [n_kv_heads][max_groups]
+        //                     [n_layers] contract with the layer dimension
+        //                     carried by the layers vector), zero-initialized.
+        std::vector<uint32_t> h2o_group_flags;
+        std::vector<float>    h2o_group_scores;
     };
 
     const layer & layer_for(int32_t il) const;
@@ -232,6 +260,13 @@ private:
     const uint32_t kv_hot_size;
     const bool cold_offload;
     const uint32_t cold_groups_per_stream;
+
+    // Phase 2 H2O heavy-hitter pins (docs/design/h2o-heavy-hitters-PHASE2-SPEC.md).
+    // h2o_groups is the effective pin count after clamping the requested
+    // --kv-h2o-groups to a fraction of n_groups_per_stream at construction
+    // (0 = disabled); h2o_enabled is the derived gate, mirroring cold_offload.
+    const uint32_t h2o_groups;
+    const bool h2o_enabled;
 
     std::unique_ptr<llama_kv_cache> metadata;
     std::vector<layer> layers;
