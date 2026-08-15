@@ -268,6 +268,15 @@ private:
     const uint32_t h2o_groups;
     const bool h2o_enabled;
 
+    // The llama_context this cache updates through. Set by init_update() (which
+    // the decode path calls before init_batch/init_kv_batch). The decode-loop
+    // memory contexts are built without an lctx argument, so without this the
+    // per-ubatch apply() would skip the pending cold-offload drain and a single
+    // llama_decode spanning more groups than the record ring could wrap ring
+    // slots before the next llama_decode's memory_update() drains them (silent
+    // cold-copy corruption; see enqueue_cold_offloads).
+    llama_context * update_lctx = nullptr;
+
     std::unique_ptr<llama_kv_cache> metadata;
     std::vector<layer> layers;
     std::unordered_map<int32_t, int32_t> map_layer_ids;

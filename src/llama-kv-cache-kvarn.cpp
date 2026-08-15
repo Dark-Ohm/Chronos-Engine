@@ -866,7 +866,7 @@ llama_memory_context_ptr llama_kv_cache_kvarn::init_batch(
         uint32_t n_ubatch,
         bool embd_all) {
     return std::make_unique<llama_kv_cache_kvarn_context>(
-        this, metadata->init_batch(balloc, n_ubatch, embd_all));
+        this, metadata->init_batch(balloc, n_ubatch, embd_all), update_lctx);
 }
 
 llama_memory_context_ptr llama_kv_cache_kvarn::init_full() {
@@ -874,6 +874,7 @@ llama_memory_context_ptr llama_kv_cache_kvarn::init_full() {
 }
 
 llama_memory_context_ptr llama_kv_cache_kvarn::init_update(llama_context * lctx, bool optimize) {
+    update_lctx = lctx;
     return std::make_unique<llama_kv_cache_kvarn_context>(this, metadata->init_update(lctx, optimize), lctx);
 }
 
@@ -893,7 +894,7 @@ llama_memory_context_ptr llama_kv_cache_kvarn::init_kv_batch(const std::vector<l
     }
 
     return std::make_unique<llama_kv_cache_kvarn_context>(
-            this, std::make_unique<llama_kv_cache_context>(metadata.get(), std::move(sinfos), ubatches));
+            this, std::make_unique<llama_kv_cache_context>(metadata.get(), std::move(sinfos), ubatches), update_lctx);
 }
 
 bool llama_kv_cache_kvarn::get_can_shift() const {
@@ -1055,17 +1056,33 @@ bool llama_kv_cache_kvarn::has_pending_cold_offloads() const {
 // Timing: a group is only queued once `tail_groups` MORE groups have been
 // seen after it, mirroring the F16 stage depth (kvarn_stage_tail_groups) --
 // i.e. only once the KVarN store kernel has actually had the opportunity to
-// flush that group's F16 stage rows into a compressed record. This lag is a
-// conservative assumption about the kernel's flush timing, not verified
-// bit-for-bit against the CUDA/CPU kvarn_store implementation; see the
-// report's caveats before relying on this for Phase 2/3 prefetch.
+// flush that group's F16 stage rows into a compressed record. VERIFIED
+// (2026-08-16, T003b-pre): the CUDA kvarn_store flush kernels trigger on the
+// first token of group g+tail_groups, exactly one group EARLIER than this
+// enqueue (g+tail_groups+1), so the lag is conservative by construction; a
+// live hash audit of every cold copy during a wrapped prefill found no stale
+// captures when the drain runs per ubatch (see below).
 //
-// Known limitation: a single llama_decode() call whose ubatches flush more
-// groups than n_groups_per_stream (i.e. a prefill chunk larger than the hot
-// ring) can wrap the GPU ring before the next llama_decode() call drains
-// pending_cold_offloads (see apply_pending_cold_offloads()), losing the
-// overwritten groups' cold copies. Typical server usage chunks prefill by
-// n_ubatch, which drains between chunks and avoids this in practice.
+// Drain timing: pending_cold_offloads is drained by apply_pending_cold_offloads()
+// from llama_kv_cache_kvarn_context::apply(), which the decode loop calls per
+// ubatch (process_ubatch) -- enabled by passing update_lctx into the
+// init_batch/init_kv_batch contexts (see update_lctx member). Without that the
+// drain would only run once per llama_decode() (memory_update at the next
+// call's start), and a single llama_decode spanning more than
+// n_groups_per_stream groups could wrap the ring and silently corrupt the
+// copies.
+//
+// Residual boundary (the general invariant, T003b-pre): the copy of group g
+// races the flush of group g+R that overwrites ring slot g%R, and the
+// enqueue->copy window is at most one ubatch, so a group's copy is safe only
+// while R > 1 + ubatch_groups. With the ring sized as
+// R = visible - tail + in_flight - 1 and in_flight = ubatch_groups (contiguous
+// ubatch), the ubatch terms cancel: the gate reduces to visible > tail + 2,
+// i.e. the hot window itself. For the SWA tail of 2 this means hot >= 512
+// tokens is safe at any ubatch size, hot = 384 sits exactly on the boundary
+// (unsafe in the worst-case alignment), and hot <= 256 loses cold copies even
+// with the per-ubatch drain. Enforcing this at construction is future work;
+// the recommended hot size is >= 512.
 void llama_kv_cache_kvarn::enqueue_cold_offloads(const llama_kv_cache::slot_info & sinfo) const {
     if (cold_groups_per_stream == 0 || sinfo.empty()) {
         return;
