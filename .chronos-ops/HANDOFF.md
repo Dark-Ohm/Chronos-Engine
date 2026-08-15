@@ -1,5 +1,128 @@
 # HANDOFF — контекст для новой сессии Архитектора
 
+**Обновлено: 2026-08-15 #5 — ФИКС ПЕРЕНЕСЁН В ОСНОВНУЮ ВЕТКУ И
+ЗАКОММИЧЕН (см. git log). Продакшн CUDA-билд ещё НЕ пересобран — see
+п.1 в чек-листе ниже. Раунд 6 (kvarn Z-4) ниже НЕ трогали 27 дней,
+статус не проверен, дерево чистое на 2026-07-19, `8cb95a13f`.**
+
+## РЕШЕНО: `Invalid input batch` на конкурентных запросах — root cause + фикс проверен живьём
+
+**Откуда всплыло:** отладка Hindsight (self-hosted память
+ChronOS-экосистемы), которая гоняет `lfm2.5-2.6b` через
+`infra/llama-swap` для retain/main/reflect. Retain периодически ловил
+`HTTP 500: Invalid input batch`, а иногда (хуже) тихо записывал в банк
+факты из чужого конкурентного запроса — контекст одной retain-задачи
+утекал в другую.
+
+**Root cause (найден `git bisect` + подтверждён живым патчем, не
+гипотеза):**
+
+Коммит `367ca3bb8` («kvarn : seq_rm гейтинг (O-6+O-8)», 18 июля 2026)
+добавил в `tools/server/server-context.cpp` гейт вокруг вызова
+`common_context_seq_rm()` при переиспользовании слота:
+
+```cpp
+if (ctx_tgt_seq_rm_type != COMMON_CONTEXT_SEQ_RM_TYPE_FULL) {
+    common_context_seq_rm(ctx_tgt, slot.id, p0, -1);
+}
+```
+
+Замысел — не дёргать частичный `seq_rm` для kvarn-контекстов (они
+поддерживают только полное удаление). Но `ctx_tgt_seq_rm_type`
+считается функцией `common_context_can_seq_rm()`, у которой TRI
+независимых пути дают одинаковый результат `FULL`: recurrent-state
+(`RS`, не наш случай), kvarn (`llama_kvarn_enabled`, тоже не наш
+случай) и **старый fallback-проб** — если у модели `llama_memory_seq_rm`
+пробный вызов возвращает `false` (частичное удаление физически не
+поддерживается движком памяти этой модели), классификация тоже `FULL`.
+
+Живая диагностика (`fprintf` прямо в `common_context_can_seq_rm`,
+модель `LFM2.5-1.2B-Instruct`, CPU-билд):
+```
+DIAG common_context_can_seq_rm: res=2 (FULL), n_rs_seq=0, kvarn_enabled=0
+```
+LFM2.5 — НЕ recurrent-state, НЕ kvarn, но всё равно `FULL` — через
+fallback-проб. Гейт из `367ca3bb8` проверяет только РЕЗУЛЬТАТ (`FULL`),
+не ПРИЧИНУ — и тихо пропускает `seq_rm` для LFM2.5 тоже. Грязный KV
+кэш с предыдущего запроса остаётся в слоте → следующий конкурентный
+запрос стартует с позиции 0 при реальной позиции кэша 13 →
+`the sequence positions must remain consecutive: Y = X + 1` →
+`Invalid input batch`.
+
+Коммит сам себя честно предупреждал в сообщении — «3/4 негейченных
+сайтов защищены» — работа была заведомо неполной, просто гэп не был
+виден до конкурентной нагрузки на не-kvarn модель.
+
+**Верификация (сегодня, `../Chronos-Engine-upstream-test`, CPU-билд):**
+- Чистый апстрим `e920c523e` (13 июля, точка нашего форка) — 5/5 раундов
+  чисто. Баг НЕ унаследован из апстрима.
+- `git bisect` вручную (10 build+test циклов, каждый 5×2 конкурентных
+  запроса) → `367ca3bb8be7ed1185994039e2fe7666c823b7c2 is the first
+  'bad' commit`, родитель `a455e7458` чист.
+- Гипотеза про `cparams.kvarn = params.kvarn` (третий хунк того же
+  коммита) — проверена и ОПРОВЕРГНУТА: убрал только эту строку, баг
+  остался (5/5 падает).
+- Настоящая причина подтверждена диагностическим `fprintf` (см. выше).
+- **Фикс применён и проверен:** заменил во всех 4 местах
+  `server-context.cpp` условие `seq_rm_type != FULL` на
+  `!llama_kvarn_enabled(ctx)` — гейтит именно по причине (kvarn),
+  не по результату классификации. После фикса: **10/10 раундов на 2
+  конкурентных + 3/3 на 3 конкурентных, 0 ошибок в логе.**
+
+**Финальный diff (в worktree `../Chronos-Engine-upstream-test`, НЕ в
+основной ветке):**
+```diff
+--- a/tools/server/server-context.cpp
++++ b/tools/server/server-context.cpp
+@@ -3358,10 +3358,10 @@ private:
+                     SLT_TRC(slot, "cached n_tokens = %d, memory_seq_rm [%d, end)\n", slot.prompt.n_tokens(), p0);
+-                    if (ctx_tgt_seq_rm_type != COMMON_CONTEXT_SEQ_RM_TYPE_FULL) {
++                    if (!llama_kvarn_enabled(ctx_tgt)) {
+                         common_context_seq_rm(ctx_tgt, slot.id, p0, -1);
+                     }
+-                    if (ctx_dft && ctx_dft_seq_rm_type != COMMON_CONTEXT_SEQ_RM_TYPE_FULL) {
++                    if (ctx_dft && !llama_kvarn_enabled(ctx_dft)) {
+                         common_context_seq_rm(ctx_dft, slot.id, p0, -1);
+                     }
+@@ -3889,10 +3889,10 @@ private:
+             slot.sampled = ids.back(); // last accepted token
+             SLT_DBG(slot, "add accepted tokens: sampled=%d, ids.size=%zu, n_draft=%zu\n", slot.sampled, ids.size(), n_draft);
+-            if (ctx_tgt_seq_rm_type != COMMON_CONTEXT_SEQ_RM_TYPE_FULL) {
++            if (!llama_kvarn_enabled(slot.ctx_tgt)) {
+                 common_context_seq_rm(slot.ctx_tgt, slot.id, slot.prompt.tokens.pos_next(), -1);
+             }
+-            if (slot.ctx_dft && ctx_dft_seq_rm_type != COMMON_CONTEXT_SEQ_RM_TYPE_FULL) {
++            if (slot.ctx_dft && !llama_kvarn_enabled(slot.ctx_dft)) {
+                 common_context_seq_rm(slot.ctx_dft, slot.id, slot.prompt.tokens.pos_next(), -1);
+             }
+```
+
+**Что осталось сделать:**
+1. ~~Перенести диф в основную ветку~~ — СДЕЛАНО, коммит `df7e25a89`
+   («server : fix seq_rm gate to check kvarn directly, not FULL
+   classification»), запушен в `chronos-main`.
+2. **Продакшн CUDA-билд ещё НЕ пересобран.** Фикс проверен только на
+   CPU-only worktree-билде (`../Chronos-Engine-upstream-test`,
+   LFM2.5-1.2B). Живой `build/bin/llama-server`, который гоняет
+   `infra/llama-swap`, всё ещё старый — пересборка (`cmake --build
+   build -j$(nproc)`, полная, CUDA) и рестарт затронутых алиасов
+   (`lfm2.5-2.6b`, `lfm-consol`) НЕ выполнены, ждут явного запроса
+   (билды/тесты — по правилу «не запускать самому без запроса»).
+3. После пересборки — живой тест на настоящем `lfm2.5-2.6b` через
+   `infra/llama-swap` (не только 1.2B CPU), конкурентный
+   retain/main/reflect от Hindsight, чтобы закрыть трек целиком.
+4. Убрать worktree: `git worktree remove
+   ../Chronos-Engine-upstream-test` — ПОСЛЕ пересборки/подтверждения
+   прод-билда, не раньше (там же весь диагностический контекст на
+   случай регресса).
+5. Отдельно, не блокер: `reasoning_content` всё равно генерится у
+   `lfm2.5-2.6b` при `--reasoning off --jinja` — жрёт токены/время на
+   каждом retain-вызове (2336 output tokens на один короткий факт).
+   См. `lfm25-reasoning-and-kv-traps` в памяти Claude.
+6. Раунд 6 ниже (Z-4, hot-window retrieval bug) — статус на 27+ дней
+   протух, НЕ считать активным без проверки живым тестом заново.
+
+---
 **Обновлено: 2026-07-19, ночь (раунд 6 роздан; репо приведён к
 продакшн-виду; G-4 нашёл баг корректности Phase 1 → Z-4 топ-приоритет).**
 
