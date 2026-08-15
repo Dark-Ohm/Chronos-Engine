@@ -15,6 +15,7 @@
 *.gguf.json
 *.lastModified
 *.log
+!.chronos-ops/checkpoint/DECISIONS.log
 *.metallib
 *.o
 *.so
