@@ -1,0 +1,4 @@
+vectors=1000 dim=128
+max|delta|            global=0.447447  mean-per-vector=0.268629
+rel L2 (||r-x||/||x||) max=0.164067  mean=0.095403
+norm ratio (||r||/||x||) mean=1.000002  min=0.999609  max=1.000402

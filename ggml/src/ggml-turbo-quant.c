@@ -21,7 +21,6 @@
 
 /* ---------- constants ---------- */
 
-#define TURBO_SEED_ROTATION 42
 #define TURBO_SEED_QJL      1042
 #define TURBO_D             128  /* rotation group size = head_dim (independent of block size) */
 #define TURBO_QJL_CONST     1.2533141373155003f  /* sqrt(pi/2) */
@@ -48,13 +47,7 @@ static const float MIDPOINTS_4BIT[15] = {
      0.070693f,  0.097191f,  0.127056f,  0.162977f,  0.212232f,
 };
 
-/* ---------- rotation matrix (lazy init) ---------- */
-
-static float turbo_rotation[TURBO_D * TURBO_D];
-static float turbo_rotation_t[TURBO_D * TURBO_D]; /* transpose */
-static int   turbo_rotation_initialized = 0;
-
-/* Simple LCG PRNG for deterministic rotation generation */
+/* Simple LCG PRNG for deterministic matrix generation (QJL) */
 static uint64_t turbo_prng_state;
 
 static void turbo_prng_seed(uint64_t seed) {
@@ -71,56 +64,6 @@ static double turbo_prng_normal(void) {
     return sqrt(-2.0 * log(u1)) * cos(2.0 * M_PI * u2);
 }
 
-static void turbo_init_rotation(void) {
-    if (turbo_rotation_initialized) return;
-
-    const int d = TURBO_D;
-
-    /* Generate random Gaussian matrix */
-    turbo_prng_seed(TURBO_SEED_ROTATION);
-    float G[TURBO_D * TURBO_D];
-    for (int i = 0; i < d * d; i++) {
-        G[i] = (float)turbo_prng_normal();
-    }
-
-    /* QR decomposition via modified Gram-Schmidt */
-    /* Q stored column-major in turbo_rotation */
-    memcpy(turbo_rotation, G, d * d * sizeof(float));
-
-    for (int j = 0; j < d; j++) {
-        /* Normalize column j */
-        float norm = 0.0f;
-        for (int i = 0; i < d; i++) {
-            norm += turbo_rotation[i * d + j] * turbo_rotation[i * d + j];
-        }
-        norm = sqrtf(norm);
-        if (norm > 1e-10f) {
-            for (int i = 0; i < d; i++) {
-                turbo_rotation[i * d + j] /= norm;
-            }
-        }
-
-        /* Orthogonalize remaining columns against j */
-        for (int k = j + 1; k < d; k++) {
-            float dot = 0.0f;
-            for (int i = 0; i < d; i++) {
-                dot += turbo_rotation[i * d + j] * turbo_rotation[i * d + k];
-            }
-            for (int i = 0; i < d; i++) {
-                turbo_rotation[i * d + k] -= dot * turbo_rotation[i * d + j];
-            }
-        }
-    }
-
-    /* Compute transpose */
-    for (int i = 0; i < d; i++) {
-        for (int j = 0; j < d; j++) {
-            turbo_rotation_t[i * d + j] = turbo_rotation[j * d + i];
-        }
-    }
-
-    turbo_rotation_initialized = 1;
-}
 
 /* ---------- QJL projection matrix (lazy init, seed-based) ---------- */
 
@@ -146,19 +89,6 @@ static void turbo_init_qjl(void) {
     }
 
     turbo_qjl_initialized = 1;
-}
-
-/* ---------- helper: matrix-vector multiply ---------- */
-
-static void matvec(const float * M, const float * x, float * y, int d) {
-    /* y = M @ x, M is row-major d×d */
-    for (int i = 0; i < d; i++) {
-        float sum = 0.0f;
-        for (int j = 0; j < d; j++) {
-            sum += M[i * d + j] * x[j];
-        }
-        y[i] = sum;
-    }
 }
 
 /* ---------- nearest centroid ---------- */
@@ -237,6 +167,26 @@ static void turbo_cpu_fwht(float * x, int group_size) {
     }
     for (int i = 0; i < group_size; i++) {
         x[i] *= inv_sqrt * turbo_cpu_s2[i];
+    }
+}
+
+/* Inverse WHT: signs2 -> butterfly -> signs1 * 1/sqrt(n). Matches CUDA direction=1. */
+static void turbo_cpu_ifwht(float * x, int group_size) {
+    const float inv_sqrt = (group_size == 128) ? 0.08838834764831845f : 0.125f;
+    for (int i = 0; i < group_size; i++) {
+        x[i] *= turbo_cpu_s2[i];
+    }
+    for (int h = 1; h < group_size; h *= 2) {
+        for (int i = 0; i < group_size; i += h * 2) {
+            for (int j = i; j < i + h; j++) {
+                float a = x[j], b = x[j + h];
+                x[j]     = a + b;
+                x[j + h] = a - b;
+            }
+        }
+    }
+    for (int i = 0; i < group_size; i++) {
+        x[i] *= inv_sqrt * turbo_cpu_s1[i];
     }
 }
 
@@ -530,8 +480,6 @@ size_t quantize_turbo2_tcq(const float * GGML_RESTRICT src, void * GGML_RESTRICT
 /* ---------- TURBO4_0: 4-bit PolarQuant (16 centroids, no QJL) ---------- */
 
 void quantize_row_turbo4_0_ref(const float * GGML_RESTRICT x, block_turbo4_0 * GGML_RESTRICT y, int64_t k) {
-    turbo_init_rotation();
-
     assert(k % QK_TURBO4 == 0);
     const int nb = k / QK_TURBO4;
     const int d  = QK_TURBO4;
@@ -553,14 +501,13 @@ void quantize_row_turbo4_0_ref(const float * GGML_RESTRICT x, block_turbo4_0 * G
             memset(normalized, 0, d * sizeof(float));
         }
 
-        /* Step 2: Rotate */
-        float rotated[TURBO_D];
-        matvec(turbo_rotation, normalized, rotated, d);
+        /* Step 2: Rotate (FWHT, matches CUDA turbo4 set_rows) */
+        turbo_cpu_fwht(normalized, d);
 
         /* Step 3: 4-bit quantization — find nearest of 16 centroids */
         uint8_t indices[TURBO_D];
         for (int i = 0; i < d; i++) {
-            indices[i] = (uint8_t)nearest_centroid_4bit(rotated[i]);
+            indices[i] = (uint8_t)nearest_centroid_4bit(normalized[i]);
         }
 
         /* Step 4: Norm correction */
@@ -580,8 +527,6 @@ void quantize_row_turbo4_0_ref(const float * GGML_RESTRICT x, block_turbo4_0 * G
 }
 
 void dequantize_row_turbo4_0(const block_turbo4_0 * GGML_RESTRICT x, float * GGML_RESTRICT y, int64_t k) {
-    turbo_init_rotation();
-
     assert(k % QK_TURBO4 == 0);
     const int nb = k / QK_TURBO4;
     const int d  = QK_TURBO4;
@@ -596,13 +541,13 @@ void dequantize_row_turbo4_0(const block_turbo4_0 * GGML_RESTRICT x, float * GGM
             rotated_recon[i] = CENTROIDS_4BIT[idx];
         }
 
-        /* Inverse rotate */
+        /* Inverse rotate (FWHT) */
+        turbo_cpu_ifwht(rotated_recon, d);
         float * dst = y + block * d;
-        matvec(turbo_rotation_t, rotated_recon, dst, d);
 
         /* Scale by norm */
         for (int i = 0; i < d; i++) {
-            dst[i] *= norm;
+            dst[i] = rotated_recon[i] * norm;
         }
     }
 }
