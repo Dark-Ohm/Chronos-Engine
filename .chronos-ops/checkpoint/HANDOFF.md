@@ -51,7 +51,11 @@ e4e8762f0 docs : T009 prompt-cache partial match drops cache
 - `T004` — root cause краша fused под multi-seq prefill. P1, блокирует
   возврат fused. Инструмент: `compute-sanitizer` memcheck + initcheck +
   racecheck, `CUDA_LAUNCH_BLOCKING=1`.
-- `T005` — качество turbo-KV как типа (turbo4 PPL ×1.55 к f16 на CPU).
+- `T005` — качество turbo-KV как типа. ВНИМАНИЕ: цифры 8.6542 vs 5.6305
+  (×1.55) сняты на **CUDA**-билде (`build-debug`) и корпусе T001, а НЕ на
+  CPU. После T006/T007 CPU turbo4 даёт 2.4266 против f16 2.3888 (×1.02) на
+  корпусе T002. Разные корпуса и разные бэкенды — сравнивать нельзя,
+  перемерить на текущем HEAD одним корпусом.
 - `T008` — TCQ-заглушки на CPU молча возвращают нули -> `GGML_ABORT`.
   Проверить все шесть TCQ-функций, не только turbo4. НЕ выдан.
 - `T009` — prompt-cache: частичное совпадение молча выбрасывает кэш.

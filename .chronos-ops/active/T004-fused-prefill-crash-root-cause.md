@@ -21,8 +21,9 @@
   «CUDA error: an illegal instruction was encountered». `GGML_TURBO_MMA_FUSED=0`
   (dequant) стабилен (PPL 8.6542, крашей нет).
 - Decode A/B тоже недетерминирован: fused 2.94..24.09 t/s (бимодален), dequant
-  стабилен 23.85..25.25 t/s. Артефакты: `.chronos-ops/active/t001-ab/`,
-  `.chronos-ops/active/t001-numerics/`.
+  стабилен 23.85..25.25 t/s. Артефакты: `.chronos-ops/done/t001-ab/`,
+  `.chronos-ops/done/t001-numerics/` (перенесены из `active/` при
+  чекпоинте #6).
 - Ключевой факт: сообщение на `cudaFuncSetAttribute` — **sticky**: реальный
   фолт произошёл в РАНЬШЕ запущенном асинхронном кернеле, а всплыл на
   ближайшей точке синхронизации. Искать надо первый фолт, не эту строку.

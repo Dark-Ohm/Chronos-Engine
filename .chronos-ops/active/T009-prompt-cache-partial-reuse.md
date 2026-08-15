@@ -74,4 +74,4 @@ llama_completion: unable to reuse common prefix (for example, when the memory is
 
 В любой харнесс, проверяющий кэш, вшивать проверку «кэш использован, а не
 просто открыт» (`replayed >= 1 && wiped == 0`). Без неё тест зелёный и пустой.
-Пример — `.chronos-ops/active/t006-cross.sh`.
+Пример — `.chronos-ops/done/t006-cross.sh`.
