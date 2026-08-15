@@ -183,23 +183,38 @@ stage_groups = tail_groups + 1 (non-SWA) | tail_groups (SWA)   # ~7-9 groups
 --kv-hot-size N        # rounded up to a multiple of 128; 0 = off
 
 # H2O pins — slots inside the compressed record ring:
-h2o_groups = --kv-h2o-groups, capped: h2o_groups <= ring_fraction * n_groups_per_stream
+h2o_groups = min(--kv-h2o-groups, max(1, n_groups_per_stream / 4))   # 0 = off
 ```
 
 Pinning costs no new VRAM (the records are already in the ring); it costs
 **window**: every pinned slot is one fewer slot cycling through the sliding
 window. That is the real budget being spent, and why the cap exists.
 
-| Config | `--kv-hot-size` | h2o_groups | Effect on window |
+**Cap = one quarter of the ring** (`KVAR_H2O_RING_FRACTION_DIVISOR = 4`,
+`llama-kv-cache-kvarn.cpp`). Fixed here as canon by T003a acceptance: the
+divisor is a design constant, not a tunable. Rationale — beyond a quarter
+the pins stop being a bias on the window and start being the window;
+a request above the cap is clamped with a warning, never refused.
+
+**CLI default is 0 (feature off).** The numbers below are recommended
+budgets *once you enable it*, not defaults; without the flag no H2O buffer
+is allocated and `has_h2o()` is false. Same contract as `--kv-hot-size`.
+
+| Config | `--kv-hot-size` | `--kv-h2o-groups` | Effect on window |
 |--------|-----------------|-----------|------------------|
+| Off (default) | 0 | 0 | no pins, no buffers |
 | Minimal | 512 | 8 | 8 ring slots held back |
-| **Default** | **512** | **16** | 16 slots held back |
-| Generous | 1024 | 32 | 32 slots held back — verify against `n_groups_per_stream` before use |
+| **Recommended** | **512** | **16** | 16 slots held back |
+| Generous | 1024 | 32 | 32 slots held back |
+
+**The table assumes a ring large enough to hold the request** — with the
+quarter cap, `h2o_groups = 16` needs `n_groups_per_stream >= 64`. On a
+small context the cap bites and the effective count drops (a 4-group ring
+clamps any request to 1). Check `n_groups_per_stream` in the KVarN startup
+log before reading these rows as achievable.
 
 The old table here multiplied `(hot_groups + h2o_groups) × 4 MB` of F16.
 That arithmetic described a design where H2O lives in F16; it does not.
-
-Even the generous config fits easily in 0.2–0.8 GB budget. **Default: 16 H2O groups (2048 tokens).**
 
 ### 3.4 CLI Flags (extends Phase 1)
 
@@ -207,8 +222,11 @@ Even the generous config fits easily in 0.2–0.8 GB budget. **Default: 16 H2O g
 --kv-hot-size N         # Phase 1, ALREADY EXISTS (common/arg.cpp:2288).
                         # Unit is TOKENS, not groups; rounded up to a multiple of 128.
                         # 0 disables the hot window. There is no --kv-hot-groups.
---kv-h2o-groups N       # Phase 2, new: heavy-hitter groups pinned per layer.
-                        # Capped at a fraction of n_groups_per_stream (§2.3).
+--kv-h2o-groups N       # Phase 2, EXISTS since T003a (common/arg.cpp:2307).
+                        # Unit is GROUPS (128 tokens), NOT tokens, and there is
+                        # no rounding -- deliberately unlike --kv-hot-size.
+                        # 0 disables (default). Clamped at cache construction to
+                        # n_groups_per_stream / 4 with a warning (§2.3, §3.3).
 ```
 
 `--kv-h2o-prefill-only` is **deleted from this spec**. There is no decode
@@ -334,8 +352,11 @@ built on a broken window measures nothing.
    groups that lie outside the SWA window (§5, row 5) — otherwise the pin is
    invisible to the kernel.
 7. **Integration test:** Qwythos-9B, `--kv-hot-size 512 --kv-h2o-groups 16
-   --ctx-size 262144`. Retrieval (NIAH) must improve over hot-window-only at
-   equal VRAM; PPL and VRAM reported from artifacts, not estimated.
+   --ctx-size 262144`. Confirm from the startup log that the request was NOT
+   clamped (needs `n_groups_per_stream >= 64`, §3.3) — a clamped run measures
+   1 pinned group, not 16, and reads as "H2O does nothing". Retrieval (NIAH)
+   must improve over hot-window-only at equal VRAM; PPL and VRAM reported
+   from artifacts, not estimated.
 
 ---
 
