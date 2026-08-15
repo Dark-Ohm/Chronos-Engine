@@ -13,11 +13,18 @@
 
 | Что в спеке | Что в коде |
 |-------------|------------|
-| H2O scoring kernel (`ggml_kvarn_h2o_score`) | ❌ Нет |
-| Graph node для scoring pass | ❌ Нет |
-| CLI: `--kv-h2o-groups`, `--kv-h2o-prefill-only` | ❌ Нет |
-| Поля `h2o_group_flags`, `h2o_scores` в KV cache | ❌ Нет |
-| Prefill-only H2O selection | ❌ Нет |
+| Накопление скоров в attention-пути (§1.3) | ❌ Нет |
+| CLI: `--kv-h2o-groups` | ❌ Нет |
+| Поля `h2o_group_flags`, `h2o_group_scores` в KV cache | ❌ Нет |
+| Пин групп против перезаписи в кольце + проброс их в live-set `view()` | ❌ Нет |
+
+**Ревизия 2026-08-16 (T003d).** Прошлая редакция описывала Phase 1,
+которой нет: `hot_boundary`, `flush_hot_to_cold()`, prefetch ring, «F16 до
+n_ctx», «K/V уже в VRAM». Отдельный scoring-пасс (`ggml_kvarn_h2o_score`,
+`build_h2o_scores()`, SnapKV observation window, `causal=false`) и флаг
+`--kv-h2o-prefill-only` из спеки удалены как нереализуемые/лишние. Принято:
+скоры накапливаются по ходу prefill с горизонтом стейджа, удержание — пин в
+сжатом кольце, отбор — per-layer.
 
 **Зависит от:** Phase 1 SPEC (`tiered-kv-offload-PHASE1-SPEC.md`) — но даже Phase 1 не полностью реализована.
 
@@ -29,50 +36,85 @@
 
 Flash-attention (and KVarN's `ggml_kvarn_view` kernel) never materializes the full K×Q matrix. We only get the final attention output `O = softmax(QK^T)V`. The per-token attention scores (`softmax(QK^T)_i`) are intermediate values inside the kernel and are **not** exposed to the host or graph.
 
-### 1.2 Candidate Approaches (from literature + what's feasible in llama.cpp)
+### 1.2 Candidate Approaches (judged against the real Phase 1 layout)
 
-| Approach | Source | How it works | Memory / Speed cost on Qwythos | Feasibility |
-|----------|--------|--------------|--------------------------------|-------------|
-| **A1. Full-prefix scoring pass (prefill only)** | H2O §3.1, SnapKV §3.1 | Run a separate attention pass with `causal=false`, scoring every query against every key, output per-token scores. | `2·n_q·n_k·d` per head-layer, `n_q=n_k=262144`, `d=256`, × 16 q-heads × 8 layers ≈ **4.5 PFLOPs total** ≈ several minutes at 20 TFLOPs fp16 peak (RTX 3070). **NOT negligible — impractical for Phase 2.** | Rejected as default: cost scales O(n²) with context, defeats the purpose at 262K. |
-| **A2. SnapKV-style observation window (prefill only)** | SnapKV §3.1 | Score only the last `W` prefill queries against all keys (not the full prefix) — SnapKV shows the observation window is sufficient to identify heavy hitters. | `2·W·n_k·d` per head-layer × 16 heads × 8 layers, `n_k=262144`: W=128 → ≈2.2 TFLOPs (~110ms); W=512 → ≈8.8 TFLOPs (~440ms); W=1024 → ≈17.6 TFLOPs (~0.9s). | **Recommended.** Same graph hook as A1, bounded query range instead of full prefix — cost independent of how long the tail of scoring needs to look, still O(n_k) in keys. |
-| **B. Scoring during prefill, piggyback on existing FA kernel** | H2O §4.1 (greedy H2) | Modify KVarN flash-attn kernel to accumulate per-token attention mass into a side buffer. | Zero extra kernel launches; adds atomicAdd or warp-reduce per token in the kernel. ~5-10% kernel overhead. | Possible but invasive to KVarN CUDA kernel (dkm kernel). Prefer A for Phase 2. |
-| **C. Approximation by K-norms** | SnapKV §3.2 (Fig 3), TokenSkipping §3 | `score_i ≈ ‖K_i‖²` or `‖K_i‖` (no Q needed). Pre-compute at token write time (`cpy_k`). | Zero runtime overhead. K-norm buffer: 8 layers × 4 heads × 262K × 2 bytes = 1.6 MB (fp16). | **Fallback** if A proves too slow. Quality loss: SnapKV §3.2 shows norm correlates with attention mass but not perfectly (correlation reported, exact R not stated in paper). |
-| **D. Sliding-window update on decode** | H2O §4.2 (dynamic H2) | Update scores incrementally: `score_i ← α·score_i + (1-α)·attn_i` each decode step. | Requires materializing per-step attention scores → back to Problem 1. Not viable without kernel support. | **Deferred** to Phase 3. |
+**Hard constraint that kills the entire A family.** Any "scoring pass at
+prefill end" assumes the prefix K/V are still readable when the pass runs.
+In Phase 1 they are not:
 
-### 1.3 Recommended: Approach A — Dedicated Scoring Pass at Prefill End
+- The F16 stage holds only `stage_groups` (`llama-kv-cache-kvarn.h:222`) —
+  the positional tail, ~7-9 groups, **not** `n_ctx`.
+- Older groups exist only as compressed records in the GPU ring, and
+  `host_cold_k/v_records` is a write-through mirror for export
+  (`enqueue_cold_offloads` / `offload_group_to_host`,
+  `llama-kv-cache-kvarn.cpp:1036/1063`) — never read back for attention.
+- There is no cold→hot promotion path.
 
-**Why:**
-- Runs **once** at the end of prefill (when all tokens are present).
-- Uses existing graph infrastructure: add a `llm_graph_input_h2o_score` node type, build it in `llm_graph_context::build_h2o_scores()`.
-- Reuses the *same* KVarN flash-attention kernel path with a modified epilogue that writes `rowsum(softmax(QK^T))` to a side buffer instead of reducing into V.
-- No changes to the hot-path decode kernels.
+So at prefill end there is nothing left to score. This is a property of
+the storage design, not a tuning problem.
 
-**Buffer layout (VRAM, per layer):**
+| Approach | Source | How it works | Verdict against Phase 1 |
+|----------|--------|--------------|-------------------------|
+| **A1. Full-prefix scoring pass** | H2O §3.1, SnapKV §3.1 | Separate attention pass over every query × every key at prefill end. | **Rejected twice over.** Prefix K/V are gone by then (constraint above); and even if present, `2·n_q·n_k·d × 16 heads × 8 layers` at `n_q=n_k=262144, d=256` ≈ **4.5 PFLOPs** ≈ minutes on an RTX 3070. |
+| **A2. SnapKV observation window** | SnapKV §3.1 | Score only the last `W` queries against all keys at prefill end. | **Rejected.** Cost would be acceptable (`W=512` ≈ 8.8 TFLOPs ≈ 440 ms), but it needs all keys readable at prefill end — they are not. Its formula also requires looking backwards from a window that does not exist yet while prefill is still running. |
+| **B. Accumulate during prefill (chosen)** | H2O §4.1 (greedy H2) | Each prefill ubatch adds its attention mass to every group still live in the F16 stage; a group's score freezes when it leaves the stage. | **Chosen.** The only variant that reads K/V while they are still readable. Costs no extra pass — it piggybacks on attention already being computed. See §1.3. |
+| **C. Approximation by K-norms** | SnapKV §3.2 (Fig 3) | `score_i ≈ ‖K_i‖²`, computed at write time, no Q needed. | **Fallback** if B's kernel work proves too invasive. Quality loss: norm correlates with attention mass but imperfectly. Cheap: 8 layers × 4 heads × 262K × 2 B = 1.6 MB. |
+| **D. Sliding-window update on decode** | H2O §4.2 (dynamic H2) | Update scores each decode step. | **Deferred to Phase 3.** Needs per-step attention scores — Problem 1 again. |
+
+### 1.3 Chosen: Approach B — Accumulation During Prefill ("H2O with a stage horizon")
+
+**How it works.** Every prefill ubatch adds the attention mass it produced
+to **all groups still living in the F16 stage** at that moment. When a
+group leaves the stage and is compressed into a record, its accumulated
+score is **frozen** and never updated again.
+
+**This is not a single snapshot.** Scoring a group once, at the instant it
+flushes, would record the attention of the last ubatch only — that is not
+H2O and must not be implemented.
+
+**Horizon — say it out loud.** A group accumulates mass only from the
+queries that arrive while it is still in the stage: roughly `stage_groups`
+worth of "future", order 1K tokens. Zhang et al. accumulate over the whole
+remaining suffix. Ours is therefore **H2O with a stage horizon**, and it
+must be named that way everywhere. Consequence to accept openly: a token
+that becomes important much later in the prompt cannot be recognised — its
+group froze long before. If measurements later show this matters, the fix
+is Phase 3 (decode-side refresh), not a re-reading of dead K/V.
+
+**Causality is structural.** The mass comes from attention prefill already
+computed causally — each query sees only its own prefix. There is no
+separate scoring pass, hence no mask to choose and no `causal=false`
+anywhere in Phase 2. The "observation window votes for itself" failure mode
+does not exist in this design.
+
+**Buffer layout (VRAM, per layer) — one contract, not three:**
 ```
-h2o_scores: float[GQA * n_ctx]   // 4 heads × 262144 × 4B = 4 MB per layer × 8 layers = 32 MB total
-h2o_norm:   half [GQA * n_ctx]   // Optional fallback: 4 × 262K × 2B = 2 MB per layer
+h2o_group_scores: float[n_kv_heads][max_groups][n_layers]
+// Qwythos: 4 KV-heads × 2048 groups × 8 layers × 4 B = 256 KB total.
+// Accumulated per KV-head; no per-key scratch buffer exists in this design.
 ```
 
-**Scoring kernel signature (new):**
-```cpp
-// In llama-kvarn.cu (alongside ggml_kvarn_view)
-void ggml_kvarn_h2o_score(const ggml_tensor *q, const ggml_tensor *k, const ggml_tensor *v,
-                          float *scores,   // output: [n_heads, n_tokens]
-                          int n_groups, int group_size,  // KVarN tiling params
-                          cudaStream_t stream);
-```
-- Input Q/K/V are the prefill tensors (already in VRAM, F16 stage).
-- Runs with `causal=false` (full attention over prefill prefix).
-- Each thread block handles one head × one tile; warp-reduce rowsum of softmax.
-- Writes per-token mass for that head.
+**GQA reduction (16 Q-heads → 4 KV-heads):** the mass of the Q-heads
+belonging to one KV-head is **summed** (attention mass is additive; a mean
+only rescales it and loses "how much arrived in total"). Scores are stored
+per KV-head.
 
-**Cost estimate (Qwythos, 16 q-heads, 8 attn layers, 262K prefill):**
-- Full-prefix (A1): `2 × n_q × n_k × d × heads × layers` = `2 × 262144² × 256 × 16 × 8` ≈ **4.5 PFLOPs**. At 20 TFLOPs fp16 peak (RTX 3070): ≈ **4 minutes**, more in practice (full attention rarely hits peak). **Not acceptable for Phase 2** — this is why A2 is recommended instead.
-- Observation window (A2, recommended), `W=512`: `2 × 512 × 262144 × 256 × 16 × 8` ≈ **8.8 TFLOPs** ≈ **~440 ms** extra prefill latency. Acceptable one-time cost.
+**From scores to flags:** sum over KV-heads → `[max_groups][n_layers]` →
+take top-K within each layer → set bits in
+`h2o_group_flags[max_groups][n_layers]`. Selection is per-layer: different
+layers attend to different things, and collapsing them into one global set
+destroys exactly the signal H2O exists to capture.
 
-**Correction history (two prior wrong numbers, both from the fired Hermes H-11/H-11b review):**
-1. First claim: "0.5-2 GFLOPs per 1K tokens" — wrong, missing the `n_k` (all-keys) factor entirely.
-2. Second claim (presented as a fix): "1.1 TFLOPs / ~55ms" for full-prefix scoring — wrong by ~3 orders of magnitude; the formula `2·n_q·n_k·d` was quoted correctly but never evaluated with real numbers (16 heads, 262144² term). Verified by the Architect 2026-07-19 by direct substitution; see numbers above. This is also why Phase 2 defaults to the SnapKV observation window (A2), not full-prefix scoring (A1).
+**Correction history (two prior wrong numbers, both from the fired Hermes
+H-11/H-11b review):**
+1. "0.5-2 GFLOPs per 1K tokens" — wrong, missing the `n_k` (all-keys) factor.
+2. "1.1 TFLOPs / ~55ms" for full-prefix scoring — wrong by ~3 orders of
+   magnitude; the formula was quoted correctly but never evaluated with real
+   numbers. Verified by direct substitution 2026-07-19; see A1 above.
+
+Both are kept here because the FLOP figures still justify rejecting A1 on
+cost alone — but note that A1/A2 are now rejected primarily on **feasibility**
+(the data is gone), not on price.
 
 ---
 
@@ -91,10 +133,21 @@ KVarN stores compressed records **per group of 128 tokens** (`KVAR_N_GROUP`). Th
 
 ### 2.3 Decision: **Per-group selection**
 
-- Select top `H2O_GROUPS` groups by mean score.
-- These groups stay in VRAM F16 stage (promoted from cold or never flushed).
-- Migration: when a group is selected as heavy-hitter, its F16 stage data is **retained** (not flushed to cold) and marked `is_h2o = true` in the metadata cache.
-- The hot window (`--kv-hot-groups`) and H2O groups coexist in VRAM F16 stage; total F16 budget = hot_groups + h2o_groups.
+- Select top `H2O_GROUPS` groups per layer by accumulated score (§1.3).
+- **H2O groups are pinned in the compressed GPU record ring — not in the
+  F16 stage.** The stage is a fixed-depth positional tail, not storage;
+  nothing can be held there persistently. What pinning actually buys: when
+  `--kv-hot-size` turns the model into a windowed (fake-SWA) ring
+  (`llama_kvarn_apply_hot_window`, `llama-model.cpp:2037`), pinned groups
+  are **not** handed out for overwrite on wraparound, while unpinned ones
+  are evicted as they are today.
+- Accepted cost of this: H2O groups survive at **record precision**
+  (`key_bits`/`value_bits`), not F16. Any claim that heavy hitters are
+  retained losslessly is false.
+- **Budget:** pinning shrinks the effective sliding window, so the pinned
+  count is capped as a fraction of `n_groups_per_stream` (the ring's
+  per-stream capacity, `llama-kv-cache-kvarn.h:224`). Beyond the cap,
+  additional candidates are simply not pinned. Default kept conservative.
 
 ---
 
@@ -119,41 +172,66 @@ For **8 attention layers**: 512 KB × 8 = **4 MB per group**.
 
 ### 3.3 Budget Allocation Formula
 
-```
-hot_groups  = --kv-hot-groups      (default: 4 = 512 tokens)
-h2o_groups  = --kv-h2o-groups      (NEW flag, default: 16 = 2048 tokens)
-total_f16_groups = hot_groups + h2o_groups
+H2O groups are **not** F16, so they do not add to the F16 budget. The two
+budgets are independent:
 
-f16_vram_mb = total_f16_groups * 4 MB
+```
+# F16 tail stage — fixed by position semantics, NOT by a CLI flag:
+stage_groups = tail_groups + 1 (non-SWA) | tail_groups (SWA)   # ~7-9 groups
+
+# Hot window — tokens, not groups:
+--kv-hot-size N        # rounded up to a multiple of 128; 0 = off
+
+# H2O pins — slots inside the compressed record ring:
+h2o_groups = --kv-h2o-groups, capped: h2o_groups <= ring_fraction * n_groups_per_stream
 ```
 
-| Config | hot_groups | h2o_groups | F16 VRAM | Cold buffer (kvarn4 @ 262K) | Total KV VRAM |
-|--------|------------|------------|----------|-----------------------------|---------------|
-| Minimal | 2 | 8 | 40 MB | 0 (all in RAM) | 40 MB |
-| **Default** | **4** | **16** | **80 MB** | **~0 MB** (all cold in RAM) | **80 MB** |
-| Generous | 8 | 32 | 160 MB | 0 | 160 MB |
+Pinning costs no new VRAM (the records are already in the ring); it costs
+**window**: every pinned slot is one fewer slot cycling through the sliding
+window. That is the real budget being spent, and why the cap exists.
+
+| Config | `--kv-hot-size` | h2o_groups | Effect on window |
+|--------|-----------------|-----------|------------------|
+| Minimal | 512 | 8 | 8 ring slots held back |
+| **Default** | **512** | **16** | 16 slots held back |
+| Generous | 1024 | 32 | 32 slots held back — verify against `n_groups_per_stream` before use |
+
+The old table here multiplied `(hot_groups + h2o_groups) × 4 MB` of F16.
+That arithmetic described a design where H2O lives in F16; it does not.
 
 Even the generous config fits easily in 0.2–0.8 GB budget. **Default: 16 H2O groups (2048 tokens).**
 
 ### 3.4 CLI Flags (extends Phase 1)
 
 ```bash
---kv-hot-groups N       # Phase 1: hot window groups (default 4)
---kv-h2o-groups N       # Phase 2: heavy-hitter groups to pin in VRAM (default 16)
---kv-h2o-prefill-only   # If set, H2O selection runs ONLY on prefill; no decode refresh
+--kv-hot-size N         # Phase 1, ALREADY EXISTS (common/arg.cpp:2288).
+                        # Unit is TOKENS, not groups; rounded up to a multiple of 128.
+                        # 0 disables the hot window. There is no --kv-hot-groups.
+--kv-h2o-groups N       # Phase 2, new: heavy-hitter groups pinned per layer.
+                        # Capped at a fraction of n_groups_per_stream (§2.3).
 ```
+
+`--kv-h2o-prefill-only` is **deleted from this spec**. There is no decode
+refresh to turn off (§4.2), so a switch defaulting to `true` would only
+document an alternative that does not exist.
 
 ---
 
 ## 4. Update Policy: Prefill vs Decode
 
-### 4.1 Prefill (One-shot Selection)
+### 4.1 Prefill (Accumulate, Then Select)
 
-1. Prefill runs normally, fills F16 stage up to `n_ctx`.
-2. At prefill end, **before first decode**, launch H2O scoring pass (Section 1.3).
-3. Compute per-group mean scores, select top `h2o_groups`.
-4. Mark those groups `is_h2o = true` in metadata cache.
-5. When F16 stage flushes to cold (window shift), skip flushing H2O groups — they stay in VRAM.
+1. Prefill runs normally. The F16 stage holds `stage_groups` — the tail —
+   and rolls; it does **not** fill up to `n_ctx`.
+2. **During** prefill, each ubatch adds its attention mass to every group
+   still live in the stage (§1.3). A group's score freezes as it leaves.
+3. At prefill end all groups already carry frozen scores. No separate
+   scoring pass runs, and none is possible (§1.2).
+4. Sum over KV-heads, take top-`h2o_groups` **per layer**, set bits in
+   `h2o_group_flags[max_groups][n_layers]`, subject to the ring-fraction
+   cap (§2.3).
+5. From then on the windowed ring skips pinned groups when choosing a slot
+   to overwrite.
 
 ### 4.2 Decode: Periodic Refresh (Optional, Off by Default)
 
@@ -161,9 +239,11 @@ H2O paper (§4.2) shows dynamic heavy-hitter update helps on very long generatio
 - Requires per-step attention scores (Problem 1).
 - Without kernel support, not feasible.
 
-**Phase 2 decision:** `--kv-h2o-prefill-only` = **true** (default). H2O set is static after prefill.
-- Simpler, no decode overhead.
+**Phase 2 decision:** the H2O set is static after prefill, and there is no
+flag for it — decode refresh is simply not implemented (deferred to Phase 3).
 - Quality: H2O §4.2 shows prefill-only retains >90% of heavy hitters for typical chat/coding workloads (heavy hitters = early system prompts, function defs, etc.).
+- Note this figure comes from full-suffix accumulation; with a stage horizon
+  (§1.3) it is an upper bound for us, not a promise.
 
 ### 4.3 Interaction with `seq_rm=FULL` (D-011)
 
@@ -183,16 +263,19 @@ Phase 1 implements: host-pinned cold buffer, hot F16 stage, metadata cache, asyn
 
 | # | What Phase 2 needs | Where in Phase 1 code | Purpose |
 |---|-------------------|----------------------|---------|
-| 1 | `hot_boundary` field in `llama_kv_cache_kvarn` | `llama-kv-cache-kvarn.h` | Already exists. Used to know where hot ends. |
-| 2 | **New field:** `uint32_t *h2o_group_flags` (bitmask or bool array, size = max_groups) | `llama-kv-cache-kvarn.h` | Marks which groups are H2O-pinned. Checked during flush. |
-| 3 | **New field:** `float *h2o_scores` (per-group mean score, size = max_groups × n_layers) | `llama-kv-cache-kvarn.h` | Written by scoring pass; read by selection logic. |
-| 4 | **Hook in store/flush path:** `if (h2o_group_flags[g]) skip_flush_to_cold(g);` | `llama-kv-cache-kvarn.cpp::store()` / `flush_hot_to_cold()` | Prevents H2O groups from migrating to RAM. |
-| 5 | **Hook in view path:** H2O groups sourced from F16 stage (same as hot) | `llama-kv-cache-kvarn.cpp::view()` / `ggml_kvarn_view` | No code change needed — H2O groups simply remain in F16 stage tensors. |
-| 6 | **CLI param plumbing:** `--kv-h2o-groups` → `cparams.kvarn.h2o_groups` → `llama_kv_cache_kvarn` ctor | `llama.h`, `llama-context.cpp`, `llama-kv-cache-kvarn.cpp` | Standard pattern, same as `--kv-hot-groups`. |
-| 7 | **Graph node for scoring:** `llm_graph_input_h2o_score` + `build_h2o_scores()` | `src/llama-graph.cpp` | New file or section; calls `ggml_kvarn_h2o_score` kernel. |
-| 8 | **Scoring kernel:** `ggml_kvarn_h2o_score` | `ggml-cuda/kvarn.cu` (new function) | Runs once at prefill end. |
+| 1 | ~~`hot_boundary` field~~ — **does not exist.** | — | The field appears only in the Phase 1 design docs, never in `src/`. Phase 2 must not reference it. Stage depth is `stage_groups` (`llama-kv-cache-kvarn.h:222`); ring capacity is `n_groups_per_stream` (`:224`). |
+| 2 | **New field:** `h2o_group_flags`, size = **`max_groups × n_layers`** | `llama-kv-cache-kvarn.h` | Per-layer pin bits (§1.3). A single global `max_groups` vector is wrong — layers select different groups. |
+| 3 | **New field:** `h2o_group_scores`, `float[n_kv_heads][max_groups][n_layers]` | `llama-kv-cache-kvarn.h` | Accumulated during prefill (§1.3). There is **no** per-key scratch buffer in this design. |
+| 4 | **Hook in the ring's overwrite path:** a pinned group is not offered as a wraparound victim | `llama-kv-cache-kvarn.cpp::store()` and the SWA ring slot selection | ~~`flush_hot_to_cold()` does not exist.~~ The real write path is `enqueue_cold_offloads()` → `offload_group_to_host()` (`:1036`/`:1063`), and it is a write-through export mirror — skipping it would not retain anything. Retention happens by not overwriting the ring slot. |
+| 5 | **Hook in view path: REQUIRED, not free.** The `ggml_kvarn_view` call itself stays single-source, but the live set must change | `llama-kv-cache-kvarn.cpp::view()` (`:1397`), `mat_idxs` / `n_kv` / metadata cells | Pinned groups sit **outside** the SWA window. Unless the indices, `n_kv` and metadata cells carry them, the kernel never asks for those records and the pin buys nothing. "No code change needed" was false. |
+| 6 | **CLI param plumbing:** `--kv-h2o-groups` alongside `kv_hot_size` | `common/arg.cpp`, `llama.h`, `llama-context.cpp`, `llama-kv-cache-kvarn.cpp` | Follow how `kv_hot_size` is plumbed — it lives **next to** the kvarn params, not inside `llama_kvarn_params`. There is no `cparams.kvarn.h2o_groups` slot today. |
+| 7 | **Accumulation hook in the attention path** (replaces the old "graph node for a scoring pass") | attention/KVarN kernel epilogue | Adds each ubatch's mass to still-live stage groups; freezes on eviction. No standalone scoring graph node, no `build_h2o_scores()` at prefill end. |
+| 8 | ~~**Scoring kernel** `ggml_kvarn_h2o_score`~~ — **not needed** | — | Approach A is rejected (§1.2); there is no separate pass to launch. |
 
-**No other Phase 1 changes required.** The prefetch infra, cold buffer, metadata cache, hot window logic all stay exactly as designed.
+**What Phase 1 provides unchanged:** compressed GPU record ring, F16 tail
+stage, host-pinned cold export mirror, metadata cache, hot-window logic.
+**What Phase 1 does NOT provide, contrary to earlier drafts:** any prefetch
+ring for attention reads, any cold→hot promotion, any `hot_boundary` field.
 
 ---
 
@@ -231,12 +314,28 @@ Phase 1 implements: host-pinned cold buffer, hot F16 stage, metadata cache, asyn
 
 ## 8. Implementation Sequence (Phase 2)
 
-1. **Add fields to `llama_kv_cache_kvarn`** (h2o_group_flags, h2o_scores, h2o_groups count).
-2. **Wire CLI flags** through `llama_context_params` → `cparams.kvarn` → kv_cache ctor.
-3. **Implement `ggml_kvarn_h2o_score` kernel** in `ggml-cuda/kvarn.cu` (reuse flash-attn tiling, add rowsum epilogue).
-4. **Add graph node + build function** in `llama-graph.cpp`: `build_h2o_scores()` called from `llama_init_from_model` after prefill graph is built, before first decode.
-5. **Modify flush logic** in `llama-kv-cache-kvarn.cpp` to respect `h2o_group_flags`.
-6. **Integration test:** Qwythos-9B, `--kv-hot-groups 4 --kv-h2o-groups 16 --ctx-size 262144`, verify VRAM < 1 GB, PPL within 1% of full-attention baseline at 32K (extrapolated).
+**Gate:** none of this starts before [[T010]] is closed by a live run —
+`--kv-hot-size` currently breaks retrieval *inside* the window, and H2O
+built on a broken window measures nothing.
+
+1. **Fields** in `llama_kv_cache_kvarn`: `h2o_group_flags[max_groups][n_layers]`,
+   `h2o_group_scores[n_kv_heads][max_groups][n_layers]`, pinned-group count.
+2. **CLI plumbing** for `--kv-h2o-groups`, following how `kv_hot_size` is
+   plumbed (next to the kvarn params, not inside `llama_kvarn_params`).
+3. **Accumulation** in the attention path: add each ubatch's mass to
+   still-live stage groups, freeze on eviction (§1.3). No separate kernel,
+   no `build_h2o_scores()`, no `llama_init_from_model` hook — at context
+   creation time prefill has not happened yet, so there is nothing to score
+   there.
+4. **Selection**: sum over KV-heads → top-K per layer → set pin bits, subject
+   to the ring-fraction cap (§2.3).
+5. **Ring retention**: pinned groups are not chosen as wraparound victims.
+6. **Read path**: `mat_idxs` / `n_kv` / metadata cells must carry pinned
+   groups that lie outside the SWA window (§5, row 5) — otherwise the pin is
+   invisible to the kernel.
+7. **Integration test:** Qwythos-9B, `--kv-hot-size 512 --kv-h2o-groups 16
+   --ctx-size 262144`. Retrieval (NIAH) must improve over hot-window-only at
+   equal VRAM; PPL and VRAM reported from artifacts, not estimated.
 
 ---
 
@@ -246,13 +345,17 @@ Phase 1 implements: host-pinned cold buffer, hot F16 stage, metadata cache, asyn
 |--------|----------|------|
 | Weights (Q4_K_M) | VRAM | 5.9 GB |
 | Desktop / compositor | VRAM | 1.3–1.9 GB |
-| **F16 hot stage (4 groups)** | VRAM | 16 MB |
-| **F16 H2O stage (16 groups)** | VRAM | 64 MB |
+| **F16 tail stage (`stage_groups`, ~7–9 groups)** | VRAM | ~28–36 MB |
+| **KVarN compressed record ring** (H2O pins live here, at record precision) | VRAM | sized by `n_groups_per_stream` |
 | Metadata cache (positions, flags) | VRAM | ~2 MB |
-| KVarN compressed records (cold) | **RAM (host-pinned)** | ~1.3 GB |
-| Prefetch ring buffer (2 groups) | VRAM | 8 MB |
-| H2O scores (float, 8 layers × 2048 groups) | VRAM | 64 KB |
-| **Total KV VRAM** | | **~90 MB** |
-| **Headroom** | | **110–710 MB** |
+| Cold export mirror (write-through, never read for attention) | **RAM (host-pinned)** | ~1.3 GB |
+| H2O scores `float[4 kv-heads][2048 groups][8 layers]` | VRAM | 256 KB |
+| H2O pin flags `[2048 groups][8 layers]` | VRAM | 2 KB |
 
-Fits comfortably in 0.2–0.8 GB budget.
+**Removed from this appendix:** the "F16 H2O stage (16 groups)" row — H2O
+groups are pinned in the compressed ring, not held in F16 (§2.3) — and the
+"Prefetch ring buffer (2 groups)" row, which described infrastructure that
+does not exist (see §5). Any total that summed those rows was fiction.
+
+The remaining figures are layout arithmetic, not measurements. Real VRAM
+numbers come from the integration test in §8, from artifacts.
