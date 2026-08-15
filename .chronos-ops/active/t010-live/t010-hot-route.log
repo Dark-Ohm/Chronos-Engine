@@ -1,0 +1,928 @@
+0.00.017.516 I cmn  common_param: common_params_print_info: verbosity = 3 (adjust with the `-lv N` CLI arg)
+0.00.111.080 I srv    load_model: loading model 'models/main/dence/Qwythos-9B-v3-1M-MTP-Q4_K_M-fixed.gguf'
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=32768 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x8000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=32768 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x8000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=32768 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x8000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=32768 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x8000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=32768 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x8000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=32768 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x8000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=32768 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x8000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=32768 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x8000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=32768 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x8000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=32768 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x8000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=32768 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x8000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=32768 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x8000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=32768 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x8000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=32768 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x8000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=32768 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x8000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=32768 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x8000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=32768 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x8000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=32768 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x8000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=32768 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x8000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=32768 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x8000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=32768 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x8000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=32768 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x8000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=32768 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x8000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=32768 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x8000
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,2,16,1] K=[256,256,4,1] V=[256,256,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,2,16,1] n_kv=256 n_kv_heads=4 n_stream=1 q_stream=1 chunk=256 ncols=[2,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,2,16,1] K=[256,256,4,1] V=[256,256,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,2,16,1] n_kv=256 n_kv_heads=4 n_stream=1 q_stream=1 chunk=256 ncols=[2,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,2,16,1] K=[256,256,4,1] V=[256,256,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,2,16,1] n_kv=256 n_kv_heads=4 n_stream=1 q_stream=1 chunk=256 ncols=[2,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,2,16,1] K=[256,256,4,1] V=[256,256,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,2,16,1] n_kv=256 n_kv_heads=4 n_stream=1 q_stream=1 chunk=256 ncols=[2,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,2,16,1] K=[256,256,4,1] V=[256,256,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,2,16,1] n_kv=256 n_kv_heads=4 n_stream=1 q_stream=1 chunk=256 ncols=[2,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,2,16,1] K=[256,256,4,1] V=[256,256,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,2,16,1] n_kv=256 n_kv_heads=4 n_stream=1 q_stream=1 chunk=256 ncols=[2,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,2,16,1] K=[256,256,4,1] V=[256,256,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,2,16,1] n_kv=256 n_kv_heads=4 n_stream=1 q_stream=1 chunk=256 ncols=[2,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,2,16,1] K=[256,256,4,1] V=[256,256,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,2,16,1] n_kv=256 n_kv_heads=4 n_stream=1 q_stream=1 chunk=256 ncols=[2,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,2,16,1] K=[256,256,4,1] V=[256,256,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,2,16,1] n_kv=256 n_kv_heads=4 n_stream=1 q_stream=1 chunk=256 ncols=[2,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,2,16,1] K=[256,256,4,1] V=[256,256,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,2,16,1] n_kv=256 n_kv_heads=4 n_stream=1 q_stream=1 chunk=256 ncols=[2,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,2,16,1] K=[256,256,4,1] V=[256,256,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,2,16,1] n_kv=256 n_kv_heads=4 n_stream=1 q_stream=1 chunk=256 ncols=[2,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,2,16,1] K=[256,256,4,1] V=[256,256,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,2,16,1] n_kv=256 n_kv_heads=4 n_stream=1 q_stream=1 chunk=256 ncols=[2,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,2,16,1] K=[256,256,4,1] V=[256,256,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,2,16,1] n_kv=256 n_kv_heads=4 n_stream=1 q_stream=1 chunk=256 ncols=[2,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,2,16,1] K=[256,256,4,1] V=[256,256,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,2,16,1] n_kv=256 n_kv_heads=4 n_stream=1 q_stream=1 chunk=256 ncols=[2,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,2,16,1] K=[256,256,4,1] V=[256,256,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,2,16,1] n_kv=256 n_kv_heads=4 n_stream=1 q_stream=1 chunk=256 ncols=[2,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,2,16,1] K=[256,256,4,1] V=[256,256,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,2,16,1] n_kv=256 n_kv_heads=4 n_stream=1 q_stream=1 chunk=256 ncols=[2,4] domain=rotated_k_original_v bits=[4,4]
+0.01.298.996 I srv    load_model: initializing, n_slots = 1, n_ctx_slot = 8192, kv_unified = 'false'
+0.01.312.385 I srv          init: chat template supports preserving reasoning, consider enabling it via --reasoning-preserve
+0.01.312.417 I srv  llama_server: model loaded
+0.01.312.420 I srv  llama_server: listening on http://127.0.0.1:8099
+0.17.973.320 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = -1
+0.17.973.371 I slot launch_slot_: id  0 | task 0 | processing task, is_child = 0
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=491520 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x78000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=491520 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x78000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=491520 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x78000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=491520 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x78000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=491520 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x78000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=491520 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x78000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=491520 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x78000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=491520 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x78000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=491520 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x78000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=491520 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x78000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=491520 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x78000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=491520 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x78000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=491520 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x78000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=491520 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x78000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=491520 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x78000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=491520 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x78000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=491520 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x78000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=491520 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x78000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=491520 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x78000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=491520 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x78000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=491520 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x78000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=491520 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x78000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=491520 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x78000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=491520 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x78000
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,30,16,1] K=[256,256,4,1] V=[256,256,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,30,16,1] n_kv=256 n_kv_heads=4 n_stream=1 q_stream=1 chunk=256 ncols=[16,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,30,16,1] K=[256,256,4,1] V=[256,256,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,30,16,1] n_kv=256 n_kv_heads=4 n_stream=1 q_stream=1 chunk=256 ncols=[16,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,30,16,1] K=[256,256,4,1] V=[256,256,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,30,16,1] n_kv=256 n_kv_heads=4 n_stream=1 q_stream=1 chunk=256 ncols=[16,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,30,16,1] K=[256,256,4,1] V=[256,256,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,30,16,1] n_kv=256 n_kv_heads=4 n_stream=1 q_stream=1 chunk=256 ncols=[16,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,30,16,1] K=[256,256,4,1] V=[256,256,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,30,16,1] n_kv=256 n_kv_heads=4 n_stream=1 q_stream=1 chunk=256 ncols=[16,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,30,16,1] K=[256,256,4,1] V=[256,256,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,30,16,1] n_kv=256 n_kv_heads=4 n_stream=1 q_stream=1 chunk=256 ncols=[16,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,30,16,1] K=[256,256,4,1] V=[256,256,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,30,16,1] n_kv=256 n_kv_heads=4 n_stream=1 q_stream=1 chunk=256 ncols=[16,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,30,16,1] K=[256,256,4,1] V=[256,256,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,30,16,1] n_kv=256 n_kv_heads=4 n_stream=1 q_stream=1 chunk=256 ncols=[16,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,256,16,1] K=[256,512,4,1] V=[256,512,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,256,16,1] n_kv=512 n_kv_heads=4 n_stream=1 q_stream=1 chunk=512 ncols=[16,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,256,16,1] K=[256,512,4,1] V=[256,512,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,256,16,1] n_kv=512 n_kv_heads=4 n_stream=1 q_stream=1 chunk=512 ncols=[16,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,256,16,1] K=[256,512,4,1] V=[256,512,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,256,16,1] n_kv=512 n_kv_heads=4 n_stream=1 q_stream=1 chunk=512 ncols=[16,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,256,16,1] K=[256,512,4,1] V=[256,512,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,256,16,1] n_kv=512 n_kv_heads=4 n_stream=1 q_stream=1 chunk=512 ncols=[16,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,256,16,1] K=[256,512,4,1] V=[256,512,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,256,16,1] n_kv=512 n_kv_heads=4 n_stream=1 q_stream=1 chunk=512 ncols=[16,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,256,16,1] K=[256,512,4,1] V=[256,512,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,256,16,1] n_kv=512 n_kv_heads=4 n_stream=1 q_stream=1 chunk=512 ncols=[16,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,256,16,1] K=[256,512,4,1] V=[256,512,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,256,16,1] n_kv=512 n_kv_heads=4 n_stream=1 q_stream=1 chunk=512 ncols=[16,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,256,16,1] K=[256,512,4,1] V=[256,512,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,256,16,1] n_kv=512 n_kv_heads=4 n_stream=1 q_stream=1 chunk=512 ncols=[16,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,256,16,1] K=[256,768,4,1] V=[256,768,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,256,16,1] n_kv=768 n_kv_heads=4 n_stream=1 q_stream=1 chunk=768 ncols=[16,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,256,16,1] K=[256,768,4,1] V=[256,768,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,256,16,1] n_kv=768 n_kv_heads=4 n_stream=1 q_stream=1 chunk=768 ncols=[16,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,256,16,1] K=[256,768,4,1] V=[256,768,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,256,16,1] n_kv=768 n_kv_heads=4 n_stream=1 q_stream=1 chunk=768 ncols=[16,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,256,16,1] K=[256,768,4,1] V=[256,768,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,256,16,1] n_kv=768 n_kv_heads=4 n_stream=1 q_stream=1 chunk=768 ncols=[16,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,256,16,1] K=[256,768,4,1] V=[256,768,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,256,16,1] n_kv=768 n_kv_heads=4 n_stream=1 q_stream=1 chunk=768 ncols=[16,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,256,16,1] K=[256,768,4,1] V=[256,768,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,256,16,1] n_kv=768 n_kv_heads=4 n_stream=1 q_stream=1 chunk=768 ncols=[16,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,256,16,1] K=[256,768,4,1] V=[256,768,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,256,16,1] n_kv=768 n_kv_heads=4 n_stream=1 q_stream=1 chunk=768 ncols=[16,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,256,16,1] K=[256,768,4,1] V=[256,768,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,256,16,1] n_kv=768 n_kv_heads=4 n_stream=1 q_stream=1 chunk=768 ncols=[16,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,256,16,1] K=[256,1024,4,1] V=[256,1024,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,256,16,1] n_kv=1024 n_kv_heads=4 n_stream=1 q_stream=1 chunk=1024 ncols=[16,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,256,16,1] K=[256,1024,4,1] V=[256,1024,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,256,16,1] n_kv=1024 n_kv_heads=4 n_stream=1 q_stream=1 chunk=1024 ncols=[16,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,256,16,1] K=[256,1024,4,1] V=[256,1024,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,256,16,1] n_kv=1024 n_kv_heads=4 n_stream=1 q_stream=1 chunk=1024 ncols=[16,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,256,16,1] K=[256,1024,4,1] V=[256,1024,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,256,16,1] n_kv=1024 n_kv_heads=4 n_stream=1 q_stream=1 chunk=1024 ncols=[16,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,256,16,1] K=[256,1024,4,1] V=[256,1024,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,256,16,1] n_kv=1024 n_kv_heads=4 n_stream=1 q_stream=1 chunk=1024 ncols=[16,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,256,16,1] K=[256,1024,4,1] V=[256,1024,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,256,16,1] n_kv=1024 n_kv_heads=4 n_stream=1 q_stream=1 chunk=1024 ncols=[16,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,256,16,1] K=[256,1024,4,1] V=[256,1024,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,256,16,1] n_kv=1024 n_kv_heads=4 n_stream=1 q_stream=1 chunk=1024 ncols=[16,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,256,16,1] K=[256,1024,4,1] V=[256,1024,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,256,16,1] n_kv=1024 n_kv_heads=4 n_stream=1 q_stream=1 chunk=1024 ncols=[16,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,256,16,1] K=[256,1280,4,1] V=[256,1280,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,256,16,1] n_kv=1280 n_kv_heads=4 n_stream=1 q_stream=1 chunk=1280 ncols=[16,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,256,16,1] K=[256,1280,4,1] V=[256,1280,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,256,16,1] n_kv=1280 n_kv_heads=4 n_stream=1 q_stream=1 chunk=1280 ncols=[16,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,256,16,1] K=[256,1280,4,1] V=[256,1280,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,256,16,1] n_kv=1280 n_kv_heads=4 n_stream=1 q_stream=1 chunk=1280 ncols=[16,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,256,16,1] K=[256,1280,4,1] V=[256,1280,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,256,16,1] n_kv=1280 n_kv_heads=4 n_stream=1 q_stream=1 chunk=1280 ncols=[16,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,256,16,1] K=[256,1280,4,1] V=[256,1280,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,256,16,1] n_kv=1280 n_kv_heads=4 n_stream=1 q_stream=1 chunk=1280 ncols=[16,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,256,16,1] K=[256,1280,4,1] V=[256,1280,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,256,16,1] n_kv=1280 n_kv_heads=4 n_stream=1 q_stream=1 chunk=1280 ncols=[16,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,256,16,1] K=[256,1280,4,1] V=[256,1280,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,256,16,1] n_kv=1280 n_kv_heads=4 n_stream=1 q_stream=1 chunk=1280 ncols=[16,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,256,16,1] K=[256,1280,4,1] V=[256,1280,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,256,16,1] n_kv=1280 n_kv_heads=4 n_stream=1 q_stream=1 chunk=1280 ncols=[16,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=2244608 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x224000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=2244608 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x224000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=2244608 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x224000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=2244608 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x224000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=2244608 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x224000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=2244608 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x224000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=2244608 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x224000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=2244608 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x224000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=2244608 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x224000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=2244608 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x224000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=2244608 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x224000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=2244608 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x224000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=2244608 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x224000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=2244608 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x224000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=2244608 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x224000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=2244608 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x224000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=2244608 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x224000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=2244608 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x224000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=2244608 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x224000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=2244608 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x224000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=2244608 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x224000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=2244608 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x224000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=2244608 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x224000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=2244608 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x224000
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,137,16,1] K=[256,1280,4,1] V=[256,1280,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,137,16,1] n_kv=1280 n_kv_heads=4 n_stream=1 q_stream=1 chunk=1280 ncols=[16,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,137,16,1] K=[256,1280,4,1] V=[256,1280,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,137,16,1] n_kv=1280 n_kv_heads=4 n_stream=1 q_stream=1 chunk=1280 ncols=[16,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,137,16,1] K=[256,1280,4,1] V=[256,1280,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,137,16,1] n_kv=1280 n_kv_heads=4 n_stream=1 q_stream=1 chunk=1280 ncols=[16,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,137,16,1] K=[256,1280,4,1] V=[256,1280,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,137,16,1] n_kv=1280 n_kv_heads=4 n_stream=1 q_stream=1 chunk=1280 ncols=[16,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,137,16,1] K=[256,1280,4,1] V=[256,1280,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,137,16,1] n_kv=1280 n_kv_heads=4 n_stream=1 q_stream=1 chunk=1280 ncols=[16,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,137,16,1] K=[256,1280,4,1] V=[256,1280,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,137,16,1] n_kv=1280 n_kv_heads=4 n_stream=1 q_stream=1 chunk=1280 ncols=[16,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,137,16,1] K=[256,1280,4,1] V=[256,1280,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,137,16,1] n_kv=1280 n_kv_heads=4 n_stream=1 q_stream=1 chunk=1280 ncols=[16,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,137,16,1] K=[256,1280,4,1] V=[256,1280,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,137,16,1] n_kv=1280 n_kv_heads=4 n_stream=1 q_stream=1 chunk=1280 ncols=[16,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,256,16,1] K=[256,1536,4,1] V=[256,1536,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,256,16,1] n_kv=1536 n_kv_heads=4 n_stream=1 q_stream=1 chunk=1536 ncols=[16,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,256,16,1] K=[256,1536,4,1] V=[256,1536,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,256,16,1] n_kv=1536 n_kv_heads=4 n_stream=1 q_stream=1 chunk=1536 ncols=[16,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,256,16,1] K=[256,1536,4,1] V=[256,1536,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,256,16,1] n_kv=1536 n_kv_heads=4 n_stream=1 q_stream=1 chunk=1536 ncols=[16,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,256,16,1] K=[256,1536,4,1] V=[256,1536,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,256,16,1] n_kv=1536 n_kv_heads=4 n_stream=1 q_stream=1 chunk=1536 ncols=[16,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,256,16,1] K=[256,1536,4,1] V=[256,1536,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,256,16,1] n_kv=1536 n_kv_heads=4 n_stream=1 q_stream=1 chunk=1536 ncols=[16,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,256,16,1] K=[256,1536,4,1] V=[256,1536,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,256,16,1] n_kv=1536 n_kv_heads=4 n_stream=1 q_stream=1 chunk=1536 ncols=[16,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,256,16,1] K=[256,1536,4,1] V=[256,1536,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,256,16,1] n_kv=1536 n_kv_heads=4 n_stream=1 q_stream=1 chunk=1536 ncols=[16,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,256,16,1] K=[256,1536,4,1] V=[256,1536,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,256,16,1] n_kv=1536 n_kv_heads=4 n_stream=1 q_stream=1 chunk=1536 ncols=[16,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=4194304 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x400000
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=65536 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x10000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=65536 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x10000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=65536 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x10000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=65536 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x10000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=65536 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x10000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=65536 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x10000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=65536 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x10000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=65536 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x10000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=65536 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x10000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=65536 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x10000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=65536 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x10000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=65536 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x10000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=65536 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x10000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=65536 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x10000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=65536 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x10000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=65536 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x10000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=65536 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x10000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=65536 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x10000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=65536 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x10000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=65536 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x10000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=65536 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x10000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=65536 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x10000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=65536 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x10000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=65536 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x10000
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,4,16,1] K=[256,1536,4,1] V=[256,1536,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,4,16,1] n_kv=1536 n_kv_heads=4 n_stream=1 q_stream=1 chunk=1536 ncols=[4,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,4,16,1] K=[256,1536,4,1] V=[256,1536,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,4,16,1] n_kv=1536 n_kv_heads=4 n_stream=1 q_stream=1 chunk=1536 ncols=[4,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,4,16,1] K=[256,1536,4,1] V=[256,1536,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,4,16,1] n_kv=1536 n_kv_heads=4 n_stream=1 q_stream=1 chunk=1536 ncols=[4,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,4,16,1] K=[256,1536,4,1] V=[256,1536,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,4,16,1] n_kv=1536 n_kv_heads=4 n_stream=1 q_stream=1 chunk=1536 ncols=[4,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,4,16,1] K=[256,1536,4,1] V=[256,1536,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,4,16,1] n_kv=1536 n_kv_heads=4 n_stream=1 q_stream=1 chunk=1536 ncols=[4,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,4,16,1] K=[256,1536,4,1] V=[256,1536,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,4,16,1] n_kv=1536 n_kv_heads=4 n_stream=1 q_stream=1 chunk=1536 ncols=[4,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,4,16,1] K=[256,1536,4,1] V=[256,1536,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,4,16,1] n_kv=1536 n_kv_heads=4 n_stream=1 q_stream=1 chunk=1536 ncols=[4,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=MMA_KVARN domain=rotated_k_original_v need_f16_K=0 need_f16_V=0 Q=[256,4,16,1] K=[256,1536,4,1] V=[256,1536,4,1]
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_WINDOWED Q=[256,4,16,1] n_kv=1536 n_kv_heads=4 n_stream=1 q_stream=1 chunk=1536 ncols=[4,4] domain=rotated_k_original_v bits=[4,4]
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_DECODE_SPLIT Q=[256,1,16,1] bits=[4,4] n_kv=1536 n_kv_heads=4 n_stream=1 gqa=4 gqa_blocks=1 max_gqa=6 n_splits=24 split_tokens=64 nwarps=8 active_blocks_per_sm=3 wave_efficiency=69 waves=1
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_DECODE_SPLIT Q=[256,1,16,1] bits=[4,4] n_kv=1536 n_kv_heads=4 n_stream=1 gqa=4 gqa_blocks=1 max_gqa=6 n_splits=24 split_tokens=64 nwarps=8 active_blocks_per_sm=3 wave_efficiency=69 waves=1
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_DECODE_SPLIT Q=[256,1,16,1] bits=[4,4] n_kv=1536 n_kv_heads=4 n_stream=1 gqa=4 gqa_blocks=1 max_gqa=6 n_splits=24 split_tokens=64 nwarps=8 active_blocks_per_sm=3 wave_efficiency=69 waves=1
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_DECODE_SPLIT Q=[256,1,16,1] bits=[4,4] n_kv=1536 n_kv_heads=4 n_stream=1 gqa=4 gqa_blocks=1 max_gqa=6 n_splits=24 split_tokens=64 nwarps=8 active_blocks_per_sm=3 wave_efficiency=69 waves=1
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_DECODE_SPLIT Q=[256,1,16,1] bits=[4,4] n_kv=1536 n_kv_heads=4 n_stream=1 gqa=4 gqa_blocks=1 max_gqa=6 n_splits=24 split_tokens=64 nwarps=8 active_blocks_per_sm=3 wave_efficiency=69 waves=1
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_DECODE_SPLIT Q=[256,1,16,1] bits=[4,4] n_kv=1536 n_kv_heads=4 n_stream=1 gqa=4 gqa_blocks=1 max_gqa=6 n_splits=24 split_tokens=64 nwarps=8 active_blocks_per_sm=3 wave_efficiency=69 waves=1
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_DECODE_SPLIT Q=[256,1,16,1] bits=[4,4] n_kv=1536 n_kv_heads=4 n_stream=1 gqa=4 gqa_blocks=1 max_gqa=6 n_splits=24 split_tokens=64 nwarps=8 active_blocks_per_sm=3 wave_efficiency=69 waves=1
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_DECODE_SPLIT Q=[256,1,16,1] bits=[4,4] n_kv=1536 n_kv_heads=4 n_stream=1 gqa=4 gqa_blocks=1 max_gqa=6 n_splits=24 split_tokens=64 nwarps=8 active_blocks_per_sm=3 wave_efficiency=69 waves=1
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_DECODE_SPLIT Q=[256,1,16,1] bits=[4,4] n_kv=1536 n_kv_heads=4 n_stream=1 gqa=4 gqa_blocks=1 max_gqa=6 n_splits=24 split_tokens=64 nwarps=8 active_blocks_per_sm=3 wave_efficiency=69 waves=1
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_DECODE_SPLIT Q=[256,1,16,1] bits=[4,4] n_kv=1536 n_kv_heads=4 n_stream=1 gqa=4 gqa_blocks=1 max_gqa=6 n_splits=24 split_tokens=64 nwarps=8 active_blocks_per_sm=3 wave_efficiency=69 waves=1
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_DECODE_SPLIT Q=[256,1,16,1] bits=[4,4] n_kv=1536 n_kv_heads=4 n_stream=1 gqa=4 gqa_blocks=1 max_gqa=6 n_splits=24 split_tokens=64 nwarps=8 active_blocks_per_sm=3 wave_efficiency=69 waves=1
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_DECODE_SPLIT Q=[256,1,16,1] bits=[4,4] n_kv=1536 n_kv_heads=4 n_stream=1 gqa=4 gqa_blocks=1 max_gqa=6 n_splits=24 split_tokens=64 nwarps=8 active_blocks_per_sm=3 wave_efficiency=69 waves=1
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_DECODE_SPLIT Q=[256,1,16,1] bits=[4,4] n_kv=1536 n_kv_heads=4 n_stream=1 gqa=4 gqa_blocks=1 max_gqa=6 n_splits=24 split_tokens=64 nwarps=8 active_blocks_per_sm=3 wave_efficiency=69 waves=1
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_DECODE_SPLIT Q=[256,1,16,1] bits=[4,4] n_kv=1536 n_kv_heads=4 n_stream=1 gqa=4 gqa_blocks=1 max_gqa=6 n_splits=24 split_tokens=64 nwarps=8 active_blocks_per_sm=3 wave_efficiency=69 waves=1
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_DECODE_SPLIT Q=[256,1,16,1] bits=[4,4] n_kv=1536 n_kv_heads=4 n_stream=1 gqa=4 gqa_blocks=1 max_gqa=6 n_splits=24 split_tokens=64 nwarps=8 active_blocks_per_sm=3 wave_efficiency=69 waves=1
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_DECODE_SPLIT Q=[256,1,16,1] bits=[4,4] n_kv=1536 n_kv_heads=4 n_stream=1 gqa=4 gqa_blocks=1 max_gqa=6 n_splits=24 split_tokens=64 nwarps=8 active_blocks_per_sm=3 wave_efficiency=69 waves=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_DECODE_SPLIT Q=[256,1,16,1] bits=[4,4] n_kv=1792 n_kv_heads=4 n_stream=1 gqa=4 gqa_blocks=1 max_gqa=6 n_splits=28 split_tokens=64 nwarps=8 active_blocks_per_sm=3 wave_efficiency=81 waves=1
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_DECODE_SPLIT Q=[256,1,16,1] bits=[4,4] n_kv=1792 n_kv_heads=4 n_stream=1 gqa=4 gqa_blocks=1 max_gqa=6 n_splits=28 split_tokens=64 nwarps=8 active_blocks_per_sm=3 wave_efficiency=81 waves=1
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_DECODE_SPLIT Q=[256,1,16,1] bits=[4,4] n_kv=1792 n_kv_heads=4 n_stream=1 gqa=4 gqa_blocks=1 max_gqa=6 n_splits=28 split_tokens=64 nwarps=8 active_blocks_per_sm=3 wave_efficiency=81 waves=1
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_DECODE_SPLIT Q=[256,1,16,1] bits=[4,4] n_kv=1792 n_kv_heads=4 n_stream=1 gqa=4 gqa_blocks=1 max_gqa=6 n_splits=28 split_tokens=64 nwarps=8 active_blocks_per_sm=3 wave_efficiency=81 waves=1
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_DECODE_SPLIT Q=[256,1,16,1] bits=[4,4] n_kv=1792 n_kv_heads=4 n_stream=1 gqa=4 gqa_blocks=1 max_gqa=6 n_splits=28 split_tokens=64 nwarps=8 active_blocks_per_sm=3 wave_efficiency=81 waves=1
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_DECODE_SPLIT Q=[256,1,16,1] bits=[4,4] n_kv=1792 n_kv_heads=4 n_stream=1 gqa=4 gqa_blocks=1 max_gqa=6 n_splits=28 split_tokens=64 nwarps=8 active_blocks_per_sm=3 wave_efficiency=81 waves=1
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_DECODE_SPLIT Q=[256,1,16,1] bits=[4,4] n_kv=1792 n_kv_heads=4 n_stream=1 gqa=4 gqa_blocks=1 max_gqa=6 n_splits=28 split_tokens=64 nwarps=8 active_blocks_per_sm=3 wave_efficiency=81 waves=1
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_DECODE_SPLIT Q=[256,1,16,1] bits=[4,4] n_kv=1792 n_kv_heads=4 n_stream=1 gqa=4 gqa_blocks=1 max_gqa=6 n_splits=28 split_tokens=64 nwarps=8 active_blocks_per_sm=3 wave_efficiency=81 waves=1
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_DECODE_SPLIT Q=[256,1,16,1] bits=[4,4] n_kv=1792 n_kv_heads=4 n_stream=1 gqa=4 gqa_blocks=1 max_gqa=6 n_splits=28 split_tokens=64 nwarps=8 active_blocks_per_sm=3 wave_efficiency=81 waves=1
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_DECODE_SPLIT Q=[256,1,16,1] bits=[4,4] n_kv=1792 n_kv_heads=4 n_stream=1 gqa=4 gqa_blocks=1 max_gqa=6 n_splits=28 split_tokens=64 nwarps=8 active_blocks_per_sm=3 wave_efficiency=81 waves=1
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_DECODE_SPLIT Q=[256,1,16,1] bits=[4,4] n_kv=1792 n_kv_heads=4 n_stream=1 gqa=4 gqa_blocks=1 max_gqa=6 n_splits=28 split_tokens=64 nwarps=8 active_blocks_per_sm=3 wave_efficiency=81 waves=1
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_DECODE_SPLIT Q=[256,1,16,1] bits=[4,4] n_kv=1792 n_kv_heads=4 n_stream=1 gqa=4 gqa_blocks=1 max_gqa=6 n_splits=28 split_tokens=64 nwarps=8 active_blocks_per_sm=3 wave_efficiency=81 waves=1
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_DECODE_SPLIT Q=[256,1,16,1] bits=[4,4] n_kv=1792 n_kv_heads=4 n_stream=1 gqa=4 gqa_blocks=1 max_gqa=6 n_splits=28 split_tokens=64 nwarps=8 active_blocks_per_sm=3 wave_efficiency=81 waves=1
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_DECODE_SPLIT Q=[256,1,16,1] bits=[4,4] n_kv=1792 n_kv_heads=4 n_stream=1 gqa=4 gqa_blocks=1 max_gqa=6 n_splits=28 split_tokens=64 nwarps=8 active_blocks_per_sm=3 wave_efficiency=81 waves=1
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_DECODE_SPLIT Q=[256,1,16,1] bits=[4,4] n_kv=1792 n_kv_heads=4 n_stream=1 gqa=4 gqa_blocks=1 max_gqa=6 n_splits=28 split_tokens=64 nwarps=8 active_blocks_per_sm=3 wave_efficiency=81 waves=1
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_DECODE_SPLIT Q=[256,1,16,1] bits=[4,4] n_kv=1792 n_kv_heads=4 n_stream=1 gqa=4 gqa_blocks=1 max_gqa=6 n_splits=28 split_tokens=64 nwarps=8 active_blocks_per_sm=3 wave_efficiency=81 waves=1
+0.21.893.785 I slot print_timing: id  0 | task 0 | n_decoded =    173, tg =  57.41 t/s, tg_3s =  57.41 t/s
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_SUPPORTED kernel=MMA_F16 effK=f16 effV=f16 supported=1
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_ALLOC kernel=MMA_F16 need_f16_K=0 need_f16_V=0 workspace_end_offset=16384 dst_data=(nil) f16_K=(nil) f16_V=(nil) f16_end=0x4000
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_DECODE_SPLIT Q=[256,1,16,1] bits=[4,4] n_kv=2048 n_kv_heads=4 n_stream=1 gqa=4 gqa_blocks=1 max_gqa=6 n_splits=32 split_tokens=64 nwarps=8 active_blocks_per_sm=3 wave_efficiency=92 waves=1
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_DECODE_SPLIT Q=[256,1,16,1] bits=[4,4] n_kv=2048 n_kv_heads=4 n_stream=1 gqa=4 gqa_blocks=1 max_gqa=6 n_splits=32 split_tokens=64 nwarps=8 active_blocks_per_sm=3 wave_efficiency=92 waves=1
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_DECODE_SPLIT Q=[256,1,16,1] bits=[4,4] n_kv=2048 n_kv_heads=4 n_stream=1 gqa=4 gqa_blocks=1 max_gqa=6 n_splits=32 split_tokens=64 nwarps=8 active_blocks_per_sm=3 wave_efficiency=92 waves=1
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_DECODE_SPLIT Q=[256,1,16,1] bits=[4,4] n_kv=2048 n_kv_heads=4 n_stream=1 gqa=4 gqa_blocks=1 max_gqa=6 n_splits=32 split_tokens=64 nwarps=8 active_blocks_per_sm=3 wave_efficiency=92 waves=1
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_DECODE_SPLIT Q=[256,1,16,1] bits=[4,4] n_kv=2048 n_kv_heads=4 n_stream=1 gqa=4 gqa_blocks=1 max_gqa=6 n_splits=32 split_tokens=64 nwarps=8 active_blocks_per_sm=3 wave_efficiency=92 waves=1
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_DECODE_SPLIT Q=[256,1,16,1] bits=[4,4] n_kv=2048 n_kv_heads=4 n_stream=1 gqa=4 gqa_blocks=1 max_gqa=6 n_splits=32 split_tokens=64 nwarps=8 active_blocks_per_sm=3 wave_efficiency=92 waves=1
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_DECODE_SPLIT Q=[256,1,16,1] bits=[4,4] n_kv=2048 n_kv_heads=4 n_stream=1 gqa=4 gqa_blocks=1 max_gqa=6 n_splits=32 split_tokens=64 nwarps=8 active_blocks_per_sm=3 wave_efficiency=92 waves=1
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_DECODE_SPLIT Q=[256,1,16,1] bits=[4,4] n_kv=2048 n_kv_heads=4 n_stream=1 gqa=4 gqa_blocks=1 max_gqa=6 n_splits=32 split_tokens=64 nwarps=8 active_blocks_per_sm=3 wave_efficiency=92 waves=1
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_DECODE_SPLIT Q=[256,1,16,1] bits=[4,4] n_kv=2048 n_kv_heads=4 n_stream=1 gqa=4 gqa_blocks=1 max_gqa=6 n_splits=32 split_tokens=64 nwarps=8 active_blocks_per_sm=3 wave_efficiency=92 waves=1
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_DECODE_SPLIT Q=[256,1,16,1] bits=[4,4] n_kv=2048 n_kv_heads=4 n_stream=1 gqa=4 gqa_blocks=1 max_gqa=6 n_splits=32 split_tokens=64 nwarps=8 active_blocks_per_sm=3 wave_efficiency=92 waves=1
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_DECODE_SPLIT Q=[256,1,16,1] bits=[4,4] n_kv=2048 n_kv_heads=4 n_stream=1 gqa=4 gqa_blocks=1 max_gqa=6 n_splits=32 split_tokens=64 nwarps=8 active_blocks_per_sm=3 wave_efficiency=92 waves=1
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_DECODE_SPLIT Q=[256,1,16,1] bits=[4,4] n_kv=2048 n_kv_heads=4 n_stream=1 gqa=4 gqa_blocks=1 max_gqa=6 n_splits=32 split_tokens=64 nwarps=8 active_blocks_per_sm=3 wave_efficiency=92 waves=1
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_DECODE_SPLIT Q=[256,1,16,1] bits=[4,4] n_kv=2048 n_kv_heads=4 n_stream=1 gqa=4 gqa_blocks=1 max_gqa=6 n_splits=32 split_tokens=64 nwarps=8 active_blocks_per_sm=3 wave_efficiency=92 waves=1
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_DECODE_SPLIT Q=[256,1,16,1] bits=[4,4] n_kv=2048 n_kv_heads=4 n_stream=1 gqa=4 gqa_blocks=1 max_gqa=6 n_splits=32 split_tokens=64 nwarps=8 active_blocks_per_sm=3 wave_efficiency=92 waves=1
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_DECODE_SPLIT Q=[256,1,16,1] bits=[4,4] n_kv=2048 n_kv_heads=4 n_stream=1 gqa=4 gqa_blocks=1 max_gqa=6 n_splits=32 split_tokens=64 nwarps=8 active_blocks_per_sm=3 wave_efficiency=92 waves=1
+CUDA_FA_ROUTE_EXEC_DISPATCH kernel=KVARN_DECODE_SPLIT Q=[256,1,16,1] bits=[4,4] n_kv=2048 n_kv_heads=4 n_stream=1 gqa=4 gqa_blocks=1 max_gqa=6 n_splits=32 split_tokens=64 nwarps=8 active_blocks_per_sm=3 wave_efficiency=92 waves=1
+0.24.910.300 I slot print_timing: id  0 | task 0 | n_decoded =    345, tg =  57.21 t/s, tg_3s =  57.02 t/s
+0.27.831.820 I slot print_timing: id  0 | task 0 | prompt eval time =     906.83 ms /  1451 tokens (    0.62 ms per token,  1600.08 tokens per second)
+0.27.831.825 I slot print_timing: id  0 | task 0 |        eval time =    8951.59 ms /   512 tokens (   17.48 ms per token,    57.20 tokens per second)
+0.27.831.825 I slot print_timing: id  0 | task 0 |       total time =    9858.42 ms /  1963 tokens
+0.27.831.830 I slot print_timing: id  0 | task 0 |    graphs reused =        509
+0.27.831.879 I slot      release: id  0 | task 0 | stop processing: n_tokens = 1962, truncated = 0
+1.50.509.499 I srv    operator(): operator(): cleaning up before exit...

@@ -1186,6 +1186,16 @@ void llm_graph_input_mem_hybrid::set_input(const llama_ubatch * ubatch) {
         llm_kv_ctx_set_input_v_rot(mctx->get_attn(), inp_attn->self_v_rot);
     }
 
+    // SWA KVarN ring (hot-window reuse path, --kv-hot-size): the attn sub-graph
+    // builds self_kvarn_mat_idxs via build_attn_inp_kv_impl, but the hybrid
+    // input wraps the per-cell absolute positions in its own set_input. Fill
+    // them here, mirroring llm_graph_input_attn_kv::set_input.
+    if (inp_attn->self_kvarn_mat_idxs && inp_attn->self_kvarn_mat_idxs->buffer) {
+        const auto * kvarn = dynamic_cast<const llama_kv_cache_kvarn_context *>(mctx->get_attn());
+        GGML_ASSERT(kvarn != nullptr);
+        kvarn->set_input_kvarn_mat_idxs(inp_attn->self_kvarn_mat_idxs, ubatch);
+    }
+
     const int64_t n_rs = mctx->get_recr()->get_n_rs();
 
     if (inp_rs->s_copy) {
@@ -1218,6 +1228,14 @@ bool llm_graph_input_mem_hybrid::can_reuse(const llm_graph_params & params) {
 
     res &= inp_rs->head == mctx->get_recr()->get_head();
     res &= inp_rs->rs_z == mctx->get_recr()->get_rs_z();
+
+    // re-bind the SWA KVarN view indices to the (possibly new) attn context,
+    // mirroring llm_graph_input_attn_kv::can_reuse
+    if (inp_attn->self_kvarn_mat_idxs && inp_attn->self_kvarn_mat_idxs->buffer) {
+        if (const auto * kvarn = dynamic_cast<const llama_kv_cache_kvarn_context *>(mctx->get_attn())) {
+            const_cast<llama_kv_cache_kvarn_context *>(kvarn)->set_mat_idxs(inp_attn->self_kvarn_mat_idxs);
+        }
+    }
 
     return res;
 }
@@ -1304,6 +1322,14 @@ void llm_graph_input_mem_hybrid_iswa::set_input(const llama_ubatch * ubatch) {
         llm_kv_ctx_set_input_v_rot(attn_ctx->get_swa(), inp_attn->self_v_rot_swa);
     }
 
+    // SWA KVarN ring: fill the per-cell absolute positions for the kvarn SWA
+    // cache, mirroring llm_graph_input_attn_kv_iswa::set_input.
+    if (inp_attn->self_kvarn_mat_idxs_swa && inp_attn->self_kvarn_mat_idxs_swa->buffer) {
+        const auto * kvarn_swa = dynamic_cast<const llama_kv_cache_kvarn_context *>(attn_ctx->get_swa());
+        GGML_ASSERT(kvarn_swa != nullptr);
+        kvarn_swa->set_input_kvarn_mat_idxs(inp_attn->self_kvarn_mat_idxs_swa, ubatch);
+    }
+
     const int64_t n_rs = mctx->get_recr()->get_n_rs();
 
     if (inp_rs->s_copy) {
@@ -1349,6 +1375,14 @@ bool llm_graph_input_mem_hybrid_iswa::can_reuse(const llm_graph_params & params)
 
     res &= inp_rs->head == mctx->get_recr()->get_head();
     res &= inp_rs->rs_z == mctx->get_recr()->get_rs_z();
+
+    // re-bind the SWA KVarN view indices to the (possibly new) SWA attn
+    // context, mirroring llm_graph_input_attn_kv_iswa::can_reuse
+    if (inp_attn->self_kvarn_mat_idxs_swa && inp_attn->self_kvarn_mat_idxs_swa->buffer) {
+        if (const auto * kvarn_swa = dynamic_cast<const llama_kv_cache_kvarn_context *>(attn_ctx->get_swa())) {
+            const_cast<llama_kv_cache_kvarn_context *>(kvarn_swa)->set_mat_idxs(inp_attn->self_kvarn_mat_idxs_swa);
+        }
+    }
 
     return res;
 }

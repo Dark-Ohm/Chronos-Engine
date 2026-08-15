@@ -1,0 +1,857 @@
+0.00.029.298 I cmn  common_param: common_params_print_info: verbosity = 3 (adjust with the `-lv N` CLI arg)
+0.00.129.885 I srv    load_model: loading model 'models/main/dence/Qwythos-9B-v3-1M-MTP-Q4_K_M-fixed.gguf'
+T010 view il=3 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=3 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=7 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=7 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=11 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=11 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=15 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=15 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=19 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=19 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=23 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=23 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=27 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=27 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=31 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=31 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=3 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=3 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=7 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=7 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=11 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=11 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=15 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=15 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=19 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=19 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=23 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=23 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=27 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=27 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=31 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=31 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=3 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=3 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=7 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=7 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=11 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=11 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=15 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=15 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=19 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=19 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=23 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=23 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=27 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=27 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=31 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=31 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=3 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=3 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=7 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=7 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=11 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=11 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=15 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=15 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=19 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=19 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=23 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=23 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=27 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=27 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=31 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=31 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=3 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=3 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=7 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=7 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=11 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=11 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=15 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=15 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=19 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=19 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=23 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=23 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=27 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=27 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=31 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=31 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=3 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=3 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=7 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=7 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=11 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=11 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=15 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=15 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=19 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=19 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=23 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=23 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=27 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=27 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=31 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=31 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=3 swa=1 n_kv=256 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=256 indices=0x55fba896c330 idx_buf=(nil) idx_n=256 stored_src1=0x55fba896ba90
+T010 view il=3 swa=1 n_kv=256 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=256 indices=0x55fba896c330 idx_buf=(nil) idx_n=256 stored_src1=0x55fba896bc00
+T010 view il=7 swa=1 n_kv=256 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=256 indices=0x55fba896c330 idx_buf=(nil) idx_n=256 stored_src1=0x55fba896ba90
+T010 view il=7 swa=1 n_kv=256 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=256 indices=0x55fba896c330 idx_buf=(nil) idx_n=256 stored_src1=0x55fba896bc00
+T010 view il=11 swa=1 n_kv=256 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=256 indices=0x55fba896c330 idx_buf=(nil) idx_n=256 stored_src1=0x55fba896ba90
+T010 view il=11 swa=1 n_kv=256 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=256 indices=0x55fba896c330 idx_buf=(nil) idx_n=256 stored_src1=0x55fba896bc00
+T010 view il=15 swa=1 n_kv=256 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=256 indices=0x55fba896c330 idx_buf=(nil) idx_n=256 stored_src1=0x55fba896ba90
+T010 view il=15 swa=1 n_kv=256 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=256 indices=0x55fba896c330 idx_buf=(nil) idx_n=256 stored_src1=0x55fba896bc00
+T010 view il=19 swa=1 n_kv=256 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=256 indices=0x55fba896c330 idx_buf=(nil) idx_n=256 stored_src1=0x55fba896ba90
+T010 view il=19 swa=1 n_kv=256 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=256 indices=0x55fba896c330 idx_buf=(nil) idx_n=256 stored_src1=0x55fba896bc00
+T010 view il=23 swa=1 n_kv=256 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=256 indices=0x55fba896c330 idx_buf=(nil) idx_n=256 stored_src1=0x55fba896ba90
+T010 view il=23 swa=1 n_kv=256 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=256 indices=0x55fba896c330 idx_buf=(nil) idx_n=256 stored_src1=0x55fba896bc00
+T010 view il=27 swa=1 n_kv=256 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=256 indices=0x55fba896c330 idx_buf=(nil) idx_n=256 stored_src1=0x55fba896ba90
+T010 view il=27 swa=1 n_kv=256 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=256 indices=0x55fba896c330 idx_buf=(nil) idx_n=256 stored_src1=0x55fba896bc00
+T010 view il=31 swa=1 n_kv=256 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=256 indices=0x55fba896c330 idx_buf=(nil) idx_n=256 stored_src1=0x55fba896ba90
+T010 view il=31 swa=1 n_kv=256 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=256 indices=0x55fba896c330 idx_buf=(nil) idx_n=256 stored_src1=0x55fba896bc00
+T010 store k_idxs n_tok=2 pos0=0 pos1=1 pos_last=1 sinfo.size=2 sinfo.idxs[0][0]=0 sinfo.idxs[0][last]=1
+T010 store k_idxs n_tok=2 pos0=0 pos1=1 pos_last=1 sinfo.size=2 sinfo.idxs[0][0]=0 sinfo.idxs[0][last]=1
+0.01.272.288 I srv    load_model: initializing, n_slots = 1, n_ctx_slot = 8192, kv_unified = 'false'
+0.01.285.425 I srv          init: chat template supports preserving reasoning, consider enabling it via --reasoning-preserve
+0.01.285.453 I srv  llama_server: model loaded
+0.01.285.457 I srv  llama_server: listening on http://127.0.0.1:8099
+0.17.965.753 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = -1
+0.17.965.797 I slot launch_slot_: id  0 | task 0 | processing task, is_child = 0
+T010 view il=3 swa=1 n_kv=256 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=256 indices=0x55fba896c330 idx_buf=(nil) idx_n=256 stored_src1=0x55fba896ba90
+T010 view il=3 swa=1 n_kv=256 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=256 indices=0x55fba896c330 idx_buf=(nil) idx_n=256 stored_src1=0x55fba896bc00
+T010 view il=7 swa=1 n_kv=256 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=256 indices=0x55fba896c330 idx_buf=(nil) idx_n=256 stored_src1=0x55fba896ba90
+T010 view il=7 swa=1 n_kv=256 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=256 indices=0x55fba896c330 idx_buf=(nil) idx_n=256 stored_src1=0x55fba896bc00
+T010 view il=11 swa=1 n_kv=256 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=256 indices=0x55fba896c330 idx_buf=(nil) idx_n=256 stored_src1=0x55fba896ba90
+T010 view il=11 swa=1 n_kv=256 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=256 indices=0x55fba896c330 idx_buf=(nil) idx_n=256 stored_src1=0x55fba896bc00
+T010 view il=15 swa=1 n_kv=256 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=256 indices=0x55fba896c330 idx_buf=(nil) idx_n=256 stored_src1=0x55fba896ba90
+T010 view il=15 swa=1 n_kv=256 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=256 indices=0x55fba896c330 idx_buf=(nil) idx_n=256 stored_src1=0x55fba896bc00
+T010 view il=19 swa=1 n_kv=256 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=256 indices=0x55fba896c330 idx_buf=(nil) idx_n=256 stored_src1=0x55fba896ba90
+T010 view il=19 swa=1 n_kv=256 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=256 indices=0x55fba896c330 idx_buf=(nil) idx_n=256 stored_src1=0x55fba896bc00
+T010 view il=23 swa=1 n_kv=256 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=256 indices=0x55fba896c330 idx_buf=(nil) idx_n=256 stored_src1=0x55fba896ba90
+T010 view il=23 swa=1 n_kv=256 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=256 indices=0x55fba896c330 idx_buf=(nil) idx_n=256 stored_src1=0x55fba896bc00
+T010 view il=27 swa=1 n_kv=256 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=256 indices=0x55fba896c330 idx_buf=(nil) idx_n=256 stored_src1=0x55fba896ba90
+T010 view il=27 swa=1 n_kv=256 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=256 indices=0x55fba896c330 idx_buf=(nil) idx_n=256 stored_src1=0x55fba896bc00
+T010 view il=31 swa=1 n_kv=256 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=256 indices=0x55fba896c330 idx_buf=(nil) idx_n=256 stored_src1=0x55fba896ba90
+T010 view il=31 swa=1 n_kv=256 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=256 indices=0x55fba896c330 idx_buf=(nil) idx_n=256 stored_src1=0x55fba896bc00
+T010 store k_idxs n_tok=30 pos0=0 pos1=1 pos_last=29 sinfo.size=30 sinfo.idxs[0][0]=0 sinfo.idxs[0][last]=29
+T010 view il=3 swa=1 n_kv=512 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=512 indices=0x55fba896c330 idx_buf=(nil) idx_n=512 stored_src1=0x55fba896ba90
+T010 view il=3 swa=1 n_kv=512 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=512 indices=0x55fba896c330 idx_buf=(nil) idx_n=512 stored_src1=0x55fba896bc00
+T010 view il=7 swa=1 n_kv=512 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=512 indices=0x55fba896c330 idx_buf=(nil) idx_n=512 stored_src1=0x55fba896ba90
+T010 view il=7 swa=1 n_kv=512 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=512 indices=0x55fba896c330 idx_buf=(nil) idx_n=512 stored_src1=0x55fba896bc00
+T010 view il=11 swa=1 n_kv=512 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=512 indices=0x55fba896c330 idx_buf=(nil) idx_n=512 stored_src1=0x55fba896ba90
+T010 view il=11 swa=1 n_kv=512 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=512 indices=0x55fba896c330 idx_buf=(nil) idx_n=512 stored_src1=0x55fba896bc00
+T010 view il=15 swa=1 n_kv=512 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=512 indices=0x55fba896c330 idx_buf=(nil) idx_n=512 stored_src1=0x55fba896ba90
+T010 view il=15 swa=1 n_kv=512 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=512 indices=0x55fba896c330 idx_buf=(nil) idx_n=512 stored_src1=0x55fba896bc00
+T010 view il=19 swa=1 n_kv=512 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=512 indices=0x55fba896c330 idx_buf=(nil) idx_n=512 stored_src1=0x55fba896ba90
+T010 view il=19 swa=1 n_kv=512 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=512 indices=0x55fba896c330 idx_buf=(nil) idx_n=512 stored_src1=0x55fba896bc00
+T010 view il=23 swa=1 n_kv=512 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=512 indices=0x55fba896c330 idx_buf=(nil) idx_n=512 stored_src1=0x55fba896ba90
+T010 view il=23 swa=1 n_kv=512 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=512 indices=0x55fba896c330 idx_buf=(nil) idx_n=512 stored_src1=0x55fba896bc00
+T010 view il=27 swa=1 n_kv=512 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=512 indices=0x55fba896c330 idx_buf=(nil) idx_n=512 stored_src1=0x55fba896ba90
+T010 view il=27 swa=1 n_kv=512 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=512 indices=0x55fba896c330 idx_buf=(nil) idx_n=512 stored_src1=0x55fba896bc00
+T010 view il=31 swa=1 n_kv=512 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=512 indices=0x55fba896c330 idx_buf=(nil) idx_n=512 stored_src1=0x55fba896ba90
+T010 view il=31 swa=1 n_kv=512 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=512 indices=0x55fba896c330 idx_buf=(nil) idx_n=512 stored_src1=0x55fba896bc00
+T010 store k_idxs n_tok=256 pos0=30 pos1=31 pos_last=285 sinfo.size=256 sinfo.idxs[0][0]=30 sinfo.idxs[0][last]=285
+T010 view il=3 swa=1 n_kv=768 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=768 indices=0x55fba896c330 idx_buf=(nil) idx_n=768 stored_src1=0x55fba896ba90
+T010 view il=3 swa=1 n_kv=768 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=768 indices=0x55fba896c330 idx_buf=(nil) idx_n=768 stored_src1=0x55fba896bc00
+T010 view il=7 swa=1 n_kv=768 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=768 indices=0x55fba896c330 idx_buf=(nil) idx_n=768 stored_src1=0x55fba896ba90
+T010 view il=7 swa=1 n_kv=768 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=768 indices=0x55fba896c330 idx_buf=(nil) idx_n=768 stored_src1=0x55fba896bc00
+T010 view il=11 swa=1 n_kv=768 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=768 indices=0x55fba896c330 idx_buf=(nil) idx_n=768 stored_src1=0x55fba896ba90
+T010 view il=11 swa=1 n_kv=768 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=768 indices=0x55fba896c330 idx_buf=(nil) idx_n=768 stored_src1=0x55fba896bc00
+T010 view il=15 swa=1 n_kv=768 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=768 indices=0x55fba896c330 idx_buf=(nil) idx_n=768 stored_src1=0x55fba896ba90
+T010 view il=15 swa=1 n_kv=768 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=768 indices=0x55fba896c330 idx_buf=(nil) idx_n=768 stored_src1=0x55fba896bc00
+T010 view il=19 swa=1 n_kv=768 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=768 indices=0x55fba896c330 idx_buf=(nil) idx_n=768 stored_src1=0x55fba896ba90
+T010 view il=19 swa=1 n_kv=768 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=768 indices=0x55fba896c330 idx_buf=(nil) idx_n=768 stored_src1=0x55fba896bc00
+T010 view il=23 swa=1 n_kv=768 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=768 indices=0x55fba896c330 idx_buf=(nil) idx_n=768 stored_src1=0x55fba896ba90
+T010 view il=23 swa=1 n_kv=768 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=768 indices=0x55fba896c330 idx_buf=(nil) idx_n=768 stored_src1=0x55fba896bc00
+T010 view il=27 swa=1 n_kv=768 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=768 indices=0x55fba896c330 idx_buf=(nil) idx_n=768 stored_src1=0x55fba896ba90
+T010 view il=27 swa=1 n_kv=768 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=768 indices=0x55fba896c330 idx_buf=(nil) idx_n=768 stored_src1=0x55fba896bc00
+T010 view il=31 swa=1 n_kv=768 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=768 indices=0x55fba896c330 idx_buf=(nil) idx_n=768 stored_src1=0x55fba896ba90
+T010 view il=31 swa=1 n_kv=768 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=768 indices=0x55fba896c330 idx_buf=(nil) idx_n=768 stored_src1=0x55fba896bc00
+T010 store k_idxs n_tok=256 pos0=286 pos1=287 pos_last=541 sinfo.size=256 sinfo.idxs[0][0]=286 sinfo.idxs[0][last]=541
+T010 view il=3 swa=1 n_kv=1024 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1024 indices=0x55fba896c330 idx_buf=(nil) idx_n=1024 stored_src1=0x55fba896ba90
+T010 view il=3 swa=1 n_kv=1024 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1024 indices=0x55fba896c330 idx_buf=(nil) idx_n=1024 stored_src1=0x55fba896bc00
+T010 view il=7 swa=1 n_kv=1024 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1024 indices=0x55fba896c330 idx_buf=(nil) idx_n=1024 stored_src1=0x55fba896ba90
+T010 view il=7 swa=1 n_kv=1024 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1024 indices=0x55fba896c330 idx_buf=(nil) idx_n=1024 stored_src1=0x55fba896bc00
+T010 view il=11 swa=1 n_kv=1024 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1024 indices=0x55fba896c330 idx_buf=(nil) idx_n=1024 stored_src1=0x55fba896ba90
+T010 view il=11 swa=1 n_kv=1024 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1024 indices=0x55fba896c330 idx_buf=(nil) idx_n=1024 stored_src1=0x55fba896bc00
+T010 view il=15 swa=1 n_kv=1024 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1024 indices=0x55fba896c330 idx_buf=(nil) idx_n=1024 stored_src1=0x55fba896ba90
+T010 view il=15 swa=1 n_kv=1024 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1024 indices=0x55fba896c330 idx_buf=(nil) idx_n=1024 stored_src1=0x55fba896bc00
+T010 view il=19 swa=1 n_kv=1024 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1024 indices=0x55fba896c330 idx_buf=(nil) idx_n=1024 stored_src1=0x55fba896ba90
+T010 view il=19 swa=1 n_kv=1024 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1024 indices=0x55fba896c330 idx_buf=(nil) idx_n=1024 stored_src1=0x55fba896bc00
+T010 view il=23 swa=1 n_kv=1024 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1024 indices=0x55fba896c330 idx_buf=(nil) idx_n=1024 stored_src1=0x55fba896ba90
+T010 view il=23 swa=1 n_kv=1024 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1024 indices=0x55fba896c330 idx_buf=(nil) idx_n=1024 stored_src1=0x55fba896bc00
+T010 view il=27 swa=1 n_kv=1024 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1024 indices=0x55fba896c330 idx_buf=(nil) idx_n=1024 stored_src1=0x55fba896ba90
+T010 view il=27 swa=1 n_kv=1024 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1024 indices=0x55fba896c330 idx_buf=(nil) idx_n=1024 stored_src1=0x55fba896bc00
+T010 view il=31 swa=1 n_kv=1024 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1024 indices=0x55fba896c330 idx_buf=(nil) idx_n=1024 stored_src1=0x55fba896ba90
+T010 view il=31 swa=1 n_kv=1024 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1024 indices=0x55fba896c330 idx_buf=(nil) idx_n=1024 stored_src1=0x55fba896bc00
+T010 store k_idxs n_tok=256 pos0=542 pos1=543 pos_last=797 sinfo.size=256 sinfo.idxs[0][0]=542 sinfo.idxs[0][last]=797
+T010 view il=3 swa=1 n_kv=1280 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1280 indices=0x55fba896c330 idx_buf=(nil) idx_n=1280 stored_src1=0x55fba896ba90
+T010 view il=3 swa=1 n_kv=1280 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1280 indices=0x55fba896c330 idx_buf=(nil) idx_n=1280 stored_src1=0x55fba896bc00
+T010 view il=7 swa=1 n_kv=1280 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1280 indices=0x55fba896c330 idx_buf=(nil) idx_n=1280 stored_src1=0x55fba896ba90
+T010 view il=7 swa=1 n_kv=1280 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1280 indices=0x55fba896c330 idx_buf=(nil) idx_n=1280 stored_src1=0x55fba896bc00
+T010 view il=11 swa=1 n_kv=1280 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1280 indices=0x55fba896c330 idx_buf=(nil) idx_n=1280 stored_src1=0x55fba896ba90
+T010 view il=11 swa=1 n_kv=1280 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1280 indices=0x55fba896c330 idx_buf=(nil) idx_n=1280 stored_src1=0x55fba896bc00
+T010 view il=15 swa=1 n_kv=1280 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1280 indices=0x55fba896c330 idx_buf=(nil) idx_n=1280 stored_src1=0x55fba896ba90
+T010 view il=15 swa=1 n_kv=1280 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1280 indices=0x55fba896c330 idx_buf=(nil) idx_n=1280 stored_src1=0x55fba896bc00
+T010 view il=19 swa=1 n_kv=1280 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1280 indices=0x55fba896c330 idx_buf=(nil) idx_n=1280 stored_src1=0x55fba896ba90
+T010 view il=19 swa=1 n_kv=1280 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1280 indices=0x55fba896c330 idx_buf=(nil) idx_n=1280 stored_src1=0x55fba896bc00
+T010 view il=23 swa=1 n_kv=1280 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1280 indices=0x55fba896c330 idx_buf=(nil) idx_n=1280 stored_src1=0x55fba896ba90
+T010 view il=23 swa=1 n_kv=1280 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1280 indices=0x55fba896c330 idx_buf=(nil) idx_n=1280 stored_src1=0x55fba896bc00
+T010 view il=27 swa=1 n_kv=1280 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1280 indices=0x55fba896c330 idx_buf=(nil) idx_n=1280 stored_src1=0x55fba896ba90
+T010 view il=27 swa=1 n_kv=1280 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1280 indices=0x55fba896c330 idx_buf=(nil) idx_n=1280 stored_src1=0x55fba896bc00
+T010 view il=31 swa=1 n_kv=1280 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1280 indices=0x55fba896c330 idx_buf=(nil) idx_n=1280 stored_src1=0x55fba896ba90
+T010 view il=31 swa=1 n_kv=1280 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1280 indices=0x55fba896c330 idx_buf=(nil) idx_n=1280 stored_src1=0x55fba896bc00
+T010 store k_idxs n_tok=256 pos0=798 pos1=799 pos_last=1053 sinfo.size=256 sinfo.idxs[0][0]=798 sinfo.idxs[0][last]=1053
+T010 view il=3 swa=1 n_kv=1280 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1280 indices=0x55fba896c330 idx_buf=(nil) idx_n=1280 stored_src1=0x55fba896ba90
+T010 view il=3 swa=1 n_kv=1280 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1280 indices=0x55fba896c330 idx_buf=(nil) idx_n=1280 stored_src1=0x55fba896bc00
+T010 view il=7 swa=1 n_kv=1280 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1280 indices=0x55fba896c330 idx_buf=(nil) idx_n=1280 stored_src1=0x55fba896ba90
+T010 view il=7 swa=1 n_kv=1280 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1280 indices=0x55fba896c330 idx_buf=(nil) idx_n=1280 stored_src1=0x55fba896bc00
+T010 view il=11 swa=1 n_kv=1280 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1280 indices=0x55fba896c330 idx_buf=(nil) idx_n=1280 stored_src1=0x55fba896ba90
+T010 view il=11 swa=1 n_kv=1280 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1280 indices=0x55fba896c330 idx_buf=(nil) idx_n=1280 stored_src1=0x55fba896bc00
+T010 view il=15 swa=1 n_kv=1280 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1280 indices=0x55fba896c330 idx_buf=(nil) idx_n=1280 stored_src1=0x55fba896ba90
+T010 view il=15 swa=1 n_kv=1280 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1280 indices=0x55fba896c330 idx_buf=(nil) idx_n=1280 stored_src1=0x55fba896bc00
+T010 view il=19 swa=1 n_kv=1280 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1280 indices=0x55fba896c330 idx_buf=(nil) idx_n=1280 stored_src1=0x55fba896ba90
+T010 view il=19 swa=1 n_kv=1280 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1280 indices=0x55fba896c330 idx_buf=(nil) idx_n=1280 stored_src1=0x55fba896bc00
+T010 view il=23 swa=1 n_kv=1280 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1280 indices=0x55fba896c330 idx_buf=(nil) idx_n=1280 stored_src1=0x55fba896ba90
+T010 view il=23 swa=1 n_kv=1280 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1280 indices=0x55fba896c330 idx_buf=(nil) idx_n=1280 stored_src1=0x55fba896bc00
+T010 view il=27 swa=1 n_kv=1280 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1280 indices=0x55fba896c330 idx_buf=(nil) idx_n=1280 stored_src1=0x55fba896ba90
+T010 view il=27 swa=1 n_kv=1280 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1280 indices=0x55fba896c330 idx_buf=(nil) idx_n=1280 stored_src1=0x55fba896bc00
+T010 view il=31 swa=1 n_kv=1280 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1280 indices=0x55fba896c330 idx_buf=(nil) idx_n=1280 stored_src1=0x55fba896ba90
+T010 view il=31 swa=1 n_kv=1280 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1280 indices=0x55fba896c330 idx_buf=(nil) idx_n=1280 stored_src1=0x55fba896bc00
+T010 store k_idxs n_tok=137 pos0=1054 pos1=1055 pos_last=1190 sinfo.size=137 sinfo.idxs[0][0]=1054 sinfo.idxs[0][last]=1190
+T010 view il=3 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=3 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=7 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=7 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=11 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=11 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=15 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=15 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=19 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=19 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=23 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=23 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=27 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=27 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=31 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=31 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=3 swa=1 n_kv=1536 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1536 indices=0x55fba896c330 idx_buf=(nil) idx_n=1536 stored_src1=0x55fba896ba90
+T010 view il=3 swa=1 n_kv=1536 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1536 indices=0x55fba896c330 idx_buf=(nil) idx_n=1536 stored_src1=0x55fba896bc00
+T010 view il=7 swa=1 n_kv=1536 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1536 indices=0x55fba896c330 idx_buf=(nil) idx_n=1536 stored_src1=0x55fba896ba90
+T010 view il=7 swa=1 n_kv=1536 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1536 indices=0x55fba896c330 idx_buf=(nil) idx_n=1536 stored_src1=0x55fba896bc00
+T010 view il=11 swa=1 n_kv=1536 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1536 indices=0x55fba896c330 idx_buf=(nil) idx_n=1536 stored_src1=0x55fba896ba90
+T010 view il=11 swa=1 n_kv=1536 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1536 indices=0x55fba896c330 idx_buf=(nil) idx_n=1536 stored_src1=0x55fba896bc00
+T010 view il=15 swa=1 n_kv=1536 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1536 indices=0x55fba896c330 idx_buf=(nil) idx_n=1536 stored_src1=0x55fba896ba90
+T010 view il=15 swa=1 n_kv=1536 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1536 indices=0x55fba896c330 idx_buf=(nil) idx_n=1536 stored_src1=0x55fba896bc00
+T010 view il=19 swa=1 n_kv=1536 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1536 indices=0x55fba896c330 idx_buf=(nil) idx_n=1536 stored_src1=0x55fba896ba90
+T010 view il=19 swa=1 n_kv=1536 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1536 indices=0x55fba896c330 idx_buf=(nil) idx_n=1536 stored_src1=0x55fba896bc00
+T010 view il=23 swa=1 n_kv=1536 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1536 indices=0x55fba896c330 idx_buf=(nil) idx_n=1536 stored_src1=0x55fba896ba90
+T010 view il=23 swa=1 n_kv=1536 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1536 indices=0x55fba896c330 idx_buf=(nil) idx_n=1536 stored_src1=0x55fba896bc00
+T010 view il=27 swa=1 n_kv=1536 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1536 indices=0x55fba896c330 idx_buf=(nil) idx_n=1536 stored_src1=0x55fba896ba90
+T010 view il=27 swa=1 n_kv=1536 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1536 indices=0x55fba896c330 idx_buf=(nil) idx_n=1536 stored_src1=0x55fba896bc00
+T010 view il=31 swa=1 n_kv=1536 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1536 indices=0x55fba896c330 idx_buf=(nil) idx_n=1536 stored_src1=0x55fba896ba90
+T010 view il=31 swa=1 n_kv=1536 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1536 indices=0x55fba896c330 idx_buf=(nil) idx_n=1536 stored_src1=0x55fba896bc00
+T010 store k_idxs n_tok=256 pos0=1191 pos1=1192 pos_last=1446 sinfo.size=256 sinfo.idxs[0][0]=1191 sinfo.idxs[0][last]=1446
+T010 view il=3 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=3 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=7 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=7 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=11 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=11 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=15 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=15 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=19 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=19 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=23 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=23 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=27 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=27 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=31 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd0e0
+T010 view il=31 swa=1 n_kv=8192 mat_idxs=0x55fbac3cd980 mat_buffer=(nil) mat_n=8192 indices=0x55fbac3cd980 idx_buf=(nil) idx_n=8192 stored_src1=0x55fbac3cd250
+T010 view il=3 swa=1 n_kv=1536 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1536 indices=0x55fba896c330 idx_buf=(nil) idx_n=1536 stored_src1=0x55fba896ba90
+T010 view il=3 swa=1 n_kv=1536 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1536 indices=0x55fba896c330 idx_buf=(nil) idx_n=1536 stored_src1=0x55fba896bc00
+T010 view il=7 swa=1 n_kv=1536 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1536 indices=0x55fba896c330 idx_buf=(nil) idx_n=1536 stored_src1=0x55fba896ba90
+T010 view il=7 swa=1 n_kv=1536 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1536 indices=0x55fba896c330 idx_buf=(nil) idx_n=1536 stored_src1=0x55fba896bc00
+T010 view il=11 swa=1 n_kv=1536 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1536 indices=0x55fba896c330 idx_buf=(nil) idx_n=1536 stored_src1=0x55fba896ba90
+T010 view il=11 swa=1 n_kv=1536 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1536 indices=0x55fba896c330 idx_buf=(nil) idx_n=1536 stored_src1=0x55fba896bc00
+T010 view il=15 swa=1 n_kv=1536 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1536 indices=0x55fba896c330 idx_buf=(nil) idx_n=1536 stored_src1=0x55fba896ba90
+T010 view il=15 swa=1 n_kv=1536 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1536 indices=0x55fba896c330 idx_buf=(nil) idx_n=1536 stored_src1=0x55fba896bc00
+T010 view il=19 swa=1 n_kv=1536 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1536 indices=0x55fba896c330 idx_buf=(nil) idx_n=1536 stored_src1=0x55fba896ba90
+T010 view il=19 swa=1 n_kv=1536 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1536 indices=0x55fba896c330 idx_buf=(nil) idx_n=1536 stored_src1=0x55fba896bc00
+T010 view il=23 swa=1 n_kv=1536 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1536 indices=0x55fba896c330 idx_buf=(nil) idx_n=1536 stored_src1=0x55fba896ba90
+T010 view il=23 swa=1 n_kv=1536 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1536 indices=0x55fba896c330 idx_buf=(nil) idx_n=1536 stored_src1=0x55fba896bc00
+T010 view il=27 swa=1 n_kv=1536 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1536 indices=0x55fba896c330 idx_buf=(nil) idx_n=1536 stored_src1=0x55fba896ba90
+T010 view il=27 swa=1 n_kv=1536 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1536 indices=0x55fba896c330 idx_buf=(nil) idx_n=1536 stored_src1=0x55fba896bc00
+T010 view il=31 swa=1 n_kv=1536 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1536 indices=0x55fba896c330 idx_buf=(nil) idx_n=1536 stored_src1=0x55fba896ba90
+T010 view il=31 swa=1 n_kv=1536 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1536 indices=0x55fba896c330 idx_buf=(nil) idx_n=1536 stored_src1=0x55fba896bc00
+T010 store k_idxs n_tok=4 pos0=1447 pos1=1448 pos_last=1450 sinfo.size=4 sinfo.idxs[0][0]=1447 sinfo.idxs[0][last]=1450
+T010 view il=3 swa=1 n_kv=1536 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1536 indices=0x55fba896c330 idx_buf=(nil) idx_n=1536 stored_src1=0x55fba896ba90
+T010 view il=3 swa=1 n_kv=1536 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1536 indices=0x55fba896c330 idx_buf=(nil) idx_n=1536 stored_src1=0x55fba896bc00
+T010 view il=7 swa=1 n_kv=1536 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1536 indices=0x55fba896c330 idx_buf=(nil) idx_n=1536 stored_src1=0x55fba896ba90
+T010 view il=7 swa=1 n_kv=1536 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1536 indices=0x55fba896c330 idx_buf=(nil) idx_n=1536 stored_src1=0x55fba896bc00
+T010 view il=11 swa=1 n_kv=1536 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1536 indices=0x55fba896c330 idx_buf=(nil) idx_n=1536 stored_src1=0x55fba896ba90
+T010 view il=11 swa=1 n_kv=1536 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1536 indices=0x55fba896c330 idx_buf=(nil) idx_n=1536 stored_src1=0x55fba896bc00
+T010 view il=15 swa=1 n_kv=1536 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1536 indices=0x55fba896c330 idx_buf=(nil) idx_n=1536 stored_src1=0x55fba896ba90
+T010 view il=15 swa=1 n_kv=1536 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1536 indices=0x55fba896c330 idx_buf=(nil) idx_n=1536 stored_src1=0x55fba896bc00
+T010 view il=19 swa=1 n_kv=1536 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1536 indices=0x55fba896c330 idx_buf=(nil) idx_n=1536 stored_src1=0x55fba896ba90
+T010 view il=19 swa=1 n_kv=1536 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1536 indices=0x55fba896c330 idx_buf=(nil) idx_n=1536 stored_src1=0x55fba896bc00
+T010 view il=23 swa=1 n_kv=1536 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1536 indices=0x55fba896c330 idx_buf=(nil) idx_n=1536 stored_src1=0x55fba896ba90
+T010 view il=23 swa=1 n_kv=1536 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1536 indices=0x55fba896c330 idx_buf=(nil) idx_n=1536 stored_src1=0x55fba896bc00
+T010 view il=27 swa=1 n_kv=1536 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1536 indices=0x55fba896c330 idx_buf=(nil) idx_n=1536 stored_src1=0x55fba896ba90
+T010 view il=27 swa=1 n_kv=1536 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1536 indices=0x55fba896c330 idx_buf=(nil) idx_n=1536 stored_src1=0x55fba896bc00
+T010 view il=31 swa=1 n_kv=1536 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1536 indices=0x55fba896c330 idx_buf=(nil) idx_n=1536 stored_src1=0x55fba896ba90
+T010 view il=31 swa=1 n_kv=1536 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1536 indices=0x55fba896c330 idx_buf=(nil) idx_n=1536 stored_src1=0x55fba896bc00
+T010 store k_idxs n_tok=1 pos0=1451 pos1=-1 pos_last=1451 sinfo.size=1 sinfo.idxs[0][0]=1451 sinfo.idxs[0][last]=1451
+T010 store k_idxs n_tok=1 pos0=1452 pos1=-1 pos_last=1452 sinfo.size=1 sinfo.idxs[0][0]=1452 sinfo.idxs[0][last]=1452
+T010 store k_idxs n_tok=1 pos0=1453 pos1=-1 pos_last=1453 sinfo.size=1 sinfo.idxs[0][0]=1453 sinfo.idxs[0][last]=1453
+T010 store k_idxs n_tok=1 pos0=1454 pos1=-1 pos_last=1454 sinfo.size=1 sinfo.idxs[0][0]=1454 sinfo.idxs[0][last]=1454
+T010 store k_idxs n_tok=1 pos0=1455 pos1=-1 pos_last=1455 sinfo.size=1 sinfo.idxs[0][0]=1455 sinfo.idxs[0][last]=1455
+T010 store k_idxs n_tok=1 pos0=1456 pos1=-1 pos_last=1456 sinfo.size=1 sinfo.idxs[0][0]=1456 sinfo.idxs[0][last]=1456
+T010 store k_idxs n_tok=1 pos0=1457 pos1=-1 pos_last=1457 sinfo.size=1 sinfo.idxs[0][0]=1457 sinfo.idxs[0][last]=1457
+T010 store k_idxs n_tok=1 pos0=1458 pos1=-1 pos_last=1458 sinfo.size=1 sinfo.idxs[0][0]=1458 sinfo.idxs[0][last]=1458
+T010 store k_idxs n_tok=1 pos0=1459 pos1=-1 pos_last=1459 sinfo.size=1 sinfo.idxs[0][0]=1459 sinfo.idxs[0][last]=1459
+T010 store k_idxs n_tok=1 pos0=1460 pos1=-1 pos_last=1460 sinfo.size=1 sinfo.idxs[0][0]=1460 sinfo.idxs[0][last]=1460
+T010 store k_idxs n_tok=1 pos0=1461 pos1=-1 pos_last=1461 sinfo.size=1 sinfo.idxs[0][0]=1461 sinfo.idxs[0][last]=1461
+T010 store k_idxs n_tok=1 pos0=1462 pos1=-1 pos_last=1462 sinfo.size=1 sinfo.idxs[0][0]=1462 sinfo.idxs[0][last]=1462
+T010 store k_idxs n_tok=1 pos0=1463 pos1=-1 pos_last=1463 sinfo.size=1 sinfo.idxs[0][0]=1463 sinfo.idxs[0][last]=1463
+T010 store k_idxs n_tok=1 pos0=1464 pos1=-1 pos_last=1464 sinfo.size=1 sinfo.idxs[0][0]=1464 sinfo.idxs[0][last]=1464
+T010 store k_idxs n_tok=1 pos0=1465 pos1=-1 pos_last=1465 sinfo.size=1 sinfo.idxs[0][0]=1465 sinfo.idxs[0][last]=1465
+T010 store k_idxs n_tok=1 pos0=1466 pos1=-1 pos_last=1466 sinfo.size=1 sinfo.idxs[0][0]=1466 sinfo.idxs[0][last]=1466
+T010 store k_idxs n_tok=1 pos0=1467 pos1=-1 pos_last=1467 sinfo.size=1 sinfo.idxs[0][0]=1467 sinfo.idxs[0][last]=1467
+T010 store k_idxs n_tok=1 pos0=1468 pos1=-1 pos_last=1468 sinfo.size=1 sinfo.idxs[0][0]=1468 sinfo.idxs[0][last]=1468
+T010 store k_idxs n_tok=1 pos0=1469 pos1=-1 pos_last=1469 sinfo.size=1 sinfo.idxs[0][0]=1469 sinfo.idxs[0][last]=1469
+T010 store k_idxs n_tok=1 pos0=1470 pos1=-1 pos_last=1470 sinfo.size=1 sinfo.idxs[0][0]=1470 sinfo.idxs[0][last]=1470
+T010 store k_idxs n_tok=1 pos0=1471 pos1=-1 pos_last=1471 sinfo.size=1 sinfo.idxs[0][0]=1471 sinfo.idxs[0][last]=1471
+T010 store k_idxs n_tok=1 pos0=1472 pos1=-1 pos_last=1472 sinfo.size=1 sinfo.idxs[0][0]=1472 sinfo.idxs[0][last]=1472
+T010 store k_idxs n_tok=1 pos0=1473 pos1=-1 pos_last=1473 sinfo.size=1 sinfo.idxs[0][0]=1473 sinfo.idxs[0][last]=1473
+T010 store k_idxs n_tok=1 pos0=1474 pos1=-1 pos_last=1474 sinfo.size=1 sinfo.idxs[0][0]=1474 sinfo.idxs[0][last]=1474
+T010 store k_idxs n_tok=1 pos0=1475 pos1=-1 pos_last=1475 sinfo.size=1 sinfo.idxs[0][0]=1475 sinfo.idxs[0][last]=1475
+T010 store k_idxs n_tok=1 pos0=1476 pos1=-1 pos_last=1476 sinfo.size=1 sinfo.idxs[0][0]=1476 sinfo.idxs[0][last]=1476
+T010 store k_idxs n_tok=1 pos0=1477 pos1=-1 pos_last=1477 sinfo.size=1 sinfo.idxs[0][0]=1477 sinfo.idxs[0][last]=1477
+T010 store k_idxs n_tok=1 pos0=1478 pos1=-1 pos_last=1478 sinfo.size=1 sinfo.idxs[0][0]=1478 sinfo.idxs[0][last]=1478
+T010 store k_idxs n_tok=1 pos0=1479 pos1=-1 pos_last=1479 sinfo.size=1 sinfo.idxs[0][0]=1479 sinfo.idxs[0][last]=1479
+T010 store k_idxs n_tok=1 pos0=1480 pos1=-1 pos_last=1480 sinfo.size=1 sinfo.idxs[0][0]=1480 sinfo.idxs[0][last]=1480
+T010 store k_idxs n_tok=1 pos0=1481 pos1=-1 pos_last=1481 sinfo.size=1 sinfo.idxs[0][0]=1481 sinfo.idxs[0][last]=1481
+T010 store k_idxs n_tok=1 pos0=1482 pos1=-1 pos_last=1482 sinfo.size=1 sinfo.idxs[0][0]=1482 sinfo.idxs[0][last]=1482
+T010 store k_idxs n_tok=1 pos0=1483 pos1=-1 pos_last=1483 sinfo.size=1 sinfo.idxs[0][0]=1483 sinfo.idxs[0][last]=1483
+T010 store k_idxs n_tok=1 pos0=1484 pos1=-1 pos_last=1484 sinfo.size=1 sinfo.idxs[0][0]=1484 sinfo.idxs[0][last]=1484
+T010 store k_idxs n_tok=1 pos0=1485 pos1=-1 pos_last=1485 sinfo.size=1 sinfo.idxs[0][0]=1485 sinfo.idxs[0][last]=1485
+T010 store k_idxs n_tok=1 pos0=1486 pos1=-1 pos_last=1486 sinfo.size=1 sinfo.idxs[0][0]=1486 sinfo.idxs[0][last]=1486
+T010 store k_idxs n_tok=1 pos0=1487 pos1=-1 pos_last=1487 sinfo.size=1 sinfo.idxs[0][0]=1487 sinfo.idxs[0][last]=1487
+T010 store k_idxs n_tok=1 pos0=1488 pos1=-1 pos_last=1488 sinfo.size=1 sinfo.idxs[0][0]=1488 sinfo.idxs[0][last]=1488
+T010 store k_idxs n_tok=1 pos0=1489 pos1=-1 pos_last=1489 sinfo.size=1 sinfo.idxs[0][0]=1489 sinfo.idxs[0][last]=1489
+T010 store k_idxs n_tok=1 pos0=1490 pos1=-1 pos_last=1490 sinfo.size=1 sinfo.idxs[0][0]=1490 sinfo.idxs[0][last]=1490
+T010 store k_idxs n_tok=1 pos0=1491 pos1=-1 pos_last=1491 sinfo.size=1 sinfo.idxs[0][0]=1491 sinfo.idxs[0][last]=1491
+T010 store k_idxs n_tok=1 pos0=1492 pos1=-1 pos_last=1492 sinfo.size=1 sinfo.idxs[0][0]=1492 sinfo.idxs[0][last]=1492
+T010 store k_idxs n_tok=1 pos0=1493 pos1=-1 pos_last=1493 sinfo.size=1 sinfo.idxs[0][0]=1493 sinfo.idxs[0][last]=1493
+T010 store k_idxs n_tok=1 pos0=1494 pos1=-1 pos_last=1494 sinfo.size=1 sinfo.idxs[0][0]=1494 sinfo.idxs[0][last]=1494
+T010 store k_idxs n_tok=1 pos0=1495 pos1=-1 pos_last=1495 sinfo.size=1 sinfo.idxs[0][0]=1495 sinfo.idxs[0][last]=1495
+T010 store k_idxs n_tok=1 pos0=1496 pos1=-1 pos_last=1496 sinfo.size=1 sinfo.idxs[0][0]=1496 sinfo.idxs[0][last]=1496
+T010 store k_idxs n_tok=1 pos0=1497 pos1=-1 pos_last=1497 sinfo.size=1 sinfo.idxs[0][0]=1497 sinfo.idxs[0][last]=1497
+T010 store k_idxs n_tok=1 pos0=1498 pos1=-1 pos_last=1498 sinfo.size=1 sinfo.idxs[0][0]=1498 sinfo.idxs[0][last]=1498
+T010 store k_idxs n_tok=1 pos0=1499 pos1=-1 pos_last=1499 sinfo.size=1 sinfo.idxs[0][0]=1499 sinfo.idxs[0][last]=1499
+T010 store k_idxs n_tok=1 pos0=1500 pos1=-1 pos_last=1500 sinfo.size=1 sinfo.idxs[0][0]=1500 sinfo.idxs[0][last]=1500
+T010 store k_idxs n_tok=1 pos0=1501 pos1=-1 pos_last=1501 sinfo.size=1 sinfo.idxs[0][0]=1501 sinfo.idxs[0][last]=1501
+T010 store k_idxs n_tok=1 pos0=1502 pos1=-1 pos_last=1502 sinfo.size=1 sinfo.idxs[0][0]=1502 sinfo.idxs[0][last]=1502
+T010 store k_idxs n_tok=1 pos0=1503 pos1=-1 pos_last=1503 sinfo.size=1 sinfo.idxs[0][0]=1503 sinfo.idxs[0][last]=1503
+T010 store k_idxs n_tok=1 pos0=1504 pos1=-1 pos_last=1504 sinfo.size=1 sinfo.idxs[0][0]=1504 sinfo.idxs[0][last]=1504
+T010 store k_idxs n_tok=1 pos0=1505 pos1=-1 pos_last=1505 sinfo.size=1 sinfo.idxs[0][0]=1505 sinfo.idxs[0][last]=1505
+T010 store k_idxs n_tok=1 pos0=1506 pos1=-1 pos_last=1506 sinfo.size=1 sinfo.idxs[0][0]=1506 sinfo.idxs[0][last]=1506
+T010 store k_idxs n_tok=1 pos0=1507 pos1=-1 pos_last=1507 sinfo.size=1 sinfo.idxs[0][0]=1507 sinfo.idxs[0][last]=1507
+T010 store k_idxs n_tok=1 pos0=1508 pos1=-1 pos_last=1508 sinfo.size=1 sinfo.idxs[0][0]=1508 sinfo.idxs[0][last]=1508
+T010 store k_idxs n_tok=1 pos0=1509 pos1=-1 pos_last=1509 sinfo.size=1 sinfo.idxs[0][0]=1509 sinfo.idxs[0][last]=1509
+T010 store k_idxs n_tok=1 pos0=1510 pos1=-1 pos_last=1510 sinfo.size=1 sinfo.idxs[0][0]=1510 sinfo.idxs[0][last]=1510
+T010 store k_idxs n_tok=1 pos0=1511 pos1=-1 pos_last=1511 sinfo.size=1 sinfo.idxs[0][0]=1511 sinfo.idxs[0][last]=1511
+T010 store k_idxs n_tok=1 pos0=1512 pos1=-1 pos_last=1512 sinfo.size=1 sinfo.idxs[0][0]=1512 sinfo.idxs[0][last]=1512
+T010 store k_idxs n_tok=1 pos0=1513 pos1=-1 pos_last=1513 sinfo.size=1 sinfo.idxs[0][0]=1513 sinfo.idxs[0][last]=1513
+T010 store k_idxs n_tok=1 pos0=1514 pos1=-1 pos_last=1514 sinfo.size=1 sinfo.idxs[0][0]=1514 sinfo.idxs[0][last]=1514
+T010 store k_idxs n_tok=1 pos0=1515 pos1=-1 pos_last=1515 sinfo.size=1 sinfo.idxs[0][0]=1515 sinfo.idxs[0][last]=1515
+T010 store k_idxs n_tok=1 pos0=1516 pos1=-1 pos_last=1516 sinfo.size=1 sinfo.idxs[0][0]=1516 sinfo.idxs[0][last]=1516
+T010 store k_idxs n_tok=1 pos0=1517 pos1=-1 pos_last=1517 sinfo.size=1 sinfo.idxs[0][0]=1517 sinfo.idxs[0][last]=1517
+T010 store k_idxs n_tok=1 pos0=1518 pos1=-1 pos_last=1518 sinfo.size=1 sinfo.idxs[0][0]=1518 sinfo.idxs[0][last]=1518
+T010 store k_idxs n_tok=1 pos0=1519 pos1=-1 pos_last=1519 sinfo.size=1 sinfo.idxs[0][0]=1519 sinfo.idxs[0][last]=1519
+T010 store k_idxs n_tok=1 pos0=1520 pos1=-1 pos_last=1520 sinfo.size=1 sinfo.idxs[0][0]=1520 sinfo.idxs[0][last]=1520
+T010 store k_idxs n_tok=1 pos0=1521 pos1=-1 pos_last=1521 sinfo.size=1 sinfo.idxs[0][0]=1521 sinfo.idxs[0][last]=1521
+T010 store k_idxs n_tok=1 pos0=1522 pos1=-1 pos_last=1522 sinfo.size=1 sinfo.idxs[0][0]=1522 sinfo.idxs[0][last]=1522
+T010 store k_idxs n_tok=1 pos0=1523 pos1=-1 pos_last=1523 sinfo.size=1 sinfo.idxs[0][0]=1523 sinfo.idxs[0][last]=1523
+T010 store k_idxs n_tok=1 pos0=1524 pos1=-1 pos_last=1524 sinfo.size=1 sinfo.idxs[0][0]=1524 sinfo.idxs[0][last]=1524
+T010 store k_idxs n_tok=1 pos0=1525 pos1=-1 pos_last=1525 sinfo.size=1 sinfo.idxs[0][0]=1525 sinfo.idxs[0][last]=1525
+T010 store k_idxs n_tok=1 pos0=1526 pos1=-1 pos_last=1526 sinfo.size=1 sinfo.idxs[0][0]=1526 sinfo.idxs[0][last]=1526
+T010 store k_idxs n_tok=1 pos0=1527 pos1=-1 pos_last=1527 sinfo.size=1 sinfo.idxs[0][0]=1527 sinfo.idxs[0][last]=1527
+T010 store k_idxs n_tok=1 pos0=1528 pos1=-1 pos_last=1528 sinfo.size=1 sinfo.idxs[0][0]=1528 sinfo.idxs[0][last]=1528
+T010 store k_idxs n_tok=1 pos0=1529 pos1=-1 pos_last=1529 sinfo.size=1 sinfo.idxs[0][0]=1529 sinfo.idxs[0][last]=1529
+T010 store k_idxs n_tok=1 pos0=1530 pos1=-1 pos_last=1530 sinfo.size=1 sinfo.idxs[0][0]=1530 sinfo.idxs[0][last]=1530
+T010 store k_idxs n_tok=1 pos0=1531 pos1=-1 pos_last=1531 sinfo.size=1 sinfo.idxs[0][0]=1531 sinfo.idxs[0][last]=1531
+T010 store k_idxs n_tok=1 pos0=1532 pos1=-1 pos_last=1532 sinfo.size=1 sinfo.idxs[0][0]=1532 sinfo.idxs[0][last]=1532
+T010 store k_idxs n_tok=1 pos0=1533 pos1=-1 pos_last=1533 sinfo.size=1 sinfo.idxs[0][0]=1533 sinfo.idxs[0][last]=1533
+T010 store k_idxs n_tok=1 pos0=1534 pos1=-1 pos_last=1534 sinfo.size=1 sinfo.idxs[0][0]=1534 sinfo.idxs[0][last]=1534
+T010 store k_idxs n_tok=1 pos0=1535 pos1=-1 pos_last=1535 sinfo.size=1 sinfo.idxs[0][0]=1535 sinfo.idxs[0][last]=1535
+T010 view il=3 swa=1 n_kv=1792 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1792 indices=0x55fba896c330 idx_buf=(nil) idx_n=1792 stored_src1=0x55fba896ba90
+T010 view il=3 swa=1 n_kv=1792 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1792 indices=0x55fba896c330 idx_buf=(nil) idx_n=1792 stored_src1=0x55fba896bc00
+T010 view il=7 swa=1 n_kv=1792 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1792 indices=0x55fba896c330 idx_buf=(nil) idx_n=1792 stored_src1=0x55fba896ba90
+T010 view il=7 swa=1 n_kv=1792 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1792 indices=0x55fba896c330 idx_buf=(nil) idx_n=1792 stored_src1=0x55fba896bc00
+T010 view il=11 swa=1 n_kv=1792 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1792 indices=0x55fba896c330 idx_buf=(nil) idx_n=1792 stored_src1=0x55fba896ba90
+T010 view il=11 swa=1 n_kv=1792 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1792 indices=0x55fba896c330 idx_buf=(nil) idx_n=1792 stored_src1=0x55fba896bc00
+T010 view il=15 swa=1 n_kv=1792 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1792 indices=0x55fba896c330 idx_buf=(nil) idx_n=1792 stored_src1=0x55fba896ba90
+T010 view il=15 swa=1 n_kv=1792 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1792 indices=0x55fba896c330 idx_buf=(nil) idx_n=1792 stored_src1=0x55fba896bc00
+T010 view il=19 swa=1 n_kv=1792 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1792 indices=0x55fba896c330 idx_buf=(nil) idx_n=1792 stored_src1=0x55fba896ba90
+T010 view il=19 swa=1 n_kv=1792 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1792 indices=0x55fba896c330 idx_buf=(nil) idx_n=1792 stored_src1=0x55fba896bc00
+T010 view il=23 swa=1 n_kv=1792 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1792 indices=0x55fba896c330 idx_buf=(nil) idx_n=1792 stored_src1=0x55fba896ba90
+T010 view il=23 swa=1 n_kv=1792 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1792 indices=0x55fba896c330 idx_buf=(nil) idx_n=1792 stored_src1=0x55fba896bc00
+T010 view il=27 swa=1 n_kv=1792 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1792 indices=0x55fba896c330 idx_buf=(nil) idx_n=1792 stored_src1=0x55fba896ba90
+T010 view il=27 swa=1 n_kv=1792 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1792 indices=0x55fba896c330 idx_buf=(nil) idx_n=1792 stored_src1=0x55fba896bc00
+T010 view il=31 swa=1 n_kv=1792 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1792 indices=0x55fba896c330 idx_buf=(nil) idx_n=1792 stored_src1=0x55fba896ba90
+T010 view il=31 swa=1 n_kv=1792 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=1792 indices=0x55fba896c330 idx_buf=(nil) idx_n=1792 stored_src1=0x55fba896bc00
+T010 store k_idxs n_tok=1 pos0=1536 pos1=-1 pos_last=1536 sinfo.size=1 sinfo.idxs[0][0]=1536 sinfo.idxs[0][last]=1536
+T010 store k_idxs n_tok=1 pos0=1537 pos1=-1 pos_last=1537 sinfo.size=1 sinfo.idxs[0][0]=1537 sinfo.idxs[0][last]=1537
+T010 store k_idxs n_tok=1 pos0=1538 pos1=-1 pos_last=1538 sinfo.size=1 sinfo.idxs[0][0]=1538 sinfo.idxs[0][last]=1538
+T010 store k_idxs n_tok=1 pos0=1539 pos1=-1 pos_last=1539 sinfo.size=1 sinfo.idxs[0][0]=1539 sinfo.idxs[0][last]=1539
+T010 store k_idxs n_tok=1 pos0=1540 pos1=-1 pos_last=1540 sinfo.size=1 sinfo.idxs[0][0]=1540 sinfo.idxs[0][last]=1540
+T010 store k_idxs n_tok=1 pos0=1541 pos1=-1 pos_last=1541 sinfo.size=1 sinfo.idxs[0][0]=1541 sinfo.idxs[0][last]=1541
+T010 store k_idxs n_tok=1 pos0=1542 pos1=-1 pos_last=1542 sinfo.size=1 sinfo.idxs[0][0]=1542 sinfo.idxs[0][last]=1542
+T010 store k_idxs n_tok=1 pos0=1543 pos1=-1 pos_last=1543 sinfo.size=1 sinfo.idxs[0][0]=1543 sinfo.idxs[0][last]=1543
+T010 store k_idxs n_tok=1 pos0=1544 pos1=-1 pos_last=1544 sinfo.size=1 sinfo.idxs[0][0]=1544 sinfo.idxs[0][last]=1544
+T010 store k_idxs n_tok=1 pos0=1545 pos1=-1 pos_last=1545 sinfo.size=1 sinfo.idxs[0][0]=1545 sinfo.idxs[0][last]=1545
+T010 store k_idxs n_tok=1 pos0=1546 pos1=-1 pos_last=1546 sinfo.size=1 sinfo.idxs[0][0]=1546 sinfo.idxs[0][last]=1546
+T010 store k_idxs n_tok=1 pos0=1547 pos1=-1 pos_last=1547 sinfo.size=1 sinfo.idxs[0][0]=1547 sinfo.idxs[0][last]=1547
+T010 store k_idxs n_tok=1 pos0=1548 pos1=-1 pos_last=1548 sinfo.size=1 sinfo.idxs[0][0]=1548 sinfo.idxs[0][last]=1548
+T010 store k_idxs n_tok=1 pos0=1549 pos1=-1 pos_last=1549 sinfo.size=1 sinfo.idxs[0][0]=1549 sinfo.idxs[0][last]=1549
+T010 store k_idxs n_tok=1 pos0=1550 pos1=-1 pos_last=1550 sinfo.size=1 sinfo.idxs[0][0]=1550 sinfo.idxs[0][last]=1550
+T010 store k_idxs n_tok=1 pos0=1551 pos1=-1 pos_last=1551 sinfo.size=1 sinfo.idxs[0][0]=1551 sinfo.idxs[0][last]=1551
+T010 store k_idxs n_tok=1 pos0=1552 pos1=-1 pos_last=1552 sinfo.size=1 sinfo.idxs[0][0]=1552 sinfo.idxs[0][last]=1552
+T010 store k_idxs n_tok=1 pos0=1553 pos1=-1 pos_last=1553 sinfo.size=1 sinfo.idxs[0][0]=1553 sinfo.idxs[0][last]=1553
+T010 store k_idxs n_tok=1 pos0=1554 pos1=-1 pos_last=1554 sinfo.size=1 sinfo.idxs[0][0]=1554 sinfo.idxs[0][last]=1554
+T010 store k_idxs n_tok=1 pos0=1555 pos1=-1 pos_last=1555 sinfo.size=1 sinfo.idxs[0][0]=1555 sinfo.idxs[0][last]=1555
+T010 store k_idxs n_tok=1 pos0=1556 pos1=-1 pos_last=1556 sinfo.size=1 sinfo.idxs[0][0]=1556 sinfo.idxs[0][last]=1556
+T010 store k_idxs n_tok=1 pos0=1557 pos1=-1 pos_last=1557 sinfo.size=1 sinfo.idxs[0][0]=1557 sinfo.idxs[0][last]=1557
+T010 store k_idxs n_tok=1 pos0=1558 pos1=-1 pos_last=1558 sinfo.size=1 sinfo.idxs[0][0]=1558 sinfo.idxs[0][last]=1558
+T010 store k_idxs n_tok=1 pos0=1559 pos1=-1 pos_last=1559 sinfo.size=1 sinfo.idxs[0][0]=1559 sinfo.idxs[0][last]=1559
+T010 store k_idxs n_tok=1 pos0=1560 pos1=-1 pos_last=1560 sinfo.size=1 sinfo.idxs[0][0]=1560 sinfo.idxs[0][last]=1560
+T010 store k_idxs n_tok=1 pos0=1561 pos1=-1 pos_last=1561 sinfo.size=1 sinfo.idxs[0][0]=1561 sinfo.idxs[0][last]=1561
+T010 store k_idxs n_tok=1 pos0=1562 pos1=-1 pos_last=1562 sinfo.size=1 sinfo.idxs[0][0]=1562 sinfo.idxs[0][last]=1562
+T010 store k_idxs n_tok=1 pos0=1563 pos1=-1 pos_last=1563 sinfo.size=1 sinfo.idxs[0][0]=1563 sinfo.idxs[0][last]=1563
+T010 store k_idxs n_tok=1 pos0=1564 pos1=-1 pos_last=1564 sinfo.size=1 sinfo.idxs[0][0]=1564 sinfo.idxs[0][last]=1564
+T010 store k_idxs n_tok=1 pos0=1565 pos1=-1 pos_last=1565 sinfo.size=1 sinfo.idxs[0][0]=1565 sinfo.idxs[0][last]=1565
+T010 store k_idxs n_tok=1 pos0=1566 pos1=-1 pos_last=1566 sinfo.size=1 sinfo.idxs[0][0]=1566 sinfo.idxs[0][last]=1566
+T010 store k_idxs n_tok=1 pos0=1567 pos1=-1 pos_last=1567 sinfo.size=1 sinfo.idxs[0][0]=1567 sinfo.idxs[0][last]=1567
+T010 store k_idxs n_tok=1 pos0=1568 pos1=-1 pos_last=1568 sinfo.size=1 sinfo.idxs[0][0]=1568 sinfo.idxs[0][last]=1568
+T010 store k_idxs n_tok=1 pos0=1569 pos1=-1 pos_last=1569 sinfo.size=1 sinfo.idxs[0][0]=1569 sinfo.idxs[0][last]=1569
+T010 store k_idxs n_tok=1 pos0=1570 pos1=-1 pos_last=1570 sinfo.size=1 sinfo.idxs[0][0]=1570 sinfo.idxs[0][last]=1570
+T010 store k_idxs n_tok=1 pos0=1571 pos1=-1 pos_last=1571 sinfo.size=1 sinfo.idxs[0][0]=1571 sinfo.idxs[0][last]=1571
+T010 store k_idxs n_tok=1 pos0=1572 pos1=-1 pos_last=1572 sinfo.size=1 sinfo.idxs[0][0]=1572 sinfo.idxs[0][last]=1572
+T010 store k_idxs n_tok=1 pos0=1573 pos1=-1 pos_last=1573 sinfo.size=1 sinfo.idxs[0][0]=1573 sinfo.idxs[0][last]=1573
+T010 store k_idxs n_tok=1 pos0=1574 pos1=-1 pos_last=1574 sinfo.size=1 sinfo.idxs[0][0]=1574 sinfo.idxs[0][last]=1574
+T010 store k_idxs n_tok=1 pos0=1575 pos1=-1 pos_last=1575 sinfo.size=1 sinfo.idxs[0][0]=1575 sinfo.idxs[0][last]=1575
+T010 store k_idxs n_tok=1 pos0=1576 pos1=-1 pos_last=1576 sinfo.size=1 sinfo.idxs[0][0]=1576 sinfo.idxs[0][last]=1576
+T010 store k_idxs n_tok=1 pos0=1577 pos1=-1 pos_last=1577 sinfo.size=1 sinfo.idxs[0][0]=1577 sinfo.idxs[0][last]=1577
+T010 store k_idxs n_tok=1 pos0=1578 pos1=-1 pos_last=1578 sinfo.size=1 sinfo.idxs[0][0]=1578 sinfo.idxs[0][last]=1578
+T010 store k_idxs n_tok=1 pos0=1579 pos1=-1 pos_last=1579 sinfo.size=1 sinfo.idxs[0][0]=1579 sinfo.idxs[0][last]=1579
+T010 store k_idxs n_tok=1 pos0=1580 pos1=-1 pos_last=1580 sinfo.size=1 sinfo.idxs[0][0]=1580 sinfo.idxs[0][last]=1580
+T010 store k_idxs n_tok=1 pos0=1581 pos1=-1 pos_last=1581 sinfo.size=1 sinfo.idxs[0][0]=1581 sinfo.idxs[0][last]=1581
+T010 store k_idxs n_tok=1 pos0=1582 pos1=-1 pos_last=1582 sinfo.size=1 sinfo.idxs[0][0]=1582 sinfo.idxs[0][last]=1582
+T010 store k_idxs n_tok=1 pos0=1583 pos1=-1 pos_last=1583 sinfo.size=1 sinfo.idxs[0][0]=1583 sinfo.idxs[0][last]=1583
+T010 store k_idxs n_tok=1 pos0=1584 pos1=-1 pos_last=1584 sinfo.size=1 sinfo.idxs[0][0]=1584 sinfo.idxs[0][last]=1584
+T010 store k_idxs n_tok=1 pos0=1585 pos1=-1 pos_last=1585 sinfo.size=1 sinfo.idxs[0][0]=1585 sinfo.idxs[0][last]=1585
+T010 store k_idxs n_tok=1 pos0=1586 pos1=-1 pos_last=1586 sinfo.size=1 sinfo.idxs[0][0]=1586 sinfo.idxs[0][last]=1586
+T010 store k_idxs n_tok=1 pos0=1587 pos1=-1 pos_last=1587 sinfo.size=1 sinfo.idxs[0][0]=1587 sinfo.idxs[0][last]=1587
+T010 store k_idxs n_tok=1 pos0=1588 pos1=-1 pos_last=1588 sinfo.size=1 sinfo.idxs[0][0]=1588 sinfo.idxs[0][last]=1588
+T010 store k_idxs n_tok=1 pos0=1589 pos1=-1 pos_last=1589 sinfo.size=1 sinfo.idxs[0][0]=1589 sinfo.idxs[0][last]=1589
+T010 store k_idxs n_tok=1 pos0=1590 pos1=-1 pos_last=1590 sinfo.size=1 sinfo.idxs[0][0]=1590 sinfo.idxs[0][last]=1590
+T010 store k_idxs n_tok=1 pos0=1591 pos1=-1 pos_last=1591 sinfo.size=1 sinfo.idxs[0][0]=1591 sinfo.idxs[0][last]=1591
+T010 store k_idxs n_tok=1 pos0=1592 pos1=-1 pos_last=1592 sinfo.size=1 sinfo.idxs[0][0]=1592 sinfo.idxs[0][last]=1592
+T010 store k_idxs n_tok=1 pos0=1593 pos1=-1 pos_last=1593 sinfo.size=1 sinfo.idxs[0][0]=1593 sinfo.idxs[0][last]=1593
+T010 store k_idxs n_tok=1 pos0=1594 pos1=-1 pos_last=1594 sinfo.size=1 sinfo.idxs[0][0]=1594 sinfo.idxs[0][last]=1594
+T010 store k_idxs n_tok=1 pos0=1595 pos1=-1 pos_last=1595 sinfo.size=1 sinfo.idxs[0][0]=1595 sinfo.idxs[0][last]=1595
+T010 store k_idxs n_tok=1 pos0=1596 pos1=-1 pos_last=1596 sinfo.size=1 sinfo.idxs[0][0]=1596 sinfo.idxs[0][last]=1596
+T010 store k_idxs n_tok=1 pos0=1597 pos1=-1 pos_last=1597 sinfo.size=1 sinfo.idxs[0][0]=1597 sinfo.idxs[0][last]=1597
+T010 store k_idxs n_tok=1 pos0=1598 pos1=-1 pos_last=1598 sinfo.size=1 sinfo.idxs[0][0]=1598 sinfo.idxs[0][last]=1598
+T010 store k_idxs n_tok=1 pos0=1599 pos1=-1 pos_last=1599 sinfo.size=1 sinfo.idxs[0][0]=1599 sinfo.idxs[0][last]=1599
+T010 store k_idxs n_tok=1 pos0=1600 pos1=-1 pos_last=1600 sinfo.size=1 sinfo.idxs[0][0]=1600 sinfo.idxs[0][last]=1600
+T010 store k_idxs n_tok=1 pos0=1601 pos1=-1 pos_last=1601 sinfo.size=1 sinfo.idxs[0][0]=1601 sinfo.idxs[0][last]=1601
+T010 store k_idxs n_tok=1 pos0=1602 pos1=-1 pos_last=1602 sinfo.size=1 sinfo.idxs[0][0]=1602 sinfo.idxs[0][last]=1602
+T010 store k_idxs n_tok=1 pos0=1603 pos1=-1 pos_last=1603 sinfo.size=1 sinfo.idxs[0][0]=1603 sinfo.idxs[0][last]=1603
+T010 store k_idxs n_tok=1 pos0=1604 pos1=-1 pos_last=1604 sinfo.size=1 sinfo.idxs[0][0]=1604 sinfo.idxs[0][last]=1604
+T010 store k_idxs n_tok=1 pos0=1605 pos1=-1 pos_last=1605 sinfo.size=1 sinfo.idxs[0][0]=1605 sinfo.idxs[0][last]=1605
+T010 store k_idxs n_tok=1 pos0=1606 pos1=-1 pos_last=1606 sinfo.size=1 sinfo.idxs[0][0]=1606 sinfo.idxs[0][last]=1606
+T010 store k_idxs n_tok=1 pos0=1607 pos1=-1 pos_last=1607 sinfo.size=1 sinfo.idxs[0][0]=1607 sinfo.idxs[0][last]=1607
+T010 store k_idxs n_tok=1 pos0=1608 pos1=-1 pos_last=1608 sinfo.size=1 sinfo.idxs[0][0]=1608 sinfo.idxs[0][last]=1608
+T010 store k_idxs n_tok=1 pos0=1609 pos1=-1 pos_last=1609 sinfo.size=1 sinfo.idxs[0][0]=1609 sinfo.idxs[0][last]=1609
+T010 store k_idxs n_tok=1 pos0=1610 pos1=-1 pos_last=1610 sinfo.size=1 sinfo.idxs[0][0]=1610 sinfo.idxs[0][last]=1610
+T010 store k_idxs n_tok=1 pos0=1611 pos1=-1 pos_last=1611 sinfo.size=1 sinfo.idxs[0][0]=1611 sinfo.idxs[0][last]=1611
+T010 store k_idxs n_tok=1 pos0=1612 pos1=-1 pos_last=1612 sinfo.size=1 sinfo.idxs[0][0]=1612 sinfo.idxs[0][last]=1612
+T010 store k_idxs n_tok=1 pos0=1613 pos1=-1 pos_last=1613 sinfo.size=1 sinfo.idxs[0][0]=1613 sinfo.idxs[0][last]=1613
+T010 store k_idxs n_tok=1 pos0=1614 pos1=-1 pos_last=1614 sinfo.size=1 sinfo.idxs[0][0]=1614 sinfo.idxs[0][last]=1614
+T010 store k_idxs n_tok=1 pos0=1615 pos1=-1 pos_last=1615 sinfo.size=1 sinfo.idxs[0][0]=1615 sinfo.idxs[0][last]=1615
+T010 store k_idxs n_tok=1 pos0=1616 pos1=-1 pos_last=1616 sinfo.size=1 sinfo.idxs[0][0]=1616 sinfo.idxs[0][last]=1616
+T010 store k_idxs n_tok=1 pos0=1617 pos1=-1 pos_last=1617 sinfo.size=1 sinfo.idxs[0][0]=1617 sinfo.idxs[0][last]=1617
+T010 store k_idxs n_tok=1 pos0=1618 pos1=-1 pos_last=1618 sinfo.size=1 sinfo.idxs[0][0]=1618 sinfo.idxs[0][last]=1618
+T010 store k_idxs n_tok=1 pos0=1619 pos1=-1 pos_last=1619 sinfo.size=1 sinfo.idxs[0][0]=1619 sinfo.idxs[0][last]=1619
+T010 store k_idxs n_tok=1 pos0=1620 pos1=-1 pos_last=1620 sinfo.size=1 sinfo.idxs[0][0]=1620 sinfo.idxs[0][last]=1620
+T010 store k_idxs n_tok=1 pos0=1621 pos1=-1 pos_last=1621 sinfo.size=1 sinfo.idxs[0][0]=1621 sinfo.idxs[0][last]=1621
+T010 store k_idxs n_tok=1 pos0=1622 pos1=-1 pos_last=1622 sinfo.size=1 sinfo.idxs[0][0]=1622 sinfo.idxs[0][last]=1622
+T010 store k_idxs n_tok=1 pos0=1623 pos1=-1 pos_last=1623 sinfo.size=1 sinfo.idxs[0][0]=1623 sinfo.idxs[0][last]=1623
+T010 store k_idxs n_tok=1 pos0=1624 pos1=-1 pos_last=1624 sinfo.size=1 sinfo.idxs[0][0]=1624 sinfo.idxs[0][last]=1624
+T010 store k_idxs n_tok=1 pos0=1625 pos1=-1 pos_last=1625 sinfo.size=1 sinfo.idxs[0][0]=1625 sinfo.idxs[0][last]=1625
+T010 store k_idxs n_tok=1 pos0=1626 pos1=-1 pos_last=1626 sinfo.size=1 sinfo.idxs[0][0]=1626 sinfo.idxs[0][last]=1626
+T010 store k_idxs n_tok=1 pos0=1627 pos1=-1 pos_last=1627 sinfo.size=1 sinfo.idxs[0][0]=1627 sinfo.idxs[0][last]=1627
+0.21.850.051 I slot print_timing: id  0 | task 0 | n_decoded =    178, tg =  59.05 t/s, tg_3s =  59.05 t/s
+T010 store k_idxs n_tok=1 pos0=1628 pos1=-1 pos_last=1628 sinfo.size=1 sinfo.idxs[0][0]=1628 sinfo.idxs[0][last]=1628
+T010 store k_idxs n_tok=1 pos0=1629 pos1=-1 pos_last=1629 sinfo.size=1 sinfo.idxs[0][0]=1629 sinfo.idxs[0][last]=1629
+T010 store k_idxs n_tok=1 pos0=1630 pos1=-1 pos_last=1630 sinfo.size=1 sinfo.idxs[0][0]=1630 sinfo.idxs[0][last]=1630
+T010 store k_idxs n_tok=1 pos0=1631 pos1=-1 pos_last=1631 sinfo.size=1 sinfo.idxs[0][0]=1631 sinfo.idxs[0][last]=1631
+T010 store k_idxs n_tok=1 pos0=1632 pos1=-1 pos_last=1632 sinfo.size=1 sinfo.idxs[0][0]=1632 sinfo.idxs[0][last]=1632
+T010 store k_idxs n_tok=1 pos0=1633 pos1=-1 pos_last=1633 sinfo.size=1 sinfo.idxs[0][0]=1633 sinfo.idxs[0][last]=1633
+T010 store k_idxs n_tok=1 pos0=1634 pos1=-1 pos_last=1634 sinfo.size=1 sinfo.idxs[0][0]=1634 sinfo.idxs[0][last]=1634
+T010 store k_idxs n_tok=1 pos0=1635 pos1=-1 pos_last=1635 sinfo.size=1 sinfo.idxs[0][0]=1635 sinfo.idxs[0][last]=1635
+T010 store k_idxs n_tok=1 pos0=1636 pos1=-1 pos_last=1636 sinfo.size=1 sinfo.idxs[0][0]=1636 sinfo.idxs[0][last]=1636
+T010 store k_idxs n_tok=1 pos0=1637 pos1=-1 pos_last=1637 sinfo.size=1 sinfo.idxs[0][0]=1637 sinfo.idxs[0][last]=1637
+T010 store k_idxs n_tok=1 pos0=1638 pos1=-1 pos_last=1638 sinfo.size=1 sinfo.idxs[0][0]=1638 sinfo.idxs[0][last]=1638
+T010 store k_idxs n_tok=1 pos0=1639 pos1=-1 pos_last=1639 sinfo.size=1 sinfo.idxs[0][0]=1639 sinfo.idxs[0][last]=1639
+T010 store k_idxs n_tok=1 pos0=1640 pos1=-1 pos_last=1640 sinfo.size=1 sinfo.idxs[0][0]=1640 sinfo.idxs[0][last]=1640
+T010 store k_idxs n_tok=1 pos0=1641 pos1=-1 pos_last=1641 sinfo.size=1 sinfo.idxs[0][0]=1641 sinfo.idxs[0][last]=1641
+T010 store k_idxs n_tok=1 pos0=1642 pos1=-1 pos_last=1642 sinfo.size=1 sinfo.idxs[0][0]=1642 sinfo.idxs[0][last]=1642
+T010 store k_idxs n_tok=1 pos0=1643 pos1=-1 pos_last=1643 sinfo.size=1 sinfo.idxs[0][0]=1643 sinfo.idxs[0][last]=1643
+T010 store k_idxs n_tok=1 pos0=1644 pos1=-1 pos_last=1644 sinfo.size=1 sinfo.idxs[0][0]=1644 sinfo.idxs[0][last]=1644
+T010 store k_idxs n_tok=1 pos0=1645 pos1=-1 pos_last=1645 sinfo.size=1 sinfo.idxs[0][0]=1645 sinfo.idxs[0][last]=1645
+T010 store k_idxs n_tok=1 pos0=1646 pos1=-1 pos_last=1646 sinfo.size=1 sinfo.idxs[0][0]=1646 sinfo.idxs[0][last]=1646
+T010 store k_idxs n_tok=1 pos0=1647 pos1=-1 pos_last=1647 sinfo.size=1 sinfo.idxs[0][0]=1647 sinfo.idxs[0][last]=1647
+T010 store k_idxs n_tok=1 pos0=1648 pos1=-1 pos_last=1648 sinfo.size=1 sinfo.idxs[0][0]=1648 sinfo.idxs[0][last]=1648
+T010 store k_idxs n_tok=1 pos0=1649 pos1=-1 pos_last=1649 sinfo.size=1 sinfo.idxs[0][0]=1649 sinfo.idxs[0][last]=1649
+T010 store k_idxs n_tok=1 pos0=1650 pos1=-1 pos_last=1650 sinfo.size=1 sinfo.idxs[0][0]=1650 sinfo.idxs[0][last]=1650
+T010 store k_idxs n_tok=1 pos0=1651 pos1=-1 pos_last=1651 sinfo.size=1 sinfo.idxs[0][0]=1651 sinfo.idxs[0][last]=1651
+T010 store k_idxs n_tok=1 pos0=1652 pos1=-1 pos_last=1652 sinfo.size=1 sinfo.idxs[0][0]=1652 sinfo.idxs[0][last]=1652
+T010 store k_idxs n_tok=1 pos0=1653 pos1=-1 pos_last=1653 sinfo.size=1 sinfo.idxs[0][0]=1653 sinfo.idxs[0][last]=1653
+T010 store k_idxs n_tok=1 pos0=1654 pos1=-1 pos_last=1654 sinfo.size=1 sinfo.idxs[0][0]=1654 sinfo.idxs[0][last]=1654
+T010 store k_idxs n_tok=1 pos0=1655 pos1=-1 pos_last=1655 sinfo.size=1 sinfo.idxs[0][0]=1655 sinfo.idxs[0][last]=1655
+T010 store k_idxs n_tok=1 pos0=1656 pos1=-1 pos_last=1656 sinfo.size=1 sinfo.idxs[0][0]=1656 sinfo.idxs[0][last]=1656
+T010 store k_idxs n_tok=1 pos0=1657 pos1=-1 pos_last=1657 sinfo.size=1 sinfo.idxs[0][0]=1657 sinfo.idxs[0][last]=1657
+T010 store k_idxs n_tok=1 pos0=1658 pos1=-1 pos_last=1658 sinfo.size=1 sinfo.idxs[0][0]=1658 sinfo.idxs[0][last]=1658
+T010 store k_idxs n_tok=1 pos0=1659 pos1=-1 pos_last=1659 sinfo.size=1 sinfo.idxs[0][0]=1659 sinfo.idxs[0][last]=1659
+T010 store k_idxs n_tok=1 pos0=1660 pos1=-1 pos_last=1660 sinfo.size=1 sinfo.idxs[0][0]=1660 sinfo.idxs[0][last]=1660
+T010 store k_idxs n_tok=1 pos0=1661 pos1=-1 pos_last=1661 sinfo.size=1 sinfo.idxs[0][0]=1661 sinfo.idxs[0][last]=1661
+T010 store k_idxs n_tok=1 pos0=1662 pos1=-1 pos_last=1662 sinfo.size=1 sinfo.idxs[0][0]=1662 sinfo.idxs[0][last]=1662
+T010 store k_idxs n_tok=1 pos0=1663 pos1=-1 pos_last=1663 sinfo.size=1 sinfo.idxs[0][0]=1663 sinfo.idxs[0][last]=1663
+T010 store k_idxs n_tok=1 pos0=1664 pos1=-1 pos_last=1664 sinfo.size=1 sinfo.idxs[0][0]=1664 sinfo.idxs[0][last]=1664
+T010 store k_idxs n_tok=1 pos0=1665 pos1=-1 pos_last=1665 sinfo.size=1 sinfo.idxs[0][0]=1665 sinfo.idxs[0][last]=1665
+T010 store k_idxs n_tok=1 pos0=1666 pos1=-1 pos_last=1666 sinfo.size=1 sinfo.idxs[0][0]=1666 sinfo.idxs[0][last]=1666
+T010 store k_idxs n_tok=1 pos0=1667 pos1=-1 pos_last=1667 sinfo.size=1 sinfo.idxs[0][0]=1667 sinfo.idxs[0][last]=1667
+T010 store k_idxs n_tok=1 pos0=1668 pos1=-1 pos_last=1668 sinfo.size=1 sinfo.idxs[0][0]=1668 sinfo.idxs[0][last]=1668
+T010 store k_idxs n_tok=1 pos0=1669 pos1=-1 pos_last=1669 sinfo.size=1 sinfo.idxs[0][0]=1669 sinfo.idxs[0][last]=1669
+T010 store k_idxs n_tok=1 pos0=1670 pos1=-1 pos_last=1670 sinfo.size=1 sinfo.idxs[0][0]=1670 sinfo.idxs[0][last]=1670
+T010 store k_idxs n_tok=1 pos0=1671 pos1=-1 pos_last=1671 sinfo.size=1 sinfo.idxs[0][0]=1671 sinfo.idxs[0][last]=1671
+T010 store k_idxs n_tok=1 pos0=1672 pos1=-1 pos_last=1672 sinfo.size=1 sinfo.idxs[0][0]=1672 sinfo.idxs[0][last]=1672
+T010 store k_idxs n_tok=1 pos0=1673 pos1=-1 pos_last=1673 sinfo.size=1 sinfo.idxs[0][0]=1673 sinfo.idxs[0][last]=1673
+T010 store k_idxs n_tok=1 pos0=1674 pos1=-1 pos_last=1674 sinfo.size=1 sinfo.idxs[0][0]=1674 sinfo.idxs[0][last]=1674
+T010 store k_idxs n_tok=1 pos0=1675 pos1=-1 pos_last=1675 sinfo.size=1 sinfo.idxs[0][0]=1675 sinfo.idxs[0][last]=1675
+T010 store k_idxs n_tok=1 pos0=1676 pos1=-1 pos_last=1676 sinfo.size=1 sinfo.idxs[0][0]=1676 sinfo.idxs[0][last]=1676
+T010 store k_idxs n_tok=1 pos0=1677 pos1=-1 pos_last=1677 sinfo.size=1 sinfo.idxs[0][0]=1677 sinfo.idxs[0][last]=1677
+T010 store k_idxs n_tok=1 pos0=1678 pos1=-1 pos_last=1678 sinfo.size=1 sinfo.idxs[0][0]=1678 sinfo.idxs[0][last]=1678
+T010 store k_idxs n_tok=1 pos0=1679 pos1=-1 pos_last=1679 sinfo.size=1 sinfo.idxs[0][0]=1679 sinfo.idxs[0][last]=1679
+T010 store k_idxs n_tok=1 pos0=1680 pos1=-1 pos_last=1680 sinfo.size=1 sinfo.idxs[0][0]=1680 sinfo.idxs[0][last]=1680
+T010 store k_idxs n_tok=1 pos0=1681 pos1=-1 pos_last=1681 sinfo.size=1 sinfo.idxs[0][0]=1681 sinfo.idxs[0][last]=1681
+T010 store k_idxs n_tok=1 pos0=1682 pos1=-1 pos_last=1682 sinfo.size=1 sinfo.idxs[0][0]=1682 sinfo.idxs[0][last]=1682
+T010 store k_idxs n_tok=1 pos0=1683 pos1=-1 pos_last=1683 sinfo.size=1 sinfo.idxs[0][0]=1683 sinfo.idxs[0][last]=1683
+T010 store k_idxs n_tok=1 pos0=1684 pos1=-1 pos_last=1684 sinfo.size=1 sinfo.idxs[0][0]=1684 sinfo.idxs[0][last]=1684
+T010 store k_idxs n_tok=1 pos0=1685 pos1=-1 pos_last=1685 sinfo.size=1 sinfo.idxs[0][0]=1685 sinfo.idxs[0][last]=1685
+T010 store k_idxs n_tok=1 pos0=1686 pos1=-1 pos_last=1686 sinfo.size=1 sinfo.idxs[0][0]=1686 sinfo.idxs[0][last]=1686
+T010 store k_idxs n_tok=1 pos0=1687 pos1=-1 pos_last=1687 sinfo.size=1 sinfo.idxs[0][0]=1687 sinfo.idxs[0][last]=1687
+T010 store k_idxs n_tok=1 pos0=1688 pos1=-1 pos_last=1688 sinfo.size=1 sinfo.idxs[0][0]=1688 sinfo.idxs[0][last]=1688
+T010 store k_idxs n_tok=1 pos0=1689 pos1=-1 pos_last=1689 sinfo.size=1 sinfo.idxs[0][0]=1689 sinfo.idxs[0][last]=1689
+T010 store k_idxs n_tok=1 pos0=1690 pos1=-1 pos_last=1690 sinfo.size=1 sinfo.idxs[0][0]=1690 sinfo.idxs[0][last]=1690
+T010 store k_idxs n_tok=1 pos0=1691 pos1=-1 pos_last=1691 sinfo.size=1 sinfo.idxs[0][0]=1691 sinfo.idxs[0][last]=1691
+T010 store k_idxs n_tok=1 pos0=1692 pos1=-1 pos_last=1692 sinfo.size=1 sinfo.idxs[0][0]=1692 sinfo.idxs[0][last]=1692
+T010 store k_idxs n_tok=1 pos0=1693 pos1=-1 pos_last=1693 sinfo.size=1 sinfo.idxs[0][0]=1693 sinfo.idxs[0][last]=1693
+T010 store k_idxs n_tok=1 pos0=1694 pos1=-1 pos_last=1694 sinfo.size=1 sinfo.idxs[0][0]=1694 sinfo.idxs[0][last]=1694
+T010 store k_idxs n_tok=1 pos0=1695 pos1=-1 pos_last=1695 sinfo.size=1 sinfo.idxs[0][0]=1695 sinfo.idxs[0][last]=1695
+T010 store k_idxs n_tok=1 pos0=1696 pos1=-1 pos_last=1696 sinfo.size=1 sinfo.idxs[0][0]=1696 sinfo.idxs[0][last]=1696
+T010 store k_idxs n_tok=1 pos0=1697 pos1=-1 pos_last=1697 sinfo.size=1 sinfo.idxs[0][0]=1697 sinfo.idxs[0][last]=1697
+T010 store k_idxs n_tok=1 pos0=1698 pos1=-1 pos_last=1698 sinfo.size=1 sinfo.idxs[0][0]=1698 sinfo.idxs[0][last]=1698
+T010 store k_idxs n_tok=1 pos0=1699 pos1=-1 pos_last=1699 sinfo.size=1 sinfo.idxs[0][0]=1699 sinfo.idxs[0][last]=1699
+T010 store k_idxs n_tok=1 pos0=1700 pos1=-1 pos_last=1700 sinfo.size=1 sinfo.idxs[0][0]=1700 sinfo.idxs[0][last]=1700
+T010 store k_idxs n_tok=1 pos0=1701 pos1=-1 pos_last=1701 sinfo.size=1 sinfo.idxs[0][0]=1701 sinfo.idxs[0][last]=1701
+T010 store k_idxs n_tok=1 pos0=1702 pos1=-1 pos_last=1702 sinfo.size=1 sinfo.idxs[0][0]=1702 sinfo.idxs[0][last]=1702
+T010 store k_idxs n_tok=1 pos0=1703 pos1=-1 pos_last=1703 sinfo.size=1 sinfo.idxs[0][0]=1703 sinfo.idxs[0][last]=1703
+T010 store k_idxs n_tok=1 pos0=1704 pos1=-1 pos_last=1704 sinfo.size=1 sinfo.idxs[0][0]=1704 sinfo.idxs[0][last]=1704
+T010 store k_idxs n_tok=1 pos0=1705 pos1=-1 pos_last=1705 sinfo.size=1 sinfo.idxs[0][0]=1705 sinfo.idxs[0][last]=1705
+T010 store k_idxs n_tok=1 pos0=1706 pos1=-1 pos_last=1706 sinfo.size=1 sinfo.idxs[0][0]=1706 sinfo.idxs[0][last]=1706
+T010 store k_idxs n_tok=1 pos0=1707 pos1=-1 pos_last=1707 sinfo.size=1 sinfo.idxs[0][0]=1707 sinfo.idxs[0][last]=1707
+T010 store k_idxs n_tok=1 pos0=1708 pos1=-1 pos_last=1708 sinfo.size=1 sinfo.idxs[0][0]=1708 sinfo.idxs[0][last]=1708
+T010 store k_idxs n_tok=1 pos0=1709 pos1=-1 pos_last=1709 sinfo.size=1 sinfo.idxs[0][0]=1709 sinfo.idxs[0][last]=1709
+T010 store k_idxs n_tok=1 pos0=1710 pos1=-1 pos_last=1710 sinfo.size=1 sinfo.idxs[0][0]=1710 sinfo.idxs[0][last]=1710
+T010 store k_idxs n_tok=1 pos0=1711 pos1=-1 pos_last=1711 sinfo.size=1 sinfo.idxs[0][0]=1711 sinfo.idxs[0][last]=1711
+T010 store k_idxs n_tok=1 pos0=1712 pos1=-1 pos_last=1712 sinfo.size=1 sinfo.idxs[0][0]=1712 sinfo.idxs[0][last]=1712
+T010 store k_idxs n_tok=1 pos0=1713 pos1=-1 pos_last=1713 sinfo.size=1 sinfo.idxs[0][0]=1713 sinfo.idxs[0][last]=1713
+T010 store k_idxs n_tok=1 pos0=1714 pos1=-1 pos_last=1714 sinfo.size=1 sinfo.idxs[0][0]=1714 sinfo.idxs[0][last]=1714
+T010 store k_idxs n_tok=1 pos0=1715 pos1=-1 pos_last=1715 sinfo.size=1 sinfo.idxs[0][0]=1715 sinfo.idxs[0][last]=1715
+T010 store k_idxs n_tok=1 pos0=1716 pos1=-1 pos_last=1716 sinfo.size=1 sinfo.idxs[0][0]=1716 sinfo.idxs[0][last]=1716
+T010 store k_idxs n_tok=1 pos0=1717 pos1=-1 pos_last=1717 sinfo.size=1 sinfo.idxs[0][0]=1717 sinfo.idxs[0][last]=1717
+T010 store k_idxs n_tok=1 pos0=1718 pos1=-1 pos_last=1718 sinfo.size=1 sinfo.idxs[0][0]=1718 sinfo.idxs[0][last]=1718
+T010 store k_idxs n_tok=1 pos0=1719 pos1=-1 pos_last=1719 sinfo.size=1 sinfo.idxs[0][0]=1719 sinfo.idxs[0][last]=1719
+T010 store k_idxs n_tok=1 pos0=1720 pos1=-1 pos_last=1720 sinfo.size=1 sinfo.idxs[0][0]=1720 sinfo.idxs[0][last]=1720
+T010 store k_idxs n_tok=1 pos0=1721 pos1=-1 pos_last=1721 sinfo.size=1 sinfo.idxs[0][0]=1721 sinfo.idxs[0][last]=1721
+T010 store k_idxs n_tok=1 pos0=1722 pos1=-1 pos_last=1722 sinfo.size=1 sinfo.idxs[0][0]=1722 sinfo.idxs[0][last]=1722
+T010 store k_idxs n_tok=1 pos0=1723 pos1=-1 pos_last=1723 sinfo.size=1 sinfo.idxs[0][0]=1723 sinfo.idxs[0][last]=1723
+T010 store k_idxs n_tok=1 pos0=1724 pos1=-1 pos_last=1724 sinfo.size=1 sinfo.idxs[0][0]=1724 sinfo.idxs[0][last]=1724
+T010 store k_idxs n_tok=1 pos0=1725 pos1=-1 pos_last=1725 sinfo.size=1 sinfo.idxs[0][0]=1725 sinfo.idxs[0][last]=1725
+T010 store k_idxs n_tok=1 pos0=1726 pos1=-1 pos_last=1726 sinfo.size=1 sinfo.idxs[0][0]=1726 sinfo.idxs[0][last]=1726
+T010 store k_idxs n_tok=1 pos0=1727 pos1=-1 pos_last=1727 sinfo.size=1 sinfo.idxs[0][0]=1727 sinfo.idxs[0][last]=1727
+T010 store k_idxs n_tok=1 pos0=1728 pos1=-1 pos_last=1728 sinfo.size=1 sinfo.idxs[0][0]=1728 sinfo.idxs[0][last]=1728
+T010 store k_idxs n_tok=1 pos0=1729 pos1=-1 pos_last=1729 sinfo.size=1 sinfo.idxs[0][0]=1729 sinfo.idxs[0][last]=1729
+T010 store k_idxs n_tok=1 pos0=1730 pos1=-1 pos_last=1730 sinfo.size=1 sinfo.idxs[0][0]=1730 sinfo.idxs[0][last]=1730
+T010 store k_idxs n_tok=1 pos0=1731 pos1=-1 pos_last=1731 sinfo.size=1 sinfo.idxs[0][0]=1731 sinfo.idxs[0][last]=1731
+T010 store k_idxs n_tok=1 pos0=1732 pos1=-1 pos_last=1732 sinfo.size=1 sinfo.idxs[0][0]=1732 sinfo.idxs[0][last]=1732
+T010 store k_idxs n_tok=1 pos0=1733 pos1=-1 pos_last=1733 sinfo.size=1 sinfo.idxs[0][0]=1733 sinfo.idxs[0][last]=1733
+T010 store k_idxs n_tok=1 pos0=1734 pos1=-1 pos_last=1734 sinfo.size=1 sinfo.idxs[0][0]=1734 sinfo.idxs[0][last]=1734
+T010 store k_idxs n_tok=1 pos0=1735 pos1=-1 pos_last=1735 sinfo.size=1 sinfo.idxs[0][0]=1735 sinfo.idxs[0][last]=1735
+T010 store k_idxs n_tok=1 pos0=1736 pos1=-1 pos_last=1736 sinfo.size=1 sinfo.idxs[0][0]=1736 sinfo.idxs[0][last]=1736
+T010 store k_idxs n_tok=1 pos0=1737 pos1=-1 pos_last=1737 sinfo.size=1 sinfo.idxs[0][0]=1737 sinfo.idxs[0][last]=1737
+T010 store k_idxs n_tok=1 pos0=1738 pos1=-1 pos_last=1738 sinfo.size=1 sinfo.idxs[0][0]=1738 sinfo.idxs[0][last]=1738
+T010 store k_idxs n_tok=1 pos0=1739 pos1=-1 pos_last=1739 sinfo.size=1 sinfo.idxs[0][0]=1739 sinfo.idxs[0][last]=1739
+T010 store k_idxs n_tok=1 pos0=1740 pos1=-1 pos_last=1740 sinfo.size=1 sinfo.idxs[0][0]=1740 sinfo.idxs[0][last]=1740
+T010 store k_idxs n_tok=1 pos0=1741 pos1=-1 pos_last=1741 sinfo.size=1 sinfo.idxs[0][0]=1741 sinfo.idxs[0][last]=1741
+T010 store k_idxs n_tok=1 pos0=1742 pos1=-1 pos_last=1742 sinfo.size=1 sinfo.idxs[0][0]=1742 sinfo.idxs[0][last]=1742
+T010 store k_idxs n_tok=1 pos0=1743 pos1=-1 pos_last=1743 sinfo.size=1 sinfo.idxs[0][0]=1743 sinfo.idxs[0][last]=1743
+T010 store k_idxs n_tok=1 pos0=1744 pos1=-1 pos_last=1744 sinfo.size=1 sinfo.idxs[0][0]=1744 sinfo.idxs[0][last]=1744
+T010 store k_idxs n_tok=1 pos0=1745 pos1=-1 pos_last=1745 sinfo.size=1 sinfo.idxs[0][0]=1745 sinfo.idxs[0][last]=1745
+T010 store k_idxs n_tok=1 pos0=1746 pos1=-1 pos_last=1746 sinfo.size=1 sinfo.idxs[0][0]=1746 sinfo.idxs[0][last]=1746
+T010 store k_idxs n_tok=1 pos0=1747 pos1=-1 pos_last=1747 sinfo.size=1 sinfo.idxs[0][0]=1747 sinfo.idxs[0][last]=1747
+T010 store k_idxs n_tok=1 pos0=1748 pos1=-1 pos_last=1748 sinfo.size=1 sinfo.idxs[0][0]=1748 sinfo.idxs[0][last]=1748
+T010 store k_idxs n_tok=1 pos0=1749 pos1=-1 pos_last=1749 sinfo.size=1 sinfo.idxs[0][0]=1749 sinfo.idxs[0][last]=1749
+T010 store k_idxs n_tok=1 pos0=1750 pos1=-1 pos_last=1750 sinfo.size=1 sinfo.idxs[0][0]=1750 sinfo.idxs[0][last]=1750
+T010 store k_idxs n_tok=1 pos0=1751 pos1=-1 pos_last=1751 sinfo.size=1 sinfo.idxs[0][0]=1751 sinfo.idxs[0][last]=1751
+T010 store k_idxs n_tok=1 pos0=1752 pos1=-1 pos_last=1752 sinfo.size=1 sinfo.idxs[0][0]=1752 sinfo.idxs[0][last]=1752
+T010 store k_idxs n_tok=1 pos0=1753 pos1=-1 pos_last=1753 sinfo.size=1 sinfo.idxs[0][0]=1753 sinfo.idxs[0][last]=1753
+T010 store k_idxs n_tok=1 pos0=1754 pos1=-1 pos_last=1754 sinfo.size=1 sinfo.idxs[0][0]=1754 sinfo.idxs[0][last]=1754
+T010 store k_idxs n_tok=1 pos0=1755 pos1=-1 pos_last=1755 sinfo.size=1 sinfo.idxs[0][0]=1755 sinfo.idxs[0][last]=1755
+T010 store k_idxs n_tok=1 pos0=1756 pos1=-1 pos_last=1756 sinfo.size=1 sinfo.idxs[0][0]=1756 sinfo.idxs[0][last]=1756
+T010 store k_idxs n_tok=1 pos0=1757 pos1=-1 pos_last=1757 sinfo.size=1 sinfo.idxs[0][0]=1757 sinfo.idxs[0][last]=1757
+T010 store k_idxs n_tok=1 pos0=1758 pos1=-1 pos_last=1758 sinfo.size=1 sinfo.idxs[0][0]=1758 sinfo.idxs[0][last]=1758
+T010 store k_idxs n_tok=1 pos0=1759 pos1=-1 pos_last=1759 sinfo.size=1 sinfo.idxs[0][0]=1759 sinfo.idxs[0][last]=1759
+T010 store k_idxs n_tok=1 pos0=1760 pos1=-1 pos_last=1760 sinfo.size=1 sinfo.idxs[0][0]=1760 sinfo.idxs[0][last]=1760
+T010 store k_idxs n_tok=1 pos0=1761 pos1=-1 pos_last=1761 sinfo.size=1 sinfo.idxs[0][0]=1761 sinfo.idxs[0][last]=1761
+T010 store k_idxs n_tok=1 pos0=1762 pos1=-1 pos_last=1762 sinfo.size=1 sinfo.idxs[0][0]=1762 sinfo.idxs[0][last]=1762
+T010 store k_idxs n_tok=1 pos0=1763 pos1=-1 pos_last=1763 sinfo.size=1 sinfo.idxs[0][0]=1763 sinfo.idxs[0][last]=1763
+T010 store k_idxs n_tok=1 pos0=1764 pos1=-1 pos_last=1764 sinfo.size=1 sinfo.idxs[0][0]=1764 sinfo.idxs[0][last]=1764
+T010 store k_idxs n_tok=1 pos0=1765 pos1=-1 pos_last=1765 sinfo.size=1 sinfo.idxs[0][0]=1765 sinfo.idxs[0][last]=1765
+T010 store k_idxs n_tok=1 pos0=1766 pos1=-1 pos_last=1766 sinfo.size=1 sinfo.idxs[0][0]=1766 sinfo.idxs[0][last]=1766
+T010 store k_idxs n_tok=1 pos0=1767 pos1=-1 pos_last=1767 sinfo.size=1 sinfo.idxs[0][0]=1767 sinfo.idxs[0][last]=1767
+T010 store k_idxs n_tok=1 pos0=1768 pos1=-1 pos_last=1768 sinfo.size=1 sinfo.idxs[0][0]=1768 sinfo.idxs[0][last]=1768
+T010 store k_idxs n_tok=1 pos0=1769 pos1=-1 pos_last=1769 sinfo.size=1 sinfo.idxs[0][0]=1769 sinfo.idxs[0][last]=1769
+T010 store k_idxs n_tok=1 pos0=1770 pos1=-1 pos_last=1770 sinfo.size=1 sinfo.idxs[0][0]=1770 sinfo.idxs[0][last]=1770
+T010 store k_idxs n_tok=1 pos0=1771 pos1=-1 pos_last=1771 sinfo.size=1 sinfo.idxs[0][0]=1771 sinfo.idxs[0][last]=1771
+T010 store k_idxs n_tok=1 pos0=1772 pos1=-1 pos_last=1772 sinfo.size=1 sinfo.idxs[0][0]=1772 sinfo.idxs[0][last]=1772
+T010 store k_idxs n_tok=1 pos0=1773 pos1=-1 pos_last=1773 sinfo.size=1 sinfo.idxs[0][0]=1773 sinfo.idxs[0][last]=1773
+T010 store k_idxs n_tok=1 pos0=1774 pos1=-1 pos_last=1774 sinfo.size=1 sinfo.idxs[0][0]=1774 sinfo.idxs[0][last]=1774
+T010 store k_idxs n_tok=1 pos0=1775 pos1=-1 pos_last=1775 sinfo.size=1 sinfo.idxs[0][0]=1775 sinfo.idxs[0][last]=1775
+T010 store k_idxs n_tok=1 pos0=1776 pos1=-1 pos_last=1776 sinfo.size=1 sinfo.idxs[0][0]=1776 sinfo.idxs[0][last]=1776
+T010 store k_idxs n_tok=1 pos0=1777 pos1=-1 pos_last=1777 sinfo.size=1 sinfo.idxs[0][0]=1777 sinfo.idxs[0][last]=1777
+T010 store k_idxs n_tok=1 pos0=1778 pos1=-1 pos_last=1778 sinfo.size=1 sinfo.idxs[0][0]=1778 sinfo.idxs[0][last]=1778
+T010 store k_idxs n_tok=1 pos0=1779 pos1=-1 pos_last=1779 sinfo.size=1 sinfo.idxs[0][0]=1779 sinfo.idxs[0][last]=1779
+T010 store k_idxs n_tok=1 pos0=1780 pos1=-1 pos_last=1780 sinfo.size=1 sinfo.idxs[0][0]=1780 sinfo.idxs[0][last]=1780
+T010 store k_idxs n_tok=1 pos0=1781 pos1=-1 pos_last=1781 sinfo.size=1 sinfo.idxs[0][0]=1781 sinfo.idxs[0][last]=1781
+T010 store k_idxs n_tok=1 pos0=1782 pos1=-1 pos_last=1782 sinfo.size=1 sinfo.idxs[0][0]=1782 sinfo.idxs[0][last]=1782
+T010 store k_idxs n_tok=1 pos0=1783 pos1=-1 pos_last=1783 sinfo.size=1 sinfo.idxs[0][0]=1783 sinfo.idxs[0][last]=1783
+T010 store k_idxs n_tok=1 pos0=1784 pos1=-1 pos_last=1784 sinfo.size=1 sinfo.idxs[0][0]=1784 sinfo.idxs[0][last]=1784
+T010 store k_idxs n_tok=1 pos0=1785 pos1=-1 pos_last=1785 sinfo.size=1 sinfo.idxs[0][0]=1785 sinfo.idxs[0][last]=1785
+T010 store k_idxs n_tok=1 pos0=1786 pos1=-1 pos_last=1786 sinfo.size=1 sinfo.idxs[0][0]=1786 sinfo.idxs[0][last]=1786
+T010 store k_idxs n_tok=1 pos0=1787 pos1=-1 pos_last=1787 sinfo.size=1 sinfo.idxs[0][0]=1787 sinfo.idxs[0][last]=1787
+T010 store k_idxs n_tok=1 pos0=1788 pos1=-1 pos_last=1788 sinfo.size=1 sinfo.idxs[0][0]=1788 sinfo.idxs[0][last]=1788
+T010 store k_idxs n_tok=1 pos0=1789 pos1=-1 pos_last=1789 sinfo.size=1 sinfo.idxs[0][0]=1789 sinfo.idxs[0][last]=1789
+T010 store k_idxs n_tok=1 pos0=1790 pos1=-1 pos_last=1790 sinfo.size=1 sinfo.idxs[0][0]=1790 sinfo.idxs[0][last]=1790
+T010 store k_idxs n_tok=1 pos0=1791 pos1=-1 pos_last=1791 sinfo.size=1 sinfo.idxs[0][0]=1791 sinfo.idxs[0][last]=1791
+T010 view il=3 swa=1 n_kv=2048 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=2048 indices=0x55fba896c330 idx_buf=(nil) idx_n=2048 stored_src1=0x55fba896ba90
+T010 view il=3 swa=1 n_kv=2048 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=2048 indices=0x55fba896c330 idx_buf=(nil) idx_n=2048 stored_src1=0x55fba896bc00
+T010 view il=7 swa=1 n_kv=2048 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=2048 indices=0x55fba896c330 idx_buf=(nil) idx_n=2048 stored_src1=0x55fba896ba90
+T010 view il=7 swa=1 n_kv=2048 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=2048 indices=0x55fba896c330 idx_buf=(nil) idx_n=2048 stored_src1=0x55fba896bc00
+T010 view il=11 swa=1 n_kv=2048 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=2048 indices=0x55fba896c330 idx_buf=(nil) idx_n=2048 stored_src1=0x55fba896ba90
+T010 view il=11 swa=1 n_kv=2048 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=2048 indices=0x55fba896c330 idx_buf=(nil) idx_n=2048 stored_src1=0x55fba896bc00
+T010 view il=15 swa=1 n_kv=2048 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=2048 indices=0x55fba896c330 idx_buf=(nil) idx_n=2048 stored_src1=0x55fba896ba90
+T010 view il=15 swa=1 n_kv=2048 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=2048 indices=0x55fba896c330 idx_buf=(nil) idx_n=2048 stored_src1=0x55fba896bc00
+T010 view il=19 swa=1 n_kv=2048 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=2048 indices=0x55fba896c330 idx_buf=(nil) idx_n=2048 stored_src1=0x55fba896ba90
+T010 view il=19 swa=1 n_kv=2048 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=2048 indices=0x55fba896c330 idx_buf=(nil) idx_n=2048 stored_src1=0x55fba896bc00
+T010 view il=23 swa=1 n_kv=2048 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=2048 indices=0x55fba896c330 idx_buf=(nil) idx_n=2048 stored_src1=0x55fba896ba90
+T010 view il=23 swa=1 n_kv=2048 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=2048 indices=0x55fba896c330 idx_buf=(nil) idx_n=2048 stored_src1=0x55fba896bc00
+T010 view il=27 swa=1 n_kv=2048 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=2048 indices=0x55fba896c330 idx_buf=(nil) idx_n=2048 stored_src1=0x55fba896ba90
+T010 view il=27 swa=1 n_kv=2048 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=2048 indices=0x55fba896c330 idx_buf=(nil) idx_n=2048 stored_src1=0x55fba896bc00
+T010 view il=31 swa=1 n_kv=2048 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=2048 indices=0x55fba896c330 idx_buf=(nil) idx_n=2048 stored_src1=0x55fba896ba90
+T010 view il=31 swa=1 n_kv=2048 mat_idxs=0x55fba896c330 mat_buffer=(nil) mat_n=2048 indices=0x55fba896c330 idx_buf=(nil) idx_n=2048 stored_src1=0x55fba896bc00
+T010 store k_idxs n_tok=1 pos0=1792 pos1=-1 pos_last=1792 sinfo.size=1 sinfo.idxs[0][0]=1792 sinfo.idxs[0][last]=1792
+T010 store k_idxs n_tok=1 pos0=1793 pos1=-1 pos_last=1793 sinfo.size=1 sinfo.idxs[0][0]=1793 sinfo.idxs[0][last]=1793
+T010 store k_idxs n_tok=1 pos0=1794 pos1=-1 pos_last=1794 sinfo.size=1 sinfo.idxs[0][0]=1794 sinfo.idxs[0][last]=1794
+T010 store k_idxs n_tok=1 pos0=1795 pos1=-1 pos_last=1795 sinfo.size=1 sinfo.idxs[0][0]=1795 sinfo.idxs[0][last]=1795
+T010 store k_idxs n_tok=1 pos0=1796 pos1=-1 pos_last=1796 sinfo.size=1 sinfo.idxs[0][0]=1796 sinfo.idxs[0][last]=1796
+T010 store k_idxs n_tok=1 pos0=1797 pos1=-1 pos_last=1797 sinfo.size=1 sinfo.idxs[0][0]=1797 sinfo.idxs[0][last]=1797
+T010 store k_idxs n_tok=1 pos0=1798 pos1=-1 pos_last=1798 sinfo.size=1 sinfo.idxs[0][0]=1798 sinfo.idxs[0][last]=1798
+T010 store k_idxs n_tok=1 pos0=1799 pos1=-1 pos_last=1799 sinfo.size=1 sinfo.idxs[0][0]=1799 sinfo.idxs[0][last]=1799
+T010 store k_idxs n_tok=1 pos0=1800 pos1=-1 pos_last=1800 sinfo.size=1 sinfo.idxs[0][0]=1800 sinfo.idxs[0][last]=1800
+T010 store k_idxs n_tok=1 pos0=1801 pos1=-1 pos_last=1801 sinfo.size=1 sinfo.idxs[0][0]=1801 sinfo.idxs[0][last]=1801
+T010 store k_idxs n_tok=1 pos0=1802 pos1=-1 pos_last=1802 sinfo.size=1 sinfo.idxs[0][0]=1802 sinfo.idxs[0][last]=1802
+T010 store k_idxs n_tok=1 pos0=1803 pos1=-1 pos_last=1803 sinfo.size=1 sinfo.idxs[0][0]=1803 sinfo.idxs[0][last]=1803
+0.24.854.323 I slot print_timing: id  0 | task 0 | n_decoded =    354, tg =  58.82 t/s, tg_3s =  58.58 t/s
+T010 store k_idxs n_tok=1 pos0=1804 pos1=-1 pos_last=1804 sinfo.size=1 sinfo.idxs[0][0]=1804 sinfo.idxs[0][last]=1804
+T010 store k_idxs n_tok=1 pos0=1805 pos1=-1 pos_last=1805 sinfo.size=1 sinfo.idxs[0][0]=1805 sinfo.idxs[0][last]=1805
+T010 store k_idxs n_tok=1 pos0=1806 pos1=-1 pos_last=1806 sinfo.size=1 sinfo.idxs[0][0]=1806 sinfo.idxs[0][last]=1806
+T010 store k_idxs n_tok=1 pos0=1807 pos1=-1 pos_last=1807 sinfo.size=1 sinfo.idxs[0][0]=1807 sinfo.idxs[0][last]=1807
+T010 store k_idxs n_tok=1 pos0=1808 pos1=-1 pos_last=1808 sinfo.size=1 sinfo.idxs[0][0]=1808 sinfo.idxs[0][last]=1808
+T010 store k_idxs n_tok=1 pos0=1809 pos1=-1 pos_last=1809 sinfo.size=1 sinfo.idxs[0][0]=1809 sinfo.idxs[0][last]=1809
+T010 store k_idxs n_tok=1 pos0=1810 pos1=-1 pos_last=1810 sinfo.size=1 sinfo.idxs[0][0]=1810 sinfo.idxs[0][last]=1810
+T010 store k_idxs n_tok=1 pos0=1811 pos1=-1 pos_last=1811 sinfo.size=1 sinfo.idxs[0][0]=1811 sinfo.idxs[0][last]=1811
+T010 store k_idxs n_tok=1 pos0=1812 pos1=-1 pos_last=1812 sinfo.size=1 sinfo.idxs[0][0]=1812 sinfo.idxs[0][last]=1812
+T010 store k_idxs n_tok=1 pos0=1813 pos1=-1 pos_last=1813 sinfo.size=1 sinfo.idxs[0][0]=1813 sinfo.idxs[0][last]=1813
+T010 store k_idxs n_tok=1 pos0=1814 pos1=-1 pos_last=1814 sinfo.size=1 sinfo.idxs[0][0]=1814 sinfo.idxs[0][last]=1814
+T010 store k_idxs n_tok=1 pos0=1815 pos1=-1 pos_last=1815 sinfo.size=1 sinfo.idxs[0][0]=1815 sinfo.idxs[0][last]=1815
+T010 store k_idxs n_tok=1 pos0=1816 pos1=-1 pos_last=1816 sinfo.size=1 sinfo.idxs[0][0]=1816 sinfo.idxs[0][last]=1816
+T010 store k_idxs n_tok=1 pos0=1817 pos1=-1 pos_last=1817 sinfo.size=1 sinfo.idxs[0][0]=1817 sinfo.idxs[0][last]=1817
+T010 store k_idxs n_tok=1 pos0=1818 pos1=-1 pos_last=1818 sinfo.size=1 sinfo.idxs[0][0]=1818 sinfo.idxs[0][last]=1818
+T010 store k_idxs n_tok=1 pos0=1819 pos1=-1 pos_last=1819 sinfo.size=1 sinfo.idxs[0][0]=1819 sinfo.idxs[0][last]=1819
+T010 store k_idxs n_tok=1 pos0=1820 pos1=-1 pos_last=1820 sinfo.size=1 sinfo.idxs[0][0]=1820 sinfo.idxs[0][last]=1820
+T010 store k_idxs n_tok=1 pos0=1821 pos1=-1 pos_last=1821 sinfo.size=1 sinfo.idxs[0][0]=1821 sinfo.idxs[0][last]=1821
+T010 store k_idxs n_tok=1 pos0=1822 pos1=-1 pos_last=1822 sinfo.size=1 sinfo.idxs[0][0]=1822 sinfo.idxs[0][last]=1822
+T010 store k_idxs n_tok=1 pos0=1823 pos1=-1 pos_last=1823 sinfo.size=1 sinfo.idxs[0][0]=1823 sinfo.idxs[0][last]=1823
+T010 store k_idxs n_tok=1 pos0=1824 pos1=-1 pos_last=1824 sinfo.size=1 sinfo.idxs[0][0]=1824 sinfo.idxs[0][last]=1824
+T010 store k_idxs n_tok=1 pos0=1825 pos1=-1 pos_last=1825 sinfo.size=1 sinfo.idxs[0][0]=1825 sinfo.idxs[0][last]=1825
+T010 store k_idxs n_tok=1 pos0=1826 pos1=-1 pos_last=1826 sinfo.size=1 sinfo.idxs[0][0]=1826 sinfo.idxs[0][last]=1826
+T010 store k_idxs n_tok=1 pos0=1827 pos1=-1 pos_last=1827 sinfo.size=1 sinfo.idxs[0][0]=1827 sinfo.idxs[0][last]=1827
+T010 store k_idxs n_tok=1 pos0=1828 pos1=-1 pos_last=1828 sinfo.size=1 sinfo.idxs[0][0]=1828 sinfo.idxs[0][last]=1828
+T010 store k_idxs n_tok=1 pos0=1829 pos1=-1 pos_last=1829 sinfo.size=1 sinfo.idxs[0][0]=1829 sinfo.idxs[0][last]=1829
+T010 store k_idxs n_tok=1 pos0=1830 pos1=-1 pos_last=1830 sinfo.size=1 sinfo.idxs[0][0]=1830 sinfo.idxs[0][last]=1830
+T010 store k_idxs n_tok=1 pos0=1831 pos1=-1 pos_last=1831 sinfo.size=1 sinfo.idxs[0][0]=1831 sinfo.idxs[0][last]=1831
+T010 store k_idxs n_tok=1 pos0=1832 pos1=-1 pos_last=1832 sinfo.size=1 sinfo.idxs[0][0]=1832 sinfo.idxs[0][last]=1832
+T010 store k_idxs n_tok=1 pos0=1833 pos1=-1 pos_last=1833 sinfo.size=1 sinfo.idxs[0][0]=1833 sinfo.idxs[0][last]=1833
+T010 store k_idxs n_tok=1 pos0=1834 pos1=-1 pos_last=1834 sinfo.size=1 sinfo.idxs[0][0]=1834 sinfo.idxs[0][last]=1834
+T010 store k_idxs n_tok=1 pos0=1835 pos1=-1 pos_last=1835 sinfo.size=1 sinfo.idxs[0][0]=1835 sinfo.idxs[0][last]=1835
+T010 store k_idxs n_tok=1 pos0=1836 pos1=-1 pos_last=1836 sinfo.size=1 sinfo.idxs[0][0]=1836 sinfo.idxs[0][last]=1836
+T010 store k_idxs n_tok=1 pos0=1837 pos1=-1 pos_last=1837 sinfo.size=1 sinfo.idxs[0][0]=1837 sinfo.idxs[0][last]=1837
+T010 store k_idxs n_tok=1 pos0=1838 pos1=-1 pos_last=1838 sinfo.size=1 sinfo.idxs[0][0]=1838 sinfo.idxs[0][last]=1838
+T010 store k_idxs n_tok=1 pos0=1839 pos1=-1 pos_last=1839 sinfo.size=1 sinfo.idxs[0][0]=1839 sinfo.idxs[0][last]=1839
+T010 store k_idxs n_tok=1 pos0=1840 pos1=-1 pos_last=1840 sinfo.size=1 sinfo.idxs[0][0]=1840 sinfo.idxs[0][last]=1840
+T010 store k_idxs n_tok=1 pos0=1841 pos1=-1 pos_last=1841 sinfo.size=1 sinfo.idxs[0][0]=1841 sinfo.idxs[0][last]=1841
+T010 store k_idxs n_tok=1 pos0=1842 pos1=-1 pos_last=1842 sinfo.size=1 sinfo.idxs[0][0]=1842 sinfo.idxs[0][last]=1842
+T010 store k_idxs n_tok=1 pos0=1843 pos1=-1 pos_last=1843 sinfo.size=1 sinfo.idxs[0][0]=1843 sinfo.idxs[0][last]=1843
+T010 store k_idxs n_tok=1 pos0=1844 pos1=-1 pos_last=1844 sinfo.size=1 sinfo.idxs[0][0]=1844 sinfo.idxs[0][last]=1844
+T010 store k_idxs n_tok=1 pos0=1845 pos1=-1 pos_last=1845 sinfo.size=1 sinfo.idxs[0][0]=1845 sinfo.idxs[0][last]=1845
+T010 store k_idxs n_tok=1 pos0=1846 pos1=-1 pos_last=1846 sinfo.size=1 sinfo.idxs[0][0]=1846 sinfo.idxs[0][last]=1846
+T010 store k_idxs n_tok=1 pos0=1847 pos1=-1 pos_last=1847 sinfo.size=1 sinfo.idxs[0][0]=1847 sinfo.idxs[0][last]=1847
+T010 store k_idxs n_tok=1 pos0=1848 pos1=-1 pos_last=1848 sinfo.size=1 sinfo.idxs[0][0]=1848 sinfo.idxs[0][last]=1848
+T010 store k_idxs n_tok=1 pos0=1849 pos1=-1 pos_last=1849 sinfo.size=1 sinfo.idxs[0][0]=1849 sinfo.idxs[0][last]=1849
+T010 store k_idxs n_tok=1 pos0=1850 pos1=-1 pos_last=1850 sinfo.size=1 sinfo.idxs[0][0]=1850 sinfo.idxs[0][last]=1850
+T010 store k_idxs n_tok=1 pos0=1851 pos1=-1 pos_last=1851 sinfo.size=1 sinfo.idxs[0][0]=1851 sinfo.idxs[0][last]=1851
+T010 store k_idxs n_tok=1 pos0=1852 pos1=-1 pos_last=1852 sinfo.size=1 sinfo.idxs[0][0]=1852 sinfo.idxs[0][last]=1852
+T010 store k_idxs n_tok=1 pos0=1853 pos1=-1 pos_last=1853 sinfo.size=1 sinfo.idxs[0][0]=1853 sinfo.idxs[0][last]=1853
+T010 store k_idxs n_tok=1 pos0=1854 pos1=-1 pos_last=1854 sinfo.size=1 sinfo.idxs[0][0]=1854 sinfo.idxs[0][last]=1854
+T010 store k_idxs n_tok=1 pos0=1855 pos1=-1 pos_last=1855 sinfo.size=1 sinfo.idxs[0][0]=1855 sinfo.idxs[0][last]=1855
+T010 store k_idxs n_tok=1 pos0=1856 pos1=-1 pos_last=1856 sinfo.size=1 sinfo.idxs[0][0]=1856 sinfo.idxs[0][last]=1856
+T010 store k_idxs n_tok=1 pos0=1857 pos1=-1 pos_last=1857 sinfo.size=1 sinfo.idxs[0][0]=1857 sinfo.idxs[0][last]=1857
+T010 store k_idxs n_tok=1 pos0=1858 pos1=-1 pos_last=1858 sinfo.size=1 sinfo.idxs[0][0]=1858 sinfo.idxs[0][last]=1858
+T010 store k_idxs n_tok=1 pos0=1859 pos1=-1 pos_last=1859 sinfo.size=1 sinfo.idxs[0][0]=1859 sinfo.idxs[0][last]=1859
+T010 store k_idxs n_tok=1 pos0=1860 pos1=-1 pos_last=1860 sinfo.size=1 sinfo.idxs[0][0]=1860 sinfo.idxs[0][last]=1860
+T010 store k_idxs n_tok=1 pos0=1861 pos1=-1 pos_last=1861 sinfo.size=1 sinfo.idxs[0][0]=1861 sinfo.idxs[0][last]=1861
+T010 store k_idxs n_tok=1 pos0=1862 pos1=-1 pos_last=1862 sinfo.size=1 sinfo.idxs[0][0]=1862 sinfo.idxs[0][last]=1862
+T010 store k_idxs n_tok=1 pos0=1863 pos1=-1 pos_last=1863 sinfo.size=1 sinfo.idxs[0][0]=1863 sinfo.idxs[0][last]=1863
+T010 store k_idxs n_tok=1 pos0=1864 pos1=-1 pos_last=1864 sinfo.size=1 sinfo.idxs[0][0]=1864 sinfo.idxs[0][last]=1864
+T010 store k_idxs n_tok=1 pos0=1865 pos1=-1 pos_last=1865 sinfo.size=1 sinfo.idxs[0][0]=1865 sinfo.idxs[0][last]=1865
+T010 store k_idxs n_tok=1 pos0=1866 pos1=-1 pos_last=1866 sinfo.size=1 sinfo.idxs[0][0]=1866 sinfo.idxs[0][last]=1866
+T010 store k_idxs n_tok=1 pos0=1867 pos1=-1 pos_last=1867 sinfo.size=1 sinfo.idxs[0][0]=1867 sinfo.idxs[0][last]=1867
+T010 store k_idxs n_tok=1 pos0=1868 pos1=-1 pos_last=1868 sinfo.size=1 sinfo.idxs[0][0]=1868 sinfo.idxs[0][last]=1868
+T010 store k_idxs n_tok=1 pos0=1869 pos1=-1 pos_last=1869 sinfo.size=1 sinfo.idxs[0][0]=1869 sinfo.idxs[0][last]=1869
+T010 store k_idxs n_tok=1 pos0=1870 pos1=-1 pos_last=1870 sinfo.size=1 sinfo.idxs[0][0]=1870 sinfo.idxs[0][last]=1870
+T010 store k_idxs n_tok=1 pos0=1871 pos1=-1 pos_last=1871 sinfo.size=1 sinfo.idxs[0][0]=1871 sinfo.idxs[0][last]=1871
+T010 store k_idxs n_tok=1 pos0=1872 pos1=-1 pos_last=1872 sinfo.size=1 sinfo.idxs[0][0]=1872 sinfo.idxs[0][last]=1872
+T010 store k_idxs n_tok=1 pos0=1873 pos1=-1 pos_last=1873 sinfo.size=1 sinfo.idxs[0][0]=1873 sinfo.idxs[0][last]=1873
+T010 store k_idxs n_tok=1 pos0=1874 pos1=-1 pos_last=1874 sinfo.size=1 sinfo.idxs[0][0]=1874 sinfo.idxs[0][last]=1874
+T010 store k_idxs n_tok=1 pos0=1875 pos1=-1 pos_last=1875 sinfo.size=1 sinfo.idxs[0][0]=1875 sinfo.idxs[0][last]=1875
+T010 store k_idxs n_tok=1 pos0=1876 pos1=-1 pos_last=1876 sinfo.size=1 sinfo.idxs[0][0]=1876 sinfo.idxs[0][last]=1876
+T010 store k_idxs n_tok=1 pos0=1877 pos1=-1 pos_last=1877 sinfo.size=1 sinfo.idxs[0][0]=1877 sinfo.idxs[0][last]=1877
+T010 store k_idxs n_tok=1 pos0=1878 pos1=-1 pos_last=1878 sinfo.size=1 sinfo.idxs[0][0]=1878 sinfo.idxs[0][last]=1878
+T010 store k_idxs n_tok=1 pos0=1879 pos1=-1 pos_last=1879 sinfo.size=1 sinfo.idxs[0][0]=1879 sinfo.idxs[0][last]=1879
+T010 store k_idxs n_tok=1 pos0=1880 pos1=-1 pos_last=1880 sinfo.size=1 sinfo.idxs[0][0]=1880 sinfo.idxs[0][last]=1880
+T010 store k_idxs n_tok=1 pos0=1881 pos1=-1 pos_last=1881 sinfo.size=1 sinfo.idxs[0][0]=1881 sinfo.idxs[0][last]=1881
+T010 store k_idxs n_tok=1 pos0=1882 pos1=-1 pos_last=1882 sinfo.size=1 sinfo.idxs[0][0]=1882 sinfo.idxs[0][last]=1882
+T010 store k_idxs n_tok=1 pos0=1883 pos1=-1 pos_last=1883 sinfo.size=1 sinfo.idxs[0][0]=1883 sinfo.idxs[0][last]=1883
+T010 store k_idxs n_tok=1 pos0=1884 pos1=-1 pos_last=1884 sinfo.size=1 sinfo.idxs[0][0]=1884 sinfo.idxs[0][last]=1884
+T010 store k_idxs n_tok=1 pos0=1885 pos1=-1 pos_last=1885 sinfo.size=1 sinfo.idxs[0][0]=1885 sinfo.idxs[0][last]=1885
+T010 store k_idxs n_tok=1 pos0=1886 pos1=-1 pos_last=1886 sinfo.size=1 sinfo.idxs[0][0]=1886 sinfo.idxs[0][last]=1886
+T010 store k_idxs n_tok=1 pos0=1887 pos1=-1 pos_last=1887 sinfo.size=1 sinfo.idxs[0][0]=1887 sinfo.idxs[0][last]=1887
+T010 store k_idxs n_tok=1 pos0=1888 pos1=-1 pos_last=1888 sinfo.size=1 sinfo.idxs[0][0]=1888 sinfo.idxs[0][last]=1888
+T010 store k_idxs n_tok=1 pos0=1889 pos1=-1 pos_last=1889 sinfo.size=1 sinfo.idxs[0][0]=1889 sinfo.idxs[0][last]=1889
+T010 store k_idxs n_tok=1 pos0=1890 pos1=-1 pos_last=1890 sinfo.size=1 sinfo.idxs[0][0]=1890 sinfo.idxs[0][last]=1890
+T010 store k_idxs n_tok=1 pos0=1891 pos1=-1 pos_last=1891 sinfo.size=1 sinfo.idxs[0][0]=1891 sinfo.idxs[0][last]=1891
+T010 store k_idxs n_tok=1 pos0=1892 pos1=-1 pos_last=1892 sinfo.size=1 sinfo.idxs[0][0]=1892 sinfo.idxs[0][last]=1892
+T010 store k_idxs n_tok=1 pos0=1893 pos1=-1 pos_last=1893 sinfo.size=1 sinfo.idxs[0][0]=1893 sinfo.idxs[0][last]=1893
+T010 store k_idxs n_tok=1 pos0=1894 pos1=-1 pos_last=1894 sinfo.size=1 sinfo.idxs[0][0]=1894 sinfo.idxs[0][last]=1894
+T010 store k_idxs n_tok=1 pos0=1895 pos1=-1 pos_last=1895 sinfo.size=1 sinfo.idxs[0][0]=1895 sinfo.idxs[0][last]=1895
+T010 store k_idxs n_tok=1 pos0=1896 pos1=-1 pos_last=1896 sinfo.size=1 sinfo.idxs[0][0]=1896 sinfo.idxs[0][last]=1896
+T010 store k_idxs n_tok=1 pos0=1897 pos1=-1 pos_last=1897 sinfo.size=1 sinfo.idxs[0][0]=1897 sinfo.idxs[0][last]=1897
+T010 store k_idxs n_tok=1 pos0=1898 pos1=-1 pos_last=1898 sinfo.size=1 sinfo.idxs[0][0]=1898 sinfo.idxs[0][last]=1898
+T010 store k_idxs n_tok=1 pos0=1899 pos1=-1 pos_last=1899 sinfo.size=1 sinfo.idxs[0][0]=1899 sinfo.idxs[0][last]=1899
+T010 store k_idxs n_tok=1 pos0=1900 pos1=-1 pos_last=1900 sinfo.size=1 sinfo.idxs[0][0]=1900 sinfo.idxs[0][last]=1900
+T010 store k_idxs n_tok=1 pos0=1901 pos1=-1 pos_last=1901 sinfo.size=1 sinfo.idxs[0][0]=1901 sinfo.idxs[0][last]=1901
+T010 store k_idxs n_tok=1 pos0=1902 pos1=-1 pos_last=1902 sinfo.size=1 sinfo.idxs[0][0]=1902 sinfo.idxs[0][last]=1902
+T010 store k_idxs n_tok=1 pos0=1903 pos1=-1 pos_last=1903 sinfo.size=1 sinfo.idxs[0][0]=1903 sinfo.idxs[0][last]=1903
+T010 store k_idxs n_tok=1 pos0=1904 pos1=-1 pos_last=1904 sinfo.size=1 sinfo.idxs[0][0]=1904 sinfo.idxs[0][last]=1904
+T010 store k_idxs n_tok=1 pos0=1905 pos1=-1 pos_last=1905 sinfo.size=1 sinfo.idxs[0][0]=1905 sinfo.idxs[0][last]=1905
+T010 store k_idxs n_tok=1 pos0=1906 pos1=-1 pos_last=1906 sinfo.size=1 sinfo.idxs[0][0]=1906 sinfo.idxs[0][last]=1906
+T010 store k_idxs n_tok=1 pos0=1907 pos1=-1 pos_last=1907 sinfo.size=1 sinfo.idxs[0][0]=1907 sinfo.idxs[0][last]=1907
+T010 store k_idxs n_tok=1 pos0=1908 pos1=-1 pos_last=1908 sinfo.size=1 sinfo.idxs[0][0]=1908 sinfo.idxs[0][last]=1908
+T010 store k_idxs n_tok=1 pos0=1909 pos1=-1 pos_last=1909 sinfo.size=1 sinfo.idxs[0][0]=1909 sinfo.idxs[0][last]=1909
+T010 store k_idxs n_tok=1 pos0=1910 pos1=-1 pos_last=1910 sinfo.size=1 sinfo.idxs[0][0]=1910 sinfo.idxs[0][last]=1910
+T010 store k_idxs n_tok=1 pos0=1911 pos1=-1 pos_last=1911 sinfo.size=1 sinfo.idxs[0][0]=1911 sinfo.idxs[0][last]=1911
+T010 store k_idxs n_tok=1 pos0=1912 pos1=-1 pos_last=1912 sinfo.size=1 sinfo.idxs[0][0]=1912 sinfo.idxs[0][last]=1912
+T010 store k_idxs n_tok=1 pos0=1913 pos1=-1 pos_last=1913 sinfo.size=1 sinfo.idxs[0][0]=1913 sinfo.idxs[0][last]=1913
+T010 store k_idxs n_tok=1 pos0=1914 pos1=-1 pos_last=1914 sinfo.size=1 sinfo.idxs[0][0]=1914 sinfo.idxs[0][last]=1914
+T010 store k_idxs n_tok=1 pos0=1915 pos1=-1 pos_last=1915 sinfo.size=1 sinfo.idxs[0][0]=1915 sinfo.idxs[0][last]=1915
+T010 store k_idxs n_tok=1 pos0=1916 pos1=-1 pos_last=1916 sinfo.size=1 sinfo.idxs[0][0]=1916 sinfo.idxs[0][last]=1916
+T010 store k_idxs n_tok=1 pos0=1917 pos1=-1 pos_last=1917 sinfo.size=1 sinfo.idxs[0][0]=1917 sinfo.idxs[0][last]=1917
+T010 store k_idxs n_tok=1 pos0=1918 pos1=-1 pos_last=1918 sinfo.size=1 sinfo.idxs[0][0]=1918 sinfo.idxs[0][last]=1918
+T010 store k_idxs n_tok=1 pos0=1919 pos1=-1 pos_last=1919 sinfo.size=1 sinfo.idxs[0][0]=1919 sinfo.idxs[0][last]=1919
+T010 store k_idxs n_tok=1 pos0=1920 pos1=-1 pos_last=1920 sinfo.size=1 sinfo.idxs[0][0]=1920 sinfo.idxs[0][last]=1920
+T010 store k_idxs n_tok=1 pos0=1921 pos1=-1 pos_last=1921 sinfo.size=1 sinfo.idxs[0][0]=1921 sinfo.idxs[0][last]=1921
+T010 store k_idxs n_tok=1 pos0=1922 pos1=-1 pos_last=1922 sinfo.size=1 sinfo.idxs[0][0]=1922 sinfo.idxs[0][last]=1922
+T010 store k_idxs n_tok=1 pos0=1923 pos1=-1 pos_last=1923 sinfo.size=1 sinfo.idxs[0][0]=1923 sinfo.idxs[0][last]=1923
+T010 store k_idxs n_tok=1 pos0=1924 pos1=-1 pos_last=1924 sinfo.size=1 sinfo.idxs[0][0]=1924 sinfo.idxs[0][last]=1924
+T010 store k_idxs n_tok=1 pos0=1925 pos1=-1 pos_last=1925 sinfo.size=1 sinfo.idxs[0][0]=1925 sinfo.idxs[0][last]=1925
+T010 store k_idxs n_tok=1 pos0=1926 pos1=-1 pos_last=1926 sinfo.size=1 sinfo.idxs[0][0]=1926 sinfo.idxs[0][last]=1926
+T010 store k_idxs n_tok=1 pos0=1927 pos1=-1 pos_last=1927 sinfo.size=1 sinfo.idxs[0][0]=1927 sinfo.idxs[0][last]=1927
+T010 store k_idxs n_tok=1 pos0=1928 pos1=-1 pos_last=1928 sinfo.size=1 sinfo.idxs[0][0]=1928 sinfo.idxs[0][last]=1928
+T010 store k_idxs n_tok=1 pos0=1929 pos1=-1 pos_last=1929 sinfo.size=1 sinfo.idxs[0][0]=1929 sinfo.idxs[0][last]=1929
+T010 store k_idxs n_tok=1 pos0=1930 pos1=-1 pos_last=1930 sinfo.size=1 sinfo.idxs[0][0]=1930 sinfo.idxs[0][last]=1930
+T010 store k_idxs n_tok=1 pos0=1931 pos1=-1 pos_last=1931 sinfo.size=1 sinfo.idxs[0][0]=1931 sinfo.idxs[0][last]=1931
+T010 store k_idxs n_tok=1 pos0=1932 pos1=-1 pos_last=1932 sinfo.size=1 sinfo.idxs[0][0]=1932 sinfo.idxs[0][last]=1932
+T010 store k_idxs n_tok=1 pos0=1933 pos1=-1 pos_last=1933 sinfo.size=1 sinfo.idxs[0][0]=1933 sinfo.idxs[0][last]=1933
+T010 store k_idxs n_tok=1 pos0=1934 pos1=-1 pos_last=1934 sinfo.size=1 sinfo.idxs[0][0]=1934 sinfo.idxs[0][last]=1934
+T010 store k_idxs n_tok=1 pos0=1935 pos1=-1 pos_last=1935 sinfo.size=1 sinfo.idxs[0][0]=1935 sinfo.idxs[0][last]=1935
+T010 store k_idxs n_tok=1 pos0=1936 pos1=-1 pos_last=1936 sinfo.size=1 sinfo.idxs[0][0]=1936 sinfo.idxs[0][last]=1936
+T010 store k_idxs n_tok=1 pos0=1937 pos1=-1 pos_last=1937 sinfo.size=1 sinfo.idxs[0][0]=1937 sinfo.idxs[0][last]=1937
+T010 store k_idxs n_tok=1 pos0=1938 pos1=-1 pos_last=1938 sinfo.size=1 sinfo.idxs[0][0]=1938 sinfo.idxs[0][last]=1938
+T010 store k_idxs n_tok=1 pos0=1939 pos1=-1 pos_last=1939 sinfo.size=1 sinfo.idxs[0][0]=1939 sinfo.idxs[0][last]=1939
+T010 store k_idxs n_tok=1 pos0=1940 pos1=-1 pos_last=1940 sinfo.size=1 sinfo.idxs[0][0]=1940 sinfo.idxs[0][last]=1940
+T010 store k_idxs n_tok=1 pos0=1941 pos1=-1 pos_last=1941 sinfo.size=1 sinfo.idxs[0][0]=1941 sinfo.idxs[0][last]=1941
+T010 store k_idxs n_tok=1 pos0=1942 pos1=-1 pos_last=1942 sinfo.size=1 sinfo.idxs[0][0]=1942 sinfo.idxs[0][last]=1942
+T010 store k_idxs n_tok=1 pos0=1943 pos1=-1 pos_last=1943 sinfo.size=1 sinfo.idxs[0][0]=1943 sinfo.idxs[0][last]=1943
+T010 store k_idxs n_tok=1 pos0=1944 pos1=-1 pos_last=1944 sinfo.size=1 sinfo.idxs[0][0]=1944 sinfo.idxs[0][last]=1944
+T010 store k_idxs n_tok=1 pos0=1945 pos1=-1 pos_last=1945 sinfo.size=1 sinfo.idxs[0][0]=1945 sinfo.idxs[0][last]=1945
+T010 store k_idxs n_tok=1 pos0=1946 pos1=-1 pos_last=1946 sinfo.size=1 sinfo.idxs[0][0]=1946 sinfo.idxs[0][last]=1946
+T010 store k_idxs n_tok=1 pos0=1947 pos1=-1 pos_last=1947 sinfo.size=1 sinfo.idxs[0][0]=1947 sinfo.idxs[0][last]=1947
+T010 store k_idxs n_tok=1 pos0=1948 pos1=-1 pos_last=1948 sinfo.size=1 sinfo.idxs[0][0]=1948 sinfo.idxs[0][last]=1948
+T010 store k_idxs n_tok=1 pos0=1949 pos1=-1 pos_last=1949 sinfo.size=1 sinfo.idxs[0][0]=1949 sinfo.idxs[0][last]=1949
+T010 store k_idxs n_tok=1 pos0=1950 pos1=-1 pos_last=1950 sinfo.size=1 sinfo.idxs[0][0]=1950 sinfo.idxs[0][last]=1950
+T010 store k_idxs n_tok=1 pos0=1951 pos1=-1 pos_last=1951 sinfo.size=1 sinfo.idxs[0][0]=1951 sinfo.idxs[0][last]=1951
+T010 store k_idxs n_tok=1 pos0=1952 pos1=-1 pos_last=1952 sinfo.size=1 sinfo.idxs[0][0]=1952 sinfo.idxs[0][last]=1952
+T010 store k_idxs n_tok=1 pos0=1953 pos1=-1 pos_last=1953 sinfo.size=1 sinfo.idxs[0][0]=1953 sinfo.idxs[0][last]=1953
+T010 store k_idxs n_tok=1 pos0=1954 pos1=-1 pos_last=1954 sinfo.size=1 sinfo.idxs[0][0]=1954 sinfo.idxs[0][last]=1954
+T010 store k_idxs n_tok=1 pos0=1955 pos1=-1 pos_last=1955 sinfo.size=1 sinfo.idxs[0][0]=1955 sinfo.idxs[0][last]=1955
+T010 store k_idxs n_tok=1 pos0=1956 pos1=-1 pos_last=1956 sinfo.size=1 sinfo.idxs[0][0]=1956 sinfo.idxs[0][last]=1956
+T010 store k_idxs n_tok=1 pos0=1957 pos1=-1 pos_last=1957 sinfo.size=1 sinfo.idxs[0][0]=1957 sinfo.idxs[0][last]=1957
+T010 store k_idxs n_tok=1 pos0=1958 pos1=-1 pos_last=1958 sinfo.size=1 sinfo.idxs[0][0]=1958 sinfo.idxs[0][last]=1958
+T010 store k_idxs n_tok=1 pos0=1959 pos1=-1 pos_last=1959 sinfo.size=1 sinfo.idxs[0][0]=1959 sinfo.idxs[0][last]=1959
+T010 store k_idxs n_tok=1 pos0=1960 pos1=-1 pos_last=1960 sinfo.size=1 sinfo.idxs[0][0]=1960 sinfo.idxs[0][last]=1960
+T010 store k_idxs n_tok=1 pos0=1961 pos1=-1 pos_last=1961 sinfo.size=1 sinfo.idxs[0][0]=1961 sinfo.idxs[0][last]=1961
+0.27.550.508 I slot print_timing: id  0 | task 0 | prompt eval time =     869.71 ms /  1451 tokens (    0.60 ms per token,  1668.37 tokens per second)
+0.27.550.512 I slot print_timing: id  0 | task 0 |        eval time =    8714.98 ms /   512 tokens (   17.02 ms per token,    58.75 tokens per second)
+0.27.550.512 I slot print_timing: id  0 | task 0 |       total time =    9584.69 ms /  1963 tokens
+0.27.550.515 I slot print_timing: id  0 | task 0 |    graphs reused =        509
+0.27.550.561 I slot      release: id  0 | task 0 | stop processing: n_tokens = 1962, truncated = 0
+1.42.899.689 I srv    operator(): operator(): cleaning up before exit...

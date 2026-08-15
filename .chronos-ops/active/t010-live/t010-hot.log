@@ -1,0 +1,16 @@
+0.00.029.367 I cmn  common_param: common_params_print_info: verbosity = 3 (adjust with the `-lv N` CLI arg)
+0.00.128.341 I srv    load_model: loading model 'models/main/dence/Qwythos-9B-v3-1M-MTP-Q4_K_M-fixed.gguf'
+0.01.314.225 I srv    load_model: initializing, n_slots = 1, n_ctx_slot = 8192, kv_unified = 'false'
+0.01.327.349 I srv          init: chat template supports preserving reasoning, consider enabling it via --reasoning-preserve
+0.01.327.379 I srv  llama_server: model loaded
+0.01.327.382 I srv  llama_server: listening on http://127.0.0.1:8099
+0.24.345.882 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = -1
+0.24.345.932 I slot launch_slot_: id  0 | task 0 | processing task, is_child = 0
+0.28.300.396 I slot print_timing: id  0 | task 0 | n_decoded =    172, tg =  57.10 t/s, tg_3s =  57.10 t/s
+0.31.319.407 I slot print_timing: id  0 | task 0 | n_decoded =    343, tg =  56.87 t/s, tg_3s =  56.64 t/s
+0.34.282.702 I slot print_timing: id  0 | task 0 | prompt eval time =     942.43 ms /  1451 tokens (    0.65 ms per token,  1539.63 tokens per second)
+0.34.282.707 I slot print_timing: id  0 | task 0 |        eval time =    8994.31 ms /   512 tokens (   17.57 ms per token,    56.92 tokens per second)
+0.34.282.707 I slot print_timing: id  0 | task 0 |       total time =    9936.75 ms /  1963 tokens
+0.34.282.711 I slot print_timing: id  0 | task 0 |    graphs reused =        509
+0.34.282.759 I slot      release: id  0 | task 0 | stop processing: n_tokens = 1962, truncated = 0
+0.42.620.933 I srv    operator(): operator(): cleaning up before exit...
