@@ -5,6 +5,7 @@
 #include "binary-ops.h"
 #include "simd-gemm.h"
 #include "ggml.h"
+#include "ggml-quants.h"
 #include "unary-ops.h"
 #include "vec.h"
 
@@ -8417,6 +8418,17 @@ void ggml_compute_forward_top_k(
     }
 }
 
+// turbo K must arrive in original domain on CPU FA (Q is not pre-rotated);
+// V stays rotated and is un-rotated by the graph's ggml_turbo_wht.
+static ggml_to_float_t fattn_k_to_float(enum ggml_type type) {
+    switch (type) {
+        case GGML_TYPE_TURBO2_0: return (ggml_to_float_t) dequantize_row_turbo2_0_k;
+        case GGML_TYPE_TURBO3_0: return (ggml_to_float_t) dequantize_row_turbo3_0_k;
+        case GGML_TYPE_TURBO4_0: return (ggml_to_float_t) dequantize_row_turbo4_0_k;
+        default:                 return ggml_get_type_traits(type)->to_float;
+    }
+}
+
 static void ggml_compute_forward_flash_attn_ext_f16_one_chunk(
         const ggml_compute_params * params,
         ggml_tensor * dst,
@@ -8494,7 +8506,7 @@ static void ggml_compute_forward_flash_attn_ext_f16_one_chunk(
     ggml_type         const k_vec_dot_type = ggml_get_type_traits_cpu(k->type)->vec_dot_type;
     ggml_from_float_t const q_to_vec_dot   = ggml_get_type_traits_cpu(k_vec_dot_type)->from_float;
     ggml_vec_dot_t    const kq_vec_dot     = ggml_get_type_traits_cpu(k->type)->vec_dot;
-    ggml_to_float_t   const k_to_float     = ggml_get_type_traits(k->type)->to_float;
+    ggml_to_float_t   const k_to_float     = fattn_k_to_float(k->type);
     ggml_to_float_t   const v_to_float     = ggml_get_type_traits(v->type)->to_float;
 
     GGML_ASSERT((                            q_to_vec_dot) && "fattn: unsupported K-type");

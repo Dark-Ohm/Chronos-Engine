@@ -1,0 +1,10 @@
+0.02.550.037 W llama_context: n_ctx is not divisible by n_seq_max - rounding down to 4096
+0.03.173.372 I 
+0.03.173.436 I system_info: n_threads = 6 (n_threads_batch = 6) / 12 | CPU : SSE3 = 1 | SSSE3 = 1 | AVX = 1 | AVX_VNNI = 1 | AVX2 = 1 | F16C = 1 | FMA = 1 | BMI2 = 1 | LLAMAFILE = 1 | OPENMP = 1 | REPACK = 1 | 
+0.03.173.454 I perplexity: tokenizing the input ..
+0.03.175.458 I perplexity: tokenization took 1.998 ms
+0.03.175.516 I perplexity: calculating perplexity over 2 chunks, n_ctx=128, batch_size=2048, n_seq=16
+0.13.941.009 I perplexity: 10.77 seconds per pass - ETA 0.02 minutes
+[1]2.0593,[2]2.4266,
+0.13.964.882 I Final estimate: PPL = 2.4266 +/- 0.26152
+

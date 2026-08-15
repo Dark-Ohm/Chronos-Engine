@@ -20,6 +20,7 @@
 !.chronos-ops/active/t001-ab/*.log
 !.chronos-ops/active/t002-cpu/*.log
 !.chronos-ops/active/t007-cpu/*.log
+!.chronos-ops/active/t006-cpu/*.log
 *.metallib
 *.o
 *.so

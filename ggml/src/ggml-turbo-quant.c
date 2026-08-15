@@ -252,6 +252,24 @@ void dequantize_row_turbo2_0(const block_turbo2_0 * GGML_RESTRICT x, float * GGM
     }
 }
 
+void dequantize_row_turbo2_0_k(const block_turbo2_0 * GGML_RESTRICT x, float * GGML_RESTRICT y, int64_t k) {
+    // K-domain dequant: inverse-WHT -> original (Q on CPU FA is not rotated).
+    assert(k % QK_TURBO2 == 0);
+    const int nb = k / QK_TURBO2;
+    for (int block = 0; block < nb; block++) {
+        float norm = GGML_FP16_TO_FP32(x[block].norm);
+        float buf[QK_TURBO2];
+        for (int j = 0; j < QK_TURBO2; j++) {
+            uint8_t idx = (x[block].qs[j/4] >> ((j%4)*2)) & 0x3;
+            buf[j] = CENTROIDS_2BIT[idx];
+        }
+        turbo_cpu_ifwht(buf, QK_TURBO2);
+        for (int j = 0; j < QK_TURBO2; j++) {
+            y[block * QK_TURBO2 + j] = buf[j] * norm;
+        }
+    }
+}
+
 size_t quantize_turbo2_0(const float * GGML_RESTRICT src, void * GGML_RESTRICT dst,
                          int64_t nrows, int64_t n_per_row, const float * imatrix) {
     GGML_UNUSED(imatrix);
@@ -333,6 +351,26 @@ void dequantize_row_turbo3_0(const block_turbo3_0 * GGML_RESTRICT x, float * GGM
             uint8_t hi1 = (x[block].signs[j/8] >> (j%8)) & 0x1;
             uint8_t idx = low2 | (hi1 << 2);
             y[block * QK_TURBO3 + j] = CENTROIDS_3BIT[idx] * norm;
+        }
+    }
+}
+
+void dequantize_row_turbo3_0_k(const block_turbo3_0 * GGML_RESTRICT x, float * GGML_RESTRICT y, int64_t k) {
+    // K-domain dequant: inverse-WHT -> original (Q on CPU FA is not rotated).
+    assert(k % QK_TURBO3 == 0);
+    const int nb = k / QK_TURBO3;
+    for (int block = 0; block < nb; block++) {
+        float norm = GGML_FP16_TO_FP32(x[block].norm);
+        float buf[QK_TURBO3];
+        for (int j = 0; j < QK_TURBO3; j++) {
+            uint8_t low2 = (x[block].qs[j/4] >> ((j%4)*2)) & 0x3;
+            uint8_t hi1 = (x[block].signs[j/8] >> (j%8)) & 0x1;
+            uint8_t idx = low2 | (hi1 << 2);
+            buf[j] = CENTROIDS_3BIT[idx];
+        }
+        turbo_cpu_ifwht(buf, QK_TURBO3);
+        for (int j = 0; j < QK_TURBO3; j++) {
+            y[block * QK_TURBO3 + j] = buf[j] * norm;
         }
     }
 }
@@ -527,6 +565,22 @@ void quantize_row_turbo4_0_ref(const float * GGML_RESTRICT x, block_turbo4_0 * G
 }
 
 void dequantize_row_turbo4_0(const block_turbo4_0 * GGML_RESTRICT x, float * GGML_RESTRICT y, int64_t k) {
+    // Dequant to rotated domain (matches CUDA k_turbo4_dequant_f16). Inv-WHT is graph-side.
+    assert(k % QK_TURBO4 == 0);
+    const int nb = k / QK_TURBO4;
+    const int d  = QK_TURBO4;
+
+    for (int block = 0; block < nb; block++) {
+        float norm = GGML_FP16_TO_FP32(x[block].norm);
+        for (int i = 0; i < d; i++) {
+            uint8_t idx = (i & 1) ? (x[block].qs[i / 2] >> 4) : (x[block].qs[i / 2] & 0xF);
+            y[block * d + i] = CENTROIDS_4BIT[idx] * norm;
+        }
+    }
+}
+
+void dequantize_row_turbo4_0_k(const block_turbo4_0 * GGML_RESTRICT x, float * GGML_RESTRICT y, int64_t k) {
+    // K-domain dequant: inverse-WHT -> original (Q on CPU FA is not rotated).
     assert(k % QK_TURBO4 == 0);
     const int nb = k / QK_TURBO4;
     const int d  = QK_TURBO4;
@@ -534,20 +588,16 @@ void dequantize_row_turbo4_0(const block_turbo4_0 * GGML_RESTRICT x, float * GGM
     for (int block = 0; block < nb; block++) {
         float norm = GGML_FP16_TO_FP32(x[block].norm);
 
-        /* Unpack 4-bit indices and reconstruct in rotated space */
-        float rotated_recon[TURBO_D];
+        float buf[TURBO_D];
         for (int i = 0; i < d; i++) {
             uint8_t idx = (i & 1) ? (x[block].qs[i / 2] >> 4) : (x[block].qs[i / 2] & 0xF);
-            rotated_recon[i] = CENTROIDS_4BIT[idx];
+            buf[i] = CENTROIDS_4BIT[idx];
         }
 
-        /* Inverse rotate (FWHT) */
-        turbo_cpu_ifwht(rotated_recon, d);
-        float * dst = y + block * d;
+        turbo_cpu_ifwht(buf, d);
 
-        /* Scale by norm */
         for (int i = 0; i < d; i++) {
-            dst[i] = rotated_recon[i] * norm;
+            y[block * d + i] = buf[i] * norm;
         }
     }
 }
