@@ -3358,10 +3358,10 @@ private:
 
                     SLT_TRC(slot, "cached n_tokens = %d, memory_seq_rm [%d, end)\n", slot.prompt.n_tokens(), p0);
 
-                    if (ctx_tgt_seq_rm_type != COMMON_CONTEXT_SEQ_RM_TYPE_FULL) {
+                    if (!llama_kvarn_enabled(ctx_tgt)) {
                         common_context_seq_rm(ctx_tgt, slot.id, p0, -1);
                     }
-                    if (ctx_dft && ctx_dft_seq_rm_type != COMMON_CONTEXT_SEQ_RM_TYPE_FULL) {
+                    if (ctx_dft && !llama_kvarn_enabled(ctx_dft)) {
                         common_context_seq_rm(ctx_dft, slot.id, p0, -1);
                     }
 
@@ -3889,10 +3889,10 @@ private:
             slot.sampled = ids.back(); // last accepted token
             SLT_DBG(slot, "add accepted tokens: sampled=%d, ids.size=%zu, n_draft=%zu\n", slot.sampled, ids.size(), n_draft);
 
-            if (ctx_tgt_seq_rm_type != COMMON_CONTEXT_SEQ_RM_TYPE_FULL) {
+            if (!llama_kvarn_enabled(slot.ctx_tgt)) {
                 common_context_seq_rm(slot.ctx_tgt, slot.id, slot.prompt.tokens.pos_next(), -1);
             }
-            if (slot.ctx_dft && ctx_dft_seq_rm_type != COMMON_CONTEXT_SEQ_RM_TYPE_FULL) {
+            if (slot.ctx_dft && !llama_kvarn_enabled(slot.ctx_dft)) {
                 common_context_seq_rm(slot.ctx_dft, slot.id, slot.prompt.tokens.pos_next(), -1);
             }
 
