@@ -37,11 +37,19 @@ llama_completion: unable to reuse common prefix (for example, when the memory is
 
 ## Что сделать
 
-1. **Назвать корневую причину, не угадывать.** Установить, какая реализация
-   `seq_rm` отрабатывает для Qwythos-9B-MTP (кандидаты: `llama_memory_hybrid`,
-   `llama_memory_recurrent`, `llama_kv_cache_dsv4`, `_dsa`, `_kvarn`,
-   `_iswa` — последняя возвращает `res_base & res_swa`, то есть false от
-   любой половины). Доказать логом/отладчиком, какая ветка даёт false.
+1. **Назвать корневую причину.** Сильный кандидат уже задокументирован в
+   `HANDOFF.md` (расследование `Invalid input batch`, фикс `df7e25a89`): у
+   части моделей `llama_memory_seq_rm` на пробном частичном удалении
+   возвращает false — движок памяти физически не умеет частичное удаление,
+   и `common_context_can_seq_rm()` классифицирует это как `FULL` через
+   fallback-проб (живая диагностика там сделана на LFM2.5-1.2B: `res=2
+   (FULL), n_rs_seq=0, kvarn_enabled=0` — не recurrent и не kvarn). Здесь,
+   судя по всему, тот же механизм на Qwythos-9B-MTP. ПОДТВЕРДИТЬ той же
+   диагностикой (`fprintf` в `common_context_can_seq_rm` или в конкретной
+   реализации `seq_rm`), а не принять по аналогии: кандидаты реализаций —
+   `llama_memory_hybrid`, `llama_memory_recurrent`, `llama_kv_cache_dsv4`,
+   `_dsa`, `_kvarn`, `_iswa` (последняя возвращает `res_base & res_swa`,
+   то есть false от любой половины).
 2. Проверить, ограничение это принципиальное (для recurrent-состояний
    частичное удаление действительно невозможно) или дефект гейта, как было
    с `seq_rm` в сервере (`df7e25a89`).
